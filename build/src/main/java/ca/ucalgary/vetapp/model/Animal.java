@@ -3,14 +3,25 @@ package ca.ucalgary.vetapp.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Animal {
-    private int animalId;
+    @Id
+    @SequenceGenerator(name = "sequence_animal", sequenceName = "sequence_animal", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_animal")
+    private long animalId;
     private String name;
     private String breed;
     private LocalDate birthDate; // if exact is unknown, put that returns most accurate age in months
     private String sex;
     private AnimalStatus status;
+
+    @ManyToOne
+    // @ForeignKey(name = "")
     private Owner theOwner;
     private int tattooNum;
     private String rfidNumber;
@@ -19,9 +30,40 @@ public class Animal {
     private String coatColor;
     private String continuousMedication;
 
-    private ArrayList<AnimalPhoto> animalPhotoList = new ArrayList<AnimalPhoto>();
-    private ArrayList<AnimalTreatment> animalTreatmentList = new ArrayList<AnimalTreatment>();
-    private ArrayList<AnimalIssue> animalIssueList = new ArrayList<AnimalIssue>();
+    @OneToMany(mappedBy = "theAnimal")
+    private List<Photos> animalPhotoList = new ArrayList<Photos>();
+    @OneToMany(mappedBy = "theAnimal")
+    private List<Treatments> animalTreatmentList = new ArrayList<Treatments>();
+    @OneToMany(mappedBy = "theAnimal")
+    private List<Issues> animalIssueList = new ArrayList<Issues>();
+
+    private Animal() {
+        this.animalPhotoList = new ArrayList<>();
+        this.animalTreatmentList = new ArrayList<>();
+        this.animalIssueList = new ArrayList<>();
+    }
+
+    public Animal(String name, String breed, LocalDate birthDate, String sex, AnimalStatus status, Owner theOwner,
+            int tattooNum, String rfidNumber, String microChipNumber, HashMap<LocalDate, Double> weight,
+            String coatColor, String continuousMedication, List<Photos> animalPhotoList,
+            List<Treatments> animalTreatmentList, List<Issues> animalIssueList) {
+        this();
+        this.name = name;
+        this.breed = breed;
+        this.birthDate = birthDate;
+        this.sex = sex;
+        this.status = status;
+        this.theOwner = theOwner;
+        this.tattooNum = tattooNum;
+        this.rfidNumber = rfidNumber;
+        this.microChipNumber = microChipNumber;
+        this.weight = weight;
+        this.coatColor = coatColor;
+        this.continuousMedication = continuousMedication;
+        this.animalPhotoList = animalPhotoList;
+        this.animalTreatmentList = animalTreatmentList;
+        this.animalIssueList = animalIssueList;
+    }
 
     /**
      * Calculates and returns the age in months
@@ -33,11 +75,11 @@ public class Animal {
         return 0;
     }
 
-    public int getAnimalId() {
+    public long getAnimalId() {
         return animalId;
     }
 
-    public void setAnimalId(int animalId) {
+    public void setAnimalId(long animalId) {
         this.animalId = animalId;
     }
 
@@ -137,27 +179,27 @@ public class Animal {
         this.continuousMedication = continuousMedication;
     }
 
-    public ArrayList<AnimalPhoto> getAnimalPhotoList() {
+    public List<Photos> getAnimalPhotoList() {
         return animalPhotoList;
     }
 
-    public void setAnimalPhotoList(ArrayList<AnimalPhoto> animalPhotoList) {
+    public void setAnimalPhotoList(ArrayList<Photos> animalPhotoList) {
         this.animalPhotoList = animalPhotoList;
     }
 
-    public ArrayList<AnimalTreatment> getAnimalTreatmentList() {
+    public List<Treatments> getAnimalTreatmentList() {
         return animalTreatmentList;
     }
 
-    public void setAnimalTreatmentList(ArrayList<AnimalTreatment> animalTreatmentList) {
+    public void setAnimalTreatmentList(ArrayList<Treatments> animalTreatmentList) {
         this.animalTreatmentList = animalTreatmentList;
     }
 
-    public ArrayList<AnimalIssue> getAnimalIssueList() {
+    public List<Issues> getAnimalIssueList() {
         return animalIssueList;
     }
 
-    public void setAnimalIssueList(ArrayList<AnimalIssue> animalIssueList) {
+    public void setAnimalIssueList(ArrayList<Issues> animalIssueList) {
         this.animalIssueList = animalIssueList;
     }
 }

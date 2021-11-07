@@ -1,7 +1,19 @@
 package ca.ucalgary.vetapp.model;
 
+import java.util.List;
+
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Owner {
-    private int ownerId;
+    @Id
+    @SequenceGenerator(name = "sequence_owner", sequenceName = "sequence_owner", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_owner")
+    private long ownerId;
+
+    @OneToMany(mappedBy = "theOwner")
+    private List<Animal> animalList;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -10,11 +22,11 @@ public class Owner {
     private String emailId;
     private String address;
 
-    public int getOwnerId() {
+    public long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(long ownerId) {
         this.ownerId = ownerId;
     }
 

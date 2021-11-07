@@ -1,17 +1,24 @@
 package ca.ucalgary.vetapp.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class User {
-    private int userId;
+    @Id
+    @SequenceGenerator(name = "sequence_user", sequenceName = "sequence_user", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_user")
+    private long userId;
     private String firstName;
     private String middleName;
     private String lastName;
     private UserRole role;
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

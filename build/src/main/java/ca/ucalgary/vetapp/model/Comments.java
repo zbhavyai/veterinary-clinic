@@ -1,19 +1,29 @@
 package ca.ucalgary.vetapp.model;
 
 import java.time.LocalDate;
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Comments {
-    private int commentId;
+    @Id
+    @SequenceGenerator(name = "sequence_comment", sequenceName = "sequence_comment", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_comment")
+    private long commentId;
     private String commentDesc;
+
+    @ManyToOne
     private Animal theAnimal;
     private LocalDate commentDate;
+
+    @ManyToOne
     private User commenter;
 
-    public int getCommentId() {
+    public long getCommentId() {
         return commentId;
     }
 
-    public void setCommentId(int commentId) {
+    public void setCommentId(long commentId) {
         this.commentId = commentId;
     }
 

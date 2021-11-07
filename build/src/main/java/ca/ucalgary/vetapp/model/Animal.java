@@ -19,6 +19,9 @@ public class Animal {
     @Column(name = "a_name")
     private String name;
 
+    @Column(name = "a_type")
+    private String type;
+
     @Column(name = "a_breed")
     private String breed;
 
@@ -69,12 +72,13 @@ public class Animal {
         this.animalIssueList = new ArrayList<>();
     }
 
-    public Animal(String name, String breed, LocalDate birthDate, String sex, AnimalStatus status, Owner theOwner,
-            int tattooNum, String rfidNumber, String microChipNumber, HashMap<LocalDate, Double> weight,
+    public Animal(String name, String type, String breed, LocalDate birthDate, String sex, AnimalStatus status,
+            Owner theOwner, int tattooNum, String rfidNumber, String microChipNumber, HashMap<LocalDate, Double> weight,
             String coatColor, String continuousMedication, List<Photos> animalPhotoList,
             List<Treatments> animalTreatmentList, List<Issues> animalIssueList) {
         this();
         this.name = name;
+        this.type = type;
         this.breed = breed;
         this.birthDate = birthDate;
         this.sex = sex;
@@ -115,6 +119,14 @@ public class Animal {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getBreed() {
@@ -209,7 +221,7 @@ public class Animal {
         return animalPhotoList;
     }
 
-    public void setAnimalPhotoList(ArrayList<Photos> animalPhotoList) {
+    public void setAnimalPhotoList(List<Photos> animalPhotoList) {
         this.animalPhotoList = animalPhotoList;
     }
 
@@ -217,7 +229,7 @@ public class Animal {
         return animalTreatmentList;
     }
 
-    public void setAnimalTreatmentList(ArrayList<Treatments> animalTreatmentList) {
+    public void setAnimalTreatmentList(List<Treatments> animalTreatmentList) {
         this.animalTreatmentList = animalTreatmentList;
     }
 
@@ -225,7 +237,7 @@ public class Animal {
         return animalIssueList;
     }
 
-    public void setAnimalIssueList(ArrayList<Issues> animalIssueList) {
+    public void setAnimalIssueList(List<Issues> animalIssueList) {
         this.animalIssueList = animalIssueList;
     }
 }

@@ -8,10 +8,14 @@ public class Photos {
     @Id
     @SequenceGenerator(name = "sequence_photo", sequenceName = "sequence_photo", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_photo")
+    @Column(name = "o_photoid")
     private long photoId;
 
     @ManyToOne
+    @JoinColumn(name = "o_animalid")
     private Animal theAnimal;
+
+    @Column(name = "o_photolink")
     private String photoLink;
 
     public long getPhotoId() {

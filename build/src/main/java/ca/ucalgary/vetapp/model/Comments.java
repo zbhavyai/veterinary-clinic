@@ -9,14 +9,21 @@ public class Comments {
     @Id
     @SequenceGenerator(name = "sequence_comment", sequenceName = "sequence_comment", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_comment")
+    @Column(name = "c_commentid")
     private long commentId;
+
+    @Column(name = "c_commentdesc")
     private String commentDesc;
 
     @ManyToOne
+    @JoinColumn(name = "c_animalid")
     private Animal theAnimal;
+
+    @Column(name = "c_commentdate")
     private LocalDate commentDate;
 
     @ManyToOne
+    @JoinColumn(name = "c_commenter")
     private User commenter;
 
     public long getCommentId() {

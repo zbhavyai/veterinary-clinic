@@ -8,10 +8,19 @@ public class User {
     @Id
     @SequenceGenerator(name = "sequence_user", sequenceName = "sequence_user", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_user")
+    @Column(name = "u_userid")
     private long userId;
+
+    @Column(name = "u_firstname")
     private String firstName;
+
+    @Column(name = "u_middlename")
     private String middleName;
+
+    @Column(name = "u_lastname")
     private String lastName;
+
+    @Column(name = "u_role")
     private UserRole role;
 
     public long getUserId() {

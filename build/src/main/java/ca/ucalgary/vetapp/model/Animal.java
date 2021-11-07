@@ -13,27 +13,53 @@ public class Animal {
     @Id
     @SequenceGenerator(name = "sequence_animal", sequenceName = "sequence_animal", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_animal")
+    @Column(name = "a_animalid")
     private long animalId;
+
+    @Column(name = "a_name")
     private String name;
+
+    @Column(name = "a_breed")
     private String breed;
+
+    @Column(name = "a_birthdate")
     private LocalDate birthDate; // if exact is unknown, put that returns most accurate age in months
+
+    @Column(name = "a_sex")
     private String sex;
+
+    @Column(name = "a_status")
     private AnimalStatus status;
 
     @ManyToOne
     // @ForeignKey(name = "")
+    @JoinColumn(name = "a_ownerid")
     private Owner theOwner;
+
+    @Column(name = "a_tattoonum")
     private int tattooNum;
+
+    @Column(name = "a_rfidnumber")
     private String rfidNumber;
+
+    @Column(name = "a_microchipnumber")
     private String microChipNumber;
+
+    @Column(name = "a_weight")
     private HashMap<LocalDate, Double> weight; // weight along with record date
+
+    @Column(name = "a_coatcolor")
     private String coatColor;
+
+    @Column(name = "a_continuousmedication")
     private String continuousMedication;
 
     @OneToMany(mappedBy = "theAnimal")
     private List<Photos> animalPhotoList = new ArrayList<Photos>();
+
     @OneToMany(mappedBy = "theAnimal")
     private List<Treatments> animalTreatmentList = new ArrayList<Treatments>();
+
     @OneToMany(mappedBy = "theAnimal")
     private List<Issues> animalIssueList = new ArrayList<Issues>();
 

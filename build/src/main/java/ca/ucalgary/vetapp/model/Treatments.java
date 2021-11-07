@@ -9,14 +9,21 @@ public class Treatments {
     @Id
     @SequenceGenerator(name = "sequence_treatment", sequenceName = "sequence_treatment", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_treatment")
+    @Column(name = "o_treatmentid")
     private long treatmentId;
+
+    @Column(name = "o_treatmentdesc")
     private String treatmentDesc;
 
     @ManyToOne
+    @JoinColumn(name = "o_animalid")
     private Animal theAnimal;
+
+    @Column(name = "o_treatmentdate")
     private LocalDate treatmentDate;
 
     @ManyToOne
+    @JoinColumn(name = "o_treatedby")
     private User treatedBy;
 
     public long getTreatmentId() {

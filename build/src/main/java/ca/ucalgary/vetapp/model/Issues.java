@@ -9,16 +9,25 @@ public class Issues {
     @Id
     @SequenceGenerator(name = "sequence_issue", sequenceName = "sequence_issue", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_issue")
+    @Column(name = "i_issueid")
     private long issueId;
+
+    @Column(name = "i_issuedesc")
     private String issueDesc;
 
     @ManyToOne
+    @JoinColumn(name = "i_animalid")
     private Animal theAnimal;
+
+    @Column(name = "i_detecteddate")
     private LocalDate detectedDate;
 
     @ManyToOne
+    @JoinColumn(name = "i_raisedby")
     private User raisedBy;
-    private boolean resolved;
+
+    @Column(name = "i_isresolved")
+    private boolean isResolved;
 
     public long getIssueId() {
         return issueId;
@@ -61,10 +70,10 @@ public class Issues {
     }
 
     public boolean isResolved() {
-        return resolved;
+        return isResolved;
     }
 
-    public void setResolved(boolean resolved) {
-        this.resolved = resolved;
+    public void setResolved(boolean isResolved) {
+        this.isResolved = isResolved;
     }
 }

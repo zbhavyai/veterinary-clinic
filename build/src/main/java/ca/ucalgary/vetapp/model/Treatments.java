@@ -1,19 +1,29 @@
 package ca.ucalgary.vetapp.model;
 
 import java.time.LocalDate;
+import javax.persistence.*;
 
-public class AnimalTreatment {
-    private int treatmentId;
+@Entity
+@Table
+public class Treatments {
+    @Id
+    @SequenceGenerator(name = "sequence_treatment", sequenceName = "sequence_treatment", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_treatment")
+    private long treatmentId;
     private String treatmentDesc;
+
+    @ManyToOne
     private Animal theAnimal;
     private LocalDate treatmentDate;
+
+    @ManyToOne
     private User treatedBy;
 
-    public int getTreatmentId() {
+    public long getTreatmentId() {
         return treatmentId;
     }
 
-    public void setTreatmentId(int treatmentId) {
+    public void setTreatmentId(long treatmentId) {
         this.treatmentId = treatmentId;
     }
 

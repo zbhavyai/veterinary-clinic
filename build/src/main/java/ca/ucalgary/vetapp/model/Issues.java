@@ -1,19 +1,30 @@
 package ca.ucalgary.vetapp.model;
 
 import java.time.LocalDate;
+import javax.persistence.*;
 
-public class AnimalIssue {
-    private int issueId;
+@Entity
+@Table
+public class Issues {
+    @Id
+    @SequenceGenerator(name = "sequence_issue", sequenceName = "sequence_issue", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_issue")
+    private long issueId;
     private String issueDesc;
+
+    @ManyToOne
     private Animal theAnimal;
     private LocalDate detectedDate;
+
+    @ManyToOne
+    private User raisedBy;
     private boolean resolved;
 
-    public int getIssueId() {
+    public long getIssueId() {
         return issueId;
     }
 
-    public void setIssueId(int issueId) {
+    public void setIssueId(long issueId) {
         this.issueId = issueId;
     }
 
@@ -26,11 +37,11 @@ public class AnimalIssue {
     }
 
     public Animal getTheAnimal() {
-        return theAnimal;
+    return theAnimal;
     }
 
     public void setTheAnimal(Animal theAnimal) {
-        this.theAnimal = theAnimal;
+    this.theAnimal = theAnimal;
     }
 
     public LocalDate getDetectedDate() {
@@ -39,6 +50,14 @@ public class AnimalIssue {
 
     public void setDetectedDate(LocalDate detectedDate) {
         this.detectedDate = detectedDate;
+    }
+
+    public User getRaisedBy() {
+        return raisedBy;
+    }
+
+    public void setRaisedBy(User raisedBy) {
+        this.raisedBy = raisedBy;
     }
 
     public boolean isResolved() {

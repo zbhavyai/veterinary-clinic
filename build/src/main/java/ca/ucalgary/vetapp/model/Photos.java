@@ -1,15 +1,24 @@
 package ca.ucalgary.vetapp.model;
 
-public class AnimalPhoto {
-    private int photoId;
+import javax.persistence.*;
+
+@Entity
+@Table
+public class Photos {
+    @Id
+    @SequenceGenerator(name = "sequence_photo", sequenceName = "sequence_photo", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_photo")
+    private long photoId;
+
+    @ManyToOne
     private Animal theAnimal;
     private String photoLink;
 
-    public int getPhotoId() {
+    public long getPhotoId() {
         return photoId;
     }
 
-    public void setPhotoId(int photoId) {
+    public void setPhotoId(long photoId) {
         this.photoId = photoId;
     }
 

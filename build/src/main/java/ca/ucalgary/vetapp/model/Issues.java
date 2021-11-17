@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "issues")
 public class Issues {
     @Id
-    @SequenceGenerator(name = "sequence_issue", sequenceName = "sequence_issue", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_issue")
+    @SequenceGenerator(name = "sequence_issues", sequenceName = "sequence_issues", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_issues")
     @Column(name = "i_issueid")
     private long issueId;
 
@@ -16,14 +16,14 @@ public class Issues {
     private String issueDesc;
 
     @ManyToOne
-    @JoinColumn(name = "i_animalid")
+    @JoinColumn(name = "i_animalid", foreignKey = @ForeignKey(name = "fk_i_animalid_issues"))
     private Animal theAnimal;
 
     @Column(name = "i_detecteddate")
     private LocalDate detectedDate;
 
     @ManyToOne
-    @JoinColumn(name = "i_raisedby")
+    @JoinColumn(name = "i_raisedby", foreignKey = @ForeignKey(name = "fk_i_raisedby_issues"))
     private User raisedBy;
 
     @Column(name = "i_isresolved")
@@ -46,11 +46,11 @@ public class Issues {
     }
 
     public Animal getTheAnimal() {
-    return theAnimal;
+        return theAnimal;
     }
 
     public void setTheAnimal(Animal theAnimal) {
-    this.theAnimal = theAnimal;
+        this.theAnimal = theAnimal;
     }
 
     public LocalDate getDetectedDate() {

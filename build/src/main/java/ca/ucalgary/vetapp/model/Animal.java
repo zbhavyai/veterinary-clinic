@@ -1,18 +1,18 @@
 package ca.ucalgary.vetapp.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "animals")
 public class Animal {
     @Id
-    @SequenceGenerator(name = "sequence_animal", sequenceName = "sequence_animal", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_animal")
+    @SequenceGenerator(name = "sequence_animals", sequenceName = "sequence_animals", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_animals")
     @Column(name = "a_animalid")
     private long animalId;
 
@@ -35,8 +35,7 @@ public class Animal {
     private AnimalStatus status;
 
     @ManyToOne
-    // @ForeignKey(name = "")
-    @JoinColumn(name = "a_ownerid")
+    @JoinColumn(name = "a_ownerid", foreignKey = @ForeignKey(name = "fk_a_ownerid_animals"))
     private Owner theOwner;
 
     @Column(name = "a_tattoonum")
@@ -101,8 +100,14 @@ public class Animal {
      * @return age in months
      */
     public int getAge() {
-        // TODO: get current date, subtract birthdate, convert in months, return
-        return 0;
+        if (this.birthDate == null) {
+            return 0;
+        }
+
+        else {
+            long months = Period.between(this.birthDate, LocalDate.now()).toTotalMonths();
+            return ((int) months);
+        }
     }
 
     public long getAnimalId() {

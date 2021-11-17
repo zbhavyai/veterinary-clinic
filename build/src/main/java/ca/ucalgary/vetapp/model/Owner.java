@@ -5,11 +5,11 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "owners")
 public class Owner {
     @Id
-    @SequenceGenerator(name = "sequence_owner", sequenceName = "sequence_owner", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_owner")
+    @SequenceGenerator(name = "sequence_owners", sequenceName = "sequence_owners", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_owners")
     @Column(name = "o_ownerid")
     private long ownerId;
 

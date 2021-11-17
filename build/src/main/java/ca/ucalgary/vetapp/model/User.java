@@ -3,11 +3,11 @@ package ca.ucalgary.vetapp.model;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "users")
 public class User {
     @Id
-    @SequenceGenerator(name = "sequence_user", sequenceName = "sequence_user", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_user")
+    @SequenceGenerator(name = "sequence_users", sequenceName = "sequence_users", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_users")
     @Column(name = "u_userid")
     private long userId;
 

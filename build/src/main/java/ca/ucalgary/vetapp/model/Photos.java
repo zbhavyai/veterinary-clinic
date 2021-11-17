@@ -3,16 +3,16 @@ package ca.ucalgary.vetapp.model;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "photos")
 public class Photos {
     @Id
-    @SequenceGenerator(name = "sequence_photo", sequenceName = "sequence_photo", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_photo")
+    @SequenceGenerator(name = "sequence_photos", sequenceName = "sequence_photos", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_photos")
     @Column(name = "p_photoid")
     private long photoId;
 
     @ManyToOne
-    @JoinColumn(name = "p_animalid")
+    @JoinColumn(name = "p_animalid", foreignKey = @ForeignKey(name = "fk_p_animalid_photos"))
     private Animal theAnimal;
 
     @Column(name = "p_photolink")

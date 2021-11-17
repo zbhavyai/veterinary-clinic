@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "treatments")
 public class Treatments {
     @Id
-    @SequenceGenerator(name = "sequence_treatment", sequenceName = "sequence_treatment", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_treatment")
+    @SequenceGenerator(name = "sequence_treatments", sequenceName = "sequence_treatments", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_treatments")
     @Column(name = "t_treatmentid")
     private long treatmentId;
 
@@ -16,14 +16,14 @@ public class Treatments {
     private String treatmentDesc;
 
     @ManyToOne
-    @JoinColumn(name = "t_animalid")
+    @JoinColumn(name = "t_animalid", foreignKey = @ForeignKey(name = "fk_t_animalid_treatments"))
     private Animal theAnimal;
 
     @Column(name = "t_treatmentdate")
     private LocalDate treatmentDate;
 
     @ManyToOne
-    @JoinColumn(name = "t_treatedby")
+    @JoinColumn(name = "t_treatedby", foreignKey = @ForeignKey(name = "fk_t_treatedby_treatments"))
     private User treatedBy;
 
     public long getTreatmentId() {

@@ -1,5 +1,6 @@
 package ca.ucalgary.vetapp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.ucalgary.vetapp.model.Animal;
@@ -24,15 +26,15 @@ public class AnimalController {
         this.animalRepository = ar;
     }
 
-    /**
-     * Gets all animals
-     *
-     * @return
-     */
-    @GetMapping
-    public List<Animal> getAllAnimals() {
-        return this.animalRepository.findAll();
-    }
+    // /**
+    //  * Gets all animals
+    //  *
+    //  * @return
+    //  */
+    // @GetMapping
+    // public List<Animal> getAllAnimals() {
+    //     return this.animalRepository.findAll();
+    // }
 
     /**
      * Get one animal
@@ -40,17 +42,29 @@ public class AnimalController {
      * @param id
      * @return
      */
-    @GetMapping("{animalId}")
-    public Animal getOneAnimal(@PathVariable("animalId") Long id) {
-        Optional<Animal> animalOptional = this.animalRepository.findById(id);
-
-        if (animalOptional.isPresent()) {
-            Animal animal = animalOptional.get();
-            return animal;
+    @GetMapping()
+    public List<Animal> getOneAnimal(@RequestParam(required = false) String id) {
+        if(id == null) {
+            return this.animalRepository.findAll();
         }
 
         else {
-            throw new NotFoundException(id);
+            Long animalid = Long.valueOf(id);
+
+            Optional<Animal> animalOptional = this.animalRepository.findById(animalid);
+
+            if (animalOptional.isPresent()) {
+                Animal animal = animalOptional.get();
+
+                List<Animal> animalResults = new ArrayList<>();
+                animalResults.add(animal);
+
+                return animalResults;
+            }
+
+            else {
+                throw new NotFoundException(animalid);
+            }
         }
     }
 

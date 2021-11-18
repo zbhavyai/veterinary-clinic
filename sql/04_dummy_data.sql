@@ -21,7 +21,7 @@ INSERT INTO animals (a_animalid,a_name,a_type,a_breed,a_birthdate,a_sex,a_status
 
 UPDATE sequence_animals SET next_val=8;
 
-INSERT INTO users (u_userid,u_firstname,u_middlename,u_lastname,u_role) VALUES 
+INSERT INTO users (u_userid,u_firstname,u_middlename,u_lastname,u_role) VALUES
 (1,"Damian","Bruce","Wayne","1"),
 (2,"Tony",NULL,"Stark","2"),
 (3,"Clark","Joseph","Kent","3"),
@@ -30,9 +30,9 @@ INSERT INTO users (u_userid,u_firstname,u_middlename,u_lastname,u_role) VALUES
 (6,"Miley","Ray",NULL,"1"),
 (7,"Chris",NULL,"Lighter","2");
 
-UPDATE sequence_users SET next_val=9;
+UPDATE sequence_users SET next_val=8;
 
-INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_animalid,t_treatmentdate,t_treatedby) VALUES 
+INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_animalid,t_treatmentdate,t_treatedby) VALUES
 (1,"Physical exam","7","2021-12-08","1"),
 (2,"Blood work","1","2021-12-09","2"),
 (3,"Da2pp","1","2021-12-10","5"),
@@ -41,9 +41,9 @@ INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_animalid,t_treatmentdate
 (6,"rabies vaccination","7","2021-12-10","2"),
 (7,"Revolution treatment","7","2021-12-08","4");
 
-UPDATE sequence_treatments SET next_val=10;
+UPDATE sequence_treatments SET next_val=8;
 
-INSERT INTO issues (i_issueid,i_issuedesc,i_animalid,i_detecteddate,i_raisedby,i_isresolved) VALUES 
+INSERT INTO issues (i_issueid,i_issuedesc,i_animalid,i_detecteddate,i_raisedby,i_isresolved) VALUES
 (1,"Limp Walk","3","2021-12-08","1",1),
 (2,NULL,"6","2020-12-12","1",0),
 (3,"Diabetes","7","2021-05-16","2",0),
@@ -52,9 +52,9 @@ INSERT INTO issues (i_issueid,i_issuedesc,i_animalid,i_detecteddate,i_raisedby,i
 (6,"chronic kidney disease","7","2021-11-17","3",0),
 (7,"Upset Stomach","3","2021-11-17","2",NULL);
 
-UPDATE sequence_issues SET next_val=11;
+UPDATE sequence_issues SET next_val=8;
 
-INSERT INTO photos (p_photoid,p_animalid,p_photolink) VALUES 
+INSERT INTO photos (p_photoid,p_animalid,p_photolink) VALUES
 (1,"7","image1.png"),
 (2,"2","image2.png"),
 (3,"3","image4.png"),
@@ -63,11 +63,11 @@ INSERT INTO photos (p_photoid,p_animalid,p_photolink) VALUES
 (6,"5","image6.png"),
 (7,"6","image5.png");
 
-UPDATE sequence_photos SET next_val=12;
+UPDATE sequence_photos SET next_val=8;
 
 
 
-INSERT INTO comments (c_commentid,c_commentdesc,c_animalid,c_commentdate,c_commenter) VALUES 
+INSERT INTO comments (c_commentid,c_commentdesc,c_animalid,c_commentdate,c_commenter) VALUES
 (1,"Nighttime terror","2","2021-12-08","1"),
 (2,"Howling ","2","2021-12-09","4"),
 (3,"Pregnant ","6","2021-12-10","5"),
@@ -76,6 +76,6 @@ INSERT INTO comments (c_commentid,c_commentdesc,c_animalid,c_commentdate,c_comme
 (6,"No Comment Provided","2","2021-12-10","2"),
 (7,"Not sleeping","2","2021-12-08","1");
 
-UPDATE sequence_comments SET next_val=13;
+UPDATE sequence_comments SET next_val=8;
 
 

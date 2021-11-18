@@ -20,3 +20,8 @@ INSERT INTO animals (a_animalid,a_name,a_type,a_breed,a_birthdate,a_sex,a_status
 (7,"Streaky","Cat","Abyssinian",NULL,"1",1,3,209577225,"177988155","267795413",NULL,"Orange",NULL);
 
 UPDATE sequence_animals SET next_val=8;
+
+INSERT INTO users (u_userid,u_firstname,u_middlename,u_lastname,u_role) VALUES
+(1,"Damian","Bruce","Wayne", 1),
+(2,"Tony","","Stark",2),
+(3,"Clark","Joseph","Kent",3);

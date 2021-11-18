@@ -1,9 +1,9 @@
 package ca.ucalgary.vetapp.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import ca.ucalgary.vetapp.model.Animal;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.hateoas.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,30 +11,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import ca.ucalgary.vetapp.model.Animal;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "api/v1/animals")
 public class AnimalController {
     private final AnimalRepository animalRepository;
+    private final AnimalModelAssembler animalModelAssembler;
 
-    // @Autowired
-    public AnimalController(AnimalRepository ar) {
+    public AnimalController(AnimalRepository ar, AnimalModelAssembler ama) {
         this.animalRepository = ar;
+        this.animalModelAssembler = ama;
     }
 
-    // /**
-    //  * Gets all animals
-    //  *
-    //  * @return
-    //  */
-    // @GetMapping
-    // public List<Animal> getAllAnimals() {
-    //     return this.animalRepository.findAll();
-    // }
+    /**
+     * Gets all animals
+     *
+     * @return
+     */
+    @GetMapping
+    public CollectionModel<EntityModel<Animal>> getAllAnimals() {
+        List<EntityModel<Animal>> allAnimals = this.animalRepository.findAll().stream()
+                .map(this.animalModelAssembler::toModel).collect(Collectors.toList());
+
+        return CollectionModel.of(allAnimals, WebMvcLinkBuilder
+                .linkTo(WebMvcLinkBuilder.methodOn(AnimalController.class).getAllAnimals()).withSelfRel());
+    }
 
     /**
      * Get one animal
@@ -42,29 +47,18 @@ public class AnimalController {
      * @param id
      * @return
      */
-    @GetMapping()
-    public List<Animal> getOneAnimal(@RequestParam(required = false) String id) {
-        if(id == null) {
-            return this.animalRepository.findAll();
+    @GetMapping(path = "{animalId}")
+    public EntityModel<Animal> getOneAnimal(@PathVariable("animalId") Long id) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+
+            return this.animalModelAssembler.toModel(oneAnimal);
         }
 
         else {
-            Long animalid = Long.valueOf(id);
-
-            Optional<Animal> animalOptional = this.animalRepository.findById(animalid);
-
-            if (animalOptional.isPresent()) {
-                Animal animal = animalOptional.get();
-
-                List<Animal> animalResults = new ArrayList<>();
-                animalResults.add(animal);
-
-                return animalResults;
-            }
-
-            else {
-                throw new NotFoundException(animalid);
-            }
+            throw new NotFoundException(id);
         }
     }
 
@@ -75,22 +69,10 @@ public class AnimalController {
      * @return
      */
     @PostMapping
-    public Animal addAnimal(@RequestBody Animal a) {
-        return this.animalRepository.save(a);
-    }
+    public ResponseEntity<?> addAnimal(@RequestBody Animal a) {
+        EntityModel<Animal> entityModel = this.animalModelAssembler.toModel(this.animalRepository.save(a));
 
-    /**
-     * Deletes one animal
-     *
-     * @param id
-     */
-    @DeleteMapping(path = "{animalId}")
-    public void deleteAnimal(@PathVariable("animalId") Long id) {
-        if (!this.animalRepository.existsById(id)) {
-            throw new NotFoundException(id);
-        }
-
-        this.animalRepository.deleteById(id);
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     /**
@@ -101,8 +83,10 @@ public class AnimalController {
      * @return
      */
     @PutMapping(path = "{animalId}")
-    public Animal updateAnimal(@RequestBody Animal a, @PathVariable("animalId") Long id) {
+    public ResponseEntity<?> updateAnimal(@RequestBody Animal a, @PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        Animal updatedAnimal;
 
         if (animalOptional.isPresent()) {
             Animal animal = animalOptional.get();
@@ -124,12 +108,31 @@ public class AnimalController {
             animal.setAnimalTreatmentList(a.getAnimalTreatmentList());
             animal.setAnimalIssueList(a.getAnimalIssueList());
 
-            return this.animalRepository.save(animal);
+            updatedAnimal = this.animalRepository.save(animal);
         }
 
         else {
             a.setAnimalId(id);
-            return this.animalRepository.save(a);
+            updatedAnimal = this.animalRepository.save(a);
         }
+
+        EntityModel<Animal> entityModel = this.animalModelAssembler.toModel(updatedAnimal);
+
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
+    }
+
+    /**
+     * Deletes one animal
+     *
+     * @param id
+     */
+    @DeleteMapping(path = "{animalId}")
+    public ResponseEntity<?> deleteAnimal(@PathVariable("animalId") Long id) {
+        if (!this.animalRepository.existsById(id)) {
+            throw new NotFoundException(id);
+        }
+
+        this.animalRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

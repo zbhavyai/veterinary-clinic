@@ -29,6 +29,9 @@ public class User {
     @Column(name = "u_password")
     private String password;
 
+    @Column(name = "u_status")
+    private UserStatus status;
+
     public long getUserId() {
         return this.userId;
     }
@@ -83,5 +86,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 }

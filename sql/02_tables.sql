@@ -26,6 +26,7 @@ CREATE TABLE users (
     u_role integer,
     u_emailid varchar(255),
     u_password text,
+    u_status integer,
     primary key (u_userid)
 );
 

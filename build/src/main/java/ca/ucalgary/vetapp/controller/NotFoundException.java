@@ -1,7 +1,7 @@
 package ca.ucalgary.vetapp.controller;
 
 public class NotFoundException extends RuntimeException {
-    NotFoundException(Long id) {
-        super("[FAIL] Could not find entity with id = " + id);
+    NotFoundException(String entity, Long id) {
+        super(String.format("[FAIL] Could not find %s with id = %l.", entity, id));
     }
 }

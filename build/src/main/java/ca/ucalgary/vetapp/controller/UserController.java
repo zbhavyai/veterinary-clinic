@@ -65,17 +65,17 @@ public class UserController {
         List<User> searchResults = new ArrayList<>();
 
         for (User eachUser : allUsers) {
-            if (eachUser.getFirstName().contains(searchTerm)) {
+            if (eachUser.getFirstName().toLowerCase().contains(searchTerm)) {
                 searchResults.add(eachUser);
                 continue;
             }
 
-            else if (eachUser.getMiddleName().contains(searchTerm)) {
+            else if (eachUser.getMiddleName().toLowerCase().contains(searchTerm)) {
                 searchResults.add(eachUser);
                 continue;
             }
 
-            else if (eachUser.getLastName().contains(searchTerm)) {
+            else if (eachUser.getLastName().toLowerCase().contains(searchTerm)) {
                 searchResults.add(eachUser);
                 continue;
             }
@@ -91,7 +91,7 @@ public class UserController {
         List<User> searchResults = new ArrayList<>();
 
         for (User eachUser : allUsers) {
-            if (eachUser.getEmailId().contains(searchTerm)) {
+            if (eachUser.getEmailId().toLowerCase().contains(searchTerm)) {
                 searchResults.add(eachUser);
                 continue;
             }

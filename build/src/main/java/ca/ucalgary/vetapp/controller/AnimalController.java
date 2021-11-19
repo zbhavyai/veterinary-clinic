@@ -1,10 +1,6 @@
 package ca.ucalgary.vetapp.controller;
 
-import ca.ucalgary.vetapp.model.Animal;
-import ca.ucalgary.vetapp.model.Photos;
-import ca.ucalgary.vetapp.model.Issues;
-import ca.ucalgary.vetapp.model.Treatments;
-import ca.ucalgary.vetapp.model.Comments;
+import ca.ucalgary.vetapp.model.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,9 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping(path = "api/v1/animals")
@@ -26,32 +24,139 @@ public class AnimalController {
     }
 
     /**
-     * Gets all animals
-     *
-     * @return
-     */
-    @GetMapping
-    public List<Animal> getAllAnimals() {
-        return this.animalRepository.findAll();
-    }
-
-    /**
      * Get one animal
      *
      * @param id
      * @return
      */
     @GetMapping(path = "{animalId}")
-    public Animal getOneAnimal(@PathVariable("animalId") Long id) {
-        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+    public Animal getAnimalById(@PathVariable("animalId") Long id) throws NotFoundException {
+        Animal a = this.searchAnimalById(id).get(0);
 
-        if (animalOptional.isPresent()) {
-            Animal oneAnimal = animalOptional.get();
-            return oneAnimal;
+        if (a == null) {
+            throw new NotFoundException("animal", id);
         }
 
         else {
-            throw new NotFoundException(id);
+            return a;
+        }
+    }
+
+    private List<Animal> searchAnimalById(Long id) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        if (animalOptional.isPresent()) {
+            List<Animal> searchResults = new ArrayList<>();
+            searchResults.add(animalOptional.get());
+            return searchResults;
+        }
+
+        else {
+            return null;
+        }
+    }
+
+    private List<Animal> searchAnimalByName(String sT) {
+        String searchTerm = sT.toLowerCase();
+
+        List<Animal> allAnimals = this.animalRepository.findAll();
+        List<Animal> searchResults = new ArrayList<>();
+
+        for (Animal eachAnimal : allAnimals) {
+            if (eachAnimal.getName().toLowerCase().contains(searchTerm)) {
+                searchResults.add(eachAnimal);
+                continue;
+            }
+        }
+
+        return searchResults;
+    }
+
+    private List<Animal> searchAnimalByBreed(String sT) {
+        String searchTerm = sT.toLowerCase();
+
+        List<Animal> allAnimals = this.animalRepository.findAll();
+        List<Animal> searchResults = new ArrayList<>();
+
+        for (Animal eachAnimal : allAnimals) {
+            if (eachAnimal.getBreed().toLowerCase().contains(searchTerm)) {
+                searchResults.add(eachAnimal);
+                continue;
+            }
+        }
+
+        return searchResults;
+    }
+
+    private List<Animal> searchAnimalByOwner(String sT) {
+        String searchTerm = sT.toLowerCase();
+
+        List<Animal> allAnimals = this.animalRepository.findAll();
+        List<Animal> searchResults = new ArrayList<>();
+
+        // TODO
+
+        return searchResults;
+    }
+
+    private List<Animal> searchAnimalByStatus(String sT) throws UnsupportedRequestException {
+        try {
+            AnimalStatus searchTerm = AnimalStatus.valueOf(sT.toUpperCase());
+
+            List<Animal> allAnimals = this.animalRepository.findAll();
+            List<Animal> searchResults = new ArrayList<>();
+
+            for (Animal eachAnimal : allAnimals) {
+                if (eachAnimal.getStatus() == searchTerm) {
+                    searchResults.add(eachAnimal);
+                    continue;
+                }
+            }
+
+            return searchResults;
+        }
+
+        catch (IllegalArgumentException e) {
+            throw new UnsupportedRequestException(e.getMessage());
+        }
+    }
+
+    @GetMapping()
+    public List<Animal> searchAnimal(@RequestParam(name = "searchBy", required = false) String searchBy,
+            @RequestParam(name = "searchTerm", required = false) String searchTerm) throws UnsupportedRequestException {
+
+        List<Animal> allAnimals = this.animalRepository.findAll();
+
+        if (searchBy == null || searchTerm == null) {
+            return allAnimals;
+        }
+
+        else if (searchBy.equals("") || searchTerm.equals("")) {
+            return allAnimals;
+        }
+
+        else if (searchBy.equalsIgnoreCase("id")) {
+            return this.searchAnimalById(Long.valueOf(searchTerm));
+        }
+
+        else if (searchBy.equalsIgnoreCase("name")) {
+            return this.searchAnimalByName(searchTerm);
+        }
+
+        else if (searchBy.equalsIgnoreCase("breed")) {
+            return this.searchAnimalByBreed(searchTerm);
+        }
+
+        else if (searchBy.equalsIgnoreCase("owner")) {
+            return this.searchAnimalByOwner(searchTerm);
+        }
+
+        else if (searchBy.equalsIgnoreCase("status")) {
+            return this.searchAnimalByStatus(searchTerm);
+        }
+
+        else {
+            throw new UnsupportedRequestException("Invalid search by");
         }
     }
 
@@ -65,7 +170,7 @@ public class AnimalController {
         }
 
         else {
-            throw new NotFoundException(id);
+            throw new NotFoundException("animal", id);
         }
     }
 
@@ -79,7 +184,7 @@ public class AnimalController {
         }
 
         else {
-            throw new NotFoundException(id);
+            throw new NotFoundException("animal", id);
         }
     }
 
@@ -93,7 +198,7 @@ public class AnimalController {
         }
 
         else {
-            throw new NotFoundException(id);
+            throw new NotFoundException("animal", id);
         }
     }
 
@@ -107,7 +212,7 @@ public class AnimalController {
         }
 
         else {
-            throw new NotFoundException(id);
+            throw new NotFoundException("animal", id);
         }
     }
 
@@ -173,7 +278,7 @@ public class AnimalController {
     @DeleteMapping(path = "{animalId}")
     public void deleteAnimal(@PathVariable("animalId") Long id) {
         if (!this.animalRepository.existsById(id)) {
-            throw new NotFoundException(id);
+            throw new NotFoundException("animal", id);
         }
 
         this.animalRepository.deleteById(id);

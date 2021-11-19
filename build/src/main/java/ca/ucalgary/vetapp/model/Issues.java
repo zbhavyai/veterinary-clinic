@@ -30,7 +30,7 @@ public class Issues {
     private boolean isResolved;
 
     public long getIssueId() {
-        return issueId;
+        return this.issueId;
     }
 
     public void setIssueId(long issueId) {
@@ -38,15 +38,15 @@ public class Issues {
     }
 
     public String getIssueDesc() {
-        return issueDesc;
+        return this.issueDesc;
     }
 
     public void setIssueDesc(String issueDesc) {
         this.issueDesc = issueDesc;
     }
 
-    public Animal getTheAnimal() {
-        return theAnimal;
+    public Animal fetchTheAnimal() {
+        return this.theAnimal;
     }
 
     public void setTheAnimal(Animal theAnimal) {
@@ -54,15 +54,36 @@ public class Issues {
     }
 
     public LocalDate getDetectedDate() {
-        return detectedDate;
+        return this.detectedDate;
     }
 
     public void setDetectedDate(LocalDate detectedDate) {
         this.detectedDate = detectedDate;
     }
 
-    public User getRaisedBy() {
-        return raisedBy;
+    public User fetchRaisedBy() {
+        return this.raisedBy;
+    }
+
+    public String getIssueRaiserName() {
+        String fname = this.raisedBy.getFirstName();
+        String mname = this.raisedBy.getMiddleName();
+        String lname = this.raisedBy.getLastName();
+
+        if(fname == null) {
+            fname = "";
+        }
+
+        if(mname == null) {
+            mname = "";
+        }
+
+        if(lname == null) {
+            lname = "";
+        }
+
+        String name = String.format("%s %s %s", fname, mname, lname);
+        return name;
     }
 
     public void setRaisedBy(User raisedBy) {
@@ -70,7 +91,7 @@ public class Issues {
     }
 
     public boolean isResolved() {
-        return isResolved;
+        return this.isResolved;
     }
 
     public void setResolved(boolean isResolved) {

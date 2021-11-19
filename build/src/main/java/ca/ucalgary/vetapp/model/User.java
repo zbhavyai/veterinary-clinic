@@ -30,7 +30,7 @@ public class User {
     private String password;
 
     public long getUserId() {
-        return userId;
+        return this.userId;
     }
 
     public void setUserId(long userId) {
@@ -38,7 +38,7 @@ public class User {
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -46,7 +46,7 @@ public class User {
     }
 
     public String getMiddleName() {
-        return middleName;
+        return this.middleName;
     }
 
     public void setMiddleName(String middleName) {
@@ -54,7 +54,7 @@ public class User {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -62,7 +62,7 @@ public class User {
     }
 
     public UserRole getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(UserRole role) {
@@ -70,7 +70,7 @@ public class User {
     }
 
     public String getEmailId() {
-        return emailId;
+        return this.emailId;
     }
 
     public void setEmailId(String emailId) {
@@ -78,7 +78,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {

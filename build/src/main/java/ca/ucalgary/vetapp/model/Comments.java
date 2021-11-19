@@ -27,7 +27,7 @@ public class Comments {
     private User commenter;
 
     public long getCommentId() {
-        return commentId;
+        return this.commentId;
     }
 
     public void setCommentId(long commentId) {
@@ -35,15 +35,15 @@ public class Comments {
     }
 
     public String getCommentDesc() {
-        return commentDesc;
+        return this.commentDesc;
     }
 
     public void setCommentDesc(String commentDesc) {
         this.commentDesc = commentDesc;
     }
 
-    public Animal getTheAnimal() {
-        return theAnimal;
+    public Animal fetchTheAnimal() {
+        return this.theAnimal;
     }
 
     public void setTheAnimal(Animal theAnimal) {
@@ -51,15 +51,36 @@ public class Comments {
     }
 
     public LocalDate getCommentDate() {
-        return commentDate;
+        return this.commentDate;
     }
 
     public void setCommentDate(LocalDate commentDate) {
         this.commentDate = commentDate;
     }
 
-    public User getCommenter() {
-        return commenter;
+    public User fetchCommenter() {
+        return this.commenter;
+    }
+
+    public String getCommenterName() {
+        String fname = this.commenter.getFirstName();
+        String mname = this.commenter.getMiddleName();
+        String lname = this.commenter.getLastName();
+
+        if(fname == null) {
+            fname = "";
+        }
+
+        if(mname == null) {
+            mname = "";
+        }
+
+        if(lname == null) {
+            lname = "";
+        }
+
+        String name = String.format("%s %s %s", fname, mname, lname);
+        return name;
     }
 
     public void setCommenter(User commenter) {

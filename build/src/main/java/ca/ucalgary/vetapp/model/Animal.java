@@ -65,33 +65,53 @@ public class Animal {
     @OneToMany(mappedBy = "theAnimal")
     private List<Issues> animalIssueList = new ArrayList<Issues>();
 
+    @OneToMany(mappedBy = "theAnimal")
+    private List<Comments> animalCommentList = new ArrayList<Comments>();
+
     private Animal() {
         this.animalPhotoList = new ArrayList<>();
         this.animalTreatmentList = new ArrayList<>();
         this.animalIssueList = new ArrayList<>();
     }
 
-    public Animal(String name, String type, String breed, LocalDate birthDate, String sex, AnimalStatus status,
-            Owner theOwner, int tattooNum, String rfidNumber, String microChipNumber, HashMap<LocalDate, Double> weight,
-            String coatColor, String continuousMedication, List<Photos> animalPhotoList,
-            List<Treatments> animalTreatmentList, List<Issues> animalIssueList) {
-        this();
+    public long getAnimalId() {
+        return this.animalId;
+    }
+
+    public void setAnimalId(long animalId) {
+        this.animalId = animalId;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public String getBreed() {
+        return this.breed;
+    }
+
+    public void setBreed(String breed) {
         this.breed = breed;
+    }
+
+    public LocalDate getBirthDate() {
+        return this.birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-        this.sex = sex;
-        this.status = status;
-        this.theOwner = theOwner;
-        this.tattooNum = tattooNum;
-        this.rfidNumber = rfidNumber;
-        this.microChipNumber = microChipNumber;
-        this.weight = weight;
-        this.coatColor = coatColor;
-        this.continuousMedication = continuousMedication;
-        this.animalPhotoList = animalPhotoList;
-        this.animalTreatmentList = animalTreatmentList;
-        this.animalIssueList = animalIssueList;
     }
 
     /**
@@ -110,48 +130,8 @@ public class Animal {
         }
     }
 
-    public long getAnimalId() {
-        return animalId;
-    }
-
-    public void setAnimalId(long animalId) {
-        this.animalId = animalId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getBreed() {
-        return breed;
-    }
-
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public String getSex() {
-        return sex;
+        return this.sex;
     }
 
     public void setSex(String sex) {
@@ -159,15 +139,52 @@ public class Animal {
     }
 
     public AnimalStatus getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(AnimalStatus status) {
         this.status = status;
     }
 
-    public Owner getTheOwner() {
-        return theOwner;
+    public Owner fetchTheOwner() {
+        return this.theOwner;
+    }
+
+    public long getOwnerId() {
+        return this.theOwner.getOwnerId();
+    }
+
+    public String getOwnerName() {
+        String fname = this.theOwner.getFirstName();
+        String mname = this.theOwner.getMiddleName();
+        String lname = this.theOwner.getLastName();
+
+        if(fname == null) {
+            fname = "";
+        }
+
+        if(mname == null) {
+            mname = "";
+        }
+
+        if(lname == null) {
+            lname = "";
+        }
+
+        String name = String.format("%s %s %s", fname, mname, lname);
+        return name;
+    }
+
+    public String getOwnerContact() {
+        return this.theOwner.getContactNumber();
+    }
+
+    public String getOwnerEmail() {
+        return this.theOwner.getEmailId();
+    }
+
+    public String getOwnerAddress() {
+        return this.theOwner.getAddress();
     }
 
     public void setTheOwner(Owner theOwner) {
@@ -175,7 +192,7 @@ public class Animal {
     }
 
     public int getTattooNum() {
-        return tattooNum;
+        return this.tattooNum;
     }
 
     public void setTattooNum(int tattooNum) {
@@ -183,7 +200,7 @@ public class Animal {
     }
 
     public String getRfidNumber() {
-        return rfidNumber;
+        return this.rfidNumber;
     }
 
     public void setRfidNumber(String rfidNumber) {
@@ -191,7 +208,7 @@ public class Animal {
     }
 
     public String getMicroChipNumber() {
-        return microChipNumber;
+        return this.microChipNumber;
     }
 
     public void setMicroChipNumber(String microChipNumber) {
@@ -199,7 +216,7 @@ public class Animal {
     }
 
     public HashMap<LocalDate, Double> getWeight() {
-        return weight;
+        return this.weight;
     }
 
     public void setWeight(HashMap<LocalDate, Double> weight) {
@@ -207,7 +224,7 @@ public class Animal {
     }
 
     public String getCoatColor() {
-        return coatColor;
+        return this.coatColor;
     }
 
     public void setCoatColor(String coatColor) {
@@ -215,34 +232,42 @@ public class Animal {
     }
 
     public String getContinuousMedication() {
-        return continuousMedication;
+        return this.continuousMedication;
     }
 
     public void setContinuousMedication(String continuousMedication) {
         this.continuousMedication = continuousMedication;
     }
 
-    public List<Photos> getAnimalPhotoList() {
-        return animalPhotoList;
+    public List<Photos> fetchAnimalPhotoList() {
+        return this.animalPhotoList;
     }
 
     public void setAnimalPhotoList(List<Photos> animalPhotoList) {
         this.animalPhotoList = animalPhotoList;
     }
 
-    public List<Treatments> getAnimalTreatmentList() {
-        return animalTreatmentList;
+    public List<Treatments> fetchAnimalTreatmentList() {
+        return this.animalTreatmentList;
     }
 
     public void setAnimalTreatmentList(List<Treatments> animalTreatmentList) {
         this.animalTreatmentList = animalTreatmentList;
     }
 
-    public List<Issues> getAnimalIssueList() {
-        return animalIssueList;
+    public List<Issues> fetchAnimalIssueList() {
+        return this.animalIssueList;
     }
 
     public void setAnimalIssueList(List<Issues> animalIssueList) {
         this.animalIssueList = animalIssueList;
+    }
+
+    public List<Comments> fetchAnimalCommentList() {
+        return this.animalCommentList;
+    }
+
+    public void setAnimalCommentList(List<Comments> animalCommentList) {
+        this.animalCommentList = animalCommentList;
     }
 }

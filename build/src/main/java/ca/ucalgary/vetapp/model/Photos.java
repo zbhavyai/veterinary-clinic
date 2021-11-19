@@ -19,15 +19,15 @@ public class Photos {
     private String photoLink;
 
     public long getPhotoId() {
-        return photoId;
+        return this.photoId;
     }
 
     public void setPhotoId(long photoId) {
         this.photoId = photoId;
     }
 
-    public Animal getTheAnimal() {
-        return theAnimal;
+    public Animal fetchTheAnimal() {
+        return this.theAnimal;
     }
 
     public void setTheAnimal(Animal theAnimal) {
@@ -35,7 +35,7 @@ public class Photos {
     }
 
     public String getPhotoLink() {
-        return photoLink;
+        return this.photoLink;
     }
 
     public void setPhotoLink(String photoLink) {

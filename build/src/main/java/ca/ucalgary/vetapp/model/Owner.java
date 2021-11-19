@@ -38,7 +38,7 @@ public class Owner {
     private String address;
 
     public long getOwnerId() {
-        return ownerId;
+        return this.ownerId;
     }
 
     public void setOwnerId(long ownerId) {
@@ -46,7 +46,7 @@ public class Owner {
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -54,7 +54,7 @@ public class Owner {
     }
 
     public String getMiddleName() {
-        return middleName;
+        return this.middleName;
     }
 
     public void setMiddleName(String middleName) {
@@ -62,7 +62,7 @@ public class Owner {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -70,7 +70,7 @@ public class Owner {
     }
 
     public UserRole getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(UserRole role) {
@@ -78,7 +78,7 @@ public class Owner {
     }
 
     public String getContactNumber() {
-        return contactNumber;
+        return this.contactNumber;
     }
 
     public void setContactNumber(String contactNumber) {
@@ -86,7 +86,7 @@ public class Owner {
     }
 
     public String getEmailId() {
-        return emailId;
+        return this.emailId;
     }
 
     public void setEmailId(String emailId) {
@@ -94,10 +94,18 @@ public class Owner {
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Animal> fetchOwnedAnimals() {
+        return this.animalList;
+    }
+
+    public void setOwnedAnimals(List<Animal> animalList) {
+        this.animalList = animalList;
     }
 }

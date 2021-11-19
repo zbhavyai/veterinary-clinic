@@ -27,7 +27,7 @@ public class Treatments {
     private User treatedBy;
 
     public long getTreatmentId() {
-        return treatmentId;
+        return this.treatmentId;
     }
 
     public void setTreatmentId(long treatmentId) {
@@ -35,15 +35,15 @@ public class Treatments {
     }
 
     public String getTreatmentDesc() {
-        return treatmentDesc;
+        return this.treatmentDesc;
     }
 
     public void setTreatmentDesc(String treatmentDesc) {
         this.treatmentDesc = treatmentDesc;
     }
 
-    public Animal getTheAnimal() {
-        return theAnimal;
+    public Animal fetchTheAnimal() {
+        return this.theAnimal;
     }
 
     public void setTheAnimal(Animal theAnimal) {
@@ -51,15 +51,36 @@ public class Treatments {
     }
 
     public LocalDate getTreatmentDate() {
-        return treatmentDate;
+        return this.treatmentDate;
     }
 
     public void setTreatmentDate(LocalDate treatmentDate) {
         this.treatmentDate = treatmentDate;
     }
 
-    public User getTreatedBy() {
-        return treatedBy;
+    public User fetchTreatedBy() {
+        return this.treatedBy;
+    }
+
+    public String getTreaterName() {
+        String fname = this.treatedBy.getFirstName();
+        String mname = this.treatedBy.getMiddleName();
+        String lname = this.treatedBy.getLastName();
+
+        if(fname == null) {
+            fname = "";
+        }
+
+        if(mname == null) {
+            mname = "";
+        }
+
+        if(lname == null) {
+            lname = "";
+        }
+
+        String name = String.format("%s %s %s", fname, mname, lname);
+        return name;
     }
 
     public void setTreatedBy(User treatedBy) {

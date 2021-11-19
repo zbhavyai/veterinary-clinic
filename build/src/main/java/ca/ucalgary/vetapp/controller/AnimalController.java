@@ -1,9 +1,10 @@
 package ca.ucalgary.vetapp.controller;
 
 import ca.ucalgary.vetapp.model.Animal;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
-import org.springframework.http.ResponseEntity;
-import org.springframework.hateoas.*;
+import ca.ucalgary.vetapp.model.Photos;
+import ca.ucalgary.vetapp.model.Issues;
+import ca.ucalgary.vetapp.model.Treatments;
+import ca.ucalgary.vetapp.model.Comments;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,17 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "api/v1/animals")
 public class AnimalController {
     private final AnimalRepository animalRepository;
-    private final AnimalModelAssembler animalModelAssembler;
 
-    public AnimalController(AnimalRepository ar, AnimalModelAssembler ama) {
+    public AnimalController(AnimalRepository ar) {
         this.animalRepository = ar;
-        this.animalModelAssembler = ama;
     }
 
     /**
@@ -33,12 +31,8 @@ public class AnimalController {
      * @return
      */
     @GetMapping
-    public CollectionModel<EntityModel<Animal>> getAllAnimals() {
-        List<EntityModel<Animal>> allAnimals = this.animalRepository.findAll().stream()
-                .map(this.animalModelAssembler::toModel).collect(Collectors.toList());
-
-        return CollectionModel.of(allAnimals, WebMvcLinkBuilder
-                .linkTo(WebMvcLinkBuilder.methodOn(AnimalController.class).getAllAnimals()).withSelfRel());
+    public List<Animal> getAllAnimals() {
+        return this.animalRepository.findAll();
     }
 
     /**
@@ -48,13 +42,68 @@ public class AnimalController {
      * @return
      */
     @GetMapping(path = "{animalId}")
-    public EntityModel<Animal> getOneAnimal(@PathVariable("animalId") Long id) {
+    public Animal getOneAnimal(@PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
+            return oneAnimal;
+        }
 
-            return this.animalModelAssembler.toModel(oneAnimal);
+        else {
+            throw new NotFoundException(id);
+        }
+    }
+
+    @GetMapping(path = "{animalId}/photos")
+    public List<Photos> getPhotos(@PathVariable("animalId") Long id) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+            return oneAnimal.fetchAnimalPhotoList();
+        }
+
+        else {
+            throw new NotFoundException(id);
+        }
+    }
+
+    @GetMapping(path = "{animalId}/issues")
+    public List<Issues> getIssues(@PathVariable("animalId") Long id) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+            return oneAnimal.fetchAnimalIssueList();
+        }
+
+        else {
+            throw new NotFoundException(id);
+        }
+    }
+
+    @GetMapping(path = "{animalId}/comments")
+    public List<Comments> getComments(@PathVariable("animalId") Long id) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+            return oneAnimal.fetchAnimalCommentList();
+        }
+
+        else {
+            throw new NotFoundException(id);
+        }
+    }
+
+    @GetMapping(path = "{animalId}/treatments")
+    public List<Treatments> getTreatments(@PathVariable("animalId") Long id) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+            return oneAnimal.fetchAnimalTreatmentList();
         }
 
         else {
@@ -69,21 +118,18 @@ public class AnimalController {
      * @return
      */
     @PostMapping
-    public ResponseEntity<?> addAnimal(@RequestBody Animal a) {
-        EntityModel<Animal> entityModel = this.animalModelAssembler.toModel(this.animalRepository.save(a));
-
-        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
+    public Animal addAnimal(@RequestBody Animal a) {
+        return this.animalRepository.save(a);
     }
 
     /**
-     * Updates or creates animal
      *
      * @param a
      * @param id
      * @return
      */
     @PutMapping(path = "{animalId}")
-    public ResponseEntity<?> updateAnimal(@RequestBody Animal a, @PathVariable("animalId") Long id) {
+    public Animal updateAnimal(@RequestBody Animal a, @PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         Animal updatedAnimal;
@@ -97,16 +143,16 @@ public class AnimalController {
             animal.setBirthDate(a.getBirthDate());
             animal.setSex(a.getSex());
             animal.setStatus(a.getStatus());
-            animal.setTheOwner(a.getTheOwner());
+            // animal.setTheOwner(a.getTheOwner());
             animal.setTattooNum(a.getTattooNum());
             animal.setRfidNumber(a.getRfidNumber());
             animal.setMicroChipNumber(a.getMicroChipNumber());
             animal.setWeight(a.getWeight());
             animal.setCoatColor(a.getCoatColor());
             animal.setContinuousMedication(a.getContinuousMedication());
-            animal.setAnimalPhotoList(a.getAnimalPhotoList());
-            animal.setAnimalTreatmentList(a.getAnimalTreatmentList());
-            animal.setAnimalIssueList(a.getAnimalIssueList());
+            // animal.setAnimalPhotoList(a.getAnimalPhotoList());
+            // animal.setAnimalTreatmentList(a.getAnimalTreatmentList());
+            // animal.setAnimalIssueList(a.getAnimalIssueList());
 
             updatedAnimal = this.animalRepository.save(animal);
         }
@@ -116,9 +162,7 @@ public class AnimalController {
             updatedAnimal = this.animalRepository.save(a);
         }
 
-        EntityModel<Animal> entityModel = this.animalModelAssembler.toModel(updatedAnimal);
-
-        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
+        return updatedAnimal;
     }
 
     /**
@@ -127,12 +171,11 @@ public class AnimalController {
      * @param id
      */
     @DeleteMapping(path = "{animalId}")
-    public ResponseEntity<?> deleteAnimal(@PathVariable("animalId") Long id) {
+    public void deleteAnimal(@PathVariable("animalId") Long id) {
         if (!this.animalRepository.existsById(id)) {
             throw new NotFoundException(id);
         }
 
         this.animalRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
     }
 }

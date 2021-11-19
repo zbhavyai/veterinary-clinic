@@ -1,15 +1,6 @@
-Comments from Majid on Slack
---------------------------------------------------------------------------------
-
-1. Authentication and Authorization mechanism. such as Oath2 , SMAL , Role base access control, Policy access control
-
-2. User traceability
-
-
-
 Git Commit Style Quick Glance
 --------------------------------------------------------------------------------
-<type>: <description>
+<type>: [Sprint-ID/Epic-ID] <description>
 
 type -
         fix

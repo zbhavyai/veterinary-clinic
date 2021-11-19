@@ -63,7 +63,23 @@ public class AnimalController {
         List<Animal> searchResults = new ArrayList<>();
 
         for (Animal eachAnimal : allAnimals) {
-            if (eachAnimal.getName().toLowerCase().contains(searchTerm)) {
+            if (eachAnimal.getName() != null && eachAnimal.getName().toLowerCase().contains(searchTerm)) {
+                searchResults.add(eachAnimal);
+                continue;
+            }
+        }
+
+        return searchResults;
+    }
+
+    private List<Animal> searchAnimalByType(String sT) {
+        String searchTerm = sT.toLowerCase();
+
+        List<Animal> allAnimals = this.animalRepository.findAll();
+        List<Animal> searchResults = new ArrayList<>();
+
+        for (Animal eachAnimal : allAnimals) {
+            if (eachAnimal.getType() != null && eachAnimal.getType().toLowerCase().contains(searchTerm)) {
                 searchResults.add(eachAnimal);
                 continue;
             }
@@ -79,7 +95,7 @@ public class AnimalController {
         List<Animal> searchResults = new ArrayList<>();
 
         for (Animal eachAnimal : allAnimals) {
-            if (eachAnimal.getBreed().toLowerCase().contains(searchTerm)) {
+            if (eachAnimal.getBreed() != null && eachAnimal.getBreed().toLowerCase().contains(searchTerm)) {
                 searchResults.add(eachAnimal);
                 continue;
             }
@@ -94,7 +110,11 @@ public class AnimalController {
         List<Animal> allAnimals = this.animalRepository.findAll();
         List<Animal> searchResults = new ArrayList<>();
 
-        // TODO
+        for (Animal eachAnimal : allAnimals) {
+            if(eachAnimal.getOwnerName() != null && eachAnimal.getOwnerName().toLowerCase().contains(searchTerm)) {
+                searchResults.add(eachAnimal);
+            }
+        }
 
         return searchResults;
     }
@@ -141,6 +161,10 @@ public class AnimalController {
 
         else if (searchBy.equalsIgnoreCase("name")) {
             return this.searchAnimalByName(searchTerm);
+        }
+
+        else if (searchBy.equalsIgnoreCase("type")) {
+            return this.searchAnimalByType(searchTerm);
         }
 
         else if (searchBy.equalsIgnoreCase("breed")) {

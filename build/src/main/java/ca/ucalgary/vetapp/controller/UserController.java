@@ -1,8 +1,6 @@
 package ca.ucalgary.vetapp.controller;
 
-import java.util.List;
-import java.util.Optional;
-
+import ca.ucalgary.vetapp.model.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,21 +9,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import java.util.Optional;
 
-import ca.ucalgary.vetapp.model.Animal;
-import ca.ucalgary.vetapp.model.User;
 @RestController
-@RequestMapping(path = "api/v1/user")
+@RequestMapping(path = "api/v1/users")
 public class UserController {
-	private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-	public UserController(UserRepository userRepository) {
-		super();
-		this.userRepository = userRepository;
-	}
-	
-	/**
-     * Gets all animals
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    /**
+     * Gets all users
      *
      * @return
      */
@@ -33,14 +30,14 @@ public class UserController {
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
     }
-    
+
     /**
      * Get one animal
      *
      * @param id
      * @return
      */
-    @GetMapping("{userId}")
+    @GetMapping(path = "{userId}")
     public User getOneUser(@PathVariable("userId") Long id) {
         Optional<User> userOptional = this.userRepository.findById(id);
 
@@ -53,18 +50,51 @@ public class UserController {
             throw new NotFoundException(id);
         }
     }
-    
+
     /**
      * Saves one user
      *
-     * @param a
+     * @param u
      * @return
      */
     @PostMapping
-    public User addUser(@RequestBody User a) {
-        return this.userRepository.save(a);
+    public User addUser(@RequestBody User u) {
+        return this.userRepository.save(u);
     }
-    
+
+    /**
+     *
+     * @param u
+     * @param id
+     * @return
+     */
+    @PutMapping(path = "{userId}")
+    public User updateUser(@RequestBody User u, @PathVariable("userId") Long id) {
+        Optional<User> userOptional = this.userRepository.findById(id);
+
+        User updatedUser;
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            user.setFirstName(u.getFirstName());
+            user.setLastName(u.getLastName());
+            user.setMiddleName(u.getMiddleName());
+            user.setRole(u.getRole());
+            user.setEmailId(u.getEmailId());
+            user.setPassword(u.getPassword());
+
+            updatedUser = this.userRepository.save(user);
+        }
+
+        else {
+            u.setUserId(id);
+            updatedUser = this.userRepository.save(u);
+        }
+
+        return updatedUser;
+    }
+
     /**
      * Deletes one user
      *
@@ -78,28 +108,4 @@ public class UserController {
 
         this.userRepository.deleteById(id);
     }
-    
-    @PutMapping(path = "{userId}")
-    public User updateUser(@RequestBody User a, @PathVariable("userId") Long id) {
-        Optional<User> userOptional = this.userRepository.findById(id);
-
-        if (userOptional.isPresent()) {
-        	User user = userOptional.get();
-        	user.setFirstName(a.getFirstName());
-        	user.setLastName(user.getLastName());
-        	user.setMiddleName(user.getMiddleName());
-        	user.setRole(user.getRole());
-
-            
-
-            return this.userRepository.save(user);
-        }
-
-        else {
-            a.setUserId(id);
-            return this.userRepository.save(a);
-        }
-        
-    }
-
 }

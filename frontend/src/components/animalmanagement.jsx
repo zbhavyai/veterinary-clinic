@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {getAnimals} from '../services/fakeAnimalsService'
+
+
+
 class AnimalManagement extends React.Component {
     state = {
         animals: getAnimals(),
@@ -7,6 +10,26 @@ class AnimalManagement extends React.Component {
     }
     render() { 
         return <React.Fragment>
+            
+           
+           
+
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">Search For</label>
+                    <select class="form-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">ID</option>
+                        <option value="2">Name</option>
+                        <option value="3">Breed</option>
+                        <option value="4">Owner</option>
+                        <option value="5">Owner</option>
+                    </select>
+                </div>
+
+                <div class="input-group mb-3">
+                    < input type="text" class="form-control" placeholder="Enter Your Search Term Here" aria-label="Enter Your Search Term Here" aria-describedby="basic-addon2" />
+                    
+                </div>
         
         <table className="table">
             <thead>

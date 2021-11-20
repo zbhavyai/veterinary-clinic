@@ -58,10 +58,10 @@ INSERT INTO issues (i_issueid,i_issuedesc,i_animalid,i_detecteddate,i_raisedby,i
 (1,"Limp Walk","3","2021-12-08","1",1),
 (2,NULL,"6","2020-12-12","1",0),
 (3,"Diabetes","7","2021-05-16","2",0),
-(4,"Inflammed limb","1","2021-05-29","1",NULL),
-(5,"Bladder Infection","1",NULL,"5",NULL),
+(4,"Inflammed limb","1","2021-05-29","1",1),
+(5,"Bladder Infection","1",NULL,"5",0),
 (6,"chronic kidney disease","7","2021-11-17","3",0),
-(7,"Upset Stomach","3","2021-11-17","2",NULL);
+(7,"Upset Stomach","3","2021-11-17","2",1);
 
 UPDATE sequence_issues SET next_val=8;
 -- ----------------------------------------------

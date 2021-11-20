@@ -1,0 +1,1346 @@
+{
+	"info": {
+		"_postman_id": "1c87a388-96c5-4dd1-9a1e-6c0bbbb3b068",
+		"name": "VetApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchUsersById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/?searchBy=id&searchTerm=5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "id"
+								},
+								{
+									"key": "searchTerm",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchUsersByName",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/?searchBy=name&searchTerm=dant",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "name"
+								},
+								{
+									"key": "searchTerm",
+									"value": "dant"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchUsersByEmail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/?searchBy=email&searchTerm=gmail",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "email"
+								},
+								{
+									"key": "searchTerm",
+									"value": "gmail"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchUsersByRole",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/?searchBy=role&searchTerm=admin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "role"
+								},
+								{
+									"key": "searchTerm",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchUsersByStatus",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/?searchBy=status&searchTerm=inactive",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "status"
+								},
+								{
+									"key": "searchTerm",
+									"value": "inactive"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerUser eg1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 3,\r\n    \"firstName\": \"Student\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"F\",\r\n    \"role\": \"STUDENT\",\r\n    \"emailId\": \"student.f@gmail.com\",\r\n    \"password\": \"passw0rd\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerUser eg2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Student\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"G\",\r\n    \"role\": \"STUDENT\",\r\n    \"emailId\": \"student.g@ucalgary.ca\",\r\n    \"password\": \"passw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 3,\r\n    \"firstName\": \"Sid\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"Shoeman\",\r\n    \"role\": \"TECHNICIAN\",\r\n    \"emailId\": \"sid.shoeman@outlook.com\",\r\n    \"password\": \"passw0rd\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/users/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Owners",
+			"item": [
+				{
+					"name": "getAllOwners",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/owners/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOwnerById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/owners/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchOwnersById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/owners/?searchBy=id&searchTerm=5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "id"
+								},
+								{
+									"key": "searchTerm",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchOwnersByEmail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/owners/?searchBy=email&searchTerm=calgary",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "email"
+								},
+								{
+									"key": "searchTerm",
+									"value": "calgary"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchOwnersByContact",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/owners/?searchBy=contact&searchTerm=4032991533",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "contact"
+								},
+								{
+									"key": "searchTerm",
+									"value": "4032991533"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addOwner",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ownerId\": 1,\r\n    \"firstName\": \"Bruce\",\r\n    \"middleName\": \"\",\r\n    \"lastName\": \"Wayne\",\r\n    \"role\": null,\r\n    \"contactNumber\": \"4036653061\",\r\n    \"emailId\": \"bruce.wayne@ucalgary.ca\",\r\n    \"address\": \"Wayne Manor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/owners/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOwner",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 3,\r\n    \"firstName\": \"Sid\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"Shoeman\",\r\n    \"role\": \"TECHNICIAN\",\r\n    \"emailId\": \"sid.shoeman@outlook.com\",\r\n    \"password\": \"passw0rd\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/owners/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteOwner",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/owners/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"owners",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Animals",
+			"item": [
+				{
+					"name": "getAllAnimals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAnimalById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchAnimalsById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/?searchBy=id&searchTerm=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "id"
+								},
+								{
+									"key": "searchTerm",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchAnimalsByName",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/?searchBy=name&searchTerm=o",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "name"
+								},
+								{
+									"key": "searchTerm",
+									"value": "o"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchAnimalsByType",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/?searchBy=type&searchTerm=dog",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "type"
+								},
+								{
+									"key": "searchTerm",
+									"value": "dog"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchAnimalsByBreed",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/?searchBy=breed&searchTerm=german",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "breed"
+								},
+								{
+									"key": "searchTerm",
+									"value": "german"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchAnimalsByOwner",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/?searchBy=owner&searchTerm=wayne",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "owner"
+								},
+								{
+									"key": "searchTerm",
+									"value": "wayne"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchAnimalsByStatus",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer skdskjd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/?searchBy=status&searchTerm=red",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								""
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "status"
+								},
+								{
+									"key": "searchTerm",
+									"value": "red"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAnimalPhotos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/3/photos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"3",
+								"photos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAnimalComments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/2/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"2",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAnimalIssues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/3/issues",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"3",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAnimalTreatments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/1/treatments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"1",
+								"treatments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAnimalWithExistingOwner",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Baileys\",\r\n    \"type\": \"Dog\",\r\n    \"breed\": \"Golden Retriever\",\r\n    \"birthDate\": null,\r\n    \"sex\": \"Male\",\r\n    \"status\": \"YELLOW\",\r\n    \"theOwner\": {\r\n        \"contactNumber\": \"4034097804\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"weight\": null,\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": null,\r\n    \"animalPhotoList\": [],\r\n    \"animalTreatmentList\": [],\r\n    \"animalIssueList\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAnimalWithNewOwner",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tommy\",\r\n    \"type\": \"Dog\",\r\n    \"breed\": \"Golden Retriever\",\r\n    \"birthDate\": null,\r\n    \"sex\": \"Male\",\r\n    \"status\": \"YELLOW\",\r\n    \"theOwner\": {\r\n        \"firstName\": \"Ryan\",\r\n        \"lastName\": \"Reynolds\",\r\n        \"contactNumber\": \"4034097800\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"weight\": null,\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": null,\r\n    \"animalPhotoList\": [],\r\n    \"animalTreatmentList\": [],\r\n    \"animalIssueList\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAnimalComment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"commentId\": 1,\r\n    \"commentDesc\": \"Weak eyesight\",\r\n    \"commentDate\": \"2021-12-08\",\r\n    \"commenter\": {\r\n        \"userId\": 5\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/2/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"2",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAnimalIssues",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"issueId\": 1,\r\n    \"issueDesc\": \"Less eating\",\r\n    \"detectedDate\": \"2021-12-08\",\r\n    \"resolved\": true,\r\n    \"raisedBy\": {\r\n        \"userId\": 3\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/2/issues",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"2",
+								"issues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAnimalPhoto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"photoId\": 3,\r\n    \"photoLink\": \"image4.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/2/photos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"2",
+								"photos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAnimalTreatment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"treatmentId\": 5,\r\n    \"treatmentDesc\": \"cleaning\",\r\n    \"treatmentDate\": \"2021-12-09\",\r\n    \"treatedBy\": {\r\n        \"userId\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/2/treatments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"2",
+								"treatments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAnimal",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"animalId\": 5,\r\n    \"name\": \"Cryptocurrency\",\r\n    \"type\": \"Dog\",\r\n    \"breed\": \"Labrador retriever\",\r\n    \"birthDate\": null,\r\n    \"sex\": \"0\",\r\n    \"status\": \"YELLOW\",\r\n    \"theOwner\": {\r\n        \"firstName\": \"Clarke\",\r\n        \"middleName\": \"Joseph\",\r\n        \"lastName\": \"Kent\",\r\n        \"role\": null,\r\n        \"contactNumber\": \"4032991534\",\r\n        \"emailId\": \"clarke.joe.kent@ucalgary.ca\",\r\n        \"address\": \"Smallville\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"weight\": null,\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": \"sleeping pills\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAnimal",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bailey\",\r\n    \"type\": \"Dog\",\r\n    \"breed\": \"Golden Retriever\",\r\n    \"birthDate\": null,\r\n    \"sex\": \"0\",\r\n    \"status\": \"YELLOW\",\r\n    \"theOwner\": {\r\n        \"ownerId\": 3,\r\n        \"firstName\": \"KJ\",\r\n        \"middleName\": null,\r\n        \"lastName\": \"Apa\",\r\n        \"role\": null,\r\n        \"contactNumber\": \"4032991533\",\r\n        \"emailId\": \"kj.apa@ucalgary.ca\",\r\n        \"address\": \"Atlanta\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"weight\": null,\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": null,\r\n    \"animalPhotoList\": [],\r\n    \"animalTreatmentList\": [],\r\n    \"animalIssueList\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAnimalPhotos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/6/photos/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"6",
+								"photos",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAnimalComments",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/2/comments/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"2",
+								"comments",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAnimalTreatments",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/6/treatments/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"6",
+								"treatments",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAnimalIssues",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/3/issues/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"3",
+								"issues",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

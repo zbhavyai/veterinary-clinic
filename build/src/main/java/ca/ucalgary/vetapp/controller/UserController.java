@@ -260,10 +260,15 @@ public class UserController {
      * @param id
      */
     @DeleteMapping(path = "{userId}")
-    public void deleteUser(@PathVariable("userId") Long id) {
+    public void deleteUser(@PathVariable("userId") Long id) throws UnsupportedRequestException {
         if (!this.userRepository.existsById(id)) {
             throw new NotFoundException("user", id);
         }
+
+        if (this.userRepository.getById(id).getRole() == UserRole.ADMIN) {
+            throw new UnsupportedRequestException("Cannot delete an admin");
+        }
+
 
         // TODO: make sure user getting deleted has all its treatments, issues, and
         // TODO: comments deleted as well. To be done on sql side using CASCADE

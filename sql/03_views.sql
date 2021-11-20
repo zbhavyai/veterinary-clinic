@@ -1,5 +1,3 @@
-USE vetdb;
-
 -- users view -----------------------------------
 CREATE OR REPLACE VIEW VIEW_USERS AS
 SELECT
@@ -55,7 +53,7 @@ LEFT JOIN owners o ON a.a_ownerid = o.o_ownerid;
 
 
 -- animals view simple --------------------------
-CREATE OR REPLACE VIEW VIEW_ANIMALS AS
+CREATE OR REPLACE VIEW VIEW_ANIMALS_SIMPLE AS
 SELECT
 a.a_animalid 'ID',
 a.a_name 'NAME',

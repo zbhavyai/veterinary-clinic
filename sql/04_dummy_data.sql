@@ -1,6 +1,3 @@
-select * from users;
-
-
 -- owners ---------------------------------------
 INSERT INTO owners (o_ownerid,o_firstname,o_middlename,o_lastname,o_role,o_contactnumber,o_emailid,o_address) VALUES
 (1,"Damian","Bruce","Wayne",NULL,"4036653061","damian.bruce.wayne@ucalgary.ca","Wayne Manor"),

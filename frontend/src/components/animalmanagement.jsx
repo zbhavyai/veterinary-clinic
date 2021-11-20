@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from './style.css'
+import AnimalManagementstyle from './AnimalManagementstyle.css'
 
 import {getAnimals} from '../services/fakeAnimalsService'
 class AnimalManagement extends React.Component {

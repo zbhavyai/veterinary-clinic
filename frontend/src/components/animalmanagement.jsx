@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import style from './style.css'
+
 import {getAnimals} from '../services/fakeAnimalsService'
 class AnimalManagement extends React.Component {
     state = {
@@ -7,7 +9,9 @@ class AnimalManagement extends React.Component {
     }
     render() { 
         return <React.Fragment>
-        
+        <button> Register</button>
+        <button> Sign In</button>
+
         <table className="table">
             <thead>
                 <tr>
@@ -25,7 +29,7 @@ class AnimalManagement extends React.Component {
                     <td>{animal["animalId"].toString()}</td>
                     <td>{(animal["name"]==null) ? 'na' : animal["name"].toString()}</td>
                     <td>{(animal["breed"]==null) ? 'na' : animal["breed"].toString()}</td>
-                    <td>{(animal["theOwner"]==null) ? 'na' : animal["theOwner"].toString()}</td>
+                    <td>{(animal["theOwner"]==null) ? 'na' : animal["theOwner"].emailId.toString()}</td>
                     <td>{(animal["status"]==null) ? 'na' : animal["status"].toString()}</td>
                     
                     </tr>

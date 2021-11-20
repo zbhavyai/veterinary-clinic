@@ -18,9 +18,22 @@ import java.util.ArrayList;
 @RequestMapping(path = "api/v1/animals")
 public class AnimalController {
     private final AnimalRepository animalRepository;
+    private final OwnerRepository ownerRepository;
+    private final UserRepository userRepository;
+    private final PhotosRepository photosRepository;
+    private final CommentsRepository commentsRepository;
+    private final IssuesRepository issueRepository;
+    private final TreatmentsRepository treatmentsRepository;
 
-    public AnimalController(AnimalRepository ar) {
+    public AnimalController(AnimalRepository ar, OwnerRepository or, UserRepository ur, PhotosRepository pr, CommentsRepository cr,
+            IssuesRepository ir, TreatmentsRepository tr) {
         this.animalRepository = ar;
+        this.ownerRepository = or;
+        this.userRepository = ur;
+        this.photosRepository = pr;
+        this.commentsRepository = cr;
+        this.issueRepository = ir;
+        this.treatmentsRepository = tr;
     }
 
     /**
@@ -111,7 +124,7 @@ public class AnimalController {
         List<Animal> searchResults = new ArrayList<>();
 
         for (Animal eachAnimal : allAnimals) {
-            if(eachAnimal.getOwnerName() != null && eachAnimal.getOwnerName().toLowerCase().contains(searchTerm)) {
+            if (eachAnimal.getOwnerName() != null && eachAnimal.getOwnerName().toLowerCase().contains(searchTerm)) {
                 searchResults.add(eachAnimal);
             }
         }
@@ -247,9 +260,125 @@ public class AnimalController {
      * @return
      */
     @PostMapping
-    public Animal addAnimal(@RequestBody Animal a) {
+    public Animal addAnimal(@RequestBody Animal a) throws UnsupportedRequestException {
+        Owner o = a.fetchTheOwner();
+
+        o = this.findUniqueOwner(o);
+        this.ownerRepository.save(o);
+        a.setTheOwner(o);
+
         return this.animalRepository.save(a);
     }
+
+    private Owner findUniqueOwner(Owner o) {
+        List<Owner> allOwners = this.ownerRepository.findAll();
+
+        for (Owner eachOwner : allOwners) {
+            if (eachOwner.getContactNumber() != null && eachOwner.getContactNumber().equals(o.getContactNumber())) {
+                return eachOwner;
+            }
+
+            else if (eachOwner.getEmailId() != null && eachOwner.getEmailId().equalsIgnoreCase(o.getEmailId())) {
+                return eachOwner;
+            }
+        }
+
+        return o;
+    }
+
+    @PostMapping(path = "{animalId}/comments")
+    public Comments addComment(@RequestBody Comments c, @PathVariable("animalId") Long id) throws UnsupportedRequestException {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+        c.setCommentId(0);
+
+        Long userId = c.fetchCommenter().getUserId();
+        User u = this.userRepository.findById(userId).get();
+        c.setCommenter(u);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+            c.setTheAnimal(oneAnimal);
+            c = this.commentsRepository.save(c);
+            oneAnimal.fetchAnimalCommentList().add(c);
+            this.animalRepository.save(oneAnimal);
+        }
+
+        else {
+            throw new NotFoundException("animal", id);
+        }
+
+        return c;
+    }
+
+    @PostMapping(path = "{animalId}/issues")
+    public Issues addIssue(@RequestBody Issues i, @PathVariable("animalId") Long id) throws UnsupportedRequestException {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+        i.setIssueId(0);
+        i.setResolved(false);
+
+        Long userId = i.fetchRaisedBy().getUserId();
+        User u = this.userRepository.findById(userId).get();
+        i.setRaisedBy(u);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+            i.setTheAnimal(oneAnimal);
+            i = this.issueRepository.save(i);
+            oneAnimal.fetchAnimalIssueList().add(i);
+            this.animalRepository.save(oneAnimal);
+        }
+
+        else {
+            throw new NotFoundException("animal", id);
+        }
+
+        return i;
+    }
+
+    @PostMapping(path = "{animalId}/treatments")
+    public Treatments addTreatment(@RequestBody Treatments t, @PathVariable("animalId") Long id) throws UnsupportedRequestException {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+        t.setTreatmentId(0);
+
+        Long userId = t.fetchTreatedBy().getUserId();
+        User u = this.userRepository.findById(userId).get();
+        t.setTreatedBy(u);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+            t.setTheAnimal(oneAnimal);
+            t = this.treatmentsRepository.save(t);
+            oneAnimal.fetchAnimalTreatmentList().add(t);
+            this.animalRepository.save(oneAnimal);
+        }
+
+        else {
+            throw new NotFoundException("animal", id);
+        }
+
+        return t;
+    }
+
+    @PostMapping(path = "{animalId}/photos")
+    public Photos addPhoto(@RequestBody Photos p, @PathVariable("animalId") Long id) throws UnsupportedRequestException {
+        Optional<Animal> animalOptional = this.animalRepository.findById(id);
+        p.setPhotoId(0);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+            p.setTheAnimal(oneAnimal);
+            p = this.photosRepository.save(p);
+            oneAnimal.fetchAnimalPhotoList().add(p);
+            this.animalRepository.save(oneAnimal);
+        }
+
+        else {
+            throw new NotFoundException("animal", id);
+        }
+
+        return p;
+    }
+
 
     /**
      *
@@ -272,7 +401,7 @@ public class AnimalController {
             animal.setBirthDate(a.getBirthDate());
             animal.setSex(a.getSex());
             animal.setStatus(a.getStatus());
-            // animal.setTheOwner(a.getTheOwner());
+            animal.setTheOwner(this.findUniqueOwner(a.fetchTheOwner()));
             animal.setTattooNum(a.getTattooNum());
             animal.setRfidNumber(a.getRfidNumber());
             animal.setMicroChipNumber(a.getMicroChipNumber());
@@ -294,6 +423,86 @@ public class AnimalController {
         return updatedAnimal;
     }
 
+    private boolean removePhotoFromAnimal(Long animalId, Long photoId) {
+        Animal a = this.animalRepository.findById(animalId).get();
+        boolean flag = false;
+        List<Photos> newPhotoList = new ArrayList<>();
+
+        for (Photos p : a.fetchAnimalPhotoList()) {
+            if (p.getPhotoId() != photoId) {
+                newPhotoList.add(p);
+            }
+
+            else {
+                p.setTheAnimal(null);
+                flag = true;
+            }
+        }
+
+        a.setAnimalPhotoList(newPhotoList);
+        return flag;
+    }
+
+    private boolean removeCommentFromAnimal(Long animalId, Long commentId) {
+        Animal a = this.animalRepository.findById(animalId).get();
+        boolean flag = false;
+        List<Comments> newCommentList = new ArrayList<>();
+
+        for (Comments c : a.fetchAnimalCommentList()) {
+            if (c.getCommentId() != commentId) {
+                newCommentList.add(c);
+            }
+
+            else {
+                c.setTheAnimal(null);
+                flag = true;
+            }
+        }
+
+        a.setAnimalCommentList(newCommentList);
+        return flag;
+    }
+
+    private boolean removeIssueFromAnimal(Long animalId, Long issueId) {
+        Animal a = this.animalRepository.findById(animalId).get();
+        boolean flag = false;
+        List<Issues> newIssueList = new ArrayList<>();
+
+        for (Issues i : a.fetchAnimalIssueList()) {
+            if (i.getIssueId() != issueId) {
+                newIssueList.add(i);
+            }
+
+            else {
+                i.setTheAnimal(null);
+                flag = true;
+            }
+        }
+
+        a.setAnimalIssueList(newIssueList);
+        return flag;
+    }
+
+    private boolean removeTreatmentFromAnimal(Long animalId, Long treatmentId) {
+        Animal a = this.animalRepository.findById(animalId).get();
+        boolean flag = false;
+        List<Treatments> newTreatmentList = new ArrayList<>();
+
+        for (Treatments t : a.fetchAnimalTreatmentList()) {
+            if (t.getTreatmentId() != treatmentId) {
+                newTreatmentList.add(t);
+            }
+
+            else {
+                t.setTheAnimal(null);
+                flag = true;
+            }
+        }
+
+        a.setAnimalTreatmentList(newTreatmentList);
+        return flag;
+    }
+
     /**
      * Deletes one animal
      *
@@ -305,6 +514,103 @@ public class AnimalController {
             throw new NotFoundException("animal", id);
         }
 
+        Animal a = this.animalRepository.findById(id).get();
+
+        // disconnect the owner
+        a.setTheOwner(null);
+
+        // removes all photos
+        for(Photos p : a.fetchAnimalPhotoList()) {
+            this.removePhotoFromAnimal(a.getAnimalId(),  p.getPhotoId());
+            this.photosRepository.delete(p);
+        }
+
+        // removes all comments
+        for(Comments c : a.fetchAnimalCommentList()) {
+            this.removeCommentFromAnimal(a.getAnimalId(), c.getCommentId());
+            this.commentsRepository.delete(c);
+        }
+
+        // removes all issues
+        for(Issues i : a.fetchAnimalIssueList()) {
+            this.removeIssueFromAnimal(a.getAnimalId(), i.getIssueId());
+            this.issueRepository.delete(i);
+        }
+
+        // removes all treatments
+        for(Treatments t : a.fetchAnimalTreatmentList()) {
+            this.removeTreatmentFromAnimal(a.getAnimalId(), t.getTreatmentId());
+            this.treatmentsRepository.delete(t);
+        }
+
         this.animalRepository.deleteById(id);
+    }
+
+    @DeleteMapping(path = "{animalId}/photos/{photoId}")
+    public void deletePhotos(@PathVariable("animalId") Long animalId, @PathVariable("photoId") Long photoId) {
+        Optional<Photos> photoOptional = this.photosRepository.findById(photoId);
+
+        if (photoOptional.isPresent()) {
+            Photos onePhoto = photoOptional.get();
+
+            if(this.removePhotoFromAnimal(animalId, photoId)) {
+                this.photosRepository.delete(onePhoto);
+            }
+        }
+
+        else {
+            throw new NotFoundException("photo", photoId);
+        }
+    }
+
+    @DeleteMapping(path = "{animalId}/comments/{commentId}")
+    public void deleteComments(@PathVariable("animalId") Long animalId, @PathVariable("commentId") Long commentId) {
+        Optional<Comments> commentOptional = this.commentsRepository.findById(commentId);
+
+        if (commentOptional.isPresent()) {
+            Comments oneComment = commentOptional.get();
+
+            if(this.removeCommentFromAnimal(animalId, commentId)) {
+                this.commentsRepository.delete(oneComment);
+            }
+        }
+
+        else {
+            throw new NotFoundException("comment", commentId);
+        }
+    }
+
+    @DeleteMapping(path = "{animalId}/issues/{issueId}")
+    public void deleteIssues(@PathVariable("animalId") Long animalId, @PathVariable("issueId") Long issueId) {
+        Optional<Issues> issueOptional = this.issueRepository.findById(issueId);
+
+        if (issueOptional.isPresent()) {
+            Issues oneIssue = issueOptional.get();
+
+            if(this.removeIssueFromAnimal(animalId, issueId)) {
+                this.issueRepository.delete(oneIssue);
+            }
+        }
+
+        else {
+            throw new NotFoundException("issue", issueId);
+        }
+    }
+
+    @DeleteMapping(path = "{animalId}/treatments/{treatmentId}")
+    public void deleteTreatments(@PathVariable("animalId") Long animalId, @PathVariable("treatmentId") Long treatmentId) {
+        Optional<Treatments> treatmentOptional = this.treatmentsRepository.findById(treatmentId);
+
+        if (treatmentOptional.isPresent()) {
+            Treatments oneTreatment = treatmentOptional.get();
+
+            if(this.removeTreatmentFromAnimal(animalId, treatmentId)) {
+                this.treatmentsRepository.delete(oneTreatment);
+            }
+        }
+
+        else {
+            throw new NotFoundException("treatment", treatmentId);
+        }
     }
 }

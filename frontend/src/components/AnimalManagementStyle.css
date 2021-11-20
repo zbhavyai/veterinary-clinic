@@ -1,0 +1,19 @@
+
+
+table th {
+   
+    text-align: left;
+    background-color: #04AA6D;
+    color: rgb(0, 0, 0);
+    
+  }
+
+    
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+table tr:hover {background-color: #ddd;}
+

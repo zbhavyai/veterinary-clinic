@@ -34,7 +34,7 @@ public class Animal {
     @Column(name = "a_status")
     private AnimalStatus status;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "a_ownerid", foreignKey = @ForeignKey(name = "fk_a_ownerid_animals"))
     private Owner theOwner;
 

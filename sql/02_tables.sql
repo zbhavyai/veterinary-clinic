@@ -57,7 +57,7 @@ create table weights (
     w_recordedby bigint not null,
     w_animalid bigint not null,
     primary key (w_weightid)
-)
+);
 
 CREATE TABLE photos (
     p_photoid bigint not null,
@@ -150,7 +150,7 @@ ALTER TABLE animals
 ALTER TABLE animals
     add constraint fk_a_profilepic_animals
     foreign key (a_profilepic)
-    references photos (p_photoid)
+    references photos (p_photoid);
 
 ALTER TABLE weights
     add constraint fk_w_animalid_weights
@@ -170,7 +170,7 @@ ALTER TABLE photos
 ALTER TABLE photos
     add constraint fk_p_uploader_photos
     foreign key (p_uploader)
-    references users (u_userid)
+    references users (u_userid);
 
 ALTER TABLE comments
     add constraint fk_c_commenter_comments

@@ -47,12 +47,16 @@ class AnimalManagement extends React.Component {
         
         
         return <React.Fragment>
+                <div class="container">
+                  
+                </div>
             
             
-           
            
                 
+                
                 <div className="input-group mb-3">
+                    
                     <label className="input-group-text" htmlFor ="inputGroupSelect01">Search For</label>
                     <select   onChange = {(e) => this.handleFilter(e)} value = {this.state.filterOption}  className="form-select" id="selectFilter" >
                         <option value = "0">No Filter</option>
@@ -99,6 +103,24 @@ class AnimalManagement extends React.Component {
                 
             </tbody>
         </table>
+        <div class="row">
+                      <div class="col-sm">
+                        
+                      </div>
+                      <div class="col-sm">
+                        
+                      </div>
+                      <div class="col-sm">
+                        
+                      </div>
+                      <div class="col-sm">
+                        
+                      </div>
+                      <div class="col-sm">
+                        <button type="button" class="btn btn-secondary">Add Animal</button>
+                      </div>
+                      
+        </div>
         
 
       </React.Fragment>

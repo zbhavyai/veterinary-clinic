@@ -1,39 +1,62 @@
 package ca.ucalgary.vetapp.model;
 
 import java.util.List;
-
 import javax.persistence.*;
 
+/**
+ * Owner of the animal
+ */
 @Entity
 @Table(name = "owners")
 public class Owner {
+    /**
+     * Unique Owner id
+     */
     @Id
     @SequenceGenerator(name = "sequence_owners", sequenceName = "sequence_owners", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_owners")
     @Column(name = "o_ownerid")
     private long ownerId;
 
+    /**
+     * Animals owned by the owner
+     */
     @OneToMany(mappedBy = "theOwner")
     private List<Animal> animalList;
 
+    /**
+     * First name of the owner
+     */
     @Column(name = "o_firstname")
     private String firstName;
 
+    /**
+     * Middle name of the owner
+     */
     @Column(name = "o_middlename")
     private String middleName;
 
+    /**
+     * Last name of the owner
+     */
     @Column(name = "o_lastname")
     private String lastName;
 
-    @Column(name = "o_role")
-    private UserRole role;
-
+    /**
+     * Contact number of the owner
+     */
     @Column(name = "o_contactnumber")
     private String contactNumber;
 
+    /**
+     * Email id of the owner
+     */
     @Column(name = "o_emailid")
     private String emailId;
 
+    /**
+     * Address of the owner
+     */
     @Column(name = "o_address")
     private String address;
 
@@ -69,12 +92,34 @@ public class Owner {
         this.lastName = lastName;
     }
 
-    public UserRole getRole() {
-        return this.role;
-    }
+    /**
+     * Returns the full name of the owner
+     *
+     * @return full name of the owner
+     */
+    public String getFullName() {
+        StringBuilder sb = new StringBuilder();
 
-    public void setRole(UserRole role) {
-        this.role = role;
+        if (this.firstName != null) {
+            sb.append(this.firstName);
+        }
+
+        if (this.middleName != null) {
+            sb.append(" " + this.middleName);
+        }
+
+        if (this.lastName != null) {
+            sb.append(" " + this.lastName);
+        }
+
+        // to handle null if no name is provided
+        if (sb.length() == 0) {
+            return "";
+        }
+
+        else {
+            return sb.toString();
+        }
     }
 
     public String getContactNumber() {

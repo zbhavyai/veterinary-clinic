@@ -3,25 +3,43 @@ package ca.ucalgary.vetapp.model;
 import java.time.LocalDate;
 import javax.persistence.*;
 
+/**
+ * Comments made on the animal
+ */
 @Entity
 @Table(name = "comments")
 public class Comments {
+    /**
+     * Unique Comment id
+     */
     @Id
     @SequenceGenerator(name = "sequence_comments", sequenceName = "sequence_comments", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_comments")
     @Column(name = "c_commentid")
     private long commentId;
 
+    /**
+     * Text of the comment made
+     */
     @Column(name = "c_commentdesc")
     private String commentDesc;
 
+    /**
+     * The animal on which comment is made
+     */
     @ManyToOne
     @JoinColumn(name = "c_animalid", foreignKey = @ForeignKey(name = "fk_c_animalid_comments"))
     private Animal theAnimal;
 
+    /**
+     * Date of adding comment
+     */
     @Column(name = "c_commentdate")
     private LocalDate commentDate;
 
+    /**
+     * User making the comment
+     */
     @ManyToOne
     @JoinColumn(name = "c_commenter", foreignKey = @ForeignKey(name = "fk_c_commenter_comments"))
     private User commenter;
@@ -63,24 +81,7 @@ public class Comments {
     }
 
     public String getCommenterName() {
-        String fname = this.commenter.getFirstName();
-        String mname = this.commenter.getMiddleName();
-        String lname = this.commenter.getLastName();
-
-        if(fname == null) {
-            fname = "";
-        }
-
-        if(mname == null) {
-            mname = "";
-        }
-
-        if(lname == null) {
-            lname = "";
-        }
-
-        String name = String.format("%s %s %s", fname, mname, lname);
-        return name;
+        return this.commenter.getFullName();
     }
 
     public void setCommenter(User commenter) {

@@ -3,75 +3,172 @@ package ca.ucalgary.vetapp.model;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.persistence.*;
 
+/**
+ * Represents an animal
+ */
 @Entity
 @Table(name = "animals")
 public class Animal {
+    /**
+     * Unique Animal id
+     */
     @Id
     @SequenceGenerator(name = "sequence_animals", sequenceName = "sequence_animals", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence_animals")
     @Column(name = "a_animalid")
     private long animalId;
 
+    /**
+     * Name of the animal
+     */
     @Column(name = "a_name")
     private String name;
 
-    @Column(name = "a_type")
-    private String type;
+    /**
+     * Specie of the animal - eg dog, cat, cow, horse
+     */
+    @Column(name = "a_species")
+    private String species;
 
+    /**
+     * Sub-Specie of the animal
+     */
+    @Column(name = "a_subspecies")
+    private String subSpecies;
+
+    /**
+     * The breed of the animal - eg German Shephard dog
+     */
     @Column(name = "a_breed")
     private String breed;
 
-    @Column(name = "a_birthdate")
-    private LocalDate birthDate; // if exact is unknown, put that returns most accurate age in months
+    /**
+     * The type/purpose of the animal - eg cattle can be draught, dairy, or meat
+     */
+    @Column(name = "a_type")
+    private String type;
 
+    /**
+     * Region of the animal
+     */
+    @Column(name = "a_region")
+    private String region;
+
+    /**
+     * Sex of the animal
+     */
     @Column(name = "a_sex")
-    private String sex;
+    private AnimalSex sex;
 
+    /**
+     * Birthdate of the animal
+     *
+     * If exact is unknown, put that returns most accurate age in months
+     */
+    @Column(name = "a_birthdate")
+    private LocalDate birthDate;
+
+    /**
+     * Status of the animal - GREEN, YELLOW, RED, or INACTIVE
+     */
     @Column(name = "a_status")
     private AnimalStatus status;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    /**
+     * The owner of the animal
+     */
+    @ManyToOne(cascade = { CascadeType.ALL })
     @JoinColumn(name = "a_ownerid", foreignKey = @ForeignKey(name = "fk_a_ownerid_animals"))
     private Owner theOwner;
 
+    /**
+     * Profile pic of the animal
+     */
+    @OneToOne
+    @JoinColumn(name = "a_profilepic", foreignKey = @ForeignKey(name = "fk_a_profilepic_animals"))
+    private Photos profilePic;
+
+    /**
+     * Tattoo number on the animal - eg 564543
+     */
     @Column(name = "a_tattoonum")
     private int tattooNum;
 
+    /**
+     * City Tattoo on the animal - eg "HOC London"
+     */
+    @Column(name = "a_citytattoo")
+    private String cityTattoo;
+
+    /**
+     * RFID tag number of the animal
+     */
     @Column(name = "a_rfidnumber")
     private String rfidNumber;
 
+    /**
+     * Microchip number of the animal
+     */
     @Column(name = "a_microchipnumber")
     private String microChipNumber;
 
-    @Column(name = "a_weight")
-    private HashMap<LocalDate, Double> weight; // weight along with record date
-
+    /**
+     * Color of the animal
+     */
     @Column(name = "a_coatcolor")
     private String coatColor;
 
+    /**
+     * If animal is on some continuous medication
+     */
     @Column(name = "a_continuousmedication")
     private String continuousMedication;
 
-    @OneToMany(mappedBy = "theAnimal")
-    private List<Photos> animalPhotoList = new ArrayList<Photos>();
+    /**
+     * A distinct feature of the animal for easy identification
+     */
+    @Column(name = "a_distinctfeature")
+    private String distinctFeature;
 
+    /**
+     * Recorded weight history of the animal
+     */
     @OneToMany(mappedBy = "theAnimal")
-    private List<Treatments> animalTreatmentList = new ArrayList<Treatments>();
+    private List<Weights> animalWeightList;
 
+    /**
+     * Photos of the animal
+     */
     @OneToMany(mappedBy = "theAnimal")
-    private List<Issues> animalIssueList = new ArrayList<Issues>();
+    private List<Photos> animalPhotoList;
 
+    /**
+     * Treatments administered to the animal
+     */
     @OneToMany(mappedBy = "theAnimal")
-    private List<Comments> animalCommentList = new ArrayList<Comments>();
+    private List<Treatments> animalTreatmentList;
+
+    /**
+     * Issues with the animal
+     */
+    @OneToMany(mappedBy = "theAnimal")
+    private List<Issues> animalIssueList;
+
+    /**
+     * Comments made on the animal
+     */
+    @OneToMany(mappedBy = "theAnimal")
+    private List<Comments> animalCommentList;
 
     private Animal() {
+        this.animalWeightList = new ArrayList<>();
         this.animalPhotoList = new ArrayList<>();
         this.animalTreatmentList = new ArrayList<>();
         this.animalIssueList = new ArrayList<>();
+        this.animalCommentList = new ArrayList<>();
     }
 
     public long getAnimalId() {
@@ -90,12 +187,20 @@ public class Animal {
         this.name = name;
     }
 
-    public String getType() {
-        return this.type;
+    public String getSpecies() {
+        return this.species;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public String getSubSpecies() {
+        return this.subSpecies;
+    }
+
+    public void setSubSpecies(String subSpecies) {
+        this.subSpecies = subSpecies;
     }
 
     public String getBreed() {
@@ -104,6 +209,30 @@ public class Animal {
 
     public void setBreed(String breed) {
         this.breed = breed;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getRegion() {
+        return this.region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public AnimalSex getSex() {
+        return this.sex;
+    }
+
+    public void setSex(AnimalSex sex) {
+        this.sex = sex;
     }
 
     public LocalDate getBirthDate() {
@@ -130,14 +259,6 @@ public class Animal {
         }
     }
 
-    public String getSex() {
-        return this.sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public AnimalStatus getStatus() {
         return this.status;
     }
@@ -155,24 +276,7 @@ public class Animal {
     }
 
     public String getOwnerName() {
-        String fname = this.theOwner.getFirstName();
-        String mname = this.theOwner.getMiddleName();
-        String lname = this.theOwner.getLastName();
-
-        if(fname == null) {
-            fname = "";
-        }
-
-        if(mname == null) {
-            mname = "";
-        }
-
-        if(lname == null) {
-            lname = "";
-        }
-
-        String name = String.format("%s %s %s", fname, mname, lname);
-        return name;
+        return this.theOwner.getFullName();
     }
 
     public String getOwnerContact() {
@@ -191,12 +295,28 @@ public class Animal {
         this.theOwner = theOwner;
     }
 
+    public Photos fetchProfilePic() {
+        return this.profilePic;
+    }
+
+    public void setProfilePic(Photos profilePic) {
+        this.profilePic = profilePic;
+    }
+
     public int getTattooNum() {
         return this.tattooNum;
     }
 
     public void setTattooNum(int tattooNum) {
         this.tattooNum = tattooNum;
+    }
+
+    public String getCityTattoo() {
+        return this.cityTattoo;
+    }
+
+    public void setCityTattoo(String cityTattoo) {
+        this.cityTattoo = cityTattoo;
     }
 
     public String getRfidNumber() {
@@ -215,14 +335,6 @@ public class Animal {
         this.microChipNumber = microChipNumber;
     }
 
-    public HashMap<LocalDate, Double> getWeight() {
-        return this.weight;
-    }
-
-    public void setWeight(HashMap<LocalDate, Double> weight) {
-        this.weight = weight;
-    }
-
     public String getCoatColor() {
         return this.coatColor;
     }
@@ -237,6 +349,22 @@ public class Animal {
 
     public void setContinuousMedication(String continuousMedication) {
         this.continuousMedication = continuousMedication;
+    }
+
+    public String getDistinctFeature() {
+        return this.distinctFeature;
+    }
+
+    public void setDistinctFeature(String distinctFeature) {
+        this.distinctFeature = distinctFeature;
+    }
+
+    public List<Weights> fetchAnimalWeightList() {
+        return this.animalWeightList;
+    }
+
+    public void setAnimalWeightList(List<Weights> animalWeightList) {
+        this.animalWeightList = animalWeightList;
     }
 
     public List<Photos> fetchAnimalPhotoList() {

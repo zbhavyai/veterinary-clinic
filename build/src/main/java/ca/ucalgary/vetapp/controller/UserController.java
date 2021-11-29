@@ -1,19 +1,9 @@
 package ca.ucalgary.vetapp.controller;
 
-import ca.ucalgary.vetapp.model.User;
-import ca.ucalgary.vetapp.model.UserRole;
-import ca.ucalgary.vetapp.model.UserStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.ArrayList;
+import ca.ucalgary.vetapp.model.*;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -21,29 +11,21 @@ import java.util.Optional;
 public class UserController {
     private final UserRepository userRepository;
 
+    /**
+     * Constructor
+     *
+     * @param userRepository jpa repository for db operations
+     */
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     /**
-     * Get one animal
+     * Search the users by id
      *
-     * @param id
-     * @return
+     * @param id user id
+     * @return list of users with id; the list would have atmost one element
      */
-    @GetMapping(path = "{userId}")
-    public User getUserById(@PathVariable("userId") Long id) throws NotFoundException {
-        User u = this.searchUserById(id).get(0);
-
-        if (u == null) {
-            throw new NotFoundException("user", id);
-        }
-
-        else {
-            return u;
-        }
-    }
-
     private List<User> searchUserById(Long id) {
         Optional<User> userOptional = this.userRepository.findById(id);
 
@@ -58,24 +40,19 @@ public class UserController {
         }
     }
 
-    private List<User> searchUserByName(String sT) {
+    /**
+     * Search the users by name
+     *
+     * @param allUsers list of all users
+     * @param sT       search term
+     * @return filtered list of users having name meeting search term
+     */
+    private List<User> searchUserByName(List<User> allUsers, String sT) {
         String searchTerm = sT.toLowerCase();
-
-        List<User> allUsers = this.userRepository.findAll();
         List<User> searchResults = new ArrayList<>();
 
         for (User eachUser : allUsers) {
-            if (eachUser.getFirstName() != null && eachUser.getFirstName().toLowerCase().contains(searchTerm)) {
-                searchResults.add(eachUser);
-                continue;
-            }
-
-            else if (eachUser.getMiddleName() != null && eachUser.getMiddleName().toLowerCase().contains(searchTerm)) {
-                searchResults.add(eachUser);
-                continue;
-            }
-
-            else if (eachUser.getLastName() != null && eachUser.getLastName().toLowerCase().contains(searchTerm)) {
+            if (eachUser.getFullName().toLowerCase().contains(searchTerm)) {
                 searchResults.add(eachUser);
                 continue;
             }
@@ -84,10 +61,15 @@ public class UserController {
         return searchResults;
     }
 
-    private List<User> searchUserByEmail(String sT) {
+    /**
+     * Search the users by email id
+     *
+     * @param allUsers list of all users
+     * @param sT       search term
+     * @return filtered list of users having email id meeting search term
+     */
+    private List<User> searchUserByEmail(List<User> allUsers, String sT) {
         String searchTerm = sT.toLowerCase();
-
-        List<User> allUsers = this.userRepository.findAll();
         List<User> searchResults = new ArrayList<>();
 
         for (User eachUser : allUsers) {
@@ -100,11 +82,16 @@ public class UserController {
         return searchResults;
     }
 
-    private List<User> searchUserByRole(String sT) throws UnsupportedRequestException {
+    /**
+     * Search the users by their role
+     *
+     * @param allUsers list of all users
+     * @param sT       search term
+     * @return filtered list of users having role as search term
+     */
+    private List<User> searchUserByRole(List<User> allUsers, String sT) throws UnsupportedRequestException {
         try {
             UserRole searchTerm = UserRole.valueOf(sT.toUpperCase());
-
-            List<User> allUsers = this.userRepository.findAll();
             List<User> searchResults = new ArrayList<>();
 
             for (User eachUser : allUsers) {
@@ -122,11 +109,16 @@ public class UserController {
         }
     }
 
-    private List<User> searchUserByStatus(String sT) throws UnsupportedRequestException {
+    /**
+     * Search the users by their status
+     *
+     * @param allUsers list of all users
+     * @param sT       search term
+     * @return filtered list of users having status as search term
+     */
+    private List<User> searchUserByStatus(List<User> allUsers, String sT) throws UnsupportedRequestException {
         try {
             UserStatus searchTerm = UserStatus.valueOf(sT.toUpperCase());
-
-            List<User> allUsers = this.userRepository.findAll();
             List<User> searchResults = new ArrayList<>();
 
             for (User eachUser : allUsers) {
@@ -144,6 +136,34 @@ public class UserController {
         }
     }
 
+    /**
+     * Endpoint for GET - fetch user by id
+     *
+     * @param id user id
+     * @return user
+     * @throws NotFoundException
+     */
+    @GetMapping(path = "{userId}")
+    public User getUserById(@PathVariable("userId") Long id) throws NotFoundException {
+        User u = this.searchUserById(id).get(0);
+
+        if (u == null) {
+            throw new NotFoundException("user", id);
+        }
+
+        else {
+            return u;
+        }
+    }
+
+    /**
+     * Endpoint for GET - search and fetch all users meeting search criteria
+     *
+     * @param searchBy   where to search
+     * @param searchTerm what to search
+     * @return list of users meeting search criteria
+     * @throws UnsupportedRequestException
+     */
     @GetMapping()
     public List<User> searchUser(@RequestParam(name = "searchBy", required = false) String searchBy,
             @RequestParam(name = "searchTerm", required = false) String searchTerm) throws UnsupportedRequestException {
@@ -163,19 +183,19 @@ public class UserController {
         }
 
         else if (searchBy.equalsIgnoreCase("name")) {
-            return this.searchUserByName(searchTerm);
+            return this.searchUserByName(allUsers, searchTerm);
         }
 
         else if (searchBy.equalsIgnoreCase("email")) {
-            return this.searchUserByEmail(searchTerm);
+            return this.searchUserByEmail(allUsers, searchTerm);
         }
 
         else if (searchBy.equalsIgnoreCase("role")) {
-            return this.searchUserByRole(searchTerm);
+            return this.searchUserByRole(allUsers, searchTerm);
         }
 
         else if (searchBy.equalsIgnoreCase("status")) {
-            return this.searchUserByStatus(searchTerm);
+            return this.searchUserByStatus(allUsers, searchTerm);
         }
 
         else {
@@ -184,10 +204,10 @@ public class UserController {
     }
 
     /**
-     * Saves one user
+     * Endpoint for POST - add a user in db
      *
-     * @param u
-     * @return
+     * @param u user details in json
+     * @return the added user details
      */
     @PostMapping(path = "register")
     public User registerUser(@RequestBody User u) throws UserExistsException {
@@ -210,11 +230,12 @@ public class UserController {
     }
 
     /**
-     * Updates a user
+     * Endpoint for PUT - update the user in db
      *
-     * @param u
-     * @param id
-     * @return
+     * @param u  updated user details in json
+     * @param id the user to be updated
+     * @return the updated user details
+     * @throws UserExistsException
      */
     @PutMapping(path = "{userId}")
     public User updateUser(@RequestBody User u, @PathVariable("userId") Long id) throws UserExistsException {
@@ -240,7 +261,6 @@ public class UserController {
             user.setMiddleName(u.getMiddleName());
             user.setRole(u.getRole());
             user.setEmailId(u.getEmailId());
-            user.setPassword(u.getPassword());
             user.setStatus(u.getStatus());
 
             updatedUser = this.userRepository.save(user);
@@ -255,9 +275,10 @@ public class UserController {
     }
 
     /**
-     * Deletes one user
+     * Endpoint for DELETE - delete user from db
      *
-     * @param id
+     * @param id user id
+     * @throws UnsupportedRequestException
      */
     @DeleteMapping(path = "{userId}")
     public void deleteUser(@PathVariable("userId") Long id) throws UnsupportedRequestException {
@@ -268,7 +289,6 @@ public class UserController {
         if (this.userRepository.getById(id).getRole() == UserRole.ADMIN) {
             throw new UnsupportedRequestException("Cannot delete an admin");
         }
-
 
         // TODO: make sure user getting deleted has all its treatments, issues, and
         // TODO: comments deleted as well. To be done on sql side using CASCADE

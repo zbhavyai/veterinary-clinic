@@ -5,7 +5,7 @@ class YourAccount extends React.Component {
             <div class="card" style={this.styles}>
                 
                 <div class="card-body">
-                    <h5 class="card-title">Register for an Account Now</h5>
+                    <h5 class="card-title">Your Account Details</h5>
                     <div class="row">
                       <div class="col-sm">
                       < input type="text" id="inputFilter"  className="form-control" placeholder="First Name" aria-label="First Name" aria-describedby="basic-addon2" />

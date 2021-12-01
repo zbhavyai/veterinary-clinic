@@ -4,7 +4,7 @@ const animals = [
         "name": "Ace",
         "type": "Dog",
         "breed": "German shepherd",
-        "birthDate": null,
+        "birthDate": "N/A",
         "sex": "1",
         "status": "INACTIVE",
         "theOwner": {
@@ -12,7 +12,7 @@ const animals = [
             "firstName": "Damian",
             "middleName": "Bruce",
             "lastName": "Wayne",
-            "role": null,
+            "role": "N/A",
             "contactNumber": "4036653061",
             "emailId": "damian.bruce.wayne@ucalgary.ca",
             "address": "Wayne Manor"
@@ -20,11 +20,11 @@ const animals = [
         "tattooNum": 130110477,
         "rfidNumber": "229664665",
         "microChipNumber": "229348845",
-        "weight": null,
+        "weight": [{"date":"Feb 2021", "value": 23}, {"date":"Mar 2021", "value": 32}, {"date":"Apr 2021", "value": 13}],
         "coatColor": "Black",
-        "continuousMedication": null,
+        "continuousMedication": "N/A",
         "animalPhotoList": [],
-        "animalTreatmentList": [],
+        "animalTreatmentList": [{"id": 1,"date": "Nov 1, 2021", "description": "It went well"},{"id": 2,"date": "Nov 2, 2021", "description": "It went not so well"}],
         "animalIssueList": [],
         "age": 0
     },
@@ -33,7 +33,7 @@ const animals = [
         "name": "Ampersand",
         "type": "Monkey",
         "breed": "Capuchin monkey",
-        "birthDate": null,
+        "birthDate": "N/A",
         "sex": "0",
         "status": "YELLOW",
         "theOwner": {
@@ -41,7 +41,7 @@ const animals = [
             "firstName": "Yorrick",
             "middleName": "",
             "lastName": "Brown",
-            "role": null,
+            "role": "N/A",
             "contactNumber": "4034097804",
             "emailId": "yorrick.brown@ucalgary.ca",
             "address": ""
@@ -49,9 +49,9 @@ const animals = [
         "tattooNum": 204261377,
         "rfidNumber": "313829102",
         "microChipNumber": "233453231",
-        "weight": null,
+        "weight": [{"date":"Feb 2021", "value": 23}, {"date":"Mar 2021", "value": 32}, {"date":"Apr 2021", "value": 98}],
         "coatColor": "Brown",
-        "continuousMedication": null,
+        "continuousMedication": "N/A",
         "animalPhotoList": [],
         "animalTreatmentList": [],
         "animalIssueList": [],
@@ -61,8 +61,8 @@ const animals = [
         "animalId": 3,
         "name": "Bat Cow",
         "type": "Cow",
-        "breed": null,
-        "birthDate": null,
+        "breed": "N/A",
+        "birthDate": "N/A",
         "sex": "0",
         "status": "RED",
         "theOwner": {
@@ -70,7 +70,7 @@ const animals = [
             "firstName": "Damian",
             "middleName": "Bruce",
             "lastName": "Wayne",
-            "role": null,
+            "role": "N/A",
             "contactNumber": "4036653061",
             "emailId": "damian.bruce.wayne@ucalgary.ca",
             "address": "Wayne Manor"
@@ -78,9 +78,9 @@ const animals = [
         "tattooNum": 171659869,
         "rfidNumber": "223023284",
         "microChipNumber": "202432386",
-        "weight": null,
+        "weight": [{"date":"Feb 2021", "value": 123}, {"date":"Mar 2021", "value": 32}, {"date":"Apr 2021", "value": 13}],
         "coatColor": "Brown, White",
-        "continuousMedication": null,
+        "continuousMedication": "N/A",
         "animalPhotoList": [],
         "animalTreatmentList": [],
         "animalIssueList": [],
@@ -91,7 +91,7 @@ const animals = [
         "name": "Comet",
         "type": "Horse",
         "breed": "Canadian horse",
-        "birthDate": null,
+        "birthDate": "N/A",
         "sex": "1",
         "status": "YELLOW",
         "theOwner": {
@@ -99,7 +99,7 @@ const animals = [
             "firstName": "Clark",
             "middleName": "Joseph",
             "lastName": "Kent",
-            "role": null,
+            "role": "N/A",
             "contactNumber": "4032991533",
             "emailId": "clark.joseph.kent@ucalgary.ca",
             "address": "Smallville"
@@ -107,9 +107,9 @@ const animals = [
         "tattooNum": 225931412,
         "rfidNumber": "184668886",
         "microChipNumber": "345541619",
-        "weight": null,
+        "weight": [{"date":"Feb 2021", "value": 23}, {"date":"Mar 2021", "value": 132}, {"date":"Apr 2021", "value": 13}],
         "coatColor": "White",
-        "continuousMedication": null,
+        "continuousMedication": "N/A",
         "animalPhotoList": [],
         "animalTreatmentList": [],
         "animalIssueList": [],
@@ -120,7 +120,7 @@ const animals = [
         "name": "Krypto",
         "type": "Dog",
         "breed": "Labrador retriever",
-        "birthDate": null,
+        "birthDate": "N/A",
         "sex": "0",
         "status": "YELLOW",
         "theOwner": {
@@ -128,7 +128,7 @@ const animals = [
             "firstName": "Clark",
             "middleName": "Joseph",
             "lastName": "Kent",
-            "role": null,
+            "role": "N/A",
             "contactNumber": "4032991533",
             "emailId": "clark.joseph.kent@ucalgary.ca",
             "address": "Smallville"
@@ -136,9 +136,9 @@ const animals = [
         "tattooNum": 185030356,
         "rfidNumber": "170719459",
         "microChipNumber": "157412204",
-        "weight": null,
+        "weight": [{"date":"Feb 2021", "value": 23}, {"date":"Mar 2021", "value": 3}, {"date":"Apr 2021", "value": 13}],
         "coatColor": "White",
-        "continuousMedication": null,
+        "continuousMedication": "N/A",
         "animalPhotoList": [],
         "animalTreatmentList": [],
         "animalIssueList": [],
@@ -149,7 +149,7 @@ const animals = [
         "name": "Snowy",
         "type": "Dog",
         "breed": "Wire Fox Terrier",
-        "birthDate": null,
+        "birthDate": "N/A",
         "sex": "1",
         "status": "GREEN",
         "theOwner": {
@@ -157,7 +157,7 @@ const animals = [
             "firstName": "Tintin",
             "middleName": "",
             "lastName": "",
-            "role": null,
+            "role": "N/A",
             "contactNumber": "4031678053",
             "emailId": "tintin@ucalgary.ca",
             "address": "Marlinspike Hall, Belgium"
@@ -165,9 +165,9 @@ const animals = [
         "tattooNum": 225864215,
         "rfidNumber": "188758885",
         "microChipNumber": "255400812",
-        "weight": null,
+        "weight": [{"date":"Feb 2021", "value": 56}, {"date":"Mar 2021", "value": 32}, {"date":"Apr 2021", "value": 23}],
         "coatColor": "White",
-        "continuousMedication": null,
+        "continuousMedication": "N/A",
         "animalPhotoList": [],
         "animalTreatmentList": [],
         "animalIssueList": [],
@@ -178,7 +178,7 @@ const animals = [
         "name": "Streaky",
         "type": "Cat",
         "breed": "Abyssinian",
-        "birthDate": null,
+        "birthDate": "N/A",
         "sex": "1",
         "status": "YELLOW",
         "theOwner": {
@@ -186,7 +186,7 @@ const animals = [
             "firstName": "Clark",
             "middleName": "Joseph",
             "lastName": "Kent",
-            "role": null,
+            "role": "N/A",
             "contactNumber": "4032991533",
             "emailId": "clark.joseph.kent@ucalgary.ca",
             "address": "Smallville"
@@ -194,9 +194,9 @@ const animals = [
         "tattooNum": 209577225,
         "rfidNumber": "177988155",
         "microChipNumber": "267795413",
-        "weight": null,
+        "weight": [{"date":"Feb 2021", "value": 3}, {"date":"Mar 2021", "value": 12}, {"date":"Apr 2021", "value": 13}],
         "coatColor": "Orange",
-        "continuousMedication": null,
+        "continuousMedication": "N/A",
         "animalPhotoList": [],
         "animalTreatmentList": [],
         "animalIssueList": [],
@@ -207,5 +207,10 @@ const animals = [
 export function getAnimals() {
     return animals;
   }
+
+export function getAnimalbyId(id){
+    return animals[id-1];
+
+}
 
 

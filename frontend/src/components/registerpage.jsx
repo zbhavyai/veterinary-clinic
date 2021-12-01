@@ -40,7 +40,7 @@ class RegistrationPage extends React.Component {
                     < input type="text" id="inputFilter" className="form-control" placeholder="Create Password" aria-label="Create Password" aria-describedby="basic-addon2" />
                     </div>
 
-                    <a href="#" class="btn btn-primary">Register</a>
+                    <a href="\" class="btn btn-primary">Register</a>
                 </div>
             </div>
         </React.Fragment>;

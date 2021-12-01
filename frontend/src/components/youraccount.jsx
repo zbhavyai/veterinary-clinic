@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import NavBar from "./navbar";
 class YourAccount extends React.Component {
     render() { 
         return <React.Fragment>
+            <NavBar/>
             <div class="card" style={this.styles}>
                 
                 <div class="card-body">

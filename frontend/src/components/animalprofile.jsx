@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from "axios";
 import {getAnimalbyId} from '../services/fakeAnimalsService'; 
 import ReactApexChart from 'react-apexcharts';
+import {useParams} from "react-router-dom";
+import { withRouter } from "react-router";
+import NavBar from './navbar';
 
 class AnimalProfile extends React.Component {
     state = {
@@ -32,7 +35,11 @@ class AnimalProfile extends React.Component {
 
     //WARNING! To be deprecated in React v17. Use componentDidMount instead.
     componentWillMount() {
-        this.setState({animal: getAnimalbyId(1), 
+        const id = this.props.match.params.id;
+        console.log(id);
+
+
+        this.setState({animal: getAnimalbyId(id), 
             
         });
 
@@ -101,6 +108,7 @@ class AnimalProfile extends React.Component {
 
 
         return <React.Fragment>
+            <NavBar/>
             <div class="container">
                 <div class="row">
                     <div class="col-sm">
@@ -201,4 +209,4 @@ class AnimalProfile extends React.Component {
     }
 }
  
-export default AnimalProfile;
+export default withRouter(AnimalProfile);

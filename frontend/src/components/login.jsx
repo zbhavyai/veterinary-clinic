@@ -1,9 +1,11 @@
 
 
 import React, { Component } from 'react';
+import NavBarStart from './navbarstart';
 class Login extends React.Component {
     render() { 
         return <React.Fragment>
+            <NavBarStart/>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-2"></div>
@@ -25,7 +27,7 @@ class Login extends React.Component {
                                     </div>
 
                                     <div >
-                                        <button type="submit" class="btn btn-outline-primary">Login</button>
+                                        <a href="/menu" class="btn btn-primary">Login</a>
                                         <button type="submit" class="btn btn-outline-primary">Forget Password</button>
                                         
                                     </div>

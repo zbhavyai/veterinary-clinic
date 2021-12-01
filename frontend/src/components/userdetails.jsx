@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import {getUserbyId} from './../services/fakeUserService'; 
+import NavBar from "./navbar";
 import {
     BrowserRouter as Router,
     Switch,
@@ -57,6 +58,7 @@ class UserDetails extends React.Component {
         }
 
         return <React.Fragment>
+            <NavBar/>
             <div class="card" style={this.styles}>
                 
                 <div class="card-body">

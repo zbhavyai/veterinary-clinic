@@ -23,6 +23,7 @@ import UserDetails from "./components/userdetails";
 import MainMenu from "./components/mainmenu";
 import axios from "axios";
 import ErrorPage from './components/errorpage';
+import HomePage from './components/homepage';
 
 
 
@@ -31,17 +32,19 @@ reactDom.render(
 
 <BrowserRouter>
 
-<NavBar/>
+
     <Switch>
       
+      <Route path='/users/:id' component={UserDetails}/>
       <Route path="/animals/:id" component={AnimalProfile} />
       <Route path="/animals" component={AnimalManagement}/>
+      <Route path="/login" component={Login}/>
       <Route path="/users" component={UserManagement}/>
       <Route path="/login" component={Login}/>
       <Route path='/register' component={RegistrationPage}/>
       <Route path='/youraccount' component={YourAccount}/>
-      <Route path='/userdetail' component={UserDetails}/>
-      <Route path="/" component={MainMenu} />
+      <Route path="/menu" component={MainMenu} />
+      <Route path="/" component={HomePage} />
       <Route path='*' component={ErrorPage}/>
       </Switch>
     

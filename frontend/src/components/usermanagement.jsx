@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import NavBar from './navbar';
 import { getUsers } from './../services/fakeUserService';
 import {
   BrowserRouter as Router,
@@ -65,6 +66,7 @@ class UserManagement extends React.Component {
             filtered = this.state.users;
           }
         return <React.Fragment>
+            <NavBar/>
             <div class="container">
                   
                   </div>

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import {getAnimals} from '../services/fakeAnimalsService'
-
+import axios from 'axios';
 
 
 class AnimalManagement extends React.Component {
     state = {
-        animals: getAnimals(),
+        animals: [],
         filterOption: 0,
         filterText: "",
-        pageSize: 4
+        pageSize: 10
     };
 
     handleFilter =(e)=>{
@@ -24,6 +24,22 @@ class AnimalManagement extends React.Component {
         console.log("tedt changed", this.state.filterText);
 
     };
+
+    async componentDidMount() {
+        
+      const {data: animals} = await axios.get('http://localhost:8080/api/v1/animals/', {
+          headers: {
+            'Access-Control-Allow-Origin': true,
+          },
+          });
+      
+          this.setState({animals});
+
+      
+          
+      //const promise = axios.get('https://jsonplaceholder.typicode.com/posts')
+      
+  }
 
 
 
@@ -43,6 +59,7 @@ class AnimalManagement extends React.Component {
           } else{
             filtered = this.state.animals;
           }
+          console.log(filtered);
         
         
         

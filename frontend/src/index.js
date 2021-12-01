@@ -11,7 +11,7 @@ import AnimalManagement from "./components/animalmanagement";
 
 import Login from "./components/login";
 
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import { Routes } from 'react-router';
 import NavBar from "./components/navbar";
 import AnimalProfile from "./components/animalprofile";
@@ -22,6 +22,7 @@ import YourAccount from "./components/youraccount";
 import UserDetails from "./components/userdetails";
 import MainMenu from "./components/mainmenu";
 import axios from "axios";
+import ErrorPage from './components/errorpage';
 
 
 
@@ -31,16 +32,19 @@ reactDom.render(
 <BrowserRouter>
 
 <NavBar/>
-<Routes>
-      <Route path="/" element={<MainMenu />} />
-      <Route path="/animalprofile" element={<AnimalProfile />} />
-      <Route path="/animals" element={<AnimalManagement />}/>
-      <Route path="/users" element={<UserManagement />}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path='/register' element={<RegistrationPage/>}/>
-      <Route path='/youraccount' element={<YourAccount/>}/>
-      <Route path='/userdetail' element={<UserDetails/>}/>
-    </Routes>
+    <Switch>
+      
+      <Route path="/animals/:id" component={AnimalProfile} />
+      <Route path="/animals" component={AnimalManagement}/>
+      <Route path="/users" component={UserManagement}/>
+      <Route path="/login" component={Login}/>
+      <Route path='/register' component={RegistrationPage}/>
+      <Route path='/youraccount' component={YourAccount}/>
+      <Route path='/userdetail' component={UserDetails}/>
+      <Route path="/" component={MainMenu} />
+      <Route path='*' component={ErrorPage}/>
+      </Switch>
+    
 
 
 </BrowserRouter>,document.getElementById('root'));

@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import {getAnimals} from '../services/fakeAnimalsService'
 import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 class AnimalManagement extends React.Component {
     state = {
-        animals: [],
+        //animals: [],
+        animals: getAnimals(),
         filterOption: 0,
         filterText: "",
         pageSize: 10
@@ -27,13 +34,9 @@ class AnimalManagement extends React.Component {
 
     async componentDidMount() {
         
-      const {data: animals} = await axios.get('http://localhost:8080/api/v1/animals/', {
-          headers: {
-            'Access-Control-Allow-Origin': true,
-          },
-          });
+      //const {data: animals} = await axios.get('http://localhost:8080/api/v1/animals/', {headers: {'Access-Control-Allow-Origin': true,},});
       
-          this.setState({animals});
+      //this.setState({animals});
 
       
           
@@ -60,6 +63,7 @@ class AnimalManagement extends React.Component {
             filtered = this.state.animals;
           }
           console.log(filtered);
+          
         
         
         
@@ -109,7 +113,8 @@ class AnimalManagement extends React.Component {
                     <td>{(animal["breed"]==null) ? 'na' : animal["breed"].toString()}</td>
                     <td>{(animal["theOwner"]==null) ? 'na' : animal["theOwner"]["emailId"].toString()}</td>
                     <td>{(animal["status"]==null) ? 'na' : animal["status"].toString()}</td>
-                    <td><button  className="btn btn-danger btn-sm">Details</button></td>
+                    
+                    <td><Link to={"/animals/"+animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
                     
                     </tr>
 

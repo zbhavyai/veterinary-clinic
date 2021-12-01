@@ -7,7 +7,7 @@ const users = [
         firstName: "Greg",
         middleName: "Stark",
         lastName: "Tony",
-        role: 0,
+        role: 1,
         emailId: "greg.boorman@ucalgary.ca",
         u_passwordhash: "passw0rd",
         u_passwordsalt: "what?",
@@ -21,7 +21,7 @@ const users = [
         firstName: "Poly",
         middleName: "Tech",
         lastName: "Tony",
-        role: 0,
+        role: 2,
         emailId: "Poly.boorman@ucalgary.ca",
         u_passwordhash: "passw0rd",
         u_passwordsalt: "what?",
@@ -51,3 +51,8 @@ const users = [
 export function getUsers() {
     return users;
   }
+
+export function getUserbyId(id){
+    return users[id-1];
+
+}

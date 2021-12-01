@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { getUsers } from './../services/fakeUserService';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 class UserManagement extends React.Component {
     state = {
-        users: [],
+        //users: [],
+        users:getUsers(),
         filterOption: 0,
         filterText: "",
         pageSize: 4
@@ -26,14 +33,9 @@ class UserManagement extends React.Component {
 
     async componentDidMount() {
         
-      const {data: users} = await axios.get('http://localhost:8080/api/v1/users/', {
-          headers: {
-            'Access-Control-Allow-Origin': true,
-          },
-          });
-        console.log(users);
+      //const {data: users} = await axios.get('http://localhost:8080/api/v1/users/', {headers: {'Access-Control-Allow-Origin': true,},});
       
-          this.setState({users}); 
+      //this.setState({users}); 
           
 
       
@@ -111,7 +113,8 @@ class UserManagement extends React.Component {
                       <td>{(user["role"]==null) ? 'na' : user["role"].toString()}</td>
                       <td>{(user["emailId"]==null) ? 'na' : user["emailId"].toString()}</td>
                       <td>{(user["status"]==null) ? 'na' : user["status"].toString()}</td>
-                      <td><button  className="btn btn-danger btn-sm">Details</button></td>
+                      
+                      <td><Link to={"/users/"+user["userId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
                       
                       </tr>
   

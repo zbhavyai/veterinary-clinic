@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import { getUsers } from './../services/fakeUserService';
 
 class UserManagement extends React.Component {
     state = {
-        users: getUsers(),
+        users: [],
         filterOption: 0,
         filterText: "",
         pageSize: 4
@@ -24,20 +24,39 @@ class UserManagement extends React.Component {
 
     };
 
+    async componentDidMount() {
+        
+      const {data: users} = await axios.get('http://localhost:8080/api/v1/users/', {
+          headers: {
+            'Access-Control-Allow-Origin': true,
+          },
+          });
+        console.log(users);
+      
+          this.setState({users}); 
+          
+
+      
+          
+      //const promise = axios.get('http://localhost:8080/api/v1/users/')
+      
+    }
+
 
 
     render() { 
+       console.log(this.state.users);
         let filtered = this.state.users;
         if (this.state.filterOption == 1) {
-            filtered = 1?this.state.users.filter(m=>m["u_userid"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
+            filtered = 1?this.state.users.filter(m=>m["userId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
           } else if (this.state.filterOption == 2) {
-            filtered = 1?this.state.users.filter(m=>m["u_firstname"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
+            filtered = 1?this.state.users.filter(m=>m["firstName"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
           } else if (this.state.filterOption == 3) {
-            filtered = 1?this.state.users.filter(m=>m["u_lastname"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
+            filtered = 1?this.state.users.filter(m=>m["lastName"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
           } else if (this.state.filterOption == 4) {
-            filtered = 1?this.state.users.filter(m=>m["u_role"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())):this.state.users;
+            filtered = 1?this.state.users.filter(m=>m["role"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())):this.state.users;
           } else if (this.state.filterOption == 5) {
-            filtered = 1?this.state.users.filter(m=>m["u_email"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
+            filtered = 1?this.state.users.filter(m=>m["emailId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
         } else if (this.state.filterOption == 6) {
             filtered = 1?this.state.users.filter(m=>m["status"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.users;
           } else{
@@ -85,12 +104,12 @@ class UserManagement extends React.Component {
               </thead>
               <tbody>
                   {filtered.map(user =>(
-                      <tr key = {user["u_userid"].toString()}>
-                      <td>{user["u_userid"].toString()}</td>
-                      <td>{(user["u_firstname"]==null) ? 'na' : user["u_firstname"].toString()}</td>
-                      <td>{(user["u_lastname"]==null) ? 'na' : user["u_lastname"].toString()}</td>
-                      <td>{(user["u_role"]==null) ? 'na' : user["u_role"].toString()}</td>
-                      <td>{(user["u_email"]==null) ? 'na' : user["u_email"].toString()}</td>
+                      <tr key = {user["userId"].toString()}>
+                      <td>{user["userId"].toString()}</td>
+                      <td>{(user["firstName"]==null) ? 'na' : user["firstName"].toString()}</td>
+                      <td>{(user["lastName"]==null) ? 'na' : user["lastName"].toString()}</td>
+                      <td>{(user["role"]==null) ? 'na' : user["role"].toString()}</td>
+                      <td>{(user["emailId"]==null) ? 'na' : user["emailId"].toString()}</td>
                       <td>{(user["status"]==null) ? 'na' : user["status"].toString()}</td>
                       <td><button  className="btn btn-danger btn-sm">Details</button></td>
                       

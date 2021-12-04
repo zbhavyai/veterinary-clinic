@@ -11,6 +11,7 @@ CREATE TABLE animals (
     a_sex integer,
     a_birthdate date,
     a_status integer,
+    a_requeststatus integer,
     a_ownerid bigint,
     a_profilepic bigint,
     a_tattoonum integer,

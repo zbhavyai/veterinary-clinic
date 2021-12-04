@@ -12,14 +12,14 @@ UPDATE sequence_owners SET next_val=7;
 
 
 -- animals --------------------------------------
-INSERT INTO animals (a_animalid,a_name,a_species,a_subspecies,a_breed,a_type,a_region,a_sex,a_birthdate,a_status,a_ownerid,a_profilepic,a_tattoonum,a_citytattoo,a_rfidnumber,a_microchipnumber,a_coatcolor,a_distinctfeature,a_continuousmedication) VALUES
-("1","Ace","Dog","Canine","German shepherd",NULL,"Spain","0","2017-12-01","0","1",NULL,"269617698","HOC sha","266951170","280286676","Black","sleeping pills","he can fly"),
-("2","Ampersand","Monkey","Ape","Capuchin monkey",NULL,"France","1","2018-12-02","3","2",NULL,"235026499","ORE esd","337506275","123933781","Brown",NULL,"high jumps"),
-("3","Bat Cow","Cow","Bovine",NULL,"Dairy","US","1","2020-04-03","0","1",NULL,"181698181","NKN sds","266386520","335668545","Brown, White",NULL,"bat-shaped patch on face"),
-("4","Comet","Horse","Gallopping","Canadian horse",NULL,"Canada","0","2017-12-11","1","3",NULL,"201373110","HIS sdm","127123163","234277856","White",NULL,"spotted"),
-("5","Krypto","Dog","Canine","Labrador retriever",NULL,"Africa","0","2018-12-31","3","3",NULL,"342871357","YSE mlc","324813826","274718671","White",NULL,NULL),
-("6","Snowy","Dog","Canine","Wire Fox Terrier",NULL,"London","1","2020-04-07","2","4",NULL,"182129899","JSD sda","262973735","247482427","White",NULL,"long ears"),
-("7","Streaky","Cat","Feline","Abyssinian",NULL,"Rome","1","2021-04-03","0","3",NULL,"162506178","DLF kjs","199834890","141860062","Orange",NULL,NULL);
+INSERT INTO animals (a_animalid,a_name,a_species,a_subspecies,a_breed,a_type,a_region,a_sex,a_birthdate,a_status,a_requeststatus,a_ownerid,a_profilepic,a_tattoonum,a_citytattoo,a_rfidnumber,a_microchipnumber,a_coatcolor,a_distinctfeature,a_continuousmedication) VALUES
+("1","Ace","Dog","Canine","German shepherd",NULL,"Spain","1","2017-12-01","2","0","1",NULL,"286704680","HOC sha","200779867","300212935","Black","sleeping pills","he can fly"),
+("2","Ampersand","Monkey","Ape","Capuchin monkey",NULL,"France","1","2018-12-02","3","0","2",NULL,"224037195","ORE esd","270458816","219009740","Brown",NULL,"high jumps"),
+("3","Bat Cow","Cow","Bovine","Unknown","Dairy","US","0","2020-04-03","1","0","1",NULL,"227479807","NKN sds","271415667","270705876","Brown, White",NULL,"bat-shaped patch on face"),
+("4","Comet","Horse","Gallopping","Canadian horse",NULL,"Canada","0","2017-12-11","3","0","3",NULL,"232141799","HIS sdm","215373589","160639011","White",NULL,"spotted"),
+("5","Krypto","Dog","Canine","Labrador retriever",NULL,"Africa","1","2018-12-31","1","0","3",NULL,"126325196","YSE mlc","300139197","169573012","White",NULL,NULL),
+("6","Snowy","Dog","Canine","Wire Fox Terrier",NULL,"London","1","2020-04-07","3","0","4",NULL,"171153107","JSD sda","174511649","295539895","White",NULL,"long ears"),
+("7","Streaky","Cat","Feline","Abyssinian",NULL,"Rome","0","2021-04-03","2","0","3",NULL,"137582509","DLF kjs","185233095","188980246","Orange",NULL,NULL);
 
 UPDATE sequence_animals SET next_val=8;
 -- ----------------------------------------------
@@ -33,9 +33,12 @@ INSERT INTO users (u_userid,u_joiningdate,u_activationdate,u_terminationdate,u_f
 ("4","2017-12-11","2017-12-12",NULL,"Attendant",NULL,"B","1","attendant.b@ucalgary.ca","passw0rd",NULL,"0"),
 ("5","2018-12-31","2019-01-01","2021-09-27","Teacher",NULL,"C","3","teacher.c@ucalgary.ca","passw0rd",NULL,"0"),
 ("6","2020-04-07","2020-04-08","2023-01-03","Student",NULL,"D","4","student.d@ucalgary.ca","passw0rd",NULL,"0"),
-("7","2021-04-03","2021-04-04","2023-12-30","Student",NULL,"E","4","student.e@ucalgary.ca","passw0rd",NULL,"0");
+("7","2021-04-03","2021-04-04","2023-12-30","Student",NULL,"E","4","student.e@ucalgary.ca","passw0rd",NULL,"0"),
+("8","2021-04-04","2021-04-05","2023-12-31","Instructor1",NULL,"E","3","Instructor_1","pt@123",NULL,"1"),
+("9","2021-04-05","2021-04-06","2023-11-30","Admin1",NULL,"LName","0","Admin_1","pa",NULL,"1"),
+("10","2021-04-06","2021-04-07","2024-01-30","Tech",NULL,"LName","2","Technician","pe",NULL,"1");
 
-UPDATE sequence_users SET next_val=8;
+UPDATE sequence_users SET next_val=11;
 -- ----------------------------------------------
 
 

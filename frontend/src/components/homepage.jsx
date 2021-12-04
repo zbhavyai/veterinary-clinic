@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import NavBar from './navbar';
 import NavBarStart from './navbarstart';
+
 class HomePage extends React.Component {
     state = {
         
         
         
-        imageUrl: 'https://schulich.ucalgary.ca/sites/default/files/styles/ucws_profiles_profile_picture/public/2018-12/Moshirpour%2C%20Mohammad.jpg?h=442ae63a&itok=k6Ifu8et',
+        imageUrl: process.env.PUBLIC_URL +'/logo.png',
 
         
         
@@ -26,7 +27,7 @@ class HomePage extends React.Component {
                 <img class="card-img-top" src={this.state.imageUrl} alt="Card image cap"/>
                 <div class="card-body">
                     <h5 class="card-title">Welcome to VetApp</h5>
-                    <p class="card-text">This App is Awesome.  -Someone</p>
+                    <p class="card-text">Please Sign in or Register from the top menu.</p>
                     
                 </div>
                 </div>

@@ -9,14 +9,20 @@ a.a_species 'SPECIES',
 a.a_subspecies 'SUBSPECIES',
 a.a_breed 'BREED',
 a.a_type 'TYPE',
-a.a_region 'REGION',
-a.a_distinctfeature 'DISTINCT_FEATURE',
 CASE a.a_status
     WHEN 0 THEN 'GREEN'
     WHEN 1 THEN 'YELLOW'
     WHEN 2 THEN 'RED'
     WHEN 3 THEN 'INACTIVE'
 END 'STATUS',
+CASE a.a_requeststatus
+    WHEN 0 THEN 'AVAILABLE'
+    WHEN 1 THEN 'REQUESTED'
+    WHEN 2 THEN 'ACCEPT_BY_ADMIN'
+    WHEN 3 THEN 'READY'
+    WHEN 4 THEN 'CANCEL'
+    WHEN 5 THEN 'REJECT'
+END 'REQUEST_STATUS',
 CONCAT( (CASE WHEN o.o_firstname IS NULL THEN "" ELSE o.o_firstname END),
         (CASE WHEN o.o_middlename IS NULL THEN "" ELSE CONCAT(" ", o.o_middlename ) END),
         (CASE WHEN o.o_lastname IS NULL THEN "" ELSE CONCAT(" ", o.o_lastname ) END)) 'OWNER',

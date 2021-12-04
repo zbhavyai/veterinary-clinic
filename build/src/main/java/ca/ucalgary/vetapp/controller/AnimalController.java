@@ -634,24 +634,81 @@ public class AnimalController {
         if (animalOptional.isPresent()) {
             Animal animal = animalOptional.get();
 
-            animal.setName(a.getName());
-            animal.setSpecies(a.getSpecies());
-            animal.setSubSpecies(a.getSubSpecies());
-            animal.setBreed(a.getBreed());
-            animal.setType(a.getType());
-            animal.setRegion(a.getRegion());
-            animal.setSex(a.getSex());
-            animal.setBirthDate(a.getBirthDate());
-            animal.setStatus(a.getStatus());
-            animal.setTheOwner(this.findUniqueOwner(a.fetchTheOwner()));
-            animal.setProfilePic(a.fetchProfilePic());
-            animal.setTattooNum(a.getTattooNum());
+            if (a.getName() != null) {
+                animal.setName(a.getName());
+            }
+
+            if (a.getSpecies() != null) {
+                animal.setSpecies(a.getSpecies());
+            }
+
+            if (a.getSubSpecies() != null) {
+                animal.setSubSpecies(a.getSubSpecies());
+            }
+
+            if(a.getBreed() != null) {
+                animal.setBreed(a.getBreed());
+            }
+
+            if(a.getType() != null) {
+                animal.setType(a.getType());
+            }
+
+            if(a.getRegion() != null) {
+                animal.setRegion(a.getRegion());
+            }
+
+            if(a.getSex() != null) {
+                animal.setSex(a.getSex());
+            }
+
+            if(a.getBirthDate() != null) {
+                animal.setBirthDate(a.getBirthDate());
+            }
+
+            if(a.getStatus() != null) {
+                animal.setStatus(a.getStatus());
+            }
+
+            if(a.getRequestStatus() != null) {
+                animal.setRequestStatus(a.getRequestStatus());
+            }
+
+            if(a.fetchTheOwner() != null) {
+                animal.setTheOwner(this.findUniqueOwner(a.fetchTheOwner()));
+            }
+
+            if(a.fetchProfilePic() != null) {
+                animal.setProfilePic(a.fetchProfilePic());
+            }
+
+            // if(a.getTattooNum() != null) {
+            // animal.setTattooNum(a.getTattooNum());
+            // }
+
+            if(a.getCityTattoo() != null) {
             animal.setCityTattoo(a.getCityTattoo());
+            }
+
+            if(a.getRfidNumber() != null) {
             animal.setRfidNumber(a.getRfidNumber());
+            }
+
+            if(a.getMicroChipNumber() != null) {
             animal.setMicroChipNumber(a.getMicroChipNumber());
+            }
+
+            if(a.getCoatColor() != null) {
             animal.setCoatColor(a.getCoatColor());
+            }
+
+            if(a.getContinuousMedication() != null) {
             animal.setContinuousMedication(a.getContinuousMedication());
+            }
+
+            if(a.getDistinctFeature() != null) {
             animal.setDistinctFeature(a.getDistinctFeature());
+            }
 
             updatedAnimal = this.animalRepository.save(animal);
         }
@@ -878,7 +935,7 @@ public class AnimalController {
      * Endpoint for DELETE - delete animal photo from db
      *
      * @param animalId animal id
-     * @param photoId photo id
+     * @param photoId  photo id
      * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}/photos/{photoId}")
@@ -902,7 +959,7 @@ public class AnimalController {
     /**
      * Endpoint for DELETE - delete animal comment from db
      *
-     * @param animalId animal id
+     * @param animalId  animal id
      * @param commentId comment id
      * @throws NotFoundException
      */
@@ -928,7 +985,7 @@ public class AnimalController {
      * Endpoint for DELETE - delete animal issue from db
      *
      * @param animalId animal id
-     * @param issueId issue id
+     * @param issueId  issue id
      * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}/issues/{issueId}")
@@ -952,7 +1009,7 @@ public class AnimalController {
     /**
      * Endpoint for DELETE - delete animal treatment from db
      *
-     * @param animalId animal id
+     * @param animalId    animal id
      * @param treatmentId treatment id
      * @throws NotFoundException
      */

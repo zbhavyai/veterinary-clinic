@@ -78,6 +78,13 @@ public class Animal {
     private AnimalStatus status;
 
     /**
+     * Request status of the animal - AVAILABLE, REQUESTED, ACCEPT_BY_ADMIN, READY,
+     * CANCEL, or REJECT
+     */
+    @Column(name = "a_requeststatus")
+    private AnimalRequestStatus requestStatus;
+
+    /**
      * The owner of the animal
      */
     @ManyToOne(cascade = { CascadeType.ALL })
@@ -265,6 +272,14 @@ public class Animal {
 
     public void setStatus(AnimalStatus status) {
         this.status = status;
+    }
+
+    public AnimalRequestStatus getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(AnimalRequestStatus requestStatus) {
+        this.requestStatus = requestStatus;
     }
 
     public Owner fetchTheOwner() {

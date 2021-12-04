@@ -24,6 +24,11 @@ import MainMenu from "./components/mainmenu";
 import axios from "axios";
 import ErrorPage from './components/errorpage';
 import HomePage from './components/homepage';
+import CommentList from './components/commentlist';
+import RequestSubmission from './components/submitrequest';
+import RequestManagement from "./components/requestmanagement";
+import TreatmentList from './components/treatmentlist';
+import IssueList from './components/issuelist';
 
 
 
@@ -34,16 +39,20 @@ reactDom.render(
 
 
     <Switch>
+    <Route path='/:user/animals/:id/issues' component={IssueList}/> 
+    <Route path='/:user/animals/:id/treatments' component={TreatmentList}/>
+    <Route path='/:user/animals/:id/comments' component={CommentList}/>
+    <Route path='/:user/requestmanagment' component={RequestManagement}/>
+    <Route path='/:user/requestsubmission' component={RequestSubmission}/>
+      <Route path='/:user/users/:id' component={UserDetails}/>
+      <Route path="/:user/animals/:id" component={AnimalProfile} />
+      <Route path="/:user/animals" component={AnimalManagement}/>
+      <Route path="/login" component={Login}/>
+      <Route path="/:user/users" component={UserManagement}/>
       
-      <Route path='/users/:id' component={UserDetails}/>
-      <Route path="/animals/:id" component={AnimalProfile} />
-      <Route path="/animals" component={AnimalManagement}/>
-      <Route path="/login" component={Login}/>
-      <Route path="/users" component={UserManagement}/>
-      <Route path="/login" component={Login}/>
       <Route path='/register' component={RegistrationPage}/>
-      <Route path='/youraccount' component={YourAccount}/>
-      <Route path="/menu" component={MainMenu} />
+      <Route path='/:user/youraccount' component={YourAccount}/>
+      <Route path="/:user/menu" component={MainMenu} />
       <Route path="/" component={HomePage} />
       <Route path='*' component={ErrorPage}/>
       </Switch>

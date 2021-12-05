@@ -255,7 +255,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 3,\r\n    \"firstName\": \"Student\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"F\",\r\n    \"role\": \"STUDENT\",\r\n    \"emailId\": \"student.f@gmail.com\",\r\n    \"password\": \"passw0rd\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"raw": "{\r\n    \"userId\": 3,\r\n    \"joiningDate\": \"2017-12-01\",\r\n    \"activationDate\": \"2017-12-02\",\r\n    \"terminationDate\": null,\r\n    \"firstName\": \"Student\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"F\",\r\n    \"role\": \"STUDENT\",\r\n    \"emailId\": \"student.f@gmail.com\",\r\n    \"passwordHash\": \"passw0rd\",\r\n    \"passwordSalt\": null,\r\n    \"status\": \"ACTIVE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,13 +309,13 @@
 					"response": []
 				},
 				{
-					"name": "updateUser",
+					"name": "updateUser eg 1",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 3,\r\n    \"firstName\": \"Sid\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"Shoeman\",\r\n    \"role\": \"TECHNICIAN\",\r\n    \"emailId\": \"sid.shoeman@outlook.com\",\r\n    \"password\": \"passw0rd\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"raw": "{\r\n    \"userId\": 3,\r\n    \"firstName\": \"Sid\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"Shoeman\",\r\n    \"terminationDate\": \"2022-12-06\",\r\n    \"role\": \"TECHNICIAN\",\r\n    \"emailId\": \"sid.shoeman@outlook.com\",\r\n    \"passwordHash\": \"passw0rd\",\r\n    \"status\": \"INACTIVE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -333,6 +333,36 @@
 								"v1",
 								"users",
 								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser eg 2",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Teacher\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"Admin\",\r\n    \"role\": \"ADMIN\",\r\n    \"emailId\": \"teacher.admin@ucalgary.ca\",\r\n    \"passwordHash\": \"passw0rd\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/users/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"2"
 							]
 						}
 					},
@@ -505,7 +535,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/v1/owners/?searchBy=contact&searchTerm=4032991533",
+							"raw": "localhost:8080/api/v1/owners/?searchBy=contact&searchTerm=4035288817",
 							"host": [
 								"localhost"
 							],
@@ -523,7 +553,7 @@
 								},
 								{
 									"key": "searchTerm",
-									"value": "4032991533"
+									"value": "4035288817"
 								}
 							]
 						}
@@ -537,7 +567,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ownerId\": 1,\r\n    \"firstName\": \"Bruce\",\r\n    \"middleName\": \"\",\r\n    \"lastName\": \"Wayne\",\r\n    \"role\": null,\r\n    \"contactNumber\": \"4036653061\",\r\n    \"emailId\": \"bruce.wayne@ucalgary.ca\",\r\n    \"address\": \"Wayne Manor\"\r\n}",
+							"raw": "{\r\n    \"ownerId\": 1,\r\n    \"firstName\": \"Bruce\",\r\n    \"middleName\": \"\",\r\n    \"lastName\": \"Wayne\",\r\n    \"contactNumber\": \"4036653061\",\r\n    \"emailId\": \"bruce.wayne@ucalgary.ca\",\r\n    \"address\": \"Wayne Manor\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -567,7 +597,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 3,\r\n    \"firstName\": \"Sid\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"Shoeman\",\r\n    \"role\": \"TECHNICIAN\",\r\n    \"emailId\": \"sid.shoeman@outlook.com\",\r\n    \"password\": \"passw0rd\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Lois\",\r\n    \"middleName\": null,\r\n    \"lastName\": \"Lane\",\r\n    \"contactNumber\": \"4032613398\",\r\n    \"emailId\": \"lois.lane@outlook.com\",\r\n    \"address\": \"Smallville\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -575,7 +605,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/owners/7",
+							"raw": "localhost:8080/api/v1/owners/3",
 							"host": [
 								"localhost"
 							],
@@ -584,7 +614,7 @@
 								"api",
 								"v1",
 								"owners",
-								"7"
+								"3"
 							]
 						}
 					},
@@ -744,7 +774,7 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/v1/animals/?searchBy=type&searchTerm=dog",
+							"raw": "localhost:8080/api/v1/animals/?searchBy=type&searchTerm=dairy",
 							"host": [
 								"localhost"
 							],
@@ -762,7 +792,7 @@
 								},
 								{
 									"key": "searchTerm",
-									"value": "dog"
+									"value": "dairy"
 								}
 							]
 						}
@@ -881,12 +911,12 @@
 					"response": []
 				},
 				{
-					"name": "getAnimalPhotos",
+					"name": "getAnimalWeight",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/animals/3/photos/",
+							"raw": "localhost:8080/api/v1/animals/3/weights",
 							"host": [
 								"localhost"
 							],
@@ -896,6 +926,28 @@
 								"v1",
 								"animals",
 								"3",
+								"weights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAnimalPhotos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/4/photos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"4",
 								"photos",
 								""
 							]
@@ -931,7 +983,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/animals/3/issues",
+							"raw": "localhost:8080/api/v1/animals/5/issues",
 							"host": [
 								"localhost"
 							],
@@ -940,7 +992,7 @@
 								"api",
 								"v1",
 								"animals",
-								"3",
+								"5",
 								"issues"
 							]
 						}
@@ -953,7 +1005,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/v1/animals/1/treatments",
+							"raw": "localhost:8080/api/v1/animals/4/treatments",
 							"host": [
 								"localhost"
 							],
@@ -962,7 +1014,7 @@
 								"api",
 								"v1",
 								"animals",
-								"1",
+								"4",
 								"treatments"
 							]
 						}
@@ -976,7 +1028,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Baileys\",\r\n    \"type\": \"Dog\",\r\n    \"breed\": \"Golden Retriever\",\r\n    \"birthDate\": null,\r\n    \"sex\": \"Male\",\r\n    \"status\": \"YELLOW\",\r\n    \"theOwner\": {\r\n        \"contactNumber\": \"4034097804\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"weight\": null,\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": null,\r\n    \"animalPhotoList\": [],\r\n    \"animalTreatmentList\": [],\r\n    \"animalIssueList\": []\r\n}",
+							"raw": "{\r\n    \"animalId\": 1,\r\n    \"name\": \"Bailey\",\r\n    \"species\": \"Dog\",\r\n    \"subSpecies\": \"Canine\",\r\n    \"breed\": \"Golden Retriever\",\r\n    \"type\": null,\r\n    \"region\": \"A dog's purpose\",\r\n    \"sex\": \"FEMALE\",\r\n    \"birthDate\": null,\r\n    \"status\": \"GREEN\",\r\n    \"theOwner\": {\r\n        \"contactNumber\": \"4035624970\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"cityTattoo\": \"HOV 865\",\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": null,\r\n    \"distinctFeature\": \"Starred in a mnovie\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1005,7 +1057,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Tommy\",\r\n    \"type\": \"Dog\",\r\n    \"breed\": \"Golden Retriever\",\r\n    \"birthDate\": null,\r\n    \"sex\": \"Male\",\r\n    \"status\": \"YELLOW\",\r\n    \"theOwner\": {\r\n        \"firstName\": \"Ryan\",\r\n        \"lastName\": \"Reynolds\",\r\n        \"contactNumber\": \"4034097800\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"weight\": null,\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": null,\r\n    \"animalPhotoList\": [],\r\n    \"animalTreatmentList\": [],\r\n    \"animalIssueList\": []\r\n}",
+							"raw": "{\r\n    \"animalId\": 1,\r\n    \"name\": \"Tommy\",\r\n    \"species\": \"Dog\",\r\n    \"subSpecies\": \"Canine\",\r\n    \"breed\": \"Golden Retriever\",\r\n    \"type\": null,\r\n    \"region\": \"A dog's purpose\",\r\n    \"sex\": \"MALE\",\r\n    \"birthDate\": null,\r\n    \"status\": \"RED\",\r\n    \"theOwner\": {\r\n        \"firstName\": \"Ryan\",\r\n        \"lastName\": \"Reynolds\",\r\n        \"contactNumber\": \"4034097800\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"cityTattoo\": \"HOV 865\",\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": null,\r\n    \"distinctFeature\": \"Starred in a mnovie\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1022,6 +1074,38 @@
 								"api",
 								"v1",
 								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAnimalPhotos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"photoDesc\": \"cleaning photo\",\r\n    \"photoLink\": \"image19.png\",\r\n    \"altText\": \"cleaning photo is here\",\r\n    \"uploader\": {\r\n        \"userId\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/animals/2/photos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"animals",
+								"2",
+								"photos",
+								""
 							]
 						}
 					},
@@ -1090,38 +1174,6 @@
 					"response": []
 				},
 				{
-					"name": "addAnimalPhoto",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"photoId\": 3,\r\n    \"photoLink\": \"image4.jpg\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/api/v1/animals/2/photos/",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"animals",
-								"2",
-								"photos",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "addAnimalTreatment",
 					"request": {
 						"method": "POST",
@@ -1159,7 +1211,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"animalId\": 5,\r\n    \"name\": \"Cryptocurrency\",\r\n    \"type\": \"Dog\",\r\n    \"breed\": \"Labrador retriever\",\r\n    \"birthDate\": null,\r\n    \"sex\": \"0\",\r\n    \"status\": \"YELLOW\",\r\n    \"theOwner\": {\r\n        \"firstName\": \"Clarke\",\r\n        \"middleName\": \"Joseph\",\r\n        \"lastName\": \"Kent\",\r\n        \"role\": null,\r\n        \"contactNumber\": \"4032991534\",\r\n        \"emailId\": \"clarke.joe.kent@ucalgary.ca\",\r\n        \"address\": \"Smallville\"\r\n    },\r\n    \"tattooNum\": 111111111,\r\n    \"rfidNumber\": \"111111111\",\r\n    \"microChipNumber\": \"111111111\",\r\n    \"weight\": null,\r\n    \"coatColor\": \"blue\",\r\n    \"continuousMedication\": \"sleeping pills\"\r\n}",
+							"raw": "{\r\n    \"requestStatus\": \"ACCEPT_BY_ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1227,7 +1279,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/animals/6/photos/7",
+							"raw": "localhost:8080/api/v1/animals/4/photos/2",
 							"host": [
 								"localhost"
 							],
@@ -1236,9 +1288,9 @@
 								"api",
 								"v1",
 								"animals",
-								"6",
+								"4",
 								"photos",
-								"7"
+								"2"
 							]
 						}
 					},
@@ -1259,7 +1311,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/animals/2/comments/7",
+							"raw": "localhost:8080/api/v1/animals/2/comments/3",
 							"host": [
 								"localhost"
 							],
@@ -1270,7 +1322,7 @@
 								"animals",
 								"2",
 								"comments",
-								"7"
+								"3"
 							]
 						}
 					},
@@ -1291,7 +1343,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/animals/6/treatments/4",
+							"raw": "localhost:8080/api/v1/animals/7/treatments/1",
 							"host": [
 								"localhost"
 							],
@@ -1300,9 +1352,9 @@
 								"api",
 								"v1",
 								"animals",
-								"6",
+								"7",
 								"treatments",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -1323,7 +1375,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/v1/animals/3/issues/7",
+							"raw": "localhost:8080/api/v1/animals/5/issues/5",
 							"host": [
 								"localhost"
 							],
@@ -1332,9 +1384,9 @@
 								"api",
 								"v1",
 								"animals",
-								"3",
+								"5",
 								"issues",
-								"7"
+								"5"
 							]
 						}
 					},

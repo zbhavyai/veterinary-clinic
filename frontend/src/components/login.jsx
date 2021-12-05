@@ -58,6 +58,14 @@ class Login extends React.Component {
                     console.log('Successful Login3');
                     hyperlink = "/t/menu"
                 }
+                else if ((this.state.username == this.state.users[i]["emailId"]) && (this.state.password == this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] == "STUDENT")) {
+                    console.log('Successful Login4');
+                    hyperlink = "/s/menu"
+                }
+                else if ((this.state.username == this.state.users[i]["emailId"]) && (this.state.password == this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] == "ATTENDANT")) {
+                    console.log('Successful Login5');
+                    hyperlink = "/at/menu"
+                }
                 else {
                     console.log("Incorrect credentials");
                     errorMessage = "Click Login when full credentials entered"

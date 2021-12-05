@@ -62,7 +62,77 @@ class AnimalManagement extends React.Component {
         // console.log(filtered);
          const user = this.props.match.params.user;
 
-        return <React.Fragment>
+         if(user == "s"){
+            return <React.Fragment>
+            <NavBar user={user} /> 
+            
+            <div class="container">
+            </div>
+
+            <div className="input-group mb-3">
+                <label className="input-group-text" htmlFor="inputGroupSelect01">Search For</label>
+                <select onChange={(e) => this.handleFilter(e)} value={this.state.filterOption} className="form-select" id="selectFilter" >
+                    <option value="0">No Filter</option>
+                    <option value="1">ID</option>
+                    <option value="2">Name</option>
+                    <option value="3">Breed</option>
+                    <option value="4">Owner's Email</option>
+                    <option value="5">Status</option>
+                </select>
+            </div>
+
+            <div className="input-group mb-3">
+                < input type="text" id="inputFilter" onChange={(e) => this.handleFilterText(e)} value={this.state.filterText} className="form-control" placeholder="Enter Your Search Term Here" aria-label="Enter Your Search Term Here" aria-describedby="basic-addon2" />
+
+            </div>
+
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Breed</th>
+                        <th>Owner Email</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filtered.map(animal => (
+                        <tr key={animal["animalId"].toString()}>
+                            <td>{animal["animalId"].toString()}</td>
+                            <td>{(animal["name"] == null) ? 'na' : animal["name"].toString()}</td>
+                            <td>{(animal["breed"] == null) ? 'na' : animal["breed"].toString()}</td>
+                            <td>{(animal["ownerEmail"] == null) ? 'na' : animal["ownerEmail"].toString()}</td>
+                            <td>{(animal["status"] == null) ? 'na' : animal["status"].toString()}</td>
+                            {/* <td><Link to={"/" + user + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td> */}
+                            <td><Link to={"/"+user + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-sm">
+                </div>
+
+                <div class="col-sm">
+                </div>
+
+                <div class="col-sm">
+                </div>
+
+                <div class="col-sm">
+                </div>
+
+                <div class="col-sm">
+                    
+                </div>
+            </div>
+        </React.Fragment>;
+
+         } else{
+            return <React.Fragment>
             <NavBar user={user} /> 
             
             <div class="container">
@@ -128,8 +198,11 @@ class AnimalManagement extends React.Component {
                     <button type="button" class="btn btn-secondary">Add Animal</button>
                 </div>
             </div>
-        </React.Fragment>
-            ;
+        </React.Fragment>;
+
+         }
+
+        
     }
 }
 

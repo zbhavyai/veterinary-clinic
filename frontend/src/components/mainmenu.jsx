@@ -22,6 +22,41 @@ class MainMenu extends React.Component {
     };
     render() { 
         const user = this.props.match.params.user;
+        if(user == "at" ){
+            return <React.Fragment>
+                <NavBar user = {user}/>
+                
+                <div class="card" style={this.styles}>
+                <a href="/at/animals">
+                    <img class="card-img-top" src={this.state.animalImageUrl} alt="Card image cap"/>
+                    <div class="card-body">
+                        <h5 class="card-title">Animal Management</h5>
+                        
+                    </div>
+                    </a>
+                </div>
+                
+            </React.Fragment>;
+
+        }
+        if(user == "s"){
+            return <React.Fragment>
+                <NavBar user = {user}/>
+                
+                <div class="card" style={this.styles}>
+                <a href="/s/animals">
+                    <img class="card-img-top" src={this.state.animalImageUrl} alt="Card image cap"/>
+                    <div class="card-body">
+                        <h5 class="card-title">Animal Management</h5>
+                        
+                    </div>
+                    </a>
+                </div>
+                
+            </React.Fragment>;
+
+        }
+
         if(user == "i"){
             return <React.Fragment>
                 <NavBar user = {user}/>
@@ -59,6 +94,7 @@ class MainMenu extends React.Component {
             </React.Fragment>;
 
         }
+
 
         if(user == "a"){
             return <React.Fragment>

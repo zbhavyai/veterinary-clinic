@@ -65,7 +65,7 @@ class MainMenu extends React.Component {
                 <a href="/i/users">
                     <img class="card-img-top" src={this.state.userImageUrl} alt="Card image cap"/>
                     <div class="card-body">
-                        <h5 class="card-title">User Management</h5>
+                        <h5 class="card-title">Student Management</h5>
                         
                     </div>
                     </a>
@@ -139,15 +139,7 @@ class MainMenu extends React.Component {
             return <React.Fragment>
                 <NavBar user = {user}/>
                 <div class="row">
-                <div class="card" style={this.styles}>
-                <a href="/t/users">
-                    <img class="card-img-top" src={this.state.userImageUrl} alt="Card image cap"/>
-                    <div class="card-body">
-                        <h5 class="card-title">User Management</h5>
-                        
-                    </div>
-                    </a>
-                </div>
+                
 
                 <div class="card" style={this.styles}>
                 <a href="/t/animals">

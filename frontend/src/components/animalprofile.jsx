@@ -100,8 +100,110 @@ class AnimalProfile extends React.Component {
             xaxis: { categories: dates }
         }
 
+        if(user == "t" || user == "at"){
+            return <React.Fragment>
 
-        return <React.Fragment>
+            <NavBar user={user} />
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <img src={this.state.imageUrl} alt="" />
+
+                    </div>
+                    <div class="col-sm">
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h5 class="display-4">Basic Details</h5>
+                                <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                                <p class="lead">Name: {this.state.animal["name"]}</p>
+                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p class="lead">Age: {this.state.animal["age"]}</p>
+                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p class="lead">Status: {this.state.animal["status"]}  <Link to={"/" + user + "/animals/" + id + "/status"} className="btn btn-secondary">Update</Link></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h5 class="display-4">Owner Details</h5>
+                                <p class="lead">Owner Name: {this.state.owner["fullName"]}</p>
+                                <p class="lead">Owner Contact: {this.state.owner["contactNumber"]}</p>
+                                <p class="lead">Owner Email: {this.state.owner["emailId"]}</p>
+                                <p class="lead">Owner Address: {this.state.owner["address"]}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm">
+                        <div class="jumbotron jumbotron-fluid">
+                            <div class="container">
+                                <h5 class="display-4">Identification Details</h5>
+                                <p class="lead">RFID Number: {this.state.animal["rfidNumber"]}</p>
+                                <p class="lead">Microchip: {this.state.animal["microChipNumber"]}</p>
+                                <p class="lead">Tattoo: {this.state.animal["tattooNum"]}</p>
+                                <p class="lead">Coat Color: {this.state.animal["coatColor"]}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h5 class="display-4">Weight Graph</h5>
+                            <div id="chart">
+                                <ReactApexChart options={options} series={series} type="line" height={350} />
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h5 class="display-4">Other Details</h5>
+                            <p class="lead">Continuous Medication: {this.state.animal["continuousMedication"]}</p>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h5 class="display-4">Photos</h5>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <td><Link to={"/" + user + "/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></td>
+                        <td><Link to={"/" + user + "/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></td>
+                        <td><Link to={"/" + user + "/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></td> 
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </React.Fragment>;
+
+        }
+        else{
+            return <React.Fragment>
 
             <NavBar user={user} />
 
@@ -200,6 +302,11 @@ class AnimalProfile extends React.Component {
 
 
         </React.Fragment>;
+
+        }
+
+
+        
     }
 }
 

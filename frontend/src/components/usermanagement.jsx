@@ -45,6 +45,7 @@ class UserManagement extends React.Component {
         console.log(this.state.users);
         const userx = this.props.match.params.user;
         let filtered = this.state.users;
+        filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
 
         if (this.state.filterOption == 1) {
             filtered = 1 ? this.state.users.filter(m => m["userId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
@@ -60,6 +61,8 @@ class UserManagement extends React.Component {
             filtered = 1 ? this.state.users.filter(m => m["status"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
         } else {
             filtered = this.state.users;
+            filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
+
         }
 
         return <React.Fragment>

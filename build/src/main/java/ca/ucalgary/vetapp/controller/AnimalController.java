@@ -3,6 +3,7 @@ package ca.ucalgary.vetapp.controller;
 import ca.ucalgary.vetapp.model.*;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -429,8 +430,14 @@ public class AnimalController {
      */
     @PostMapping
     public Animal addAnimal(@RequestBody Animal a) throws UnsupportedRequestException {
-        Owner o = a.fetchTheOwner();
+        // reset the id to 0 to prevent overwrite
+        a.setAnimalId(0);
 
+        // set the request status to available
+        a.setRequestStatus(AnimalRequestStatus.AVAILABLE);
+
+        // set the right owner or insert a new one
+        Owner o = a.fetchTheOwner();
         o = this.findUniqueOwner(o);
         this.ownerRepository.save(o);
         a.setTheOwner(o);
@@ -472,7 +479,13 @@ public class AnimalController {
     public Weights addWeight(@RequestBody Weights w, @PathVariable("animalId") Long id)
             throws UnsupportedRequestException {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        // reset the id to 0 to prevent overwrite
         w.setWeightId(0);
+
+        Long userId = w.fetchRecordedBy().getUserId();
+        User u = this.userRepository.findById(userId).get();
+        w.setRecordedBy(u);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
@@ -501,7 +514,16 @@ public class AnimalController {
     public Photos addPhoto(@RequestBody Photos p, @PathVariable("animalId") Long id)
             throws UnsupportedRequestException {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        // reset the id to 0 to prevent overwrite
         p.setPhotoId(0);
+
+        // set upload date to now
+        p.setUploadDate(LocalDate.now());
+
+        Long userId = p.fetchUploader().getUserId();
+        User u = this.userRepository.findById(userId).get();
+        p.setUploader(u);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
@@ -530,7 +552,11 @@ public class AnimalController {
     public Issues addIssue(@RequestBody Issues i, @PathVariable("animalId") Long id)
             throws UnsupportedRequestException {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        // reset the id to 0 to prevent overwrite
         i.setIssueId(0);
+
+        // all new reported issues are unresolved
         i.setResolved(false);
 
         Long userId = i.fetchRaisedBy().getUserId();

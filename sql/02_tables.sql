@@ -55,8 +55,8 @@ create table weights (
     w_weightid bigint not null,
     w_massinkg double precision not null,
     w_recorddate date not null,
-    w_recordedby bigint not null,
-    w_animalid bigint not null,
+    w_recordedby bigint,
+    w_animalid bigint,
     primary key (w_weightid)
 );
 
@@ -66,7 +66,7 @@ CREATE TABLE photos (
     p_animalid bigint,
     p_photolink varchar(255),
     p_alttext varchar(255),
-    p_uploader bigint not null,
+    p_uploader bigint,
     p_uploaddate date not null,
     primary key (p_photoid)
 );
@@ -75,7 +75,7 @@ CREATE TABLE comments (
     c_commentid bigint not null,
     c_commentdesc varchar(255),
     c_animalid bigint,
-    c_commentdate date,
+    c_commentdate date not null,
     c_commenter bigint,
     primary key (c_commentid)
 );
@@ -83,9 +83,9 @@ CREATE TABLE comments (
 CREATE TABLE issues (
     i_issueid bigint not null,
     i_issuedesc varchar(255),
-    i_detecteddate date,
+    i_detecteddate date not null,
     i_animalid bigint,
-    i_raisedby bigint not null,
+    i_raisedby bigint,
     i_isresolved bit,
     primary key (i_issueid)
 );
@@ -97,7 +97,7 @@ CREATE TABLE treatments (
     t_drugdose varchar(255),
     t_deliverymethod varchar(255),
     t_animalid bigint,
-    t_treatmentdate date,
+    t_treatmentdate date not null,
     t_treatedby bigint,
     primary key (t_treatmentid)
 );
@@ -156,49 +156,49 @@ ALTER TABLE animals
 ALTER TABLE weights
     add constraint fk_w_animalid_weights
     foreign key (w_animalid)
-    references animals (a_animalid);
+    references animals (a_animalid) on delete cascade;
 
 ALTER TABLE weights
     add constraint fk_w_recordedby_weights
     foreign key (w_recordedby)
-    references users (u_userid);
+    references users (u_userid) on delete set null;
 
 ALTER TABLE photos
     add constraint fk_p_animalid_photos
     foreign key (p_animalid)
-    references animals (a_animalid);
+    references animals (a_animalid) on delete cascade;
 
 ALTER TABLE photos
     add constraint fk_p_uploader_photos
     foreign key (p_uploader)
-    references users (u_userid);
+    references users (u_userid) on delete set null;
 
 ALTER TABLE comments
     add constraint fk_c_commenter_comments
     foreign key (c_commenter)
-    references users (u_userid);
+    references users (u_userid) on delete set null;
 
 ALTER TABLE comments
     add constraint fk_c_animalid_comments
     foreign key (c_animalid)
-    references animals (a_animalid);
+    references animals (a_animalid) on delete cascade;
 
 ALTER TABLE issues
     add constraint fk_i_raisedby_issues
     foreign key (i_raisedby)
-    references users (u_userid);
+    references users (u_userid) on delete set null;
 
 ALTER TABLE issues
     add constraint fk_i_animalid_issues
     foreign key (i_animalid)
-    references animals (a_animalid);
+    references animals (a_animalid) on delete cascade;
 
 ALTER TABLE treatments
     add constraint fk_t_animalid_treatments
     foreign key (t_animalid)
-    references animals (a_animalid);
+    references animals (a_animalid) on delete cascade;
 
 ALTER TABLE treatments
     add constraint fk_t_treatedby_treatments
     foreign key (t_treatedby)
-    references users (u_userid);
+    references users (u_userid) on delete set null;

@@ -3,6 +3,7 @@ package ca.ucalgary.vetapp.controller;
 import ca.ucalgary.vetapp.model.*;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -225,8 +226,13 @@ public class UserController {
         // reset the id to 0 to prevent overwrite
         u.setUserId(0);
 
+        // set the joining date to now and activation date to null
+        u.setJoiningDate(LocalDate.now());
+        u.setActivationDate(null);
+
         // all new users should be inactive and must be activated by admin
         u.setStatus(UserStatus.INACTIVE);
+
         return this.userRepository.save(u);
     }
 
@@ -257,11 +263,23 @@ public class UserController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
+            // check if this is activation request
+            if(user.getStatus() == UserStatus.INACTIVE && u.getStatus() == UserStatus.ACTIVE) {
+                user.setActivationDate(LocalDate.now());
+            }
+
+            // check if this is a block request
+            if(u.getStatus() == UserStatus.INACTIVE) {
+                user.setActivationDate(null);
+            }
+
+            user.setTerminationDate(u.getTerminationDate());
             user.setFirstName(u.getFirstName());
-            user.setLastName(u.getLastName());
             user.setMiddleName(u.getMiddleName());
+            user.setLastName(u.getLastName());
             user.setRole(u.getRole());
             user.setEmailId(u.getEmailId());
+            user.setPasswordHash(u.getPasswordHash());
             user.setStatus(u.getStatus());
 
             updatedUser = this.userRepository.save(user);
@@ -293,6 +311,7 @@ public class UserController {
 
         // TODO: make sure user getting deleted has all its treatments, issues, and
         // TODO: comments deleted as well. To be done on sql side using CASCADE
+        // DONE: handled via tables cascade
         this.userRepository.deleteById(id);
     }
 }

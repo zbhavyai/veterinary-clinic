@@ -48,18 +48,28 @@ Below are steps to get the backend service up and running.
    3. [03_views.sql](sql/03_views.sql)
    4. [04_dummy_data.sql](sql/04_dummy_data.sql)
 
-5. On your machine, navigate to the directory [build](build). Running the below command will get the backend server running.
-   ```bash
-   $ mvn clean spring-boot:run
-   ```
+5. **To test the backend**
 
-6. To test all the implemented API endpoints, launch Postman on your local machine.
+   1. On your machine, navigate to the directory [build](build). Running the below command will get the backend server running.
+      ```bash
+      $ mvn clean spring-boot:run
+      ```
 
-7. Import [this](docs/api_endpoints/VetApp.postman_collection.json) file into the Postman. You can then run all the API endpoints in the imported folder **VetApp** one by one.
+   2. To test all the implemented API endpoints, launch Postman on your local machine.
 
-8. At any given time, you can also verify the db tables using the credentials mentioned in step #4.
+   3. Import [this](docs/api_endpoints/VetApp.postman_collection.json) file into the Postman. You can then run all the API endpoints in the imported folder **VetApp** one by one.
 
-9. Once the testing and verification is done, you may remove all the data from your MySQL server using [10_purge.sql](sql/10_purge.sql).
+   4. At any given time, you can also verify the db tables using the credentials mentioned in step #4.
+
+6. **To test the frontend**
+
+   1. On your machine, navigate to the directory [frontend](frontend). Running the below command will get the react server running.
+      ```bash
+      $ npm install
+      $ npm start
+      ```
+
+7. Once the testing and verification is done, you may remove all the data from your MySQL server using [10_purge.sql](sql/10_purge.sql).
 
 
 

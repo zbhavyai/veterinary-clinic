@@ -27,12 +27,12 @@ Sprint No  | Description                          | Due Date     | Information
 1              | Developing epics and user stories    | 15-Oct-2021  | [Jira board](https://uofeng607-888.atlassian.net/jira/software/projects/U888/boards/1/roadmap)
 2              | Designing the wire-frames            | 22-Oct-2021  | [Wireframes PPT](docs/wireframes/Wireframes_Consolidated.pptx)
 3              | Designing the required API           | 19-Nov-2021  | [Postman file](docs/api_endpoints/VetApp.postman_collection.json) and [instructions](#how-to-run-backend)
-4              | Developing front-end and back-end    | 03-Dec-2021  | *TBA*
+4              | Developing front-end and back-end    | 03-Dec-2021  | [backend](build) and [frontend](frontend)
 5              | Integrating front-end and back-end   | 14-Dec-2021  | *TBA*
 
 
 
-## How to run backend
+## How to run backend and frontend
 
 Below are steps to get the backend service up and running.
 

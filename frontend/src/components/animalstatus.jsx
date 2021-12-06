@@ -3,6 +3,7 @@ import axios from "axios";
 import ReactApexChart from 'react-apexcharts';
 import { useParams } from "react-router-dom";
 import { withRouter } from "react-router";
+
 import NavBar from './navbar';
 import {
     BrowserRouter as Router,

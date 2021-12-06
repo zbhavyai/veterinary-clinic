@@ -30,6 +30,8 @@ import RequestManagement from "./components/requestmanagement";
 import TreatmentList from './components/treatmentlist';
 import IssueList from './components/issuelist';
 import AnimalStatus from './components/animalstatus';
+import AddComment from './components/addcomment';
+import EditComment from './components/editcomment';
 
 
 
@@ -40,6 +42,8 @@ reactDom.render(
 
 
     <Switch>
+    <Route path='/:user/animals/:id/comments/:cid/edit' component={EditComment}/>
+    <Route path='/:user/animals/:id/comments/add' component={AddComment}/> 
     <Route path='/:user/animals/:id/status' component={AnimalStatus}/> 
     <Route path='/:user/animals/:id/issues' component={IssueList}/> 
     <Route path='/:user/animals/:id/treatments' component={TreatmentList}/>

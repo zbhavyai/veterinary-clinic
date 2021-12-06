@@ -40,9 +40,9 @@ class CommentList extends React.Component {
 
     render() {
         const user = this.props.match.params.user;
-
-
-        return <React.Fragment>
+        const cid = this.props.match.params.cid;
+        if(user == "i" || user=="s"){
+            return <React.Fragment>
             <NavBar user={user} />
             
             <h2 class="display-4">Comment Logs</h2>
@@ -70,13 +70,13 @@ class CommentList extends React.Component {
             <div class="row">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <h1 class="display-4">Log History</h1>
+                        <h1 class="display-4">Log History <Link to={"/"+user+"/animals/" + this.state.animal["animalId"] + "/comments/add"} className="btn btn-secondary btn-sm">Add Comments</Link>
+                        </h1>
                         {this.state.comments.map(comment => (
                             <div class="card" style={this.styles}>
                                 <p>Log {comment["commentId"]}: {comment["commentDate"]}</p>
 
                                 <p>{comment["commentDesc"]}</p>
-                                <td><Link to={"/"+{user}+"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Remove</Link></td>
                                 <p></p>
                                 <p></p>
                             </div>
@@ -86,6 +86,60 @@ class CommentList extends React.Component {
 
             </div>
         </React.Fragment>;
+
+        } else{
+            return <React.Fragment>
+            <NavBar user={user} />
+            
+            <h2 class="display-4">Comment Logs</h2>
+            
+            <div class="row">
+                <div class="col-sm">
+                    <img src={this.state.imageUrl} alt="" />
+
+                </div>
+                <div class="col-sm">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">Basic Details</h1>
+                            <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                                <p class="lead">Name: {this.state.animal["name"]}</p>
+                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p class="lead">Age: {this.state.animal["age"]}</p>
+                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p class="lead">Status: {this.state.animal["status"]}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Log History</h1>
+                        
+                        {this.state.comments.map(comment => (
+                            <div class="card" style={this.styles}>
+                                <p>Log {comment["commentId"]}: {comment["commentDate"]}</p>
+
+                                <p>{comment["commentDesc"]}</p>
+                                <td><Link to={"/"+user+"/animals/" + this.state.animal["animalId"].toString()+"/comments/"+comment["commentId"] + "/edit"} className="btn btn-secondary btn-sm">Edit</Link><Link to={"/"+user+"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Remove</Link></td>
+                                <p></p>
+                                <p></p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+        </React.Fragment>;
+
+        }
+
+
+
+        
     }
 }
 

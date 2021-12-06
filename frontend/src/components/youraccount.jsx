@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import NavBar from "./navbar";
 class YourAccount extends React.Component {
     render() { 
+        const user = this.props.match.params.user;
+        
+        const uid = this.props.match.params.uid;
         return <React.Fragment>
-            <NavBar/>
+            <NavBar user = {user} uid = {uid}/>
             <div class="card" style={this.styles}>
                 
                 <div class="card-body">

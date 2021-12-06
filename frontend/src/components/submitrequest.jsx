@@ -120,6 +120,7 @@ class RequestSubmission extends React.Component {
 
     render() {
       const user = this.props.match.params.user;
+      const uid = this.props.match.params.uid;
 
         let filtered = this.state.animals;
         if (this.state.filterOption == 1) {
@@ -143,7 +144,7 @@ class RequestSubmission extends React.Component {
 
 
         return <React.Fragment>
-                <NavBar user = {user}/>
+                <NavBar user = {user} uid = {uid}/>
                 <div class="container">
 
                 </div>

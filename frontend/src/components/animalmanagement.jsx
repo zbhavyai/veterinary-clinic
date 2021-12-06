@@ -61,10 +61,11 @@ class AnimalManagement extends React.Component {
 
         // console.log(filtered);
          const user = this.props.match.params.user;
+         const uid = this.props.match.params.uid;
 
          if(user == "s"){
             return <React.Fragment>
-            <NavBar user={user} /> 
+            <NavBar user = {user} uid = {uid}/>
             
             <div class="container">
             </div>
@@ -106,7 +107,7 @@ class AnimalManagement extends React.Component {
                             <td>{(animal["ownerEmail"] == null) ? 'na' : animal["ownerEmail"].toString()}</td>
                             <td>{(animal["status"] == null) ? 'na' : animal["status"].toString()}</td>
                             {/* <td><Link to={"/" + user + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td> */}
-                            <td><Link to={"/"+user + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
+                            <td><Link to={"/"+user + "/" + uid +  "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
                         </tr>
                     ))}
                 </tbody>
@@ -133,7 +134,7 @@ class AnimalManagement extends React.Component {
 
          } else{
             return <React.Fragment>
-            <NavBar user={user} /> 
+            <NavBar user = {user} uid = {uid}/>
             
             <div class="container">
             </div>
@@ -175,7 +176,7 @@ class AnimalManagement extends React.Component {
                             <td>{(animal["ownerEmail"] == null) ? 'na' : animal["ownerEmail"].toString()}</td>
                             <td>{(animal["status"] == null) ? 'na' : animal["status"].toString()}</td>
                             {/* <td><Link to={"/" + user + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td> */}
-                            <td><Link to={"/"+user + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
+                            <td><Link to={"/"+user + "/" + uid + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
                         </tr>
                     ))}
                 </tbody>

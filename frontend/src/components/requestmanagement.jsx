@@ -104,6 +104,7 @@ class RequestManagement extends React.Component {
 
     render() {
         const user = this.props.match.params.user;
+        const uid = this.props.match.params.uid;
         let filtered = this.state.animals;
         if(user == 't'){
             filtered = 1?this.state.animals.filter(m=>m["requestStatus"].toString().includes("ACCEPT_BY_ADMIN") ):this.state.animals;
@@ -124,7 +125,7 @@ class RequestManagement extends React.Component {
 
 
         return <React.Fragment>
-                <NavBar user = {user}/>
+                <NavBar user = {user} uid = {uid}/>
                 <div class="container">
 
                 </div>

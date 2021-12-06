@@ -44,8 +44,12 @@ class UserManagement extends React.Component {
     render() {
         console.log(this.state.users);
         const userx = this.props.match.params.user;
+        const uid = this.props.match.params.uid;
         let filtered = this.state.users;
-        filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
+        if(userx == "i"){
+            filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
+        }
+        
 
         if (this.state.filterOption == 1) {
             filtered = 1 ? this.state.users.filter(m => m["userId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
@@ -61,12 +65,14 @@ class UserManagement extends React.Component {
             filtered = 1 ? this.state.users.filter(m => m["status"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
         } else {
             filtered = this.state.users;
-            filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
+            if(userx == "i"){
+                filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
+            }
 
         }
 
         return <React.Fragment>
-            <NavBar user={userx} />
+            <NavBar user = {userx} uid = {uid}/>
 
             <div class="container">
             </div>
@@ -111,7 +117,7 @@ class UserManagement extends React.Component {
                             <td>{(user["status"] == null) ? 'na' : user["status"].toString()}</td>
 
                             {/* <td><Link to={"/" + userx + "/users/" + user["userId"].toString()} className="btn btn-primary btn-sm">Details</Link></td> */}
-                            <td><Link to={"/"+userx + "/users/" + user["userId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
+                            <td><Link to={"/"+userx + "/" + uid + "/users/" + "/" + user["userId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
                         </tr>
                     ))}
                 </tbody>

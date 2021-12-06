@@ -32,6 +32,8 @@ import IssueList from './components/issuelist';
 import AnimalStatus from './components/animalstatus';
 import AddComment from './components/addcomment';
 import EditComment from './components/editcomment';
+import AddTreatment from './components/addtreatment';
+import AddIssue from './components/addissue';
 
 
 
@@ -42,23 +44,25 @@ reactDom.render(
 
 
     <Switch>
-    <Route path='/:user/animals/:id/comments/:cid/edit' component={EditComment}/>
-    <Route path='/:user/animals/:id/comments/add' component={AddComment}/> 
-    <Route path='/:user/animals/:id/status' component={AnimalStatus}/> 
-    <Route path='/:user/animals/:id/issues' component={IssueList}/> 
-    <Route path='/:user/animals/:id/treatments' component={TreatmentList}/>
-    <Route path='/:user/animals/:id/comments' component={CommentList}/>
-    <Route path='/:user/requestmanagment' component={RequestManagement}/>
-    <Route path='/:user/requestsubmission' component={RequestSubmission}/>
-      <Route path='/:user/users/:id' component={UserDetails}/>
-      <Route path="/:user/animals/:id" component={AnimalProfile} />
-      <Route path="/:user/animals" component={AnimalManagement}/>
+    <Route path='/:user/:uid/animals/:id/issues/add' component={AddIssue}/> 
+    <Route path='/:user/:uid/animals/:id/treatments/add' component={AddTreatment}/>
+    <Route path='/:user/:uid/animals/:id/comments/:cid/edit' component={EditComment}/>
+    <Route path='/:user/:uid/animals/:id/comments/add' component={AddComment}/> 
+    <Route path='/:user/:uid/animals/:id/status' component={AnimalStatus}/> 
+    <Route path='/:user/:uid/animals/:id/issues' component={IssueList}/> 
+    <Route path='/:user/:uid/animals/:id/treatments' component={TreatmentList}/>
+    <Route path='/:user/:uid/animals/:id/comments' component={CommentList}/>
+    <Route path='/:user/:uid/requestmanagment' component={RequestManagement}/>
+    <Route path='/:user/:uid/requestsubmission' component={RequestSubmission}/>
+      <Route path='/:user/:uid/users/:id' component={UserDetails}/>
+      <Route path="/:user/:uid/animals/:id" component={AnimalProfile} />
+      <Route path="/:user/:uid/animals" component={AnimalManagement}/>
       <Route path="/login" component={Login}/>
-      <Route path="/:user/users" component={UserManagement}/>
+      <Route path="/:user/:uid/users" component={UserManagement}/>
       
       <Route path='/register' component={RegistrationPage}/>
-      <Route path='/:user/youraccount' component={YourAccount}/>
-      <Route path="/:user/menu" component={MainMenu} />
+      <Route path='/:user/:uid/youraccount' component={YourAccount}/>
+      <Route path="/:user/:uid/menu" component={MainMenu} />
       <Route path="/" component={HomePage} />
       <Route path='*' component={ErrorPage}/>
       </Switch>

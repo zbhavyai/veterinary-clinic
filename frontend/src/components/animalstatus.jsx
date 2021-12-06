@@ -60,10 +60,11 @@ class AnimalStatus extends React.Component {
     render() { 
         const user = this.props.match.params.user;
         const id = this.props.match.params.id;
+        const uid = this.props.match.params.uid;
 
         return <React.Fragment>
             
-            <NavBar user={user} />
+            <NavBar user = {user} uid = {uid}/>
 
             <div class="row">
                 <div class="col-sm">

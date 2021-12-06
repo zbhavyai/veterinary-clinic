@@ -40,11 +40,18 @@ class IssueList extends React.Component {
 
     render() {
         const user = this.props.match.params.user;
+        const cid = this.props.match.params.cid;
+        const uid = this.props.match.params.uid;
         console.log(this.state.issues);
+        if(user == "i" || user=="s"){
+
+        }else{
+
+        }
 
 
         return <React.Fragment>
-            <NavBar user={user} /> 
+            <NavBar user = {user} uid = {uid}/>
             
             <h2 class="display-4">Issue Logs</h2>
             <div class="row">
@@ -71,7 +78,7 @@ class IssueList extends React.Component {
             <div class="row">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <h1 class="display-4">Log History</h1>
+                        <h1 class="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/issues/add"} className="btn btn-secondary btn-sm">Add Issue</Link></h1>
                         {this.state.issues.map(issue => (
                             <div class="card" style={this.styles}>
                                 <p>Log {issue["issueId"]}: {issue["issueDate"]}</p>

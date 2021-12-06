@@ -51,6 +51,7 @@ class UserDetails extends React.Component {
 
     render() {
         const userx = this.props.match.params.user;
+        const uid = this.props.match.params.uid;
         // let label = "";
 
         // if (this.state.user["role"] === 0) {
@@ -71,7 +72,7 @@ class UserDetails extends React.Component {
 
         if(userx == "i"){
             return <React.Fragment>
-            <NavBar user={userx} />
+            <NavBar user = {userx} uid = {uid}/>
 
             <div class="card" style={this.styles}>
                 <div class="card-body">
@@ -121,7 +122,7 @@ class UserDetails extends React.Component {
 
         } else{
             return <React.Fragment>
-            <NavBar user={userx} />
+            <NavBar user = {userx} uid = {uid}/>
 
             <div class="card" style={this.styles}>
                 <div class="card-body">

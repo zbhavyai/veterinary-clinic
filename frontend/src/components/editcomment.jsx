@@ -78,9 +78,10 @@ class EditComment extends React.Component {
 
     render() {
         const user = this.props.match.params.user;
+        const uid = this.props.match.params.uid;
         
             return <React.Fragment>
-            <NavBar user={user} />
+            <NavBar user = {user} uid = {uid}/>
             
             <h2 class="display-4">Comment Logs</h2>
             <div class="row">

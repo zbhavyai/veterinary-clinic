@@ -11,7 +11,9 @@ import {
     Route,
     Link
 } from "react-router-dom";
-class AddComment extends React.Component {
+
+
+class AddIssue extends React.Component {
     state = {
         animal: {},
         comment: "",
@@ -48,10 +50,11 @@ class AddComment extends React.Component {
         console.log(dateString);
 
         const message = {
-            "commentId": 1,
-            "commentDesc": this.state.comment.toString(),
-            "commentDate": "2021-12-06",
-            "commenter": {
+            "issueId": 1,
+            "issueDesc": this.state.comment,
+            "detectedDate": "2021-12-08",
+            "resolved": true,
+            "raisedBy": {
                 "userId": uid
             }
         }
@@ -59,7 +62,7 @@ class AddComment extends React.Component {
         
        
         
-        const link = "http://localhost:8080/api/v1/animals/" + id + "/comments";
+        const link = "http://localhost:8080/api/v1/animals/" + id + "/issues";
         axios.post(link, message,{headers:{}}).then(res => {
             console.log(res);
             console.log(res.data);
@@ -84,12 +87,12 @@ class AddComment extends React.Component {
         let dateString = year.toString() + "-" + month.toString()+ "-"+day.toString();
         console.log(dateString);
         const user = this.props.match.params.user;
-        const uid = this.props.match.params.uid;
+        const uid  = this.props.match.params.uid;
         
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             
-            <h2 class="display-4">Comment Logs</h2>
+            <h2 class="display-4">Issue Logs</h2>
             <div class="row">
                 <div class="col-sm">
                     <img src={this.state.imageUrl} alt="" />
@@ -114,11 +117,11 @@ class AddComment extends React.Component {
             <div class="row">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <h1 class="display-4">Add Comment</h1>
+                        <h1 class="display-4">Add Issue</h1>
                         <div class="row">
                         <div class="col-sm">
                             < input type="text" id="inputFilter" className="form-control" placeholder="Add your comment here" aria-label="First Name" aria-describedby="basic-addon2" value={this.state.comment} onChange={(e) =>this.handleChange(e)}/>
-                            <button onClick={(e) => this.handleComment(e)} className="btn btn-primary">Add Comment</button>
+                            <button onClick={(e) => this.handleComment(e)} className="btn btn-primary">Add Issue</button>
                         
                         </div>
                         </div>
@@ -135,4 +138,4 @@ class AddComment extends React.Component {
     }
 }
  
-export default AddComment;
+export default AddIssue;

@@ -27,6 +27,7 @@ class AddUser
 
     render() {
         const userx = this.props.match.params.user;
+        const uid = this.props.match.params.uid;
         // let label = "";
 
         // if (this.state.user["role"] === 0) {
@@ -46,7 +47,7 @@ class AddUser
         // }
 
         return <React.Fragment>
-            <NavBar user={userx} />
+            <NavBar user = {userx} uid = {uid}/>
 
             <div class="card" style={this.styles}>
                 <div class="card-body">

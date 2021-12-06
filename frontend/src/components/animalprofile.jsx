@@ -55,6 +55,7 @@ class AnimalProfile extends React.Component {
     render() {
         const user = this.props.match.params.user;
         const id = this.props.match.params.id;
+        const uid = this.props.match.params.uid;
         let weight = [];
         let dates = [];
         // console.log(this.state.animal["weight"]);
@@ -103,7 +104,7 @@ class AnimalProfile extends React.Component {
         if(user == "t" || user == "at"){
             return <React.Fragment>
 
-            <NavBar user={user} />
+            <NavBar user = {user} uid = {uid}/>
 
             <div class="container">
                 <div class="row">
@@ -189,9 +190,9 @@ class AnimalProfile extends React.Component {
                 </div>
                 <div class="row">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <td><Link to={"/" + user + "/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></td>
-                        <td><Link to={"/" + user + "/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></td>
-                        <td><Link to={"/" + user + "/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></td> 
+                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></td>
+                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></td>
+                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></td> 
                     </div>
 
                 </div>
@@ -205,7 +206,7 @@ class AnimalProfile extends React.Component {
         else{
             return <React.Fragment>
 
-            <NavBar user={user} />
+            <NavBar user = {user} uid = {uid}/>
 
             <div class="container">
                 <div class="row">
@@ -291,9 +292,9 @@ class AnimalProfile extends React.Component {
                 </div>
                 <div class="row">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <td><Link to={"/" + user + "/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></td>
-                        <td><Link to={"/" + user + "/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></td>
-                        <td><Link to={"/" + user + "/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></td> 
+                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></td>
+                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></td>
+                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></td> 
                     </div>
 
                 </div>

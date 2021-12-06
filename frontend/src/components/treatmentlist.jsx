@@ -40,9 +40,58 @@ class TreatmentList extends React.Component {
 
     render() {
         const user = this.props.match.params.user;
+        const cid = this.props.match.params.cid;
+        const uid = this.props.match.params.uid;
 
+        if(user == "i" || user=="s"){
+            return <React.Fragment>
 
-        return <React.Fragment>
+<NavBar user = {user} uid = {uid}/>
+            
+            <h2 class="display-4">Treatment Logs</h2>
+            <div class="row">
+                <div class="col-sm">
+                    <img src={this.state.imageUrl} alt="" />
+
+                </div>
+                <div class="col-sm">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">Basic Details</h1>
+                            <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                                <p class="lead">Name: {this.state.animal["name"]}</p>
+                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p class="lead">Age: {this.state.animal["age"]}</p>
+                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p class="lead">Status: {this.state.animal["status"]}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Log History </h1>
+                        {this.state.treatments.map(treatment => (
+                            <div class="card" style={this.styles}>
+                                <p>Log {treatment["treatmentId"]}: {treatment["treatmentDate"]}</p>
+
+                                <p>Decscription: {treatment["treatmentDesc"]}</p>
+                               
+                                 <p></p>
+                                <p></p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+        </React.Fragment>;
+
+        }else{
+            return <React.Fragment>
 
             <NavBar user={user} />
             
@@ -71,12 +120,12 @@ class TreatmentList extends React.Component {
             <div class="row">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <h1 class="display-4">Log History</h1>
+                        <h1 class="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/treatments/add"} className="btn btn-secondary btn-sm">Add Treatment</Link></h1>
                         {this.state.treatments.map(treatment => (
                             <div class="card" style={this.styles}>
                                 <p>Log {treatment["treatmentId"]}: {treatment["treatmentDate"]}</p>
 
-                                <p>{treatment["treatmentDesc"]}</p>
+                                <p>Decscription: {treatment["treatmentDesc"]}</p>
                                 <td><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Remove</Link></td>
                                 <p></p>
                                 <p></p>
@@ -87,6 +136,11 @@ class TreatmentList extends React.Component {
 
             </div>
         </React.Fragment>;
+
+        }
+
+
+        
     }
 }
 

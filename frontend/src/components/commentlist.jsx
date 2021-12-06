@@ -41,9 +41,10 @@ class CommentList extends React.Component {
     render() {
         const user = this.props.match.params.user;
         const cid = this.props.match.params.cid;
+        const uid = this.props.match.params.uid;
         if(user == "i" || user=="s"){
             return <React.Fragment>
-            <NavBar user={user} />
+            <NavBar user = {user} uid = {uid}/>
             
             <h2 class="display-4">Comment Logs</h2>
             <div class="row">
@@ -70,7 +71,7 @@ class CommentList extends React.Component {
             <div class="row">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <h1 class="display-4">Log History <Link to={"/"+user+"/animals/" + this.state.animal["animalId"] + "/comments/add"} className="btn btn-secondary btn-sm">Add Comments</Link>
+                        <h1 class="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/comments/add"} className="btn btn-secondary btn-sm">Add Comments</Link>
                         </h1>
                         {this.state.comments.map(comment => (
                             <div class="card" style={this.styles}>
@@ -89,7 +90,7 @@ class CommentList extends React.Component {
 
         } else{
             return <React.Fragment>
-            <NavBar user={user} />
+            <NavBar user = {user} uid = {uid}/>
             
             <h2 class="display-4">Comment Logs</h2>
             
@@ -117,14 +118,14 @@ class CommentList extends React.Component {
             <div class="row">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <h1 class="display-4">Log History</h1>
+                        <h1 class="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/comments/add"} className="btn btn-secondary btn-sm">Add Comments</Link></h1>
                         
                         {this.state.comments.map(comment => (
                             <div class="card" style={this.styles}>
                                 <p>Log {comment["commentId"]}: {comment["commentDate"]}</p>
 
                                 <p>{comment["commentDesc"]}</p>
-                                <td><Link to={"/"+user+"/animals/" + this.state.animal["animalId"].toString()+"/comments/"+comment["commentId"] + "/edit"} className="btn btn-secondary btn-sm">Edit</Link><Link to={"/"+user+"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Remove</Link></td>
+                                <td><Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"].toString()+"/comments/"+comment["commentId"] + "/edit"} className="btn btn-secondary btn-sm">Edit</Link><Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Remove</Link></td>
                                 <p></p>
                                 <p></p>
                             </div>

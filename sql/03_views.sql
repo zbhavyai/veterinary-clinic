@@ -100,7 +100,7 @@ CONCAT( (CASE WHEN u.u_firstname IS NULL THEN "" ELSE u.u_firstname END),
 u.u_emailid 'RECORDER_EMAIL'
 FROM
 animals a
-LEFT JOIN weights w ON w.w_animalid = a.a_animalid
+RIGHT JOIN weights w ON w.w_animalid = a.a_animalid
 LEFT JOIN users u ON u.u_userid = w.w_recordedby
 ORDER BY
 a.a_animalid, w.w_recorddate DESC;
@@ -115,8 +115,6 @@ a.a_name 'NAME',
 a.a_species 'SPECIES',
 a.a_subspecies 'SUBSPECIES',
 a.a_breed 'BREED',
--- a.a_type 'TYPE',
--- a.a_region 'REGION',
 a.a_distinctfeature 'DISTINCT_FEATURE',
 CASE a.a_status
     WHEN 0 THEN 'GREEN'
@@ -134,7 +132,7 @@ CONCAT( (CASE WHEN u.u_firstname IS NULL THEN "" ELSE u.u_firstname END),
 u.u_emailid 'UPLOADER_EMAIL'
 FROM
 animals a
-LEFT JOIN photos p ON p.p_animalid = a.a_animalid
+RIGHT JOIN photos p ON p.p_animalid = a.a_animalid
 LEFT JOIN users u ON u.u_userid = p.p_uploader
 ORDER BY
 a.a_animalid, p.p_uploaddate DESC;
@@ -166,7 +164,7 @@ CONCAT( (CASE WHEN u.u_firstname IS NULL THEN "" ELSE u.u_firstname END),
 u.u_emailid 'COMMENTER_EMAIL'
 FROM
 animals a
-LEFT JOIN comments c ON c.c_animalid = a.a_animalid
+RIGHT JOIN comments c ON c.c_animalid = a.a_animalid
 LEFT JOIN users u ON u.u_userid = c.c_commenter
 ORDER BY
 a.a_animalid, c.c_commentdate DESC;
@@ -198,7 +196,7 @@ CONCAT( (CASE WHEN u.u_firstname IS NULL THEN "" ELSE u.u_firstname END),
 u.u_emailid 'RAISEDBY_EMAIL'
 FROM
 animals a
-LEFT JOIN issues i ON i.i_animalid = a.a_animalid
+RIGHT JOIN issues i ON i.i_animalid = a.a_animalid
 LEFT JOIN users u ON u.u_userid = i.i_raisedby
 ORDER BY
 a.a_animalid, i.i_detecteddate DESC;
@@ -233,7 +231,7 @@ CONCAT( (CASE WHEN u.u_firstname IS NULL THEN "" ELSE u.u_firstname END),
 u.u_emailid 'TREATEDBY_EMAIL'
 FROM
 animals a
-LEFT JOIN treatments t ON t.t_animalid = a.a_animalid
+RIGHT JOIN treatments t ON t.t_animalid = a.a_animalid
 LEFT JOIN users u ON u.u_userid = t.t_treatedby
 ORDER BY
 a.a_animalid, t.t_treatmentdate DESC;

@@ -36,10 +36,21 @@ class UserDetails extends React.Component {
 
     handleStatus =(e, statusx)=>{
         const id = this.props.match.params.id;
+
+        const message = {
+            "userId": this.state.user["userId"],
+            "firstName": this.state.user["firstName"],
+            "middleName": this.state.user["middleName"],
+            "lastName": this.state.user["lastName"],
+            "role": this.state.user["role"],
+            "emailId": this.state.user["emailId"],
+            "password": this.state.user["password"],
+            "status": statusx
+        };
        
-        const status = {"status": statusx};
+        
         const link = "http://localhost:8080/api/v1/users/" + id;
-        axios.put(link, status,{headers:{}});
+        axios.put(link, message,{headers:{}});
         window.location.reload(false);
         
 

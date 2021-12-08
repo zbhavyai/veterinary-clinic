@@ -69,7 +69,7 @@ class AddIssue extends React.Component {
           });
         //window.location.reload(false);
 
-        this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/comments")
+        this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/issues")
         
 
 

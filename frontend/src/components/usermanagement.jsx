@@ -117,7 +117,7 @@ class UserManagement extends React.Component {
                             <td>{(user["status"] == null) ? 'na' : user["status"].toString()}</td>
 
                             {/* <td><Link to={"/" + userx + "/users/" + user["userId"].toString()} className="btn btn-primary btn-sm">Details</Link></td> */}
-                            <td><Link to={"/"+userx + "/" + uid + "/users/" + "/" + user["userId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
+                            <td><Link to={"/"+userx + "/" + uid + "/users/"  + user["userId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
                         </tr>
                     ))}
                 </tbody>

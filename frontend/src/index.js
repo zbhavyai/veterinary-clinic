@@ -36,6 +36,8 @@ import AddTreatment from './components/addtreatment';
 import AddIssue from './components/addissue';
 import AddUser from './components/adduser';
 import IsAnimalOwner from './components/isanimalowner';
+import AddAnimalExisting from './components/addanimalexisting';
+import AddAnimalNew from './components/addanimalnew';
 
 
 
@@ -46,6 +48,8 @@ reactDom.render(
 
 
     <Switch>
+    <Route path='/:user/:uid/animals/addnanimal' component={AddAnimalNew}/> 
+    <Route path='/:user/:uid/animals/addoanimal' component={AddAnimalExisting}/> 
     <Route path='/:user/:uid/animals/isowner' component={IsAnimalOwner}/> 
     <Route path='/:user/:uid/users/add' component={AddUser}/>
     <Route path='/:user/:uid/animals/:id/issues/add' component={AddIssue}/> 

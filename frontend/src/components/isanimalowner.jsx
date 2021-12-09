@@ -32,7 +32,7 @@ class IsAnimalOwner extends React.Component {
             <NavBar user = {user} uid = {uid}/>
                 <div class="row">
                 <div class="card" style={this.styles}>
-                <a href="/">
+                <a href={"/"+user+"/" + uid +"/animals/addoanimal"}>
                     <img class="card-img-top" src={this.state.ownerImageUrl} alt="Card image cap"/>
                     <div class="card-body">
                         <h5 class="card-title">Existing Owner</h5>
@@ -42,7 +42,7 @@ class IsAnimalOwner extends React.Component {
                 </div>
 
                 <div class="card" style={this.styles}>
-                <a href="/">
+                <a href={"/"+user+"/" + uid +"/animals/addnanimal"}>
                     <img class="card-img-top" src={this.state.noOwnerImageUrl} alt="Card image cap"/>
                     <div class="card-body">
                         <h5 class="card-title">New Owner</h5>

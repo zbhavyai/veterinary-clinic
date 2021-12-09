@@ -174,7 +174,7 @@ class UserDetails extends React.Component {
                     <p class="lead">Status: {this.state.user["status"]}</p>
                         </div>
 
-                    <a href="#" class="btn btn-primary">Edit</a>
+                        <button onClick={(e) => this.handleStatus(e, "INACTIVE")} className="btn btn-primary">Block</button><button onClick={(e) => this.handleStatus(e, "ACTIVE")} className="btn btn-primary ">Unblock</button><Link to={"/"+userx + "/" + uid + "/users/"  + this.state.user["userId"] + "/edit"} class="btn btn-primary">Edit</Link>
                 </div>
             </div>
 

@@ -38,6 +38,7 @@ import AddUser from './components/adduser';
 import IsAnimalOwner from './components/isanimalowner';
 import AddAnimalExisting from './components/addanimalexisting';
 import AddAnimalNew from './components/addanimalnew';
+import EditUser from './components/edituser';
 
 
 
@@ -51,6 +52,7 @@ reactDom.render(
     <Route path='/:user/:uid/animals/addnanimal' component={AddAnimalNew}/> 
     <Route path='/:user/:uid/animals/addoanimal' component={AddAnimalExisting}/> 
     <Route path='/:user/:uid/animals/isowner' component={IsAnimalOwner}/> 
+    <Route path='/:user/:uid/users/:id/edit' component={EditUser}/>
     <Route path='/:user/:uid/users/add' component={AddUser}/>
     <Route path='/:user/:uid/animals/:id/issues/add' component={AddIssue}/> 
     <Route path='/:user/:uid/animals/:id/treatments/add' component={AddTreatment}/>

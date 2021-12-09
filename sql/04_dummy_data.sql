@@ -1,13 +1,29 @@
 -- owners ---------------------------------------
-INSERT INTO owners (o_ownerid,o_firstname,o_middlename,o_lastname,o_contactnumber,o_emailid,o_address) VALUES
-("1","Damian","Bruce","Wayne","4035624970","damian.bruce.wayne@ucalgary.ca","Wayne Manor"),
-("2","Yorrick",NULL,"Brown","4035288817","yorrick.brown@ucalgary.ca",NULL),
-("3","Clark","Joseph","Kent","4032613398","clark.joseph.kent@ucalgary.ca","Smallville"),
-("4","Tintin",NULL,NULL,"4031571609","tintin@ucalgary.ca","Marlinspike Hall, Belgium"),
-("5","UCalgary",NULL,NULL,"4032811334","ucalgary@ucalgary.ca","2500 University Dr NW, Calgary, AB T2N 1N4"),
-("6","James",NULL,"Gunn","4033203090","james.gunn@ucalgary.ca","9336 Civic Center Drive, Beverly Hills, CA 90210-3604, USA");
+INSERT INTO owners (o_ownerid,o_firstname,o_middlename,o_lastname,o_contactnumber,o_emailid,o_address) VALUES 
+("1","Damian","Bruce","Wayne","4034340123","damian.bruce.wayne@ucalgary.ca","Wayne Manor"),
+("2","Yorrick",NULL,"Brown","4038832120","yorrick.brown@ucalgary.ca",NULL),
+("3","Clark","Joseph","Kent","4036803045","clark.joseph.kent@ucalgary.ca","Smallville"),
+("4","Tintin",NULL,NULL,"4033186450","tintin@ucalgary.ca","Marlinspike Hall, Belgium"),
+("5","UCalgary",NULL,NULL,"4031686732","ucalgary@ucalgary.ca","2500 University Dr NW, Calgary, AB T2N 1N4"),
+("6","James",NULL,"Gunn","4038169529","james.gunn@ucalgary.ca","9336 Civic Center Drive, Beverly Hills, CA 90210-3604, USA"),
+("7","Emily",NULL,"Marasco","4036274705","emily.marasco@ucalgary.ca","1042 Hope Street, Edmonton AB"),
+("8","Kevin",NULL,"Durant","4039593033","kevin.durant@ucalgary.ca","5463 Wallflower Road, San Francisco, CA 90315, USA"),
+("9","Jason","Kamika","Fukuda","4038453400","jason.kamika.fukuda@ucalgary.ca","1354 Douglasdale Blvd, Calgary,AB "),
+("10","Jacob","D","Brown","4033251185","jacob.d.brown@ucalgary.ca","30 Building Way, San Francisco, CA 90315, USA"),
+("11","Fred",NULL,"Kong","4036457953","fred.kong@ucalgary.ca","6401 Jasper Ave, Edmonton AB"),
+("12","Kyrie",NULL,"Irving","4034267631","kyrie.irving@ucalgary.ca","93 Essense Hall, Crawley, London"),
+("13","Trinity","Hope","Smith","4038575607","trinity.hope.smith@ucalgary.ca","10 Guardian Manor, Fort McMurray, AB"),
+("14","Kailey","Camen","Hoeld","4035184239","kailey.camen.hoeld@ucalgary.ca","172 Silin Forest Road, Fort McMurray, AB"),
+("15","Elizabeth",NULL,"Price","4037769246","elizabeth.price@ucalgary.ca","2850 Delancey Crescent, San Francisco, CA 904361, USA"),
+("16","Dillon",NULL,"White","4035575015","dillon.white@ucalgary.ca","326 Ricardo Road, Bogota, Colombia "),
+("17","Amber","Fair","Polinski","4034502790","amber.fair.polinski@ucalgary.ca","1792 Camille Street, Medellin, Colombia "),
+("18","Gurneet","Kaur","Dhillon","4037535559","gurneet.kaur.dhillon@ucalgary.ca","#401 Arera Colony, Bhopal, MP, India"),
+("19","Ravi","Teja","Challa","4035812945","ravi.teja.challa@ucalgary.ca","326 Hamptons Way, Calgary, AB"),
+("20","Kevin",NULL,"Durant","4037450149","kevin.durant@ucalgary.ca","564 Embarcodero Road, San Francisco, CA 953019, USA");
 
-UPDATE sequence_owners SET next_val=7;
+SET SQL_SAFE_UPDATES = 0; -- Line required to ensure next_val can be updated 
+UPDATE sequence_owners SET next_val=21;
+
 -- ----------------------------------------------
 
 

@@ -101,7 +101,7 @@ class AnimalProfile extends React.Component {
             xaxis: { categories: dates }
         }
 
-        if(user == "t" || user == "at"){
+        if(user == "t" || user == "at" || user == "a"){
             return <React.Fragment>
 
             <NavBar user = {user} uid = {uid}/>
@@ -121,7 +121,7 @@ class AnimalProfile extends React.Component {
                                 <p class="lead">Breed: {this.state.animal["breed"]}</p>
                                 <p class="lead">Age: {this.state.animal["age"]}</p>
                                 <p class="lead">Sex: {this.state.animal["sex"]}</p>
-                                <p class="lead">Status: {this.state.animal["status"]}  <Link to={"/" + user + "/animals/" + id + "/status"} className="btn btn-secondary">Update</Link></p>
+                                <p class="lead">Status: {this.state.animal["status"]}  <Link to={"/" + user + "/" + uid +"/animals/" + id + "/status"} className="btn btn-secondary">Update</Link></p>
                             </div>
                         </div>
                     </div>

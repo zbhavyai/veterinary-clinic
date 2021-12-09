@@ -94,25 +94,20 @@ class RegistrationPage extends React.Component {
 
         let message = {
             "userId": 3,
+            "joiningDate": "2017-12-01",
+            "activationDate": "2017-12-02",
+            "terminationDate": null,
             "firstName": this.state.firstName,
             "middleName": this.state.middleName,
             "lastName": this.state.lastName,
             "role": this.state.role,
             "emailId": this.state.emailId,
             "password": this.state.password,
+            "passwordSalt": null,
             "status": this.state.status
         }
         
-        message = {
-            "userId": 3,
-            "firstName": "Batman",
-            "middleName": null,
-            "lastName": "Joker",
-            "role": "STUDENT",
-            "emailId": "batman@gmail.com",
-            "password": "batbat",
-            "status": "ACTIVE"
-        }
+        
        
         
         const link = "http://localhost:8080/api/v1/users/register";

@@ -29,14 +29,22 @@ class CommentList extends React.Component {
     }
 
 
-    // componentWillMount() {
-    //     const id = this.props.match.params.id;
-    //     // console.log(id);
+    handleRemoveComments =(e, comment)=>{
+        const user = this.props.match.params.user;
+        const id = this.props.match.params.id;
+        const uid = this.props.match.params.uid;
+        
+        const link = "localhost:8080/api/v1/animals/" + id + "/comments/" + comment["commentId"];
+        axios.delete(link).then(res => {
+            console.log(res);
+            console.log(res.data);
+          });;
+        //window.location.reload(false);
 
-    //     this.setState({
-    //         animal: getAnimalbyId(id),
-    //     });
-    // }
+        
+
+
+    };
 
     render() {
         const user = this.props.match.params.user;
@@ -56,7 +64,7 @@ class CommentList extends React.Component {
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
                             <h1 class="display-4">Basic Details</h1>
-                            <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                            <p class="lead">Animal ID: {this.state.animal["animalId"]} <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
                                 <p class="lead">Name: {this.state.animal["name"]}</p>
                                 <p class="lead">Breed: {this.state.animal["breed"]}</p>
                                 <p class="lead">Age: {this.state.animal["age"]}</p>
@@ -74,6 +82,7 @@ class CommentList extends React.Component {
                         <h1 class="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/comments/add"} className="btn btn-secondary btn-sm">Add Comments</Link>
                         </h1>
                         {this.state.comments.map(comment => (
+                            <tr key={comment["commentId"].toString()}>
                             <div class="card" style={this.styles}>
                                 <p>Log {comment["commentId"]}: {comment["commentDate"]}</p>
 
@@ -81,6 +90,7 @@ class CommentList extends React.Component {
                                 <p></p>
                                 <p></p>
                             </div>
+                            </tr>
                         ))}
                     </div>
                 </div>
@@ -103,7 +113,7 @@ class CommentList extends React.Component {
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
                             <h1 class="display-4">Basic Details</h1>
-                            <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                            <p class="lead">Animal ID: {this.state.animal["animalId"]}<Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
                                 <p class="lead">Name: {this.state.animal["name"]}</p>
                                 <p class="lead">Breed: {this.state.animal["breed"]}</p>
                                 <p class="lead">Age: {this.state.animal["age"]}</p>
@@ -125,7 +135,7 @@ class CommentList extends React.Component {
                                 <p>Log {comment["commentId"]}: {comment["commentDate"]}</p>
 
                                 <p>{comment["commentDesc"]}</p>
-                                <td><Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"].toString()+"/comments/"+comment["commentId"] + "/edit"} className="btn btn-secondary btn-sm">Edit</Link><Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Remove</Link></td>
+                                <td><Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"].toString()+"/comments/"+comment["commentId"] + "/edit"} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveComments(e, comment)} className="btn btn-secondary btn-sm">Remove</button></td>
                                 <p></p>
                                 <p></p>
                             </div>

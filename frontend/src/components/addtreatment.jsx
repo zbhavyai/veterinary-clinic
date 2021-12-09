@@ -77,12 +77,16 @@ class AddTreatment extends React.Component {
         
        
         
-        const link = "http://localhost:8080/api/v1/animals/" + id + "/treatments";
+        let link = "http://localhost:8080/api/v1/animals/" + id + "/treatments";
         axios.post(link, message,{headers:{}}).then(res => {
             console.log(res);
             console.log(res.data);
           });
-        //window.location.reload(false);
+
+          const status = {"status": "GREEN"};
+        link = "http://localhost:8080/api/v1/animals/" + id;
+        axios.put(link, status,{headers:{}});
+        
 
         this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/treatments")
         

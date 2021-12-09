@@ -39,6 +39,14 @@ class AnimalManagement extends React.Component {
     async componentDidMount() {
         const { data: animals } = await axios.get('http://localhost:8080/api/v1/animals/', { headers: { 'Access-Control-Allow-Origin': true } });
         this.setState({ animals });
+        for(let i = 0; i<this.state.animals.length; i++){
+            if(this.state.animals[i]["breed"]== null){
+                this.state.animals[i]["breed"]="na";
+
+            }
+        }
+        this.setState({ animals });
+
 
         //const promise = axios.get('https://jsonplaceholder.typicode.com/posts')
     }
@@ -196,7 +204,7 @@ class AnimalManagement extends React.Component {
                 </div>
 
                 <div class="col-sm">
-                    <button type="button" class="btn btn-secondary">Add Animal</button>
+                    <Link to={"/"+user + "/" + uid +  "/animals/isowner"} class="btn btn-secondary">Add Animal</Link>
                 </div>
             </div>
         </React.Fragment>;

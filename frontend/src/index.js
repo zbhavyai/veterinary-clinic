@@ -34,6 +34,8 @@ import AddComment from './components/addcomment';
 import EditComment from './components/editcomment';
 import AddTreatment from './components/addtreatment';
 import AddIssue from './components/addissue';
+import AddUser from './components/adduser';
+import IsAnimalOwner from './components/isanimalowner';
 
 
 
@@ -44,6 +46,8 @@ reactDom.render(
 
 
     <Switch>
+    <Route path='/:user/:uid/animals/isowner' component={IsAnimalOwner}/> 
+    <Route path='/:user/:uid/users/add' component={AddUser}/>
     <Route path='/:user/:uid/animals/:id/issues/add' component={AddIssue}/> 
     <Route path='/:user/:uid/animals/:id/treatments/add' component={AddTreatment}/>
     <Route path='/:user/:uid/animals/:id/comments/:cid/edit' component={EditComment}/>

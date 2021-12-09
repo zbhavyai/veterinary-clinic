@@ -137,7 +137,7 @@ class UserManagement extends React.Component {
                 </div>
 
                 <div class="col-sm">
-                    <button type="button" class="btn btn-secondary">Add User</button>
+                <Link to={"/"+userx + "/" + uid +  "/users/add" } className="btn btn-secondary">Add User</Link>
                 </div>
             </div>
 

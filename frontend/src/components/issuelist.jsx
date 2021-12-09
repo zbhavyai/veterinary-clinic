@@ -63,7 +63,7 @@ class IssueList extends React.Component {
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
                             <h1 class="display-4">Basic Details</h1>
-                            <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                            <p class="lead">Animal ID: {this.state.animal["animalId"]} <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
                                 <p class="lead">Name: {this.state.animal["name"]}</p>
                                 <p class="lead">Breed: {this.state.animal["breed"]}</p>
                                 <p class="lead">Age: {this.state.animal["age"]}</p>

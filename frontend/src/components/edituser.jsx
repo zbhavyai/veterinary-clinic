@@ -210,7 +210,7 @@ class EditUser extends React.Component {
                     </div>
 
                     <button onClick={(e) => this.handleRegister(e)} className="btn btn-primary">Save</button><Link to={"/"+userx+"/" + uid +"/users/" + this.state.user["userId"] } className="btn btn-primary">Cancel</Link>
-                    <p>Note: Upon sign up, you will need to wait for the Admint to activate your account before you can login</p>
+                    
                 </div>
             </div>
             </div>

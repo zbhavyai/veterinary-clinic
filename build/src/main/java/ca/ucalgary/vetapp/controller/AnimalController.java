@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(methods = { RequestMethod.PUT, RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE,
+        RequestMethod.OPTIONS })
 @RestController
 @RequestMapping(path = "api/v1/animals")
 public class AnimalController {
@@ -672,39 +673,39 @@ public class AnimalController {
                 animal.setSubSpecies(a.getSubSpecies());
             }
 
-            if(a.getBreed() != null) {
+            if (a.getBreed() != null) {
                 animal.setBreed(a.getBreed());
             }
 
-            if(a.getType() != null) {
+            if (a.getType() != null) {
                 animal.setType(a.getType());
             }
 
-            if(a.getRegion() != null) {
+            if (a.getRegion() != null) {
                 animal.setRegion(a.getRegion());
             }
 
-            if(a.getSex() != null) {
+            if (a.getSex() != null) {
                 animal.setSex(a.getSex());
             }
 
-            if(a.getBirthDate() != null) {
+            if (a.getBirthDate() != null) {
                 animal.setBirthDate(a.getBirthDate());
             }
 
-            if(a.getStatus() != null) {
+            if (a.getStatus() != null) {
                 animal.setStatus(a.getStatus());
             }
 
-            if(a.getRequestStatus() != null) {
+            if (a.getRequestStatus() != null) {
                 animal.setRequestStatus(a.getRequestStatus());
             }
 
-            if(a.fetchTheOwner() != null) {
+            if (a.fetchTheOwner() != null) {
                 animal.setTheOwner(this.findUniqueOwner(a.fetchTheOwner()));
             }
 
-            if(a.fetchProfilePic() != null) {
+            if (a.fetchProfilePic() != null) {
                 animal.setProfilePic(a.fetchProfilePic());
             }
 
@@ -712,28 +713,28 @@ public class AnimalController {
             // animal.setTattooNum(a.getTattooNum());
             // }
 
-            if(a.getCityTattoo() != null) {
-            animal.setCityTattoo(a.getCityTattoo());
+            if (a.getCityTattoo() != null) {
+                animal.setCityTattoo(a.getCityTattoo());
             }
 
-            if(a.getRfidNumber() != null) {
-            animal.setRfidNumber(a.getRfidNumber());
+            if (a.getRfidNumber() != null) {
+                animal.setRfidNumber(a.getRfidNumber());
             }
 
-            if(a.getMicroChipNumber() != null) {
-            animal.setMicroChipNumber(a.getMicroChipNumber());
+            if (a.getMicroChipNumber() != null) {
+                animal.setMicroChipNumber(a.getMicroChipNumber());
             }
 
-            if(a.getCoatColor() != null) {
-            animal.setCoatColor(a.getCoatColor());
+            if (a.getCoatColor() != null) {
+                animal.setCoatColor(a.getCoatColor());
             }
 
-            if(a.getContinuousMedication() != null) {
-            animal.setContinuousMedication(a.getContinuousMedication());
+            if (a.getContinuousMedication() != null) {
+                animal.setContinuousMedication(a.getContinuousMedication());
             }
 
-            if(a.getDistinctFeature() != null) {
-            animal.setDistinctFeature(a.getDistinctFeature());
+            if (a.getDistinctFeature() != null) {
+                animal.setDistinctFeature(a.getDistinctFeature());
             }
 
             updatedAnimal = this.animalRepository.save(animal);

@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(methods = { RequestMethod.PUT, RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE,
+    RequestMethod.OPTIONS })
 @RestController
 @RequestMapping(path = "api/v1/users")
 public class UserController {

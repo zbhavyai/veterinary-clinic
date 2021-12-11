@@ -1,3 +1,7 @@
+-- 2nd last tuple of each table is to test maximum possible NULL values for each attribute
+-- last tuple of each table is to test empty values ("") values for each attribute
+-- If a value is present in either of last 2 tables, it is required
+
 -- owners ---------------------------------------
 INSERT INTO owners (o_ownerid,o_firstname,o_middlename,o_lastname,o_contactnumber,o_emailid,o_address) VALUES 
 ("1","Damian","Bruce","Wayne","4039034805","damian.bruce.wayne@ucalgary.ca","Wayne Manor"),

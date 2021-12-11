@@ -229,3 +229,10 @@ INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_drugname,t_drugdose,t_de
 
 UPDATE sequence_treatments SET next_val=21;
 -- ----------------------------------------------
+
+-- sets animal to green status when the issue is resolved
+-- CURRENTLY Updates ALL a_status to 0. 
+UPDATE animals, issues
+SET a_status = "0" 
+WHERE issues.i_isresolved = 1;
+SELECT * FROM ANIMALS;

@@ -138,6 +138,8 @@ class AddAnimalExisting extends React.Component {
 
     };
 
+    
+
 
     
 
@@ -185,7 +187,10 @@ class AddAnimalExisting extends React.Component {
           });
         //window.location.reload(false);
 
-        this.props.history.push("/"+ userx+"/" + uid +'/animals/');
+        const timer = setTimeout(() => {
+          this.props.history.push("/"+ userx+"/" + uid +'/animals/');
+       }, 500);
+        
         
 
 
@@ -193,6 +198,8 @@ class AddAnimalExisting extends React.Component {
 
 
     };
+
+    
 
 
     render() { 

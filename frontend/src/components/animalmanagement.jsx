@@ -11,6 +11,7 @@ import {
 
 class AnimalManagement extends React.Component {
     state = {
+        
         animals: [],
         // animals: getAnimals(),
         filterOption: 0,
@@ -37,6 +38,9 @@ class AnimalManagement extends React.Component {
     };
 
     async componentDidMount() {
+
+        
+        
         const { data: animals } = await axios.get('http://localhost:8080/api/v1/animals/', { headers: { 'Access-Control-Allow-Origin': true } });
         this.setState({ animals });
         for(let i = 0; i<this.state.animals.length; i++){
@@ -46,12 +50,15 @@ class AnimalManagement extends React.Component {
             }
         }
         this.setState({ animals });
+        
+        
 
 
         //const promise = axios.get('https://jsonplaceholder.typicode.com/posts')
     }
 
     render() {
+        
         let filtered = this.state.animals;
         if (this.state.filterOption == 1) {
             filtered = 1 ? this.state.animals.filter(m => m["animalId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;

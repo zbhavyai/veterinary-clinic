@@ -66,7 +66,11 @@ class AddComment extends React.Component {
           });
         //window.location.reload(false);
 
-        this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/comments")
+        const timer = setTimeout(() => {
+            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/comments");
+         }, 500);
+
+        
         
 
 

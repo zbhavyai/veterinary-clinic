@@ -120,8 +120,10 @@ class AddUser
           });
         //window.location.reload(false);
 
-        this.props.history.push("/"+ userx+"/" + uid +'/users/');
         
+        const timer = setTimeout(() => {
+            this.props.history.push("/"+ userx+"/" + uid +'/users/');
+         }, 500);
 
 
 

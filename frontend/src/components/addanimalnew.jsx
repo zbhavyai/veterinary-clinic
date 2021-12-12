@@ -200,7 +200,9 @@ class AddAnimalNew extends React.Component {
           });
         //window.location.reload(false);
 
-        this.props.history.push("/"+ userx+"/" + uid +'/animals/');
+        const timer = setTimeout(() => {
+          this.props.history.push("/"+ userx+"/" + uid +'/animals/');
+       }, 500);
         
 
 

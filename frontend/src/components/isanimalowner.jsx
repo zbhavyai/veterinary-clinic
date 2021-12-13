@@ -30,22 +30,22 @@ class IsAnimalOwner extends React.Component {
         const uid = this.props.match.params.uid;
         return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
-                <div class="row">
-                <div class="card" style={this.styles}>
+                <div className="row">
+                <div className="card" style={this.styles}>
                 <a href={"/"+user+"/" + uid +"/animals/addoanimal"}>
-                    <img class="card-img-top" src={this.state.ownerImageUrl} alt="Card image cap"/>
-                    <div class="card-body">
-                        <h5 class="card-title">Existing Owner</h5>
+                    <img className="card-img-top" src={this.state.ownerImageUrl} alt="Card image cap"/>
+                    <div className="card-body">
+                        <h5 className="card-title">Existing Owner</h5>
                         
                     </div>
                     </a>
                 </div>
 
-                <div class="card" style={this.styles}>
+                <div className="card" style={this.styles}>
                 <a href={"/"+user+"/" + uid +"/animals/addnanimal"}>
-                    <img class="card-img-top" src={this.state.noOwnerImageUrl} alt="Card image cap"/>
-                    <div class="card-body">
-                        <h5 class="card-title">New Owner</h5>
+                    <img className="card-img-top" src={this.state.noOwnerImageUrl} alt="Card image cap"/>
+                    <div className="card-body">
+                        <h5 className="card-title">New Owner</h5>
                         
                     </div>
                     </a>

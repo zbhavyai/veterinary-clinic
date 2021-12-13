@@ -97,7 +97,7 @@ class UserManagement extends React.Component {
             return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
 
-            <div class="container">
+            <div className="container">
             </div>
 
             <div className="input-group mb-3">
@@ -146,20 +146,20 @@ class UserManagement extends React.Component {
                 </tbody>
             </table>
 
-            <div class="row">
-                <div class="col-sm">
+            <div className="row">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 <Link to={"/"+userx + "/" + uid +  "/users/add" } className="btn btn-secondary">Add User</Link>
                 </div>
             </div>
@@ -171,7 +171,7 @@ class UserManagement extends React.Component {
             return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
 
-            <div class="container">
+            <div className="container">
             </div>
 
             <div className="input-group mb-3">
@@ -220,20 +220,20 @@ class UserManagement extends React.Component {
                 </tbody>
             </table>
 
-            <div class="row">
-                <div class="col-sm">
+            <div className="row">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 <Link to={"/"+userx + "/" + uid +  "/users/add" } className="btn btn-secondary">Add User</Link>
                 </div>
             </div>

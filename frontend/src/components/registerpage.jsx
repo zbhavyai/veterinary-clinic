@@ -130,21 +130,21 @@ class RegistrationPage extends React.Component {
     render() { 
         return <React.Fragment>
             <NavBarStart/>
-            <div class="container">
-            <div class="card" style={this.styles}>
+            <div className="container">
+            <div className="card" style={this.styles}>
                 
-                <div class="card-body">
-                    <h5 class="card-title">Register for an Account Now</h5>
-                    <div class="row">
-                      <div class="col-sm">
+                <div className="card-body">
+                    <h5 className="card-title">Register for an Account Now</h5>
+                    <div className="row">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter"  className="form-control" placeholder="First Name" value={this.state.firstName} onChange={(e) =>this.handleFnChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Middle Name" value={this.state.middleName} onChange={(e) =>this.handleMnChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Last Name" value={this.state.lastName} onChange={(e) =>this.handleLnChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
@@ -152,7 +152,7 @@ class RegistrationPage extends React.Component {
                       
                     </div>
 
-                    <div class="row">
+                    <div className="row">
                     <select   onChange={(e) => this.handleFilter(e)} className="form-select" id="selectFilter" value={this.state.filterOption}>
                         <option value = "0">ADMIN</option>
                         <option value="1">ATTENDANT</option>
@@ -163,10 +163,10 @@ class RegistrationPage extends React.Component {
                     </select>
 
                     </div>
-                    <div class="row">
+                    <div className="row">
                     < input type="text" id="inputFilter" className="form-control" placeholder="Email Address" value={this.state.emailId} onChange={(e) =>this.handleEmChange(e)} aria-label="Email Address" aria-describedby="basic-addon2" />
                     </div>
-                    <div class="row">
+                    <div className="row">
                     < input type="text" id="inputFilter" className="form-control" placeholder="Create Password" value={this.state.password} onChange={(e) =>this.handlePsChange(e)} aria-label="Create Password" aria-describedby="basic-addon2" />
                     </div>
 

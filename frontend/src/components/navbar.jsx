@@ -15,11 +15,11 @@ class NavBar extends React.Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href={"/"+user+"/"+uid+"/menu"}>Home <span class="sr-only">(current)</span></a>
+              <a className="nav-link" href={"/"+user+"/"+uid+"/menu"}>Home <span className="sr-only">(current)</span></a>
             </li>
 
             <li className="nav-item active">
-              <a className="nav-link" href={"/"+user+"/"+uid+"/youraccount"}>Your Account <span class="sr-only">(current)</span></a>
+              <a className="nav-link" href={"/"+user+"/"+uid+"/youraccount"}>Your Account <span className="sr-only">(current)</span></a>
             </li>
             
             

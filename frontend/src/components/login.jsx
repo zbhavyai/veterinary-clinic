@@ -79,32 +79,32 @@ class Login extends React.Component {
 
         return <React.Fragment>
             <NavBarStart />
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-2"></div>
-                    <div class="col-lg-6 col-md-8 login-box">
-                        <div class="col-lg-12 login-title">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-3 col-md-2"></div>
+                    <div className="col-lg-6 col-md-8 login-box">
+                        <div className="col-lg-12 login-title">
                             Sign in to your account
                         </div>
 
-                        <div class="login-form">
+                        <div className="login-form">
 
                             <form>
-                                <div class="form-group">
-                                    <label class="form-control-label" >Username</label>
-                                    <input type="text" class="form-control" onChange={(e) => this.getUsername(e)} />
+                                <div className="form-group">
+                                    <label className="form-control-label" >Username</label>
+                                    <input type="text" className="form-control" onChange={(e) => this.getUsername(e)} />
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-control-label">Password</label>
-                                    <input type="password" class="form-control" i onChange={(e) => this.getPassword(e)} />
+                                <div className="form-group">
+                                    <label className="form-control-label">Password</label>
+                                    <input type="password" className="form-control" i onChange={(e) => this.getPassword(e)} />
                                 </div>
 
                                 <div >
-                                    <a href={hyperlink} class="btn btn-primary">Login</a>
+                                    <a href={hyperlink} className="btn btn-primary">Login</a>
                                     
 
                                 </div>
-                                <div class="error">
+                                <div className="error">
                                     <h>  {errorMessage} </h>
                                 </div>
                             </form>

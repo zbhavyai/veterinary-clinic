@@ -85,43 +85,43 @@ class UserDetails extends React.Component {
             return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
 
-            <div class="card" style={this.styles}>
-                <div class="card-body">
-                    <h1 class="card-title">User Details</h1>
-                    <div class="row">
-                        <div class="col-sm">
-                        <p class="lead">First Name: {this.state.user["firstName"]}</p>
+            <div className="card" style={this.styles}>
+                <div className="card-body">
+                    <h1 className="card-title">User Details</h1>
+                    <div className="row">
+                        <div className="col-sm">
+                        <p className="lead">First Name: {this.state.user["firstName"]}</p>
                              </div>
 
-                        <div class="col-sm">
-                        <p class="lead">Middle Name: {this.state.user["middleName"]}</p>
+                        <div className="col-sm">
+                        <p className="lead">Middle Name: {this.state.user["middleName"]}</p>
                         </div>
 
-                        <div class="col-sm">
-                        <p class="lead">Last Name: {this.state.user["lastName"]}</p>
+                        <div className="col-sm">
+                        <p className="lead">Last Name: {this.state.user["lastName"]}</p>
                             </div>
                     </div>
 
-                    <div class="row">
-                    <p class="lead">Your Unique ID: {this.state.user["userId"]}</p>
+                    <div className="row">
+                    <p className="lead">Your Unique ID: {this.state.user["userId"]}</p>
                         </div>
 
-                    <div class="row">
+                    <div className="row">
                         {/* <select className="form-select" id="selectFilter" defaultValue={{ label: this.state.user["role"].toString(), value: this.state.user["role"].toString() }}>
                             <option value="0">Student</option>
                             <option value="1">Technician</option>
                             <option value="2">Teacher</option>
                             <option value="3">Admin</option>
                         </select> */}
-                        <p class="lead">Role: {this.state.user["role"]}</p>
+                        <p className="lead">Role: {this.state.user["role"]}</p>
                         </div>
 
-                    <div class="row">
-                    <p class="lead">Email: {this.state.user["emailId"]}</p>
+                    <div className="row">
+                    <p className="lead">Email: {this.state.user["emailId"]}</p>
                         </div>
 
-                    <div class="row">
-                    <p class="lead">Status: {this.state.user["status"]}</p>
+                    <div className="row">
+                    <p className="lead">Status: {this.state.user["status"]}</p>
                         </div>
 
                         <button onClick={(e) => this.handleStatus(e, "INACTIVE")} className="btn btn-primary">Block</button><button onClick={(e) => this.handleStatus(e, "ACTIVE")} className="btn btn-primary ">Unblock</button>
@@ -135,46 +135,46 @@ class UserDetails extends React.Component {
             return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
 
-            <div class="card" style={this.styles}>
-                <div class="card-body">
-                    <h1 class="card-title">User Details</h1>
-                    <div class="row">
-                        <div class="col-sm">
-                        <p class="lead">First Name: {this.state.user["firstName"]}</p>
+            <div className="card" style={this.styles}>
+                <div className="card-body">
+                    <h1 className="card-title">User Details</h1>
+                    <div className="row">
+                        <div className="col-sm">
+                        <p className="lead">First Name: {this.state.user["firstName"]}</p>
                              </div>
 
-                        <div class="col-sm">
-                        <p class="lead">Middle Name: {this.state.user["middleName"]}</p>
+                        <div className="col-sm">
+                        <p className="lead">Middle Name: {this.state.user["middleName"]}</p>
                         </div>
 
-                        <div class="col-sm">
-                        <p class="lead">Last Name: {this.state.user["lastName"]}</p>
+                        <div className="col-sm">
+                        <p className="lead">Last Name: {this.state.user["lastName"]}</p>
                             </div>
                     </div>
 
-                    <div class="row">
-                    <p class="lead">Your Unique ID: {this.state.user["userId"]}</p>
+                    <div className="row">
+                    <p className="lead">Your Unique ID: {this.state.user["userId"]}</p>
                         </div>
 
-                    <div class="row">
+                    <div className="row">
                         {/* <select className="form-select" id="selectFilter" defaultValue={{ label: this.state.user["role"].toString(), value: this.state.user["role"].toString() }}>
                             <option value="0">Student</option>
                             <option value="1">Technician</option>
                             <option value="2">Teacher</option>
                             <option value="3">Admin</option>
                         </select> */}
-                        <p class="lead">Role: {this.state.user["role"]}</p>
+                        <p className="lead">Role: {this.state.user["role"]}</p>
                         </div>
 
-                    <div class="row">
-                    <p class="lead">Email: {this.state.user["emailId"]}</p>
+                    <div className="row">
+                    <p className="lead">Email: {this.state.user["emailId"]}</p>
                         </div>
 
-                    <div class="row">
-                    <p class="lead">Status: {this.state.user["status"]}</p>
+                    <div className="row">
+                    <p className="lead">Status: {this.state.user["status"]}</p>
                         </div>
 
-                        <button onClick={(e) => this.handleStatus(e, "INACTIVE")} className="btn btn-primary">Block</button><button onClick={(e) => this.handleStatus(e, "ACTIVE")} className="btn btn-primary ">Unblock</button><Link to={"/"+userx + "/" + uid + "/users/"  + this.state.user["userId"] + "/edit"} class="btn btn-primary">Edit</Link>
+                        <button onClick={(e) => this.handleStatus(e, "INACTIVE")} className="btn btn-primary">Block</button><button onClick={(e) => this.handleStatus(e, "ACTIVE")} className="btn btn-primary ">Unblock</button><Link to={"/"+userx + "/" + uid + "/users/"  + this.state.user["userId"] + "/edit"} className="btn btn-primary">Edit</Link>
                 </div>
             </div>
 

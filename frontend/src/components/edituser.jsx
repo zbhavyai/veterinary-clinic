@@ -170,21 +170,21 @@ class EditUser extends React.Component {
         const uid = this.props.match.params.uid;
         return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
-            <div class="container">
-            <div class="card" style={this.styles}>
+            <div className="container">
+            <div className="card" style={this.styles}>
                 
-                <div class="card-body">
-                    <h5 class="card-title">Register for an Account Now</h5>
-                    <div class="row">
-                      <div class="col-sm">
+                <div className="card-body">
+                    <h5 className="card-title">Register for an Account Now</h5>
+                    <div className="row">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter"  className="form-control" placeholder={this.state.firstName} value={this.state.firstName} onChange={(e) =>this.handleFnChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder={this.state.middleName} value={this.state.middleName} onChange={(e) =>this.handleMnChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder={this.state.lastName} value={this.state.lastName} onChange={(e) =>this.handleLnChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
@@ -192,7 +192,7 @@ class EditUser extends React.Component {
                       
                     </div>
 
-                    <div class="row">
+                    <div className="row">
                     <select   onChange={(e) => this.handleFilter(e)} className="form-select" id="selectFilter" value={this.state.filterOption}>
                         <option value = "0">ADMIN</option>
                         <option value="1">ATTENDANT</option>
@@ -203,10 +203,10 @@ class EditUser extends React.Component {
                     </select>
 
                     </div>
-                    <div class="row">
+                    <div className="row">
                     < input type="text" id="inputFilter" className="form-control" placeholder={this.state.emailId} value={this.state.emailId} onChange={(e) =>this.handleEmChange(e)} aria-label="Email Address" aria-describedby="basic-addon2" />
                     </div>
-                    <div class="row">
+                    <div className="row">
                     </div>
 
                     <button onClick={(e) => this.handleRegister(e)} className="btn btn-primary">Save</button><Link to={"/"+userx+"/" + uid +"/users/" + this.state.user["userId"] } className="btn btn-primary">Cancel</Link>

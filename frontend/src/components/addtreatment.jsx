@@ -95,7 +95,7 @@ class AddTreatment extends React.Component {
         const message = {
             "treatmentId": 5,
             "treatmentDesc": this.state.treatmentDesc,
-            "treatmentDate": "2021-12-09",
+            "treatmentDate": null,
             "treatedBy": {
                 "userId": uid
             }
@@ -147,34 +147,34 @@ class AddTreatment extends React.Component {
 
             <NavBar user = {user} uid = {uid}/>
             
-            <h2 class="display-4">Treatment Logs</h2>
-            <div class="row">
-                <div class="col-sm">
+            <h2 className="display-4">Treatment Logs</h2>
+            <div className="row">
+                <div className="col-sm">
                     <img src={this.state.imageUrl} alt="" />
 
                 </div>
-                <div class="col-sm">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h1 class="display-4">Basic Details</h1>
-                            <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
-                                <p class="lead">Name: {this.state.animal["name"]}</p>
-                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
-                                <p class="lead">Age: {this.state.animal["age"]}</p>
-                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
-                                <p class="lead">Status: {this.state.animal["status"]}</p>
+                <div className="col-sm">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h1 className="display-4">Basic Details</h1>
+                            <p className="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                                <p className="lead">Name: {this.state.animal["name"]}</p>
+                                <p className="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p className="lead">Age: {this.state.animal["age"]}</p>
+                                <p className="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p className="lead">Status: {this.state.animal["status"]}</p>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div class="row">
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="display-4">Add Treatment</h1>
-                        <div class="row">
-                        <div class="col-sm">
+            <div className="row">
+                <div className="jumbotron jumbotron-fluid">
+                    <div className="container">
+                        <h1 className="display-4">Add Treatment</h1>
+                        <div className="row">
+                        <div className="col-sm">
                             < input type="text" id="inputFilter" className="form-control" placeholder="Treatment Description" aria-label="First Name" aria-describedby="basic-addon2" value={this.state.treatmentDesc} onChange={(e) =>this.handleDescChange(e)}/>
                             
                             <button onClick={(e) => this.handleTreatment(e)} className="btn btn-primary">Add Treatment</button>

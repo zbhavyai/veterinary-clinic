@@ -23,11 +23,11 @@ class HomePage extends React.Component {
         
         return <React.Fragment>
             <NavBarStart/>
-            <div class="card" style={this.styles}>
-                <img class="card-img-top" src={this.state.imageUrl} alt="Card image cap"/>
-                <div class="card-body">
-                    <h5 class="card-title">Welcome to VetApp</h5>
-                    <p class="card-text">Please Sign in or Register from the top menu.</p>
+            <div className="card" style={this.styles}>
+                <img className="card-img-top" src={this.state.imageUrl} alt="Card image cap"/>
+                <div className="card-body">
+                    <h5 className="card-title">Welcome to VetApp</h5>
+                    <p className="card-text">Please Sign in or Register from the top menu.</p>
                     
                 </div>
                 </div>

@@ -92,47 +92,41 @@ class IssueList extends React.Component {
         const uid = this.props.match.params.uid;
         console.log(this.state.issues);
         if(user == "i" || user=="s"){
-
-        }else{
-
-        }
-
-
-        return <React.Fragment>
+            return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             
-            <h2 class="display-4">Issue Logs</h2>
-            <div class="row">
-                <div class="col-sm">
+            <h2 className="display-4">Issue Logs</h2>
+            <div className="row">
+                <div className="col-sm">
                     <img src={this.state.imageUrl} alt="" />
 
                 </div>
-                <div class="col-sm">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h1 class="display-4">Basic Details</h1>
-                            <p class="lead">Animal ID: {this.state.animal["animalId"]} <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
-                                <p class="lead">Name: {this.state.animal["name"]}</p>
-                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
-                                <p class="lead">Age: {this.state.animal["age"]}</p>
-                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
-                                <p class="lead">Status: {this.state.animal["status"]}</p>
+                <div className="col-sm">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h1 className="display-4">Basic Details</h1>
+                            <p className="lead">Animal ID: {this.state.animal["animalId"]} <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
+                                <p className="lead">Name: {this.state.animal["name"]}</p>
+                                <p className="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p className="lead">Age: {this.state.animal["age"]}</p>
+                                <p className="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p className="lead">Status: {this.state.animal["status"]}</p>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div class="row">
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/issues/add"} className="btn btn-secondary btn-sm">Add Issue</Link></h1>
+            <div className="row">
+                <div className="jumbotron jumbotron-fluid">
+                    <div className="container">
+                        <h1 className="display-4">Log History </h1>
                         {this.state.issues.map(issue => (
-                            <div class="card" style={this.styles}>
+                            <div key = {issue["issueId"]} className="card" style={this.styles}>
                                 <p>Log {issue["issueId"]}: {issue["issueDate"]}</p>
 
                                 <p>{issue["issueDesc"]}</p>
-                                <td><Link to={"/" + user+ "/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveIssuess(e, issue)} className="btn btn-secondary btn-sm">Remove</button></td>
+                                
                                 <p></p>
                                 <p></p>
                             </div>
@@ -142,6 +136,57 @@ class IssueList extends React.Component {
 
             </div>
         </React.Fragment>;
+
+        }else{
+            return <React.Fragment>
+            <NavBar user = {user} uid = {uid}/>
+            
+            <h2 className="display-4">Issue Logs</h2>
+            <div className="row">
+                <div className="col-sm">
+                    <img src={this.state.imageUrl} alt="" />
+
+                </div>
+                <div className="col-sm">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h1 className="display-4">Basic Details</h1>
+                            <p className="lead">Animal ID: {this.state.animal["animalId"]} <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
+                                <p className="lead">Name: {this.state.animal["name"]}</p>
+                                <p className="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p className="lead">Age: {this.state.animal["age"]}</p>
+                                <p className="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p className="lead">Status: {this.state.animal["status"]}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div className="row">
+                <div className="jumbotron jumbotron-fluid">
+                    <div className="container">
+                        <h1 className="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/issues/add"} className="btn btn-secondary btn-sm">Add Issue</Link></h1>
+                        {this.state.issues.map(issue => (
+                            <div key = {issue["issueId"]} className="card" style={this.styles}>
+                                <p>Log {issue["issueId"]}: {issue["issueDate"]}</p>
+
+                                <p>{issue["issueDesc"]}</p>
+                                <p><Link to={"/" + user+ "/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveIssuess(e, issue)} className="btn btn-secondary btn-sm">Remove</button></p>
+                                <p></p>
+                                <p></p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+            </div>
+        </React.Fragment>;
+
+        }
+
+
+        
     }
 }
 

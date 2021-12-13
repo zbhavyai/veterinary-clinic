@@ -103,7 +103,7 @@ class AnimalManagement extends React.Component {
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             
-            <div class="container">
+            <div className="container">
             </div>
 
             <div className="input-group mb-3">
@@ -149,20 +149,20 @@ class AnimalManagement extends React.Component {
                 </tbody>
             </table>
 
-            <div class="row">
-                <div class="col-sm">
+            <div className="row">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                     
                 </div>
             </div>
@@ -172,7 +172,7 @@ class AnimalManagement extends React.Component {
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             
-            <div class="container">
+            <div className="container">
             </div>
 
             <div className="input-group mb-3">
@@ -218,21 +218,21 @@ class AnimalManagement extends React.Component {
                 </tbody>
             </table>
 
-            <div class="row">
-                <div class="col-sm">
+            <div className="row">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
+                <div className="col-sm">
                 </div>
 
-                <div class="col-sm">
-                    <Link to={"/"+user + "/" + uid +  "/animals/isowner"} class="btn btn-secondary">Add Animal</Link>
+                <div className="col-sm">
+                    <Link to={"/"+user + "/" + uid +  "/animals/isowner"} className="btn btn-secondary">Add Animal</Link>
                 </div>
             </div>
         </React.Fragment>;

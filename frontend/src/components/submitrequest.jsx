@@ -145,7 +145,7 @@ class RequestSubmission extends React.Component {
 
         return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
-                <div class="container">
+                <div className="container">
 
                 </div>
                 <div className="input-group mb-3">
@@ -202,20 +202,20 @@ class RequestSubmission extends React.Component {
 
             </tbody>
         </table>
-        <div class="row">
-                      <div class="col-sm">
+        <div className="row">
+                      <div className="col-sm">
                       {this.state.alertmsg}
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
 
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
 
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
 
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
 
                       </div>
 

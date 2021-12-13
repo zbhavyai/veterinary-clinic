@@ -217,37 +217,37 @@ class AddAnimalNew extends React.Component {
         const uid = this.props.match.params.uid;
         return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
-            <div class="container">
-            <div class="card" style={this.styles}>
+            <div className="container">
+            <div className="card" style={this.styles}>
                 
-                <div class="card-body">
-                    <h5 class="card-title">Add and Animal</h5>
-                    <div class="row">
-                      <div class="col-sm">
+                <div className="card-body">
+                    <h5 className="card-title">Add and Animal</h5>
+                    <div className="row">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter"  className="form-control" placeholder="Name" value={this.state.name} onChange={(e) =>this.handleNameChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Species" value={this.state.species} onChange={(e) =>this.handleSpeciesChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Sub Species" value={this.state.subspecies} onChange={(e) =>this.handleSubSpeciesChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       
                       
                     </div>
-                    <div class="row">
-                      <div class="col-sm">
+                    <div className="row">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter"  className="form-control" placeholder="Breed" value={this.state.breed} onChange={(e) =>this.handleBreedChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Type" value={this.state.type} onChange={(e) =>this.handleTypeChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Region" value={this.state.region} onChange={(e) =>this.handleRegionChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
@@ -255,21 +255,21 @@ class AddAnimalNew extends React.Component {
                       
                     </div>
 
-                    <div class="row">
-                      <div class="col-sm">
+                    <div className="row">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter"  className="form-control" placeholder="Tattoo Number" value={this.state.tattooNum} onChange={(e) =>this.handletattooNumChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="City Tattoo" value={this.state.cityTattoo} onChange={(e) =>this.handlecityTattooChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="RFID Number" value={this.state.rfidNumber} onChange={(e) =>this.handlerfidNumberChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
 
-                      <div class="col-sm">
+                      <div className="col-sm">
                          < input type="text" id="inputFilter"  className="form-control" placeholder="Distinct Features" value={this.state.distinctFeature} onChange={(e) =>this.handledistinctFeatureChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                         </div>
@@ -277,23 +277,23 @@ class AddAnimalNew extends React.Component {
                       
                     </div>
 
-                    <div class="row">
-                      <div class="col-sm">
+                    <div className="row">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter"  className="form-control" placeholder="Micro Chip Number" value={this.state.microChipNumber} onChange={(e) =>this.handleMicroChipChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Coat Color" value={this.state.coatColor} onChange={(e) =>this.handleCoatColorChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Continuous Medication" value={this.state.continuousMedication} onChange={(e) =>this.handlecontMedChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       
                       
                     </div>
-                    <div class="row">
+                    <div className="row">
                         
                     <select   onChange={(e) => this.handleFilter(e)} className="form-select" id="selectFilter" value={this.state.filterOption}>
                         <option value = "0">MALE</option>
@@ -304,18 +304,18 @@ class AddAnimalNew extends React.Component {
 
                     </div>
 
-                    <div class="row">
+                    <div className="row">
                         <h1>New Owner Information</h1>
-                        <div class="col-sm">
+                        <div className="col-sm">
                          < input type="text" id="inputFilter"  className="form-control" placeholder="Owner's First Name" value={this.state.ownerFN} onChange={(e) =>this.handledOwnerFNChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                         </div>
-                        <div class="col-sm">
+                        <div className="col-sm">
                          < input type="text" id="inputFilter"  className="form-control" placeholder="Owner's Last Name" value={this.state.ownerLN} onChange={(e) =>this.handledOwnerLNChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                         </div>
                         
-                        <div class="col-sm">
+                        <div className="col-sm">
                          < input type="text" id="inputFilter"  className="form-control" placeholder="Owner's Contact Number" value={this.state.ownerContact} onChange={(e) =>this.handledOwnerContactChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                         </div>

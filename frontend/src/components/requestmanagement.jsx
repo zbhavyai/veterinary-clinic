@@ -126,7 +126,7 @@ class RequestManagement extends React.Component {
 
         return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
-                <div class="container">
+                <div className="container">
 
                 </div>
 
@@ -167,20 +167,20 @@ class RequestManagement extends React.Component {
 
             </tbody>
         </table>
-        <div class="row">
-                      <div class="col-sm">
+        <div className="row">
+                      <div className="col-sm">
                       {alert}
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
 
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
 
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
 
                       </div>
-                      <div class="col-sm">
+                      <div className="col-sm">
 
                       </div>
 

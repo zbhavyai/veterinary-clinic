@@ -96,34 +96,34 @@ class TreatmentList extends React.Component {
 
 <NavBar user = {user} uid = {uid}/>
             
-            <h2 class="display-4">Treatment Logs</h2>
-            <div class="row">
-                <div class="col-sm">
+            <h2 className="display-4">Treatment Logs</h2>
+            <div className="row">
+                <div className="col-sm">
                     <img src={this.state.imageUrl} alt="" />
 
                 </div>
-                <div class="col-sm">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h1 class="display-4">Basic Details</h1>
-                            <p class="lead">Animal ID: {this.state.animal["animalId"]} <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
-                                <p class="lead">Name: {this.state.animal["name"]}</p>
-                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
-                                <p class="lead">Age: {this.state.animal["age"]}</p>
-                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
-                                <p class="lead">Status: {this.state.animal["status"]}</p>
+                <div className="col-sm">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h1 className="display-4">Basic Details</h1>
+                            <p className="lead">Animal ID: {this.state.animal["animalId"]} <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
+                                <p className="lead">Name: {this.state.animal["name"]}</p>
+                                <p className="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p className="lead">Age: {this.state.animal["age"]}</p>
+                                <p className="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p className="lead">Status: {this.state.animal["status"]}</p>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div class="row">
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="display-4">Log History </h1>
+            <div className="row">
+                <div className="jumbotron jumbotron-fluid">
+                    <div className="container">
+                        <h1 className="display-4">Log History </h1>
                         {this.state.treatments.map(treatment => (
-                            <div class="card" style={this.styles}>
+                            <div key = {treatment["treatmentId"]} className="card" style={this.styles}>
                                 <p>Log {treatment["treatmentId"]}: {treatment["treatmentDate"]}</p>
 
                                 <p>Decscription: {treatment["treatmentDesc"]}</p>
@@ -143,38 +143,38 @@ class TreatmentList extends React.Component {
 
             <NavBar user={user} />
             
-            <h2 class="display-4">Treatment Logs</h2>
-            <div class="row">
-                <div class="col-sm">
+            <h2 className="display-4">Treatment Logs</h2>
+            <div className="row">
+                <div className="col-sm">
                     <img src={this.state.imageUrl} alt="" />
 
                 </div>
-                <div class="col-sm">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h1 class="display-4">Basic Details</h1>
-                            <p class="lead">Animal ID: {this.state.animal["animalId"]}<Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
-                                <p class="lead">Name: {this.state.animal["name"]}</p>
-                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
-                                <p class="lead">Age: {this.state.animal["age"]}</p>
-                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
-                                <p class="lead">Status: {this.state.animal["status"]}</p>
+                <div className="col-sm">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h1 className="display-4">Basic Details</h1>
+                            <p className="lead">Animal ID: {this.state.animal["animalId"]}<Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] } className="btn btn-secondary btn-sm">Back to Profile</Link></p>
+                                <p className="lead">Name: {this.state.animal["name"]}</p>
+                                <p className="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p className="lead">Age: {this.state.animal["age"]}</p>
+                                <p className="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p className="lead">Status: {this.state.animal["status"]}</p>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div class="row">
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/treatments/add"} className="btn btn-secondary btn-sm">Add Treatment</Link></h1>
+            <div className="row">
+                <div className="jumbotron jumbotron-fluid">
+                    <div className="container">
+                        <h1 className="display-4">Log History <Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"] + "/treatments/add"} className="btn btn-secondary btn-sm">Add Treatment</Link></h1>
                         {this.state.treatments.map(treatment => (
-                            <div class="card" style={this.styles}>
+                            <div key = {treatment["treatmentId"]} className="card" style={this.styles}>
                                 <p>Log {treatment["treatmentId"]}: {treatment["treatmentDate"]}</p>
 
                                 <p>Decscription: {treatment["treatmentDesc"]}</p>
-                                <td><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveTreatments(e, treatment)} className="btn btn-secondary btn-sm">Remove</button></td>
+                                <p><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveTreatments(e, treatment)} className="btn btn-secondary btn-sm">Remove</button></p>
                                 <p></p>
                                 <p></p>
                             </div>

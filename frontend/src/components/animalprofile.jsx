@@ -139,57 +139,57 @@ class AnimalProfile extends React.Component {
 
             <NavBar user = {user} uid = {uid}/>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm">
                         <img src={this.state.imageUrl} alt="" />
 
                     </div>
-                    <div class="col-sm">
-                        <div class="jumbotron jumbotron-fluid">
-                            <div class="container">
-                                <h5 class="display-4">Basic Details</h5>
-                                <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
-                                <p class="lead">Name: {this.state.animal["name"]}</p>
-                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
-                                <p class="lead">Age: {this.state.animal["age"]}</p>
-                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
-                                <p class="lead">Status: {this.state.animal["status"]}  <Link to={"/" + user + "/" + uid +"/animals/" + id + "/status"} className="btn btn-secondary">Update</Link></p>
+                    <div className="col-sm">
+                        <div className="jumbotron jumbotron-fluid">
+                            <div className="container">
+                                <h5 className="display-4">Basic Details</h5>
+                                <p className="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                                <p className="lead">Name: {this.state.animal["name"]}</p>
+                                <p className="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p className="lead">Age: {this.state.animal["age"]}</p>
+                                <p className="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p className="lead">Status: {this.state.animal["status"]}  <Link to={"/" + user + "/" + uid +"/animals/" + id + "/status"} className="btn btn-secondary">Update</Link></p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="jumbotron jumbotron-fluid">
-                            <div class="container">
-                                <h5 class="display-4">Owner Details</h5>
-                                <p class="lead">Owner Name: {this.state.owner["fullName"]}</p>
-                                <p class="lead">Owner Contact: {this.state.owner["contactNumber"]}</p>
-                                <p class="lead">Owner Email: {this.state.owner["emailId"]}</p>
-                                <p class="lead">Owner Address: {this.state.owner["address"]}</p>
+                <div className="row">
+                    <div className="col-sm">
+                        <div className="jumbotron jumbotron-fluid">
+                            <div className="container">
+                                <h5 className="display-4">Owner Details</h5>
+                                <p className="lead">Owner Name: {this.state.owner["fullName"]}</p>
+                                <p className="lead">Owner Contact: {this.state.owner["contactNumber"]}</p>
+                                <p className="lead">Owner Email: {this.state.owner["emailId"]}</p>
+                                <p className="lead">Owner Address: {this.state.owner["address"]}</p>
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-sm">
-                        <div class="jumbotron jumbotron-fluid">
-                            <div class="container">
-                                <h5 class="display-4">Identification Details</h5>
-                                <p class="lead">RFID Number: {this.state.animal["rfidNumber"]}</p>
-                                <p class="lead">Microchip: {this.state.animal["microChipNumber"]}</p>
-                                <p class="lead">Tattoo: {this.state.animal["tattooNum"]}</p>
-                                <p class="lead">Coat Color: {this.state.animal["coatColor"]}</p>
+                    <div className="col-sm">
+                        <div className="jumbotron jumbotron-fluid">
+                            <div className="container">
+                                <h5 className="display-4">Identification Details</h5>
+                                <p className="lead">RFID Number: {this.state.animal["rfidNumber"]}</p>
+                                <p className="lead">Microchip: {this.state.animal["microChipNumber"]}</p>
+                                <p className="lead">Tattoo: {this.state.animal["tattooNum"]}</p>
+                                <p className="lead">Coat Color: {this.state.animal["coatColor"]}</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h5 class="display-4">Weight Graph</h5>
+                <div className="row">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h5 className="display-4">Weight Graph</h5>
                             <div id="chart">
                                 <ReactApexChart options={options} series={series} type="line" height={350} />
                             </div>
@@ -199,11 +199,11 @@ class AnimalProfile extends React.Component {
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h5 class="display-4">Other Details</h5>
-                            <p class="lead">Continuous Medication: {this.state.animal["continuousMedication"]}</p>
+                <div className="row">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h5 className="display-4">Other Details</h5>
+                            <p className="lead">Continuous Medication: {this.state.animal["continuousMedication"]}</p>
 
 
                         </div>
@@ -211,13 +211,15 @@ class AnimalProfile extends React.Component {
 
                 </div>
 
-                <div class="row">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h5 class="display-4">Photos</h5><Link to={"/" + user + "/" + uid +"/animals/" + id + "/addphoto"} className="btn btn-secondary">Upload Photo</Link>
-                            <div class="container">
+                <div className="row">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h5 className="display-4">Photos</h5><Link to={"/" + user + "/" + uid +"/animals/" + id + "/addphoto"} className="btn btn-secondary">Upload Photo</Link>
+                            <div className="container">
+
                             {this.state.photos.map(photo => (
-                                <img src={photo} width="200" 
+                                
+                                <img key={photo} src={photo} width="200" 
                                 height="200" alt="" />
                             ))}
 
@@ -231,11 +233,11 @@ class AnimalProfile extends React.Component {
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></td>
-                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></td>
-                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></td> 
+                <div className="row">
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></div>
+                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></div>
+                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></div> 
                     </div>
 
                 </div>
@@ -251,57 +253,57 @@ class AnimalProfile extends React.Component {
 
             <NavBar user = {user} uid = {uid}/>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm">
                         <img src={this.state.imageUrl} alt="" />
 
                     </div>
-                    <div class="col-sm">
-                        <div class="jumbotron jumbotron-fluid">
-                            <div class="container">
-                                <h5 class="display-4">Basic Details</h5>
-                                <p class="lead">Animal ID: {this.state.animal["animalId"]}</p>
-                                <p class="lead">Name: {this.state.animal["name"]}</p>
-                                <p class="lead">Breed: {this.state.animal["breed"]}</p>
-                                <p class="lead">Age: {this.state.animal["age"]}</p>
-                                <p class="lead">Sex: {this.state.animal["sex"]}</p>
-                                <p class="lead">Status: {this.state.animal["status"]}</p>
+                    <div className="col-sm">
+                        <div className="jumbotron jumbotron-fluid">
+                            <div className="container">
+                                <h5 className="display-4">Basic Details</h5>
+                                <p className="lead">Animal ID: {this.state.animal["animalId"]}</p>
+                                <p className="lead">Name: {this.state.animal["name"]}</p>
+                                <p className="lead">Breed: {this.state.animal["breed"]}</p>
+                                <p className="lead">Age: {this.state.animal["age"]}</p>
+                                <p className="lead">Sex: {this.state.animal["sex"]}</p>
+                                <p className="lead">Status: {this.state.animal["status"]}</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="jumbotron jumbotron-fluid">
-                            <div class="container">
-                                <h5 class="display-4">Owner Details</h5>
-                                <p class="lead">Owner Name: {this.state.owner["fullName"]}</p>
-                                <p class="lead">Owner Contact: {this.state.owner["contactNumber"]}</p>
-                                <p class="lead">Owner Email: {this.state.owner["emailId"]}</p>
-                                <p class="lead">Owner Address: {this.state.owner["address"]}</p>
+                <div className="row">
+                    <div className="col-sm">
+                        <div className="jumbotron jumbotron-fluid">
+                            <div className="container">
+                                <h5 className="display-4">Owner Details</h5>
+                                <p className="lead">Owner Name: {this.state.owner["fullName"]}</p>
+                                <p className="lead">Owner Contact: {this.state.owner["contactNumber"]}</p>
+                                <p className="lead">Owner Email: {this.state.owner["emailId"]}</p>
+                                <p className="lead">Owner Address: {this.state.owner["address"]}</p>
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-sm">
-                        <div class="jumbotron jumbotron-fluid">
-                            <div class="container">
-                                <h5 class="display-4">Identification Details</h5>
-                                <p class="lead">RFID Number: {this.state.animal["rfidNumber"]}</p>
-                                <p class="lead">Microchip: {this.state.animal["microChipNumber"]}</p>
-                                <p class="lead">Tattoo: {this.state.animal["tattooNum"]}</p>
-                                <p class="lead">Coat Color: {this.state.animal["coatColor"]}</p>
+                    <div className="col-sm">
+                        <div className="jumbotron jumbotron-fluid">
+                            <div className="container">
+                                <h5 className="display-4">Identification Details</h5>
+                                <p className="lead">RFID Number: {this.state.animal["rfidNumber"]}</p>
+                                <p className="lead">Microchip: {this.state.animal["microChipNumber"]}</p>
+                                <p className="lead">Tattoo: {this.state.animal["tattooNum"]}</p>
+                                <p className="lead">Coat Color: {this.state.animal["coatColor"]}</p>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h5 class="display-4">Weight Graph</h5>
+                <div className="row">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h5 className="display-4">Weight Graph</h5>
                             <div id="chart">
                                 <ReactApexChart options={options} series={series} type="line" height={350} />
                             </div>
@@ -311,11 +313,11 @@ class AnimalProfile extends React.Component {
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h5 class="display-4">Other Details</h5>
-                            <p class="lead">Continuous Medication: {this.state.animal["continuousMedication"]}</p>
+                <div className="row">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h5 className="display-4">Other Details</h5>
+                            <p className="lead">Continuous Medication: {this.state.animal["continuousMedication"]}</p>
 
 
                         </div>
@@ -323,13 +325,13 @@ class AnimalProfile extends React.Component {
 
                 </div>
 
-                <div class="row">
-                    <div class="jumbotron jumbotron-fluid">
-                        <div class="container">
-                            <h5 class="display-4">Photos</h5>
+                <div className="row">
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <h5 className="display-4">Photos</h5>
                             {this.state.photos.map(photo => (
                                 
-                                <img src={photo} width="200" 
+                                <img key={photo} src={photo} width="200" 
                                 height="200" alt="" />
                                 
                             ))}
@@ -339,11 +341,11 @@ class AnimalProfile extends React.Component {
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></td>
-                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></td>
-                        <td><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></td> 
+                <div className="row">
+                    <div className="btn-group" role="group" aria-label="Basic example">
+                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></div>
+                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></div>
+                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></div> 
                     </div>
 
                 </div>

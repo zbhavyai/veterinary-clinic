@@ -101,7 +101,7 @@ class Login extends React.Component {
 
                                 <div >
                                     <a href={hyperlink} class="btn btn-primary">Login</a>
-                                    <button type="submit" class="btn btn-outline-primary">Forget Password</button>
+                                    
 
                                 </div>
                                 <div class="error">

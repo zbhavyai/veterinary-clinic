@@ -42,6 +42,7 @@ class EditComment extends React.Component {
     handleComment =(e)=>{
         const id = this.props.match.params.id;
         const user = this.props.match.params.user;
+        const uid = this.props.match.params.uid;
 
         let newDate = new Date()
         let date = newDate.getDate();
@@ -53,7 +54,7 @@ class EditComment extends React.Component {
         const message = {
             "commentId": this.state.comments[0]["commentId"],
             "commentDesc": this.state.comments[0]["commentDesc"],
-            "commentDate": dateString,
+            "commentDate": "2022-01-01",
             "commenter": {
                 "userId": user
             }
@@ -67,7 +68,9 @@ class EditComment extends React.Component {
           });
         //window.location.reload(false);
 
-        this.props.history.push("/"+ user+'/animals/'+id+"/comments")
+        const timer = setTimeout(() => {
+            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/comments");
+         }, 500);
         
 
 

@@ -62,7 +62,7 @@ class UploadPhoto extends React.Component {
       
       };
       
-      // On file upload (click the upload button)
+      
       onFileUpload = () => {
         const id = this.props.match.params.id;
         const user = this.props.match.params.user;
@@ -70,7 +70,7 @@ class UploadPhoto extends React.Component {
 
         const formData = new FormData();
     
-        // Update the formData object
+        
         formData.append(
           "image", this.state.selectedFile 
           

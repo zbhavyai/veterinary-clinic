@@ -104,7 +104,7 @@ INSERT INTO weights (w_weightid,w_massinkg,w_recorddate,w_recordedby,w_animalid)
 ("27","30.4","2021-02-28","1","6"),
 ("28","40.4","2021-02-28","2","7");
 
-UPDATE sequence_treatments SET next_val=29;
+UPDATE sequence_weights SET next_val=29;
 -- ----------------------------------------------
 
 

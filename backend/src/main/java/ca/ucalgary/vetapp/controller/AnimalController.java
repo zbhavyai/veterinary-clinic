@@ -27,7 +27,7 @@ public class AnimalController {
     private final WeightsRepository weightsRepository;
     private final PhotosRepository photosRepository;
     private final CommentsRepository commentsRepository;
-    private final IssuesRepository issueRepository;
+    private final IssuesRepository issuesRepository;
     private final TreatmentsRepository treatmentsRepository;
 
     /**
@@ -51,7 +51,7 @@ public class AnimalController {
         this.weightsRepository = wr;
         this.photosRepository = pr;
         this.commentsRepository = cr;
-        this.issueRepository = ir;
+        this.issuesRepository = ir;
         this.treatmentsRepository = tr;
     }
 
@@ -497,7 +497,7 @@ public class AnimalController {
      * Endpoint for POST - save the animal in db
      *
      * @param a animal details in json
-     * @return the added animal details
+     * @return the message
      */
     @PostMapping
     public ResponseEntity<?> addAnimal(@RequestBody Animal a) {
@@ -545,7 +545,7 @@ public class AnimalController {
      *
      * @param w  animal weight details in json
      * @param id animal id
-     * @return the added animal weight
+     * @return the message
      */
     @PostMapping(path = "{animalId}/weights")
     public ResponseEntity<?> addWeight(@RequestBody Weights w, @PathVariable("animalId") Long id) {
@@ -595,19 +595,20 @@ public class AnimalController {
 
     /**
      * Extracts the extension of the uploaded file
+     *
      * @param filename the filename from which extension is to be extracted
      * @return the extension with .
      */
     private String getPhotoExtension(String filename) {
         String ext = "";
 
-        if(filename == null || filename.equals("")) {
+        if (filename == null || filename.equals("")) {
             return ext;
         }
 
         int dotIndex = filename.lastIndexOf(".");
 
-        if(dotIndex > 0) {
+        if (dotIndex > 0) {
             ext = filename.substring(dotIndex);
         }
 
@@ -619,10 +620,11 @@ public class AnimalController {
      *
      * @param p  animal photo details in json
      * @param id animal id
-     * @return the added animal photo
+     * @return the message
      */
     @PostMapping(path = "{animalId}/photos")
-    public ResponseEntity<?> addPhoto(@PathVariable("animalId") Long id, @RequestParam("image") MultipartFile file, @RequestParam Long userId, @RequestParam String photodesc, @RequestParam String alttext) {
+    public ResponseEntity<?> addPhoto(@PathVariable("animalId") Long id, @RequestParam("image") MultipartFile file,
+            @RequestParam Long userId, @RequestParam String photodesc, @RequestParam String alttext) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         Photos p = new Photos();
@@ -691,7 +693,7 @@ public class AnimalController {
      *
      * @param i  animal issue details in json
      * @param id animal id
-     * @return the added animal issue
+     * @return the message
      */
     @PostMapping(path = "{animalId}/issues")
     public ResponseEntity<?> addIssue(@RequestBody Issues i, @PathVariable("animalId") Long id) {
@@ -707,10 +709,12 @@ public class AnimalController {
         User u = this.userRepository.findById(userId).get();
         i.setRaisedBy(u);
 
+        i.setDetectedDate(LocalDate.now());
+
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
             i.setTheAnimal(oneAnimal);
-            i = this.issueRepository.save(i);
+            i = this.issuesRepository.save(i);
             oneAnimal.fetchAnimalIssueList().add(i);
             this.animalRepository.save(oneAnimal);
 
@@ -729,7 +733,7 @@ public class AnimalController {
      *
      * @param c  animal comment in json
      * @param id animal id
-     * @return the added animal comment
+     * @return the message
      */
     @PostMapping(path = "{animalId}/comments")
     public ResponseEntity<?> addComment(@RequestBody Comments c, @PathVariable("animalId") Long id) {
@@ -739,6 +743,8 @@ public class AnimalController {
         Long userId = c.fetchCommenter().getUserId();
         User u = this.userRepository.findById(userId).get();
         c.setCommenter(u);
+
+        c.setCommentDate(LocalDate.now());
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
@@ -762,7 +768,7 @@ public class AnimalController {
      *
      * @param t  animal treatment in json
      * @param id animal id
-     * @return the added animal treatment
+     * @return the message
      */
     @PostMapping(path = "{animalId}/treatments")
     public ResponseEntity<?> addTreatment(@RequestBody Treatments t, @PathVariable("animalId") Long id) {
@@ -772,6 +778,8 @@ public class AnimalController {
         Long userId = t.fetchTreatedBy().getUserId();
         User u = this.userRepository.findById(userId).get();
         t.setTreatedBy(u);
+
+        t.setTreatmentDate(LocalDate.now());
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
@@ -891,6 +899,150 @@ public class AnimalController {
         }
 
         return updatedAnimal;
+    }
+
+    /**
+     * Endpoint for PUT - update animal comment in db
+     *
+     * @param c         the updated comment details in json
+     * @param animalId  the animal whose comment it is
+     * @param commentId the id the comment that is getting updated
+     * @return the message
+     */
+    @PutMapping(path = "{animalId}/comments/{commentId}")
+    public ResponseEntity<?> updateComment(@RequestBody Comments c, @PathVariable("animalId") Long animalId,
+            @PathVariable("commentId") Long commentId) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(animalId);
+        Optional<Comments> commentOptional = this.commentsRepository.findById(commentId);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+
+            if (commentOptional.isPresent()) {
+                Comments comment = commentOptional.get();
+
+                // refresh the comment date
+                comment.setCommentDate(LocalDate.now());
+
+                comment.setCommentDesc(c.getCommentDesc());
+                comment.setCommenter(c.fetchCommenter());
+                comment.setTheAnimal(oneAnimal);
+                this.commentsRepository.save(comment);
+            }
+
+            else {
+                c.setCommentId(commentId);
+                this.commentsRepository.save(c);
+
+                oneAnimal.fetchAnimalCommentList().add(c);
+                this.animalRepository.save(oneAnimal);
+            }
+
+            String message = "Animal comment updated successfully";
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
+        }
+
+        else {
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+        }
+    }
+
+    /**
+     * Endpoint for PUT - update animal issues in db
+     *
+     * @param i        the updated issue details in json
+     * @param animalId the animal whose issue it is
+     * @param issueId  the id the issue that is getting updated
+     * @return the message
+     */
+    @PutMapping(path = "{animalId}/issues/{issueId}")
+    public ResponseEntity<?> updateIssue(@RequestBody Issues i, @PathVariable("animalId") Long animalId,
+            @PathVariable("issueId") Long issueId) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(animalId);
+        Optional<Issues> issueOptional = this.issuesRepository.findById(issueId);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+
+            if (issueOptional.isPresent()) {
+                Issues issue = issueOptional.get();
+
+                // refresh the issue date
+                issue.setDetectedDate(LocalDate.now());
+
+                issue.setIssueDesc(i.getIssueDesc());
+                issue.setRaisedBy(i.fetchRaisedBy());
+                issue.setTheAnimal(oneAnimal);
+                this.issuesRepository.save(issue);
+            }
+
+            else {
+                i.setIssueId(issueId);
+                this.issuesRepository.save(i);
+
+                oneAnimal.fetchAnimalIssueList().add(i);
+                this.animalRepository.save(oneAnimal);
+            }
+
+            String message = "Animal issue updated successfully";
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
+        }
+
+        else {
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+        }
+    }
+
+    /**
+     * Endpoint for PUT - update animal treatments in db
+     *
+     * @param t           the updated treatment details in json
+     * @param animalId    the animal whose treatment it is
+     * @param treatmentId the id the treatment that is getting updated
+     * @return the message
+     */
+    @PutMapping(path = "{animalId}/treatments/{treatmentId}")
+    public ResponseEntity<?> updateTreatment(@RequestBody Treatments t, @PathVariable("animalId") Long animalId,
+            @PathVariable("treatmentId") Long treatmentId) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(animalId);
+        Optional<Treatments> treatmentOptional = this.treatmentsRepository.findById(treatmentId);
+
+        if (animalOptional.isPresent()) {
+            Animal oneAnimal = animalOptional.get();
+
+            if (treatmentOptional.isPresent()) {
+                Treatments treatment = treatmentOptional.get();
+
+                // refresh the treatment date
+                treatment.setTreatmentDate(LocalDate.now());
+
+                treatment.setDeliveryMethod(t.getDeliveryMethod());
+                treatment.setDrugDose(t.getDrugDose());
+                treatment.setTreatmentDesc(t.getTreatmentDesc());
+                treatment.setTreatedBy(t.fetchTreatedBy());
+                treatment.setDrugName(t.getDrugName());
+                treatment.setTheAnimal(oneAnimal);
+                this.treatmentsRepository.save(treatment);
+            }
+
+            else {
+                t.setTreatmentId(treatmentId);
+                this.treatmentsRepository.save(t);
+
+                oneAnimal.fetchAnimalTreatmentList().add(t);
+                this.animalRepository.save(oneAnimal);
+            }
+
+            String message = "Animal treatment updated successfully";
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
+        }
+
+        else {
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+        }
     }
 
     /**
@@ -1032,12 +1184,12 @@ public class AnimalController {
      * Endpoint for DELETE - delete animal from db
      *
      * @param id animal id
-     * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}")
     public ResponseEntity<?> deleteAnimal(@PathVariable("animalId") Long id) {
         if (!this.animalRepository.existsById(id)) {
-            // throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
 
         Animal a = this.animalRepository.findById(id).get();
@@ -1066,7 +1218,7 @@ public class AnimalController {
         // removes all issues
         for (Issues i : a.fetchAnimalIssueList()) {
             this.removeIssueFromAnimal(a.getAnimalId(), i.getIssueId());
-            this.issueRepository.delete(i);
+            this.issuesRepository.delete(i);
         }
 
         // removes all treatments
@@ -1185,18 +1337,17 @@ public class AnimalController {
      *
      * @param animalId animal id
      * @param issueId  issue id
-     *                 // * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}/issues/{issueId}")
     public ResponseEntity<?> deleteIssues(@PathVariable("animalId") Long animalId,
             @PathVariable("issueId") Long issueId) {
-        Optional<Issues> issueOptional = this.issueRepository.findById(issueId);
+        Optional<Issues> issueOptional = this.issuesRepository.findById(issueId);
 
         if (issueOptional.isPresent()) {
             Issues oneIssue = issueOptional.get();
 
             if (this.removeIssueFromAnimal(animalId, issueId)) {
-                this.issueRepository.delete(oneIssue);
+                this.issuesRepository.delete(oneIssue);
 
                 String message = "Animal issue deleted successfully";
                 return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));

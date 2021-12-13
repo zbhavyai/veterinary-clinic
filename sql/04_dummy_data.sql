@@ -1,9 +1,5 @@
--- 2nd last tuple of each table is to test maximum possible NULL values for each attribute
--- last tuple of each table is to test empty values ("") values for each attribute
--- If a value is present in either of last 2 tables, it is required
-
 -- owners ---------------------------------------
-INSERT INTO owners (o_ownerid,o_firstname,o_middlename,o_lastname,o_contactnumber,o_emailid,o_address) VALUES 
+INSERT INTO owners (o_ownerid,o_firstname,o_middlename,o_lastname,o_contactnumber,o_emailid,o_address) VALUES
 ("1","Damian","Bruce","Wayne","4039034805","damian.bruce.wayne@ucalgary.ca","Wayne Manor"),
 ("2","Yorrick",NULL,"Brown","4038141489","yorrick.brown@ucalgary.ca",NULL),
 ("3","Clark","Joseph","Kent","4032423736","clark.joseph.kent@ucalgary.ca","Smallville"),
@@ -25,14 +21,12 @@ INSERT INTO owners (o_ownerid,o_firstname,o_middlename,o_lastname,o_contactnumbe
 ("19",NULL,NULL,NULL,NULL,NULL,NULL),
 ("20", "","","","","","");
 
-SET SQL_SAFE_UPDATES = 0; -- Line required to ensure next_val can be updated 
 UPDATE sequence_owners SET next_val=21;
-
 -- ----------------------------------------------
 
 
 -- animals --------------------------------------
-INSERT INTO animals (a_animalid,a_name,a_species,a_subspecies,a_breed,a_type,a_region,a_sex,a_birthdate,a_status,a_requeststatus,a_ownerid,a_profilepic,a_tattoonum,a_citytattoo,a_rfidnumber,a_microchipnumber,a_coatcolor,a_distinctfeature,a_continuousmedication) VALUES 
+INSERT INTO animals (a_animalid,a_name,a_species,a_subspecies,a_breed,a_type,a_region,a_sex,a_birthdate,a_status,a_requeststatus,a_ownerid,a_profilepic,a_tattoonum,a_citytattoo,a_rfidnumber,a_microchipnumber,a_coatcolor,a_distinctfeature,a_continuousmedication) VALUES
 ("1","Ace","Dog","Canine","German shepherd",NULL,"Spain","1","2017-12-01","0","0","13",NULL,"244662717","HOC sha","249005924","343639466","Black","sleeping pills","he can fly"),
 ("2","Ampersand","Monkey","Ape","Capuchin monkey",NULL,"France","0","2018-12-02","0","0","10",NULL,"158121195","ORE esd","260725030","147771172","Brown",NULL,"high jumps"),
 ("3","Bat Cow","Cow","Bovine",NULL,"Dairy","US","1","2020-04-03","0","0","11",NULL,"205572497","NKN sds","151131824","231238713","Brown, White",NULL,"bat-shaped patch on face"),
@@ -59,7 +53,7 @@ UPDATE sequence_animals SET next_val=21;
 
 
 -- users ----------------------------------------
-INSERT INTO users (u_userid,u_joiningdate,u_activationdate,u_terminationdate,u_firstname,u_middlename,u_lastname,u_role,u_emailid,u_passwordhash,u_passwordsalt,u_status) VALUES 
+INSERT INTO users (u_userid,u_joiningdate,u_activationdate,u_terminationdate,u_firstname,u_middlename,u_lastname,u_role,u_emailid,u_passwordhash,u_passwordsalt,u_status) VALUES
 ("1","2017-12-01","2017-12-02",NULL,"Greg",NULL,"Boorman","0","greg.boorman@ucalgary.ca","passw0rd",NULL,"1"),
 ("2","2018-12-02","2018-12-03",NULL,"Teacher",NULL,"Admin","0","teacher.admin@ucalgary.ca","passw0rd",NULL,"0"),
 ("3","2020-04-03","2020-04-04",NULL,"Technician",NULL,"A","2","technician.a@ucalgary.ca","passw0rd",NULL,"0"),
@@ -86,7 +80,7 @@ UPDATE sequence_users SET next_val=21;
 
 
 -- weights --------------------------------------
-INSERT INTO weights (w_weightid,w_massinkg,w_recorddate,w_recordedby,w_animalid) VALUES 
+INSERT INTO weights (w_weightid,w_massinkg,w_recorddate,w_recordedby,w_animalid) VALUES
 ("1","5","2020-10-01","7","1"),
 ("2","4","2020-10-01","7","2"),
 ("3","30","2020-10-01","3","3"),
@@ -123,7 +117,7 @@ UPDATE sequence_treatments SET next_val=31;
 
 
 -- photos ---------------------------------------
-INSERT INTO photos (p_photoid,p_photodesc,p_animalid,p_photolink,p_alttext,p_uploader,p_uploaddate) VALUES 
+INSERT INTO photos (p_photoid,p_photodesc,p_animalid,p_photolink,p_alttext,p_uploader,p_uploaddate) VALUES
 ("1",NULL,"4","image1.png","neck","16","2020-10-01"),
 ("2",NULL,"16","image2.png",NULL,"8","2020-10-01"),
 ("3",NULL,"11","image3.png",NULL,"6","2020-10-01"),
@@ -145,13 +139,12 @@ INSERT INTO photos (p_photoid,p_photodesc,p_animalid,p_photolink,p_alttext,p_upl
 ("19",NULL,NULL,NULL,NULL,NULL,"2021-03-28"),
 ("20","",NULL,"","",NULL,"2021-03-28");
 
-
 UPDATE sequence_photos SET next_val=21;
 -- ----------------------------------------------
 
 
 -- comments -------------------------------------
-INSERT INTO comments (c_commentid,c_commentdesc,c_animalid,c_commentdate,c_commenter) VALUES 
+INSERT INTO comments (c_commentid,c_commentdesc,c_animalid,c_commentdate,c_commenter) VALUES
 ("1","Nighttime terror","8","2021-12-08","1"),
 ("2","Howling ","18","2021-12-09","8"),
 ("3","Pregnant ","16","2021-12-10","9"),
@@ -178,7 +171,7 @@ UPDATE sequence_comments SET next_val=21;
 
 
 -- issues ---------------------------------------
-INSERT INTO issues (i_issueid,i_issuedesc,i_detecteddate,i_animalid,i_raisedby,i_isresolved) VALUES 
+INSERT INTO issues (i_issueid,i_issuedesc,i_detecteddate,i_animalid,i_raisedby,i_isresolved) VALUES
 ("1","Limp Walk","2021-12-08","1","5",1),
 ("2",NULL,"2020-12-12","13","11",1),
 ("3","Diabetes","2021-05-16","7","12",0),
@@ -205,7 +198,7 @@ UPDATE sequence_issues SET next_val=21;
 
 
 -- treatments -----------------------------------
-INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_drugname,t_drugdose,t_deliverymethod,t_animalid,t_treatmentdate,t_treatedby) VALUES 
+INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_drugname,t_drugdose,t_deliverymethod,t_animalid,t_treatmentdate,t_treatedby) VALUES
 ("1","Physical exam","Pfizer","0.5mg","transdermal","12","2021-12-08","1"),
 ("2","Blood work",NULL,NULL,NULL,"5","2021-12-09","11"),
 ("3","Da2pp","Astrazeneca","0.02mg",NULL,"14","2021-12-10","4"),
@@ -229,10 +222,3 @@ INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_drugname,t_drugdose,t_de
 
 UPDATE sequence_treatments SET next_val=21;
 -- ----------------------------------------------
-
--- sets animal to green status when the issue is resolved
--- CURRENTLY Updates ALL a_status to 0. 
-UPDATE animals, issues
-SET a_status = "0" 
-WHERE issues.i_isresolved = 1;
-SELECT * FROM ANIMALS;

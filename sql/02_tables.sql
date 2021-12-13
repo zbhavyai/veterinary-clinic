@@ -1,207 +1,204 @@
 USE vetdb;
 
 CREATE TABLE animals (
-    a_animalid bigint not null,
-    a_name varchar(255),
-    a_species varchar(255),
-    a_subspecies varchar(255),
-    a_breed varchar(255),
-    a_type varchar(255),
-    a_region varchar(255),
-    a_sex integer,
-    a_birthdate date,
-    a_status integer,
-    a_requeststatus integer,
-    a_ownerid bigint,
-    a_profilepic bigint,
-    a_tattoonum integer,
-    a_citytattoo varchar(255),
-    a_rfidnumber varchar(255),
-    a_microchipnumber varchar(255),
-    a_coatcolor varchar(255),
-    a_continuousmedication varchar(255),
-    a_distinctfeature varchar(255),
-    primary key (a_animalid)
+    a_animalid BIGINT NOT NULL,
+    a_name VARCHAR(255),
+    a_species VARCHAR(255),
+    a_subspecies VARCHAR(255),
+    a_breed VARCHAR(255),
+    a_type VARCHAR(255),
+    a_region VARCHAR(255),
+    a_sex INTEGER,
+    a_birthdate DATE,
+    a_status INTEGER,
+    a_requeststatus INTEGER,
+    a_ownerid BIGINT,
+    a_profilepic BIGINT,
+    a_tattoonum INTEGER,
+    a_citytattoo VARCHAR(255),
+    a_rfidnumber VARCHAR(255),
+    a_microchipnumber VARCHAR(255),
+    a_coatcolor VARCHAR(255),
+    a_continuousmedication VARCHAR(255),
+    a_distinctfeature VARCHAR(255),
+    PRIMARY KEY (a_animalid)
 );
 
 CREATE TABLE users (
-    u_userid bigint not null,
-    u_joiningdate date not null,
-    u_activationdate date,
-    u_terminationdate date,
-    u_firstname varchar(255),
-    u_middlename varchar(255),
-    u_lastname varchar(255),
-    u_role integer,
-    u_emailid varchar(255),
-    u_passwordhash text,
-    u_passwordsalt varchar(255),
-    u_status integer not null,
-    primary key (u_userid)
+    u_userid BIGINT NOT NULL,
+    u_joiningdate DATE NOT NULL,
+    u_activationdate DATE,
+    u_terminationdate DATE,
+    u_firstname VARCHAR(255),
+    u_middlename VARCHAR(255),
+    u_lastname VARCHAR(255),
+    u_role INTEGER,
+    u_emailid VARCHAR(255),
+    u_passwordhash TEXT,
+    u_passwordsalt VARCHAR(255),
+    u_status INTEGER NOT NULL,
+    PRIMARY KEY (u_userid)
 );
 
 CREATE TABLE owners (
-    o_ownerid bigint not null,
-    o_firstname varchar(255),
-    o_middlename varchar(255),
-    o_lastname varchar(255),
-    o_contactnumber varchar(255),
-    o_emailid varchar(255),
-    o_address varchar(255),
-    primary key (o_ownerid)
+    o_ownerid BIGINT NOT NULL,
+    o_firstname VARCHAR(255),
+    o_middlename VARCHAR(255),
+    o_lastname VARCHAR(255),
+    o_contactnumber VARCHAR(255),
+    o_emailid VARCHAR(255),
+    o_address VARCHAR(255),
+    PRIMARY KEY (o_ownerid)
 );
 
-create table weights (
-    w_weightid bigint not null,
-    w_massinkg double precision not null,
-    w_recorddate date not null,
-    w_recordedby bigint,
-    w_animalid bigint,
-    primary key (w_weightid)
+CREATE TABLE weights (
+    w_weightid BIGINT NOT NULL,
+    w_massinkg DOUBLE PRECISION NOT NULL,
+    w_recorddate DATE NOT NULL,
+    w_recordedby BIGINT,
+    w_animalid BIGINT NOT NULL,
+    PRIMARY KEY (w_weightid)
 );
 
 CREATE TABLE photos (
-    p_photoid bigint not null,
-    p_photodesc varchar(255),
-    p_animalid bigint,
-    p_photolink varchar(255),
-    p_alttext varchar(255),
-    p_uploader bigint,
-    p_uploaddate date not null,
-    primary key (p_photoid)
+    p_photoid BIGINT NOT NULL,
+    p_photodesc VARCHAR(255),
+    p_animalid BIGINT NOT NULL,
+    p_photolink VARCHAR(255),
+    p_alttext VARCHAR(255),
+    p_uploader BIGINT,
+    p_uploaddate DATE NOT NULL,
+    PRIMARY KEY (p_photoid)
 );
 
 CREATE TABLE comments (
-    c_commentid bigint not null,
-    c_commentdesc varchar(255),
-    c_animalid bigint,
-    c_commentdate date not null,
-    c_commenter bigint,
-    primary key (c_commentid)
+    c_commentid BIGINT NOT NULL,
+    c_commentdesc VARCHAR(255),
+    c_animalid BIGINT NOT NULL,
+    c_commentdate DATE NOT NULL,
+    c_commenter BIGINT,
+    PRIMARY KEY (c_commentid)
 );
 
 CREATE TABLE issues (
-    i_issueid bigint not null,
-    i_issuedesc varchar(255),
-    i_detecteddate date not null,
-    i_animalid bigint,
-    i_raisedby bigint,
-    i_isresolved bit,
-    primary key (i_issueid)
+    i_issueid BIGINT NOT NULL,
+    i_issuedesc VARCHAR(255),
+    i_detecteddate DATE NOT NULL,
+    i_animalid BIGINT NOT NULL,
+    i_raisedby BIGINT,
+    i_isresolved BIT,
+    PRIMARY KEY (i_issueid)
 );
 
 CREATE TABLE treatments (
-    t_treatmentid bigint not null,
-    t_treatmentdesc varchar(255),
-    t_drugname varchar(255),
-    t_drugdose varchar(255),
-    t_deliverymethod varchar(255),
-    t_animalid bigint,
-    t_treatmentdate date not null,
-    t_treatedby bigint,
-    primary key (t_treatmentid)
+    t_treatmentid BIGINT NOT NULL,
+    t_treatmentdesc VARCHAR(255),
+    t_drugname VARCHAR(255),
+    t_drugdose VARCHAR(255),
+    t_deliverymethod VARCHAR(255),
+    t_animalid BIGINT NOT NULL,
+    t_treatmentdate DATE NOT NULL,
+    t_treatedby BIGINT,
+    PRIMARY KEY (t_treatmentid)
 );
 
 CREATE TABLE sequence_animals (
-    next_val bigint
+    next_val BIGINT
 );
 
 CREATE TABLE sequence_users (
-    next_val bigint
+    next_val BIGINT
 );
 
 CREATE TABLE sequence_owners (
-    next_val bigint
+    next_val BIGINT
 );
 
 CREATE TABLE sequence_weights (
-    next_val bigint
+    next_val BIGINT
 );
 
 CREATE TABLE sequence_photos (
-    next_val bigint
+    next_val BIGINT
 );
 
 CREATE TABLE sequence_comments (
-    next_val bigint
+    next_val BIGINT
 );
 
 CREATE TABLE sequence_issues (
-    next_val bigint
+    next_val BIGINT
 );
 
 CREATE TABLE sequence_treatments (
-    next_val bigint
+    next_val BIGINT
 );
 
-INSERT INTO sequence_animals values (1);
-INSERT INTO sequence_users values (1);
-INSERT INTO sequence_owners values (1);
-INSERT INTO sequence_weights values (1);
-INSERT INTO sequence_photos values (1);
-INSERT INTO sequence_comments values (1);
-INSERT INTO sequence_issues values (1);
-INSERT INTO sequence_treatments values (1);
+INSERT INTO sequence_animals VALUES (1);
+INSERT INTO sequence_users VALUES (1);
+INSERT INTO sequence_owners VALUES (1);
+INSERT INTO sequence_weights VALUES (1);
+INSERT INTO sequence_photos VALUES (1);
+INSERT INTO sequence_comments VALUES (1);
+INSERT INTO sequence_issues VALUES (1);
+INSERT INTO sequence_treatments VALUES (1);
 
 ALTER TABLE animals
-    add constraint fk_a_ownerid_animals
-    foreign key (a_ownerid)
-    references owners (o_ownerid);
+    ADD CONSTRAINT fk_a_ownerid_animals
+    FOREIGN KEY (a_ownerid)
+    REFERENCES owners (o_ownerid);
 
 ALTER TABLE animals
-    add constraint fk_a_profilepic_animals
-    foreign key (a_profilepic)
-    references photos (p_photoid);
+    ADD CONSTRAINT fk_a_profilepic_animals
+    FOREIGN KEY (a_profilepic)
+    REFERENCES photos (p_photoid);
 
 ALTER TABLE weights
-    add constraint fk_w_animalid_weights
-    foreign key (w_animalid)
-    references animals (a_animalid) on delete cascade;
+    ADD CONSTRAINT fk_w_animalid_weights
+    FOREIGN KEY (w_animalid)
+    REFERENCES animals (a_animalid) ON DELETE CASCADE;
 
 ALTER TABLE weights
-    add constraint fk_w_recordedby_weights
-    foreign key (w_recordedby)
-    references users (u_userid) on delete set null;
+    ADD CONSTRAINT fk_w_recordedby_weights
+    FOREIGN KEY (w_recordedby)
+    REFERENCES users (u_userid) ON DELETE SET NULL;
 
 ALTER TABLE photos
-    add constraint fk_p_animalid_photos
-    foreign key (p_animalid)
-    references animals (a_animalid) on delete cascade;
+    ADD CONSTRAINT fk_p_animalid_photos
+    FOREIGN KEY (p_animalid)
+    REFERENCES animals (a_animalid) ON DELETE CASCADE;
 
 ALTER TABLE photos
-    add constraint fk_p_uploader_photos
-    foreign key (p_uploader)
-    references users (u_userid) on delete set null;
+    ADD CONSTRAINT fk_p_uploader_photos
+    FOREIGN KEY (p_uploader)
+    REFERENCES users (u_userid) ON DELETE SET NULL;
 
 ALTER TABLE comments
-    add constraint fk_c_commenter_comments
-    foreign key (c_commenter)
-    references users (u_userid) on delete set null;
+    ADD CONSTRAINT fk_c_commenter_comments
+    FOREIGN KEY (c_commenter)
+    REFERENCES users (u_userid) ON DELETE SET NULL;
 
 ALTER TABLE comments
-    add constraint fk_c_animalid_comments
-    foreign key (c_animalid)
-    references animals (a_animalid) on delete cascade;
+    ADD CONSTRAINT fk_c_animalid_comments
+    FOREIGN KEY (c_animalid)
+    REFERENCES animals (a_animalid) ON DELETE CASCADE;
 
 ALTER TABLE issues
-    add constraint fk_i_raisedby_issues
-    foreign key (i_raisedby)
-    references users (u_userid) on delete set null;
+    ADD CONSTRAINT fk_i_raisedby_issues
+    FOREIGN KEY (i_raisedby)
+    REFERENCES users (u_userid) ON DELETE SET NULL;
 
 ALTER TABLE issues
-    add constraint fk_i_animalid_issues
-    foreign key (i_animalid)
-    references animals (a_animalid) on delete cascade;
+    ADD CONSTRAINT fk_i_animalid_issues
+    FOREIGN KEY (i_animalid)
+    REFERENCES animals (a_animalid) ON DELETE CASCADE;
 
 ALTER TABLE treatments
-    add constraint fk_t_animalid_treatments
-    foreign key (t_animalid)
-    references animals (a_animalid) on delete cascade;
+    ADD CONSTRAINT fk_t_animalid_treatments
+    FOREIGN KEY (t_animalid)
+    REFERENCES animals (a_animalid) ON DELETE CASCADE;
 
 ALTER TABLE treatments
-    add constraint fk_t_treatedby_treatments
-    foreign key (t_treatedby)
-    references users (u_userid) on delete set null;
-   
-    
-
+    ADD CONSTRAINT fk_t_treatedby_treatments
+    FOREIGN KEY (t_treatedby)
+    REFERENCES users (u_userid) ON DELETE SET NULL;

@@ -34,11 +34,15 @@ class CommentList extends React.Component {
         const id = this.props.match.params.id;
         const uid = this.props.match.params.uid;
         
-        const link = "localhost:8080/api/v1/animals/" + id + "/comments/" + comment["commentId"];
+        const link = "http://localhost:8080/api/v1/animals/" + id + "/comments/" + comment["commentId"];
         axios.delete(link).then(res => {
             console.log(res);
             console.log(res.data);
           });;
+
+          const timer = setTimeout(() => {
+            window.location.reload(false);
+         }, 500);
         //window.location.reload(false);
 
         

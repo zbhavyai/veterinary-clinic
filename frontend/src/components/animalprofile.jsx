@@ -16,7 +16,9 @@ class AnimalProfile extends React.Component {
         animal: {},
         weights: [],
         owner: {},
-        imageUrl: 'https://picsum.photos/200',
+        imageUrl: process.env.PUBLIC_URL + '/toobad.png',
+        apiphotos: [],
+        photos:[]
     };
 
     styles = {
@@ -39,6 +41,35 @@ class AnimalProfile extends React.Component {
         const { data: owner } = await axios.get(ownerUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ owner });
 
+        var animalphotoUrl = "http://localhost:8080/api/v1/animals/" + id + "/photos"
+        const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+        this.setState({ apiphotos });
+        
+        var image = null;
+        var photourl = null;
+        var paray = [];
+        for (var i = 0; i< this.state.apiphotos.length;i++){
+            photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
+            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            paray.push(photourl);
+
+        }
+
+        this.setState({ photos: paray});
+
+        if(this.state.photos.length>0){
+            this.setState({
+                imageUrl: this.state.photos[0]
+            })
+        }
+        
+
+        console.log(this.state.photos.length)
+
+        
+
+        
+
         //const promise = axios.get('https://jsonplaceholder.typicode.com/posts')
     }
 
@@ -59,6 +90,8 @@ class AnimalProfile extends React.Component {
         let weight = [];
         let dates = [];
         // console.log(this.state.animal["weight"]);
+
+        
 
         if (this.state.weights.length > 0) {
             for (var i = 0; i < this.state.weights.length; i++) {
@@ -181,7 +214,16 @@ class AnimalProfile extends React.Component {
                 <div class="row">
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
-                            <h5 class="display-4">Photos</h5>
+                            <h5 class="display-4">Photos</h5><Link to={"/" + user + "/" + uid +"/animals/" + id + "/addphoto"} className="btn btn-secondary">Upload Photo</Link>
+                            <div class="container">
+                            {this.state.photos.map(photo => (
+                                <img src={photo} alt="" />
+                            ))}
+
+                            </div>
+                            
+                            
+
 
 
                         </div>
@@ -284,6 +326,11 @@ class AnimalProfile extends React.Component {
                     <div class="jumbotron jumbotron-fluid">
                         <div class="container">
                             <h5 class="display-4">Photos</h5>
+                            {this.state.photos.map(photo => (
+                                
+                                <img src={photo} alt="" />
+                                
+                            ))}
 
 
                         </div>

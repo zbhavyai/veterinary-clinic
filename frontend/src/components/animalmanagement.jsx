@@ -57,6 +57,27 @@ class AnimalManagement extends React.Component {
         //const promise = axios.get('https://jsonplaceholder.typicode.com/posts')
     }
 
+    handleRemove =(e, animal)=>{
+        const user = this.props.match.params.user;
+        
+        const uid = this.props.match.params.uid;
+        
+        const link = "http://localhost:8080/api/v1/animals/" + animal["animalId"];
+        axios.delete(link).then(res => {
+            console.log(res);
+            console.log(res.data);
+          });;
+
+          const timer = setTimeout(() => {
+            window.location.reload(false);
+         }, 500);
+        //window.location.reload(false);
+
+        
+
+
+    };
+
     render() {
         
         let filtered = this.state.animals;
@@ -78,7 +99,7 @@ class AnimalManagement extends React.Component {
          const user = this.props.match.params.user;
          const uid = this.props.match.params.uid;
 
-         if(user == "s"){
+         if(user == "s" || user == "i"){
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             
@@ -191,7 +212,7 @@ class AnimalManagement extends React.Component {
                             <td>{(animal["ownerEmail"] == null) ? 'na' : animal["ownerEmail"].toString()}</td>
                             <td>{(animal["status"] == null) ? 'na' : animal["status"].toString()}</td>
                             {/* <td><Link to={"/" + user + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td> */}
-                            <td><Link to={"/"+user + "/" + uid + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link></td>
+                            <td><Link to={"/"+user + "/" + uid + "/animals/" + animal["animalId"].toString()} className="btn btn-primary btn-sm">Details</Link><button onClick={(e) => this.handleRemove(e, animal)} className="btn btn-danger btn-sm">Remove</button></td>
                         </tr>
                     ))}
                 </tbody>

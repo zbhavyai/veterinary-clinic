@@ -38,6 +38,27 @@ class TreatmentList extends React.Component {
     //     });
     // }
 
+    handleRemoveTreatments =(e, treatment)=>{
+        const user = this.props.match.params.user;
+        const id = this.props.match.params.id;
+        const uid = this.props.match.params.uid;
+        
+        const link = "http://localhost:8080/api/v1/animals/" + id + "/treatments/" + treatment["treatmentId"];
+        axios.delete(link).then(res => {
+            console.log(res);
+            console.log(res.data);
+          });;
+
+          const timer = setTimeout(() => {
+            window.location.reload(false);
+         }, 500);
+        //window.location.reload(false);
+
+        
+
+
+    };
+
     render() {
         const user = this.props.match.params.user;
         const cid = this.props.match.params.cid;
@@ -126,7 +147,7 @@ class TreatmentList extends React.Component {
                                 <p>Log {treatment["treatmentId"]}: {treatment["treatmentDate"]}</p>
 
                                 <p>Decscription: {treatment["treatmentDesc"]}</p>
-                                <td><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Remove</Link></td>
+                                <td><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveTreatments(e, treatment)} className="btn btn-secondary btn-sm">Remove</button></td>
                                 <p></p>
                                 <p></p>
                             </div>

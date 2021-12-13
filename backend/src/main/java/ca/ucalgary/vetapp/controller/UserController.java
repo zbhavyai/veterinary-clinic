@@ -10,8 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@CrossOrigin(methods = { RequestMethod.PUT, RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE,
-        RequestMethod.OPTIONS })
+@CrossOrigin
 @RestController
 @RequestMapping(path = "api/v1/users")
 public class UserController {

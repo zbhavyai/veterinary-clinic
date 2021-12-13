@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@CrossOrigin(methods = { RequestMethod.PUT, RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE,
-    RequestMethod.OPTIONS })
+@CrossOrigin
 @RestController
 @RequestMapping(path = "api/v1/owners")
 public class OwnerController {

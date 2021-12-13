@@ -17,8 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 
-@CrossOrigin(methods = { RequestMethod.PUT, RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE,
-        RequestMethod.OPTIONS })
+@CrossOrigin
 @RestController
 @RequestMapping(path = "api/v1/animals")
 public class AnimalController {

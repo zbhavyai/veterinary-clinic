@@ -17,11 +17,9 @@ INSERT INTO owners (o_ownerid,o_firstname,o_middlename,o_lastname,o_contactnumbe
 ("15","Elizabeth",NULL,"Price","4034406265","elizabeth.price@ucalgary.ca","2850 Delancey Crescent, San Francisco, CA 904361, USA"),
 ("16","Dillon",NULL,"White","4034352974","dillon.white@ucalgary.ca","326 Ricardo Road, Bogota, Colombia "),
 ("17","Amber","Fair","Polinski","4039639612","amber.fair.polinski@ucalgary.ca","1792 Camille Street, Medellin, Colombia "),
-("18","Gurneet","Kaur","Dhillon","4037339463","gurneet.kaur.dhillon@ucalgary.ca","#401 Arera Colony, Bhopal, MP, India"),
-("19",NULL,NULL,NULL,NULL,NULL,NULL),
-("20", "","","","","","");
+("18","Gurneet","Kaur","Dhillon","4037339463","gurneet.kaur.dhillon@ucalgary.ca","#401 Arera Colony, Bhopal, MP, India");
 
-UPDATE sequence_owners SET next_val=21;
+UPDATE sequence_owners SET next_val=19;
 -- ----------------------------------------------
 
 
@@ -44,11 +42,9 @@ INSERT INTO animals (a_animalid,a_name,a_species,a_subspecies,a_breed,a_type,a_r
 ("15","Boomer","Horse","Tarpan","Arabian",NULL,"US","0","2021-08-11","0","0","3",NULL,"171406800","SLD wel","187156291","170514959","Black",NULL,"bat-shaped patch on face"),
 ("16","Kitty","Cat","Feline","Persian",NULL,"London","1","2021-04-09","3","0","3",NULL,"226042634","JLI oih","340156393","128127109","Brown","ACE Inhibitors","spotted"),
 ("17","Brewster","Dog","Canine","Golden Retriever",NULL,"Spain","1","2019-04-16","0","0","12",NULL,"212511357","NLK jll","186893525","185848221","Brown, White","chronic painkillers",NULL),
-("18","Jack","Dog","Lupus","Bulldog",NULL,"Spain","1","2019-05-21","2","0","9",NULL,"194017653","IEK kdo","185173038","200140661","White",NULL,"long ears"),
-("19",NULL,NULL,NULL,NULL,NULL,NULL,"1","2019-04-16","2","0","16",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-("20","","","","","","","1","2019-04-16","0","0","1",NULL,NULL,"","","","","","");
+("18","Jack","Dog","Lupus","Bulldog",NULL,"Spain","1","2019-05-21","2","0","9",NULL,"194017653","IEK kdo","185173038","200140661","White",NULL,"long ears");
 
-UPDATE sequence_animals SET next_val=21;
+UPDATE sequence_animals SET next_val=19;
 -- ----------------------------------------------
 
 
@@ -71,11 +67,9 @@ INSERT INTO users (u_userid,u_joiningdate,u_activationdate,u_terminationdate,u_f
 ("15","2017-12-01","2017-12-02",NULL,"Pam",NULL,"Beesley","3","pam.beesley@ucalgary.ca","passw0rd",NULL,"0"),
 ("16","2018-12-02","2018-12-03",NULL,"Adam","Christopher","Greene","4","adam.christopher.greene@ucalgary.ca","passw0rd",NULL,"1"),
 ("17","2020-04-03","2020-04-04",NULL,"Demi",NULL,"Babatunde","4","demi.babatunde@ucalgary.ca","passw0rd",NULL,"1"),
-("18","2017-12-11","2017-12-12",NULL,"Zach","Smith","Klein","4","zach.smith.klein@ucalgary.ca","passw0rd",NULL,"0"),
-("19","2018-04-23","2018-04-24",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,"0"),
-("20","2017-12-14","2020-12-15",NULL,"","","",NULL,"","","","0");
+("18","2017-12-11","2017-12-12",NULL,"Zach","Smith","Klein","4","zach.smith.klein@ucalgary.ca","passw0rd",NULL,"0");
 
-UPDATE sequence_users SET next_val=21;
+UPDATE sequence_users SET next_val=19;
 -- ----------------------------------------------
 
 
@@ -108,11 +102,9 @@ INSERT INTO weights (w_weightid,w_massinkg,w_recorddate,w_recordedby,w_animalid)
 ("25","5.4","2021-02-28","1","4"),
 ("26","4.4","2021-02-28","4","5"),
 ("27","30.4","2021-02-28","1","6"),
-("28","40.4","2021-02-28","2","7"),
-("29","40","2021-02-28",NULL,"8"),
-("30","40","2021-02-28",NULL,"9");
+("28","40.4","2021-02-28","2","7");
 
-UPDATE sequence_treatments SET next_val=31;
+UPDATE sequence_treatments SET next_val=29;
 -- ----------------------------------------------
 
 
@@ -135,11 +127,9 @@ INSERT INTO photos (p_photoid,p_photodesc,p_animalid,p_photolink,p_alttext,p_upl
 ("15","losing fur","17","image15.png",NULL,"9","2021-03-19"),
 ("16",NULL,"9","image16.png",NULL,"17","2021-10-03"),
 ("17","post neuter ","10","image17.png",NULL,"13","2021-09-04"),
-("18",NULL,"9","image18.png",NULL,"2","2021-03-28"),
-("19",NULL,"8",NULL,NULL,NULL,"2021-03-28"),
-("20","","7","","",NULL,"2021-03-28");
+("18",NULL,"9","image18.png",NULL,"2","2021-03-28");
 
-UPDATE sequence_photos SET next_val=21;
+UPDATE sequence_photos SET next_val=19;
 -- ----------------------------------------------
 
 
@@ -162,11 +152,9 @@ INSERT INTO comments (c_commentid,c_commentdesc,c_animalid,c_commentdate,c_comme
 ("15","Neuterization consult","10","2021-05-05","16"),
 ("16",NULL,"1","2021-09-01","11"),
 ("17",NULL,"3","2021-03-19","14"),
-("18",NULL,"5","2021-10-03","5"),
-("19",NULL,"9","2021-10-04",NULL),
-("20","","12","2021-10-04",NULL);
+("18",NULL,"5","2021-10-03","5");
 
-UPDATE sequence_comments SET next_val=21;
+UPDATE sequence_comments SET next_val=19;
 -- ----------------------------------------------
 
 
@@ -189,11 +177,9 @@ INSERT INTO issues (i_issueid,i_issuedesc,i_detecteddate,i_animalid,i_raisedby,i
 ("15",NULL,"2021-04-29","11","4",1),
 ("16",NULL,"2021-11-11","16","14",1),
 ("17",NULL,"2021-06-14","6","10",1),
-("18",NULL,"2021-06-19","15","9",0),
-("19",NULL,"2021-06-19","16",NULL,NULL),
-("20","","2021-06-19","17",NULL,"");
+("18",NULL,"2021-06-19","15","9",0);
 
-UPDATE sequence_issues SET next_val=21;
+UPDATE sequence_issues SET next_val=19;
 -- ----------------------------------------------
 
 
@@ -215,10 +201,7 @@ INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_drugname,t_drugdose,t_de
 ("14","Vaccine","Astrazeneca","0.1mg","injection","18","2021-12-08","7"),
 ("15","Da2pp",NULL,NULL,NULL,"12","2020-10-01","2"),
 ("16","dental cleaning","Astrazeneca",NULL,NULL,"7","2021-05-13","15"),
-("17","drontal deworm",NULL,NULL,NULL,"5","2021-04-29","5"),
-("18",NULL,NULL,NULL,NULL,"1","2021-11-11","7"),
-("19",NULL,NULL,NULL,NULL,"5","2021-11-12","7"),
-("20","","","","","14","2021-11-12",NULL);
+("17","drontal deworm",NULL,NULL,NULL,"5","2021-04-29","5");
 
-UPDATE sequence_treatments SET next_val=21;
+UPDATE sequence_treatments SET next_val=18;
 -- ----------------------------------------------

@@ -218,13 +218,15 @@ public class UserController {
      * @return the added user details
      */
     @PostMapping(path = "register")
-    public ResponseEntity<?> registerUser(@RequestBody User u) throws UserExistsException {
+    public ResponseEntity<?> registerUser(@RequestBody User u) {
         List<User> allUsers = this.userRepository.findAll();
 
         if (allUsers.size() != 0) {
             for (User eachUser : allUsers) {
                 if (eachUser.getEmailId().equals(u.getEmailId())) {
-                    throw new UserExistsException(u.getEmailId());
+                    String message = "Email is already taken";
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(new CustomMessage(HttpStatus.BAD_REQUEST, message));
                 }
             }
         }
@@ -250,18 +252,18 @@ public class UserController {
      * @param u  updated user details in json
      * @param id the user to be updated
      * @return the updated user details
-     * @throws UserExistsException
      */
     @PutMapping(path = "{userId}")
-    public ResponseEntity<?> updateUser(@RequestBody User u, @PathVariable("userId") Long id)
-            throws UserExistsException {
+    public ResponseEntity<?> updateUser(@RequestBody User u, @PathVariable("userId") Long id) {
         // checks so that user cannot update to an already claimed it by other
         List<User> allUsers = this.userRepository.findAll();
 
         if (allUsers.size() != 0) {
             for (User eachUser : allUsers) {
                 if (eachUser.getUserId() != id && eachUser.getEmailId().equals(u.getEmailId())) {
-                    throw new UserExistsException(u.getEmailId());
+                    String message = "Email is already taken";
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body(new CustomMessage(HttpStatus.BAD_REQUEST, message));
                 }
             }
         }
@@ -310,12 +312,13 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable("userId") Long id) {
         if (!this.userRepository.existsById(id)) {
             String message = "Cannot find requested user";
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
 
         if (this.userRepository.getById(id).getRole() == UserRole.ADMIN) {
             String message = "An admin cannot be deleted";
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomMessage(HttpStatus.BAD_REQUEST, message));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new CustomMessage(HttpStatus.BAD_REQUEST, message));
         }
 
         this.userRepository.deleteById(id);

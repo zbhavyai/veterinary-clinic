@@ -62,14 +62,14 @@ CREATE TABLE weights (
     w_massinkg DOUBLE PRECISION NOT NULL,
     w_recorddate DATE NOT NULL,
     w_recordedby BIGINT,
-    w_animalid BIGINT,
+    w_animalid BIGINT NOT NULL,
     PRIMARY KEY (w_weightid)
 );
 
 CREATE TABLE photos (
     p_photoid BIGINT NOT NULL,
     p_photodesc VARCHAR(255),
-    p_animalid BIGINT,
+    p_animalid BIGINT NOT NULL,
     p_photolink VARCHAR(255),
     p_alttext VARCHAR(255),
     p_uploader BIGINT,
@@ -80,7 +80,7 @@ CREATE TABLE photos (
 CREATE TABLE comments (
     c_commentid BIGINT NOT NULL,
     c_commentdesc VARCHAR(255),
-    c_animalid BIGINT,
+    c_animalid BIGINT NOT NULL,
     c_commentdate DATE NOT NULL,
     c_commenter BIGINT,
     PRIMARY KEY (c_commentid)
@@ -90,7 +90,7 @@ CREATE TABLE issues (
     i_issueid BIGINT NOT NULL,
     i_issuedesc VARCHAR(255),
     i_detecteddate DATE NOT NULL,
-    i_animalid BIGINT,
+    i_animalid BIGINT NOT NULL,
     i_raisedby BIGINT,
     i_isresolved BIT,
     PRIMARY KEY (i_issueid)
@@ -102,7 +102,7 @@ CREATE TABLE treatments (
     t_drugname VARCHAR(255),
     t_drugdose VARCHAR(255),
     t_deliverymethod VARCHAR(255),
-    t_animalid BIGINT,
+    t_animalid BIGINT NOT NULL,
     t_treatmentdate DATE NOT NULL,
     t_treatedby BIGINT,
     PRIMARY KEY (t_treatmentid)

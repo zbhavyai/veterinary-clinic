@@ -92,7 +92,7 @@ FROM
 animals a
 RIGHT JOIN issues i ON i.i_animalid = a.a_animalid
 LEFT JOIN users u ON u.u_userid = i.i_raisedby
-WHERE 
+WHERE
 a.a_animalid=13;
 
 UPDATE issues SET i_issuedesc='Fracture' WHERE i_issueid=2;
@@ -121,18 +121,19 @@ FROM
 animals a
 RIGHT JOIN issues i ON i.i_animalid = a.a_animalid
 LEFT JOIN users u ON u.u_userid = i.i_raisedby
-WHERE 
+WHERE
 a.a_animalid=13;
 -- ----------------------------------------------
 
 
 -- (7) delete operation -------------------------
-SELECT * FROM animals WHERE a_animalid='5';
+SELECT * FROM animals WHERE a_animalid=5;
 
 SELECT * FROM comments WHERE c_animalid=5;
 SELECT * FROM issues WHERE i_animalid=5;
 SELECT * FROM photos WHERE p_animalid=5;
 SELECT * FROM treatments WHERE t_animalid=5;
+SELECT * FROM weights WHERE w_animalid=5;
 
 DELETE FROM animals WHERE a_animalid='5';
 -- ----------------------------------------------

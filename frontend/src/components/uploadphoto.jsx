@@ -123,7 +123,7 @@ class UploadPhoto extends React.Component {
           return (
             <div>
               <br />
-              <h4>Choose before Pressing the Upload button</h4>
+              <h4>Please click Choose and select file before clicking the Upload button</h4>
             </div>
           );
         }
@@ -169,7 +169,7 @@ class UploadPhoto extends React.Component {
             <div className="row">
                 <div className="jumbotron jumbotron-fluid">
                     <div className="container">
-                        <h1 className="display-4">Upload Photo</h1>
+                        <h1 className="display-4">Please follow instructions below:</h1>
                         <div className="row">
                         <div className="col-sm">
                         <div>

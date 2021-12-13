@@ -558,6 +558,8 @@ public class AnimalController {
         User u = this.userRepository.findById(userId).get();
         w.setRecordedBy(u);
 
+        w.setRecordDate(LocalDate.now());
+
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
             w.setTheAnimal(oneAnimal);

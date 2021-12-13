@@ -174,7 +174,7 @@ class TreatmentList extends React.Component {
                                 <p>Log {treatment["treatmentId"]}: {treatment["treatmentDate"]}</p>
 
                                 <p>Decscription: {treatment["treatmentDesc"]}</p>
-                                <p><Link to={"/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveTreatments(e, treatment)} className="btn btn-secondary btn-sm">Remove</button></p>
+                                <p><Link to={"/"+user+"/" + uid +"/animals/" + this.state.animal["animalId"].toString()+"/treatments/"+treatment["treatmentId"] + "/edit"} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveTreatments(e, treatment)} className="btn btn-secondary btn-sm">Remove</button></p>
                                 <p></p>
                                 <p></p>
                             </div>

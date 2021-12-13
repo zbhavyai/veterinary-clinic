@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
-import { withRouter } from "react-router";
 import NavBar from './navbar';
-import { Redirect } from 'react-router';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
 } from "react-router-dom";
-class EditComment extends React.Component {
+class EditIssue extends React.Component {
     state = {
         animal: {},
         comment: "",
-        comments:[],
-        placeholder: "",
         imageUrl: process.env.PUBLIC_URL + '/toobad.png',
+        placeholder: "",
         apiphotos: [],
         photos:[],
-        idx: 0
+        comments:[]
     };
 
     async componentDidMount() {
@@ -29,10 +24,9 @@ class EditComment extends React.Component {
 
         var animalIdUrl = "http://localhost:8080/api/v1/animals/" + id
         const { data: animal } = await axios.get(animalIdUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
-
-
         this.setState({ animal });
 
+        
 
         var animalphotoUrl = "http://localhost:8080/api/v1/animals/" + id + "/photos"
         const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
@@ -59,25 +53,21 @@ class EditComment extends React.Component {
 
         console.log(this.state.photos.length)
 
-        var animalCommentUrl = "http://localhost:8080/api/v1/animals/" + id + "/comments"
+        var animalCommentUrl = "http://localhost:8080/api/v1/animals/" + id + "/issues"
         const { data: comments } = await axios.get(animalCommentUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ comments });
-        
-        
-        
 
         for(var i = 0; i<this.state.comments.length;i++){
-            console.log("Comment ID: "+ this.state.comments[i]["commentId"]);
-            if(cid == this.state.comments[i]["commentId"]){
+            console.log("Issue ID: "+ this.state.comments[i]["issueId"]);
+            if(cid == this.state.comments[i]["issueId"]){
                 console.log("Found");
                 this.setState({
-                    idx: i
+                    idx: i,
+                    placeholder: this.state.comments[i]["issueDesc"]
                 })
             }
         }
-        this.setState({placeholder: this.state.comments[this.state.idx]["commentDesc"]});
-
-
+        
     }
 
     handleChange(event) {
@@ -91,37 +81,42 @@ class EditComment extends React.Component {
         const uid = this.props.match.params.uid;
         const cid = this.props.match.params.cid;
 
-        
-
         let newDate = new Date()
-        let date = newDate.getDate();
+        let day = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
-        let day = newDate.getDay();
+        
         let dateString = year.toString() + "-" + month.toString()+ "-"+day.toString();
-        let x = this.state.idx;
+        console.log(dateString);
 
         const message = {
-            "commentId": this.state.comments[x]["commentId"],
-            "commentDesc": this.state.comment,
-            "commentDate": "2022-01-01",
-            "commenter": {
+            "issueId": cid,
+            "issueDesc": this.state.comment,
+            "detectedDate": null,
+            "resolved": false,
+            "raisedBy": {
                 "userId": uid
             }
         }
+
+        
        
         
-        const link = "http://localhost:8080/api/v1/animals/" + id + "/comments/" + this.state.comments[x]["commentId"];
+        let link = "http://localhost:8080/api/v1/animals/" + id + "/issues/"+cid;
         axios.put(link, message,{headers:{}}).then(res => {
             console.log(res);
             console.log(res.data);
           });
-        //window.location.reload(false);
-
-        const timer = setTimeout(() => {
-            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/comments");
-         }, 500);
         
+
+        const status = {"status": "RED"};
+        link = "http://localhost:8080/api/v1/animals/" + id;
+        axios.put(link, status,{headers:{}});
+
+        
+        const timer = setTimeout(() => {
+            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/issues");
+         }, 500);
 
 
 
@@ -130,13 +125,20 @@ class EditComment extends React.Component {
     };
 
     render() {
+        let newDate = new Date()
+        let day = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+        
+        let dateString = year.toString() + "-" + month.toString()+ "-"+day.toString();
+        console.log(dateString);
         const user = this.props.match.params.user;
-        const uid = this.props.match.params.uid;
+        const uid  = this.props.match.params.uid;
         
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             
-            <h2 className="display-4">Comment Logs</h2>
+            <h2 className="display-4">Issue Logs</h2>
             <div className="row">
                 <div className="col-sm">
                     <img src={this.state.imageUrl} alt="" />
@@ -161,11 +163,11 @@ class EditComment extends React.Component {
             <div className="row">
                 <div className="jumbotron jumbotron-fluid">
                     <div className="container">
-                        <h1 className="display-4">Edit Comment</h1>
+                        <h1 className="display-4">Edit Issue</h1>
                         <div className="row">
                         <div className="col-sm">
                             < input type="text" id="inputFilter" className="form-control" placeholder={this.state.placeholder} aria-label="First Name" aria-describedby="basic-addon2" value={this.state.comment} onChange={(e) =>this.handleChange(e)}/>
-                            <button onClick={(e) => this.handleComment(e)} className="btn btn-primary">Edit Comment</button>
+                            <button onClick={(e) => this.handleComment(e)} className="btn btn-primary">Edit Issue</button>
                         
                         </div>
                         </div>
@@ -182,4 +184,4 @@ class EditComment extends React.Component {
     }
 }
  
-export default EditComment;
+export default EditIssue;

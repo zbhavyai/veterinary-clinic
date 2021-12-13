@@ -11,15 +11,17 @@ import {
     Route,
     Link
 } from "react-router-dom";
-class EditComment extends React.Component {
+class EditTreatment extends React.Component {
     state = {
         animal: {},
-        comment: "",
-        comments:[],
+        treatmentDesc: "",
+        drugName: "",
+        drugDose: "",
         placeholder: "",
         imageUrl: process.env.PUBLIC_URL + '/toobad.png',
         apiphotos: [],
         photos:[],
+        treatments:[],
         idx: 0
     };
 
@@ -32,6 +34,8 @@ class EditComment extends React.Component {
 
 
         this.setState({ animal });
+
+        
 
 
         var animalphotoUrl = "http://localhost:8080/api/v1/animals/" + id + "/photos"
@@ -56,70 +60,93 @@ class EditComment extends React.Component {
             })
         }
         
-
         console.log(this.state.photos.length)
 
-        var animalCommentUrl = "http://localhost:8080/api/v1/animals/" + id + "/comments"
-        const { data: comments } = await axios.get(animalCommentUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
-        this.setState({ comments });
+        var animalTreatmentUrl = "http://localhost:8080/api/v1/animals/" + id + "/treatments"
+        const { data: treatments } = await axios.get(animalTreatmentUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+        this.setState({ treatments });
+
+        
         
         
         
 
-        for(var i = 0; i<this.state.comments.length;i++){
-            console.log("Comment ID: "+ this.state.comments[i]["commentId"]);
-            if(cid == this.state.comments[i]["commentId"]){
+        for(var i = 0; i<this.state.treatments.length;i++){
+            console.log("Treatment ID: "+ this.state.treatments[i]["treatmentId"]);
+            if(cid == this.state.treatments[i]["treatmentId"]){
+                
                 console.log("Found");
                 this.setState({
+                    placeholder: this.state.treatments[i]["treatmentDesc"],
                     idx: i
                 })
             }
         }
-        this.setState({placeholder: this.state.comments[this.state.idx]["commentDesc"]});
+        
 
 
     }
 
-    handleChange(event) {
-        this.setState({comment: event.target.value})
+    handleDescChange(event) {
+        this.setState({treatmentDesc: event.target.value})
         
       }
 
-    handleComment =(e)=>{
+      handleDrugChange(event) {
+        this.setState({drugName: event.target.value})
+        
+      }
+
+      handleDosageChange(event) {
+        this.setState({drugDose: event.target.value})
+        
+      }
+
+      handledeliveryMethodChange(event) {
+        this.setState({deliveryMethod: event.target.value})
+        
+      }
+
+      handleTreatment =(e)=>{
         const id = this.props.match.params.id;
         const user = this.props.match.params.user;
         const uid = this.props.match.params.uid;
         const cid = this.props.match.params.cid;
-
-        
-
         let newDate = new Date()
-        let date = newDate.getDate();
+        let day = newDate.getDate();
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
-        let day = newDate.getDay();
+        
         let dateString = year.toString() + "-" + month.toString()+ "-"+day.toString();
+        console.log(dateString);
         let x = this.state.idx;
 
         const message = {
-            "commentId": this.state.comments[x]["commentId"],
-            "commentDesc": this.state.comment,
-            "commentDate": "2022-01-01",
-            "commenter": {
+            "treatmentId": cid,
+            "treatmentDesc": this.state.treatmentDesc,
+            "treatmentDate": null,
+            "treatedBy": {
                 "userId": uid
             }
         }
+
+        
        
         
-        const link = "http://localhost:8080/api/v1/animals/" + id + "/comments/" + this.state.comments[x]["commentId"];
+        let link = "http://localhost:8080/api/v1/animals/" + id + "/treatments/"+ cid;
         axios.put(link, message,{headers:{}}).then(res => {
             console.log(res);
             console.log(res.data);
           });
-        //window.location.reload(false);
 
+          const status = {"status": "GREEN"};
+        link = "http://localhost:8080/api/v1/animals/" + id;
+        axios.put(link, status,{headers:{}});
+        
+
+        
         const timer = setTimeout(() => {
-            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/comments");
+            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/treatments");
          }, 500);
         
 
@@ -129,14 +156,29 @@ class EditComment extends React.Component {
 
     };
 
+
+
+    // componentWillMount() {
+    //     const id = this.props.match.params.id;
+    //     // console.log(id);
+
+    //     this.setState({
+    //         animal: getAnimalbyId(id),
+    //     });
+    // }
+
     render() {
         const user = this.props.match.params.user;
         const uid = this.props.match.params.uid;
+        let x  = this.state.idx;
         
-            return <React.Fragment>
+
+
+        return <React.Fragment>
+
             <NavBar user = {user} uid = {uid}/>
             
-            <h2 className="display-4">Comment Logs</h2>
+            <h2 className="display-4">Treatment Logs</h2>
             <div className="row">
                 <div className="col-sm">
                     <img src={this.state.imageUrl} alt="" />
@@ -161,11 +203,12 @@ class EditComment extends React.Component {
             <div className="row">
                 <div className="jumbotron jumbotron-fluid">
                     <div className="container">
-                        <h1 className="display-4">Edit Comment</h1>
+                        <h1 className="display-4">Edit Treatment</h1>
                         <div className="row">
                         <div className="col-sm">
-                            < input type="text" id="inputFilter" className="form-control" placeholder={this.state.placeholder} aria-label="First Name" aria-describedby="basic-addon2" value={this.state.comment} onChange={(e) =>this.handleChange(e)}/>
-                            <button onClick={(e) => this.handleComment(e)} className="btn btn-primary">Edit Comment</button>
+                            < input type="text" id="inputFilter" className="form-control" placeholder={this.state.placeholder} aria-label="First Name" aria-describedby="basic-addon2" value={this.state.treatmentDesc} onChange={(e) =>this.handleDescChange(e)}/>
+                            
+                            <button onClick={(e) => this.handleTreatment(e)} className="btn btn-primary">Edit Treatment</button>
                         
                         </div>
                         </div>
@@ -174,12 +217,8 @@ class EditComment extends React.Component {
 
             </div>
         </React.Fragment>;
-
-        
-
-
-        
     }
 }
  
-export default EditComment;
+ 
+export default EditTreatment;

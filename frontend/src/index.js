@@ -40,6 +40,8 @@ import AddAnimalExisting from './components/addanimalexisting';
 import AddAnimalNew from './components/addanimalnew';
 import EditUser from './components/edituser';
 import UploadPhoto from './components/uploadphoto';
+import EditTreatment from './components/edittreatment';
+import EditIssue from "./components/editissue";
 
 
 
@@ -55,7 +57,9 @@ reactDom.render(
     <Route path='/:user/:uid/animals/isowner' component={IsAnimalOwner}/> 
     <Route path='/:user/:uid/users/:id/edit' component={EditUser}/>
     <Route path='/:user/:uid/users/add' component={AddUser}/>
+    <Route path='/:user/:uid/animals/:id/issues/:cid/edit' component={EditIssue}/>
     <Route path='/:user/:uid/animals/:id/issues/add' component={AddIssue}/> 
+    <Route path='/:user/:uid/animals/:id/treatments/:cid/edit' component={EditTreatment}/>
     <Route path='/:user/:uid/animals/:id/treatments/add' component={AddTreatment}/>
     <Route path='/:user/:uid/animals/:id/comments/:cid/edit' component={EditComment}/>
     <Route path='/:user/:uid/animals/:id/comments/add' component={AddComment}/> 

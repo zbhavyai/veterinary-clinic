@@ -172,7 +172,7 @@ class IssueList extends React.Component {
                                 <p>Log {issue["issueId"]}: {issue["issueDate"]}</p>
 
                                 <p>{issue["issueDesc"]}</p>
-                                <p><Link to={"/" + user+ "/animals/" + this.state.animal["animalId"].toString()} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveIssuess(e, issue)} className="btn btn-secondary btn-sm">Remove</button></p>
+                                <p><Link to={"/"+user+"/" + uid + "/animals/" + this.state.animal["animalId"].toString()+"/issues/"+issue["issueId"] + "/edit"} className="btn btn-secondary btn-sm">Edit</Link><button onClick={(e) => this.handleRemoveIssuess(e, issue)} className="btn btn-secondary btn-sm">Remove</button></p>
                                 <p></p>
                                 <p></p>
                             </div>

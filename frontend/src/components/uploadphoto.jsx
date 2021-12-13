@@ -14,7 +14,9 @@ class UploadPhoto extends React.Component {
     state = {
         animal: {},
         comment: "",
-        imageUrl: 'https://picsum.photos/200',
+        imageUrl: process.env.PUBLIC_URL + '/toobad.png',
+        apiphotos: [],
+        photos:[],
         selectedFile: null
     };
 
@@ -25,35 +27,78 @@ class UploadPhoto extends React.Component {
         const { data: animal } = await axios.get(animalIdUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ animal });
 
+
+        var animalphotoUrl = "http://localhost:8080/api/v1/animals/" + id + "/photos"
+        const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+        this.setState({ apiphotos });
+        
+        var image = null;
+        var photourl = null;
+        var paray = [];
+        for (var i = 0; i< this.state.apiphotos.length;i++){
+            photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
+            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            paray.push(photourl);
+
+        }
+
+        this.setState({ photos: paray});
+
+        if(this.state.photos.length>0){
+            this.setState({
+                imageUrl: this.state.photos[0]
+            })
+        }
+        
+
+        console.log(this.state.photos.length)
+
         
     }
 
     onFileChange = event => {
-    
-        // Update the state
+        
         this.setState({ selectedFile: event.target.files[0] });
       
       };
       
       // On file upload (click the upload button)
       onFileUpload = () => {
-      
-        // Create an object of formData
+        const id = this.props.match.params.id;
+        const user = this.props.match.params.user;
+        const uid = this.props.match.params.uid;
+
         const formData = new FormData();
-      
+    
         // Update the formData object
         formData.append(
-          "myFile",
-          this.state.selectedFile,
-          this.state.selectedFile.name
+          "image", this.state.selectedFile 
+          
         );
+        formData.append("userId", uid);
+        formData.append("photodesc", "photoupload");
+        formData.append("alttext", "photoupload");
+
       
-        // Details of the uploaded file
-        console.log(this.state.selectedFile);
-      
-        // Request made to the backend api
-        // Send formData object
-        axios.post("api/uploadfile", formData);
+        const message = {
+            "image": this.state.selectedFile,
+            "userId": uid,
+            "photodesc": "photoupload",
+            "alttext": "photoupload",
+
+            
+        }
+
+        const link = "http://localhost:8080/api/v1/animals/" + id + "/photos";
+        axios.post(link, formData,{headers:{}}).then(res => {
+            console.log(res);
+            console.log(res.data);
+          });
+        //window.location.reload(false);
+
+        const timer = setTimeout(() => {
+            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id);
+         }, 500);
       };
 
       fileData = () => {
@@ -70,10 +115,7 @@ class UploadPhoto extends React.Component {
                 <p>File Type: {this.state.selectedFile.type}</p>
    
                
-            <p>
-                Last Modified:{" "}
-                {this.state.selectedFile.lastModifiedDate.toDateString()}
-              </p>
+            
    
             </div>
           );
@@ -132,7 +174,7 @@ class UploadPhoto extends React.Component {
                         <div class="col-sm">
                         <div>
                                 <input type="file" onChange={this.onFileChange} />
-                                <button onClick={this.onFileUpload}>
+                                <button className="btn btn-secondary" onClick={this.onFileUpload}>
                                 Upload!
                                 </button>
                             </div>

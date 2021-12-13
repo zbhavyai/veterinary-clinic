@@ -13,7 +13,9 @@ class TreatmentList extends React.Component {
     state = {
         animal: {},
         treatments: [],
-        imageUrl: 'https://picsum.photos/200',
+        imageUrl: process.env.PUBLIC_URL + '/toobad.png',
+        apiphotos: [],
+        photos:[],
     };
 
     async componentDidMount() {
@@ -26,6 +28,31 @@ class TreatmentList extends React.Component {
         var animalTreatmentUrl = "http://localhost:8080/api/v1/animals/" + id + "/treatments"
         const { data: treatments } = await axios.get(animalTreatmentUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ treatments });
+
+        var animalphotoUrl = "http://localhost:8080/api/v1/animals/" + id + "/photos"
+        const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+        this.setState({ apiphotos });
+        
+        var image = null;
+        var photourl = null;
+        var paray = [];
+        for (var i = 0; i< this.state.apiphotos.length;i++){
+            photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
+            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            paray.push(photourl);
+
+        }
+
+        this.setState({ photos: paray});
+
+        if(this.state.photos.length>0){
+            this.setState({
+                imageUrl: this.state.photos[0]
+            })
+        }
+        
+
+        console.log(this.state.photos.length)
     }
 
 

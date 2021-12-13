@@ -41,6 +41,7 @@ import EditUser from './components/edituser';
 import UploadPhoto from './components/uploadphoto';
 import EditTreatment from './components/edittreatment';
 import EditIssue from "./components/editissue";
+import AddWeight from "./components/addweight";
 
 
 
@@ -66,6 +67,7 @@ reactDom.render(
     <Route path='/:user/:uid/animals/:id/status' component={AnimalStatus}/> 
     <Route path='/:user/:uid/animals/:id/issues' component={IssueList}/> 
     <Route path='/:user/:uid/animals/:id/treatments' component={TreatmentList}/>
+    <Route path='/:user/:uid/animals/:id/addweight' component={AddWeight}/>
     <Route path='/:user/:uid/animals/:id/comments' component={CommentList}/>
     <Route path='/:user/:uid/requestmanagment' component={RequestManagement}/>
     <Route path='/:user/:uid/requestsubmission' component={RequestSubmission}/>

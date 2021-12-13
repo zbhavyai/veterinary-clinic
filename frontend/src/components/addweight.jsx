@@ -2,21 +2,21 @@ import React from 'react';
 import axios from "axios";
 import ReactApexChart from 'react-apexcharts';
 
-import { withRouter } from "react-router";
+
 import NavBar from './navbar';
 import {
 
     Link
 } from "react-router-dom";
-
-class AnimalProfile extends React.Component {
+class AddWeight extends React.Component {
     state = {
         animal: {},
         weights: [],
         owner: {},
         imageUrl: process.env.PUBLIC_URL + '/toobad.png',
         apiphotos: [],
-        photos:[]
+        photos:[],
+        weight:""
     };
 
     styles = {
@@ -71,15 +71,47 @@ class AnimalProfile extends React.Component {
         //const promise = axios.get('https://jsonplaceholder.typicode.com/posts')
     }
 
-    //WARNING! To be deprecated in React v17. Use componentDidMount instead.
-    // componentWillMount() {
-    //     const id = this.props.match.params.id;
-    //     // console.log(id);
+    
+    handleChange(event) {
+        this.setState({weight: event.target.value})
+        
+      }
 
-    //     this.setState({
-    //         animal: getAnimalbyId(id),
-    //     });
-    // }
+    handleComment =(e)=>{
+        const id = this.props.match.params.id;
+        const user = this.props.match.params.user;
+        const uid = this.props.match.params.uid;
+
+        if(isNaN(Number(this.state.weight))){
+            alert("Please enter valid Number!")
+
+        } else{
+            const message = {
+                "massInKg": Number(this.state.weight),
+                
+                "reordedBy": {
+                    "userId": uid
+                }
+            }
+    
+            
+           
+            
+            const link = "http://localhost:8080/api/v1/animals/" + id + "/weights";
+            axios.post(link, message,{headers:{}}).then(res => {
+                console.log(res);
+                console.log(res.data);
+              });
+            //window.location.reload(false);
+    
+            setTimeout(() => {
+                this.props.history.push("/"+ user+"/" + uid +'/animals/'+id);
+             }, 500);
+
+        }
+        
+
+    };
 
     render() {
         const user = this.props.match.params.user;
@@ -158,36 +190,22 @@ class AnimalProfile extends React.Component {
                     </div>
 
                 </div>
-                <div className="row">
-                    <div className="col-sm">
-                        <div className="jumbotron jumbotron-fluid">
-                            <div className="container">
-                                <h5 className="display-4">Owner Details</h5>
-                                <p className="lead">Owner Name: {this.state.owner["fullName"]}</p>
-                                <p className="lead">Owner Contact: {this.state.owner["contactNumber"]}</p>
-                                <p className="lead">Owner Email: {this.state.owner["emailId"]}</p>
-                                <p className="lead">Owner Address: {this.state.owner["address"]}</p>
-                            </div>
+                
+                <div className="container">
+                        <h1 className="display-4">Add Weight</h1>
+                        <div className="row">
+                        <div className="col-sm">
+                            < input type="text" id="inputFilter" className="form-control" placeholder="Add Weight here" aria-label="First Name" aria-describedby="basic-addon2" value={this.state.comment} onChange={(e) =>this.handleChange(e)}/>
+                            <button onClick={(e) => this.handleComment(e)} className="btn btn-primary">Add Weight</button>
+                        
                         </div>
-
-                    </div>
-                    <div className="col-sm">
-                        <div className="jumbotron jumbotron-fluid">
-                            <div className="container">
-                                <h5 className="display-4">Identification Details</h5>
-                                <p className="lead">RFID Number: {this.state.animal["rfidNumber"]}</p>
-                                <p className="lead">Microchip: {this.state.animal["microChipNumber"]}</p>
-                                <p className="lead">Tattoo: {this.state.animal["tattooNum"]}</p>
-                                <p className="lead">Coat Color: {this.state.animal["coatColor"]}</p>
-                            </div>
                         </div>
                     </div>
 
-                </div>
-                <div className="row">
+                    <div className="row">
                     <div className="jumbotron jumbotron-fluid">
                         <div className="container">
-                            <h5 className="display-4">Weight Graph</h5><Link to={"/" + user + "/" + uid +"/animals/" + id + "/addweight"} className="btn btn-secondary">Add Weight</Link>
+                            
                             <div id="chart">
                                 <ReactApexChart options={options} series={series} type="line" height={350} />
                             </div>
@@ -197,48 +215,9 @@ class AnimalProfile extends React.Component {
                     </div>
 
                 </div>
-                <div className="row">
-                    <div className="jumbotron jumbotron-fluid">
-                        <div className="container">
-                            <h5 className="display-4">Other Details</h5>
-                            <p className="lead">Continuous Medication: {this.state.animal["continuousMedication"]}</p>
+                
 
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="row">
-                    <div className="jumbotron jumbotron-fluid">
-                        <div className="container">
-                            <h5 className="display-4">Photos</h5><Link to={"/" + user + "/" + uid +"/animals/" + id + "/addphoto"} className="btn btn-secondary">Upload Photo</Link>
-                            <div className="container">
-
-                            {this.state.photos.map(photo => (
-                                
-                                <img key={photo} src={photo} width="200" 
-                                height="200" alt="" />
-                            ))}
-
-                            </div>
-                            
-                            
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-                <div className="row">
-                    <div className="btn-group" role="group" aria-label="Basic example">
-                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></div>
-                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></div>
-                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></div> 
-                    </div>
-
-                </div>
+                
             </div>
 
 
@@ -359,5 +338,5 @@ class AnimalProfile extends React.Component {
         
     }
 }
-
-export default withRouter(AnimalProfile);
+ 
+export default AddWeight;

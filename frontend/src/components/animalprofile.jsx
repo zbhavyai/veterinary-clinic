@@ -217,7 +217,8 @@ class AnimalProfile extends React.Component {
                             <h5 class="display-4">Photos</h5><Link to={"/" + user + "/" + uid +"/animals/" + id + "/addphoto"} className="btn btn-secondary">Upload Photo</Link>
                             <div class="container">
                             {this.state.photos.map(photo => (
-                                <img src={photo} alt="" />
+                                <img src={photo} width="200" 
+                                height="200" alt="" />
                             ))}
 
                             </div>
@@ -328,7 +329,8 @@ class AnimalProfile extends React.Component {
                             <h5 class="display-4">Photos</h5>
                             {this.state.photos.map(photo => (
                                 
-                                <img src={photo} alt="" />
+                                <img src={photo} width="200" 
+                                height="200" alt="" />
                                 
                             ))}
 

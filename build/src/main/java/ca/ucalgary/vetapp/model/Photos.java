@@ -2,6 +2,7 @@ package ca.ucalgary.vetapp.model;
 
 import java.time.LocalDate;
 import javax.persistence.*;
+import java.nio.file.*;
 
 /**
  * Photos of the animal
@@ -9,6 +10,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "photos")
 public class Photos {
+    public static Path storeLocation = Paths.get("photos");
+
     /**
      * Unique Photo id
      */

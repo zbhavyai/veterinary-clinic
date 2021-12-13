@@ -1,11 +1,21 @@
 package ca.ucalgary.vetapp.controller;
 
 import ca.ucalgary.vetapp.model.*;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.nio.file.*;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.util.Random;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 
 @CrossOrigin(methods = { RequestMethod.PUT, RequestMethod.POST, RequestMethod.GET, RequestMethod.DELETE,
         RequestMethod.OPTIONS })
@@ -199,10 +209,11 @@ public class AnimalController {
      * @param sT         search term
      * @return filtered list of animals having status as search term
      */
-    private List<Animal> searchAnimalByStatus(List<Animal> allAnimals, String sT) throws UnsupportedRequestException {
+    private List<Animal> searchAnimalByStatus(List<Animal> allAnimals, String sT) {
+        List<Animal> searchResults = new ArrayList<>();
+
         try {
             AnimalStatus searchTerm = AnimalStatus.valueOf(sT.toUpperCase());
-            List<Animal> searchResults = new ArrayList<>();
 
             for (Animal eachAnimal : allAnimals) {
                 if (eachAnimal.getStatus() == searchTerm) {
@@ -215,7 +226,7 @@ public class AnimalController {
         }
 
         catch (IllegalArgumentException e) {
-            throw new UnsupportedRequestException(e.getMessage());
+            return searchResults;
         }
     }
 
@@ -244,18 +255,18 @@ public class AnimalController {
      *
      * @param id animal id
      * @return animal
-     * @throws NotFoundException
      */
     @GetMapping(path = "{animalId}")
-    public Animal getAnimalById(@PathVariable("animalId") Long id) throws NotFoundException {
-        Animal a = this.searchAnimalById(id).get(0);
+    public ResponseEntity<?> getAnimalById(@PathVariable("animalId") Long id) {
+        List<Animal> a = this.searchAnimalById(id);
 
         if (a == null) {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
 
         else {
-            return a;
+            return ResponseEntity.status(HttpStatus.OK).body(a.get(0));
         }
     }
 
@@ -265,60 +276,61 @@ public class AnimalController {
      * @param searchBy   where to search
      * @param searchTerm what to search
      * @return list of animals meeting search criteria
-     * @throws UnsupportedRequestException
      */
     @GetMapping()
-    public List<Animal> searchAnimal(@RequestParam(name = "searchBy", required = false) String searchBy,
-            @RequestParam(name = "searchTerm", required = false) String searchTerm) throws UnsupportedRequestException {
+    public ResponseEntity<?> searchAnimal(@RequestParam(name = "searchBy", required = false) String searchBy,
+            @RequestParam(name = "searchTerm", required = false) String searchTerm) {
 
         List<Animal> allAnimals = this.animalRepository.findAll();
 
         if (searchBy == null || searchTerm == null) {
-            return allAnimals;
+            return ResponseEntity.status(HttpStatus.OK).body(allAnimals);
         }
 
         else if (searchBy.equals("") || searchTerm.equals("")) {
-            return allAnimals;
+            return ResponseEntity.status(HttpStatus.OK).body(allAnimals);
         }
 
         else if (searchBy.equalsIgnoreCase("id")) {
-            return this.searchAnimalById(Long.valueOf(searchTerm));
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalById(Long.valueOf(searchTerm)));
         }
 
         else if (searchBy.equalsIgnoreCase("name")) {
-            return this.searchAnimalByName(allAnimals, searchTerm);
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalByName(allAnimals, searchTerm));
         }
 
         else if (searchBy.equalsIgnoreCase("species")) {
-            return this.searchAnimalBySpecies(allAnimals, searchTerm);
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalBySpecies(allAnimals, searchTerm));
         }
 
         else if (searchBy.equalsIgnoreCase("subspecies")) {
-            return this.searchAnimalBySubSpecies(allAnimals, searchTerm);
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalBySubSpecies(allAnimals, searchTerm));
         }
 
         else if (searchBy.equalsIgnoreCase("breed")) {
-            return this.searchAnimalByBreed(allAnimals, searchTerm);
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalByBreed(allAnimals, searchTerm));
         }
 
         else if (searchBy.equalsIgnoreCase("type")) {
-            return this.searchAnimalByType(allAnimals, searchTerm);
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalByType(allAnimals, searchTerm));
         }
 
         else if (searchBy.equalsIgnoreCase("region")) {
-            return this.searchAnimalByRegion(allAnimals, searchTerm);
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalByRegion(allAnimals, searchTerm));
         }
 
         else if (searchBy.equalsIgnoreCase("status")) {
-            return this.searchAnimalByStatus(allAnimals, searchTerm);
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalByStatus(allAnimals, searchTerm));
         }
 
         else if (searchBy.equalsIgnoreCase("owner")) {
-            return this.searchAnimalByOwner(allAnimals, searchTerm);
+            return ResponseEntity.status(HttpStatus.OK).body(this.searchAnimalByOwner(allAnimals, searchTerm));
         }
 
         else {
-            throw new UnsupportedRequestException("Invalid search by");
+            String message = "Invalid animal search operation";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new CustomMessage(HttpStatus.BAD_REQUEST, message));
         }
     }
 
@@ -329,16 +341,17 @@ public class AnimalController {
      * @return list of weights recorded
      */
     @GetMapping(path = "{animalId}/weights")
-    public List<Weights> getWeights(@PathVariable("animalId") Long id) {
+    public ResponseEntity<?> getWeights(@PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
-            return oneAnimal.fetchAnimalWeightList();
+            return ResponseEntity.status(HttpStatus.OK).body(oneAnimal.fetchAnimalWeightList());
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -349,16 +362,71 @@ public class AnimalController {
      * @return list of photos
      */
     @GetMapping(path = "{animalId}/photos")
-    public List<Photos> getPhotos(@PathVariable("animalId") Long id) {
+    public ResponseEntity<?> getPhotos(@PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
-            return oneAnimal.fetchAnimalPhotoList();
+            return ResponseEntity.status(HttpStatus.OK).body(oneAnimal.fetchAnimalPhotoList());
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+        }
+    }
+
+    /**
+     * Endpoint for GET - fetch the photo of the animal as a image for display
+     *
+     * @param animalId animal id - used just for checking
+     * @param photoId  photo id of the photo to fetch
+     * @return the image file
+     */
+    @GetMapping(path = "{animalId}/photos/{photoId}")
+    public ResponseEntity<?> fetchPhotoById(@PathVariable("animalId") Long animalId,
+            @PathVariable("photoId") Long photoId) {
+        Optional<Animal> animalOptional = this.animalRepository.findById(animalId);
+
+        if (animalOptional.isPresent()) {
+            Optional<Photos> photoOptional = this.photosRepository.findById(photoId);
+
+            if (photoOptional.isPresent()) {
+                Photos onePhoto = photoOptional.get();
+                Path file = Photos.storeLocation.resolve(onePhoto.getPhotoLink());
+
+                try {
+                    Resource resource = new UrlResource(file.toUri());
+
+                    if (resource.exists() || resource.isReadable()) {
+                        return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.CONTENT_DISPOSITION,
+                                "attachment; filename=\"" + resource.getFilename() + "\"").body(resource);
+                    }
+
+                    else {
+                        String message = "Animal photo could not be read";
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                .body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+                    }
+                }
+
+                catch (MalformedURLException e) {
+                    String message = "Animal photo could not be fetched";
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                            .body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+                }
+            }
+
+            else {
+                String message = "Animal photo not found";
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+            }
+        }
+
+        else {
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -369,16 +437,17 @@ public class AnimalController {
      * @return list of issues
      */
     @GetMapping(path = "{animalId}/issues")
-    public List<Issues> getIssues(@PathVariable("animalId") Long id) {
+    public ResponseEntity<?> getIssues(@PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
-            return oneAnimal.fetchAnimalIssueList();
+            return ResponseEntity.status(HttpStatus.OK).body(oneAnimal.fetchAnimalIssueList());
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -389,16 +458,17 @@ public class AnimalController {
      * @return list of comments
      */
     @GetMapping(path = "{animalId}/comments")
-    public List<Comments> getComments(@PathVariable("animalId") Long id) {
+    public ResponseEntity<?> getComments(@PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
-            return oneAnimal.fetchAnimalCommentList();
+            return ResponseEntity.status(HttpStatus.OK).body(oneAnimal.fetchAnimalCommentList());
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -410,16 +480,17 @@ public class AnimalController {
      * @return list of treatments
      */
     @GetMapping(path = "{animalId}/treatments")
-    public List<Treatments> getTreatments(@PathVariable("animalId") Long id) {
+    public ResponseEntity<?> getTreatments(@PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
-            return oneAnimal.fetchAnimalTreatmentList();
+            return ResponseEntity.status(HttpStatus.OK).body(oneAnimal.fetchAnimalTreatmentList());
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -430,7 +501,7 @@ public class AnimalController {
      * @return the added animal details
      */
     @PostMapping
-    public Animal addAnimal(@RequestBody Animal a) throws UnsupportedRequestException {
+    public ResponseEntity<?> addAnimal(@RequestBody Animal a) {
         // reset the id to 0 to prevent overwrite
         a.setAnimalId(0);
 
@@ -442,8 +513,10 @@ public class AnimalController {
         o = this.findUniqueOwner(o);
         this.ownerRepository.save(o);
         a.setTheOwner(o);
+        this.animalRepository.save(a);
 
-        return this.animalRepository.save(a);
+        String message = "Animal added successfully";
+        return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
     }
 
     /**
@@ -474,11 +547,9 @@ public class AnimalController {
      * @param w  animal weight details in json
      * @param id animal id
      * @return the added animal weight
-     * @throws UnsupportedRequestException
      */
     @PostMapping(path = "{animalId}/weights")
-    public Weights addWeight(@RequestBody Weights w, @PathVariable("animalId") Long id)
-            throws UnsupportedRequestException {
+    public ResponseEntity<?> addWeight(@RequestBody Weights w, @PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         // reset the id to 0 to prevent overwrite
@@ -494,13 +565,54 @@ public class AnimalController {
             w = this.weightsRepository.save(w);
             oneAnimal.fetchAnimalWeightList().add(w);
             this.animalRepository.save(oneAnimal);
+
+            String message = "Animal weight added successfully";
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+        }
+    }
+
+    /**
+     * Generates a random string of length 20
+     */
+    private String generateRandomName() {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 20;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        return generatedString;
+    }
+
+    /**
+     * Extracts the extension of the uploaded file
+     * @param filename the filename from which extension is to be extracted
+     * @return the extension with .
+     */
+    private String getPhotoExtension(String filename) {
+        String ext = "";
+
+        if(filename == null || filename.equals("")) {
+            return ext;
         }
 
-        return w;
+        int dotIndex = filename.lastIndexOf(".");
+
+        if(dotIndex > 0) {
+            ext = filename.substring(dotIndex);
+        }
+
+        return ext;
     }
 
     /**
@@ -509,12 +621,18 @@ public class AnimalController {
      * @param p  animal photo details in json
      * @param id animal id
      * @return the added animal photo
-     * @throws UnsupportedRequestException
      */
     @PostMapping(path = "{animalId}/photos")
-    public Photos addPhoto(@RequestBody Photos p, @PathVariable("animalId") Long id)
-            throws UnsupportedRequestException {
+    public ResponseEntity<?> addPhoto(@PathVariable("animalId") Long id, @RequestParam("image") MultipartFile file, @RequestParam Long userId, @RequestParam String photodesc, @RequestParam String alttext) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
+
+        Photos p = new Photos();
+        p.setAltText(alttext);
+        p.setPhotoDesc(photodesc);
+
+        // set the uploader
+        User u = this.userRepository.findById(userId).get();
+        p.setUploader(u);
 
         // reset the id to 0 to prevent overwrite
         p.setPhotoId(0);
@@ -522,23 +640,51 @@ public class AnimalController {
         // set upload date to now
         p.setUploadDate(LocalDate.now());
 
-        Long userId = p.fetchUploader().getUserId();
-        User u = this.userRepository.findById(userId).get();
-        p.setUploader(u);
+        // check if file is empty
+        if (file.isEmpty()) {
+            String message = "Cannot upload empty file";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new CustomMessage(HttpStatus.EXPECTATION_FAILED, message));
+        }
+
+        // set the name
+        String photoName = this.generateRandomName() + this.getPhotoExtension(file.getOriginalFilename());
+
+        Path destinationFile = Photos.storeLocation.resolve(Paths.get(photoName)).normalize().toAbsolutePath();
+
+        // save the path
+        p.setPhotoLink(photoName);
 
         if (animalOptional.isPresent()) {
             Animal oneAnimal = animalOptional.get();
             p.setTheAnimal(oneAnimal);
-            p = this.photosRepository.save(p);
-            oneAnimal.fetchAnimalPhotoList().add(p);
-            this.animalRepository.save(oneAnimal);
+
+            try (InputStream inputStream = file.getInputStream()) {
+                // copy the file to server
+                Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+
+                // write the photo details in the db
+                p = this.photosRepository.save(p);
+
+                // associate photo details with animal
+                oneAnimal.fetchAnimalPhotoList().add(p);
+                this.animalRepository.save(oneAnimal);
+
+                String message = "Animal photo added successfully";
+                return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
+            }
+
+            catch (IOException e) {
+                String message = "Failed to store the file";
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new CustomMessage(HttpStatus.NOT_FOUND, message));
+            }
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
-
-        return p;
     }
 
     /**
@@ -547,11 +693,9 @@ public class AnimalController {
      * @param i  animal issue details in json
      * @param id animal id
      * @return the added animal issue
-     * @throws UnsupportedRequestException
      */
     @PostMapping(path = "{animalId}/issues")
-    public Issues addIssue(@RequestBody Issues i, @PathVariable("animalId") Long id)
-            throws UnsupportedRequestException {
+    public ResponseEntity<?> addIssue(@RequestBody Issues i, @PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
 
         // reset the id to 0 to prevent overwrite
@@ -570,13 +714,15 @@ public class AnimalController {
             i = this.issueRepository.save(i);
             oneAnimal.fetchAnimalIssueList().add(i);
             this.animalRepository.save(oneAnimal);
+
+            String message = "Animal issue added successfully";
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
-
-        return i;
     }
 
     /**
@@ -585,11 +731,9 @@ public class AnimalController {
      * @param c  animal comment in json
      * @param id animal id
      * @return the added animal comment
-     * @throws UnsupportedRequestException
      */
     @PostMapping(path = "{animalId}/comments")
-    public Comments addComment(@RequestBody Comments c, @PathVariable("animalId") Long id)
-            throws UnsupportedRequestException {
+    public ResponseEntity<?> addComment(@RequestBody Comments c, @PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
         c.setCommentId(0);
 
@@ -603,13 +747,15 @@ public class AnimalController {
             c = this.commentsRepository.save(c);
             oneAnimal.fetchAnimalCommentList().add(c);
             this.animalRepository.save(oneAnimal);
+
+            String message = "Animal comment added successfully";
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
-
-        return c;
     }
 
     /**
@@ -618,11 +764,9 @@ public class AnimalController {
      * @param t  animal treatment in json
      * @param id animal id
      * @return the added animal treatment
-     * @throws UnsupportedRequestException
      */
     @PostMapping(path = "{animalId}/treatments")
-    public Treatments addTreatment(@RequestBody Treatments t, @PathVariable("animalId") Long id)
-            throws UnsupportedRequestException {
+    public ResponseEntity<?> addTreatment(@RequestBody Treatments t, @PathVariable("animalId") Long id) {
         Optional<Animal> animalOptional = this.animalRepository.findById(id);
         t.setTreatmentId(0);
 
@@ -636,13 +780,15 @@ public class AnimalController {
             t = this.treatmentsRepository.save(t);
             oneAnimal.fetchAnimalTreatmentList().add(t);
             this.animalRepository.save(oneAnimal);
+
+            String message = "Animal treatment added successfully";
+            return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
         }
 
         else {
-            throw new NotFoundException("animal", id);
+            String message = "Animal not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
-
-        return t;
     }
 
     /**
@@ -890,9 +1036,9 @@ public class AnimalController {
      * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}")
-    public void deleteAnimal(@PathVariable("animalId") Long id) throws NotFoundException {
+    public ResponseEntity<?> deleteAnimal(@PathVariable("animalId") Long id) {
         if (!this.animalRepository.existsById(id)) {
-            throw new NotFoundException("animal", id);
+            // throw new NotFoundException("animal", id);
         }
 
         Animal a = this.animalRepository.findById(id).get();
@@ -931,6 +1077,9 @@ public class AnimalController {
         }
 
         this.animalRepository.deleteById(id);
+
+        String message = "Animal deleted successfully";
+        return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
     }
 
     /**
@@ -938,11 +1087,10 @@ public class AnimalController {
      *
      * @param animalId animal id
      * @param weightId weight id
-     * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}/weights/{weightId}")
-    public void deleteWeights(@PathVariable("animalId") Long animalId, @PathVariable("weightId") Long weightId)
-            throws NotFoundException {
+    public ResponseEntity<?> deleteWeights(@PathVariable("animalId") Long animalId,
+            @PathVariable("weightId") Long weightId) {
         Optional<Weights> weightOptional = this.weightsRepository.findById(weightId);
 
         if (weightOptional.isPresent()) {
@@ -950,11 +1098,18 @@ public class AnimalController {
 
             if (this.removeWeightFromAnimal(animalId, weightId)) {
                 this.weightsRepository.delete(oneweight);
+
+                String message = "Animal weight deleted successfully";
+                return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
             }
+
+            String message = "Animal weight couldnt be deleted";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
 
         else {
-            throw new NotFoundException("weight", weightId);
+            String message = "Animal or weight not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -963,23 +1118,35 @@ public class AnimalController {
      *
      * @param animalId animal id
      * @param photoId  photo id
-     * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}/photos/{photoId}")
-    public void deletePhotos(@PathVariable("animalId") Long animalId, @PathVariable("photoId") Long photoId)
-            throws NotFoundException {
+    public ResponseEntity<?> deletePhotos(@PathVariable("animalId") Long animalId,
+            @PathVariable("photoId") Long photoId) {
         Optional<Photos> photoOptional = this.photosRepository.findById(photoId);
 
         if (photoOptional.isPresent()) {
             Photos onePhoto = photoOptional.get();
 
             if (this.removePhotoFromAnimal(animalId, photoId)) {
+                File fileToDelete = Photos.storeLocation.resolve(onePhoto.getPhotoLink()).toFile();
+
+                // delete photo from database
                 this.photosRepository.delete(onePhoto);
+
+                // delete photo from file system
+                fileToDelete.delete();
+
+                String message = "Animal photo deleted successfully";
+                return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
             }
+
+            String message = "Animal photo couldnt be deleted";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
 
         else {
-            throw new NotFoundException("photo", photoId);
+            String message = "Animal or photo not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -988,11 +1155,10 @@ public class AnimalController {
      *
      * @param animalId  animal id
      * @param commentId comment id
-     * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}/comments/{commentId}")
-    public void deleteComments(@PathVariable("animalId") Long animalId, @PathVariable("commentId") Long commentId)
-            throws NotFoundException {
+    public ResponseEntity<?> deleteComments(@PathVariable("animalId") Long animalId,
+            @PathVariable("commentId") Long commentId) {
         Optional<Comments> commentOptional = this.commentsRepository.findById(commentId);
 
         if (commentOptional.isPresent()) {
@@ -1000,11 +1166,18 @@ public class AnimalController {
 
             if (this.removeCommentFromAnimal(animalId, commentId)) {
                 this.commentsRepository.delete(oneComment);
+
+                String message = "Animal comment deleted successfully";
+                return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
             }
+
+            String message = "Animal comment couldnt be deleted";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
 
         else {
-            throw new NotFoundException("comment", commentId);
+            String message = "Animal or comment not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -1013,11 +1186,11 @@ public class AnimalController {
      *
      * @param animalId animal id
      * @param issueId  issue id
-     * @throws NotFoundException
+     *                 // * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}/issues/{issueId}")
-    public void deleteIssues(@PathVariable("animalId") Long animalId, @PathVariable("issueId") Long issueId)
-            throws NotFoundException {
+    public ResponseEntity<?> deleteIssues(@PathVariable("animalId") Long animalId,
+            @PathVariable("issueId") Long issueId) {
         Optional<Issues> issueOptional = this.issueRepository.findById(issueId);
 
         if (issueOptional.isPresent()) {
@@ -1025,11 +1198,18 @@ public class AnimalController {
 
             if (this.removeIssueFromAnimal(animalId, issueId)) {
                 this.issueRepository.delete(oneIssue);
+
+                String message = "Animal issue deleted successfully";
+                return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
             }
+
+            String message = "Animal issue couldnt be deleted";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
 
         else {
-            throw new NotFoundException("issue", issueId);
+            String message = "Animal or issue not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 
@@ -1038,11 +1218,10 @@ public class AnimalController {
      *
      * @param animalId    animal id
      * @param treatmentId treatment id
-     * @throws NotFoundException
      */
     @DeleteMapping(path = "{animalId}/treatments/{treatmentId}")
-    public void deleteTreatments(@PathVariable("animalId") Long animalId,
-            @PathVariable("treatmentId") Long treatmentId) throws NotFoundException {
+    public ResponseEntity<?> deleteTreatments(@PathVariable("animalId") Long animalId,
+            @PathVariable("treatmentId") Long treatmentId) {
         Optional<Treatments> treatmentOptional = this.treatmentsRepository.findById(treatmentId);
 
         if (treatmentOptional.isPresent()) {
@@ -1050,11 +1229,18 @@ public class AnimalController {
 
             if (this.removeTreatmentFromAnimal(animalId, treatmentId)) {
                 this.treatmentsRepository.delete(oneTreatment);
+
+                String message = "Animal treatment deleted successfully";
+                return ResponseEntity.status(HttpStatus.OK).body(new CustomMessage(HttpStatus.OK, message));
             }
+
+            String message = "Animal treatment couldnt be deleted";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
 
         else {
-            throw new NotFoundException("treatment", treatmentId);
+            String message = "Animal or treatment not found";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new CustomMessage(HttpStatus.NOT_FOUND, message));
         }
     }
 }

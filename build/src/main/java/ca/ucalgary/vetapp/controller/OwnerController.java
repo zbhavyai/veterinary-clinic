@@ -89,10 +89,9 @@ public class OwnerController {
      *
      * @param id owner id
      * @return owner
-     * @throws NotFoundException
      */
     @GetMapping(path = "{ownerId}")
-    public Owner getOwnerById(@PathVariable("ownerId") Long id) throws NotFoundException {
+    public Owner getOwnerById(@PathVariable("ownerId") Long id) {
         List<Owner> o = this.searchOwnerById(id);
 
         if (o.size() != 0) {
@@ -100,7 +99,8 @@ public class OwnerController {
         }
 
         else {
-            throw new NotFoundException("owner", id);
+            // throw new NotFoundException("owner", id);
+            return null;
         }
     }
 
@@ -111,7 +111,7 @@ public class OwnerController {
      * @return list of animals owned by the owner
      */
     @GetMapping(path = "{ownerId}/animals")
-    public List<Animal> getOwnedAnimals(@PathVariable("ownerId") Long id) throws NotFoundException {
+    public List<Animal> getOwnedAnimals(@PathVariable("ownerId") Long id) {
         Optional<Owner> ownerOptional = this.ownerRepository.findById(id);
 
         if (ownerOptional.isPresent()) {
@@ -120,7 +120,8 @@ public class OwnerController {
         }
 
         else {
-            throw new NotFoundException("owner", id);
+            // throw new NotFoundException("owner", id);
+            return null;
         }
     }
 
@@ -130,11 +131,10 @@ public class OwnerController {
      * @param searchBy   where to search
      * @param searchTerm what to search
      * @return list of owners meeting search criteria
-     * @throws UnsupportedRequestException
      */
     @GetMapping()
     public List<Owner> searchOwner(@RequestParam(name = "searchBy", required = false) String searchBy,
-            @RequestParam(name = "searchTerm", required = false) String searchTerm) throws UnsupportedRequestException {
+            @RequestParam(name = "searchTerm", required = false) String searchTerm) {
 
         List<Owner> allOwners = this.ownerRepository.findAll();
 
@@ -159,7 +159,8 @@ public class OwnerController {
         }
 
         else {
-            throw new UnsupportedRequestException("Invalid search by");
+            // throw new UnsupportedRequestException("Invalid search by");
+            return null;
         }
     }
 
@@ -212,17 +213,16 @@ public class OwnerController {
      * Endpoint for DELETE - delete owner from db
      *
      * @param id owner id
-     * @throws UnsupportedRequestException
      */
     @DeleteMapping(path = "{ownerId}")
-    public void deleteOwner(@PathVariable("ownerId") Long id) throws UnsupportedRequestException {
+    public void deleteOwner(@PathVariable("ownerId") Long id) {
         if (!this.ownerRepository.existsById(id)) {
-            throw new NotFoundException("owner", id);
+            // throw new NotFoundException("owner", id);
         }
 
         // before deleting owner, he should have no animals in the system
         if (this.searchOwnerById(id).get(0).fetchOwnedAnimals().size() != 0) {
-            throw new UnsupportedRequestException("Please remove owned animals from the system first");
+            // throw new UnsupportedRequestException("Please remove owned animals from the system first");
         }
 
         this.ownerRepository.deleteById(id);

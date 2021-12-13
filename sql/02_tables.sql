@@ -202,3 +202,6 @@ ALTER TABLE treatments
     add constraint fk_t_treatedby_treatments
     foreign key (t_treatedby)
     references users (u_userid) on delete set null;
+   
+    
+

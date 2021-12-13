@@ -88,7 +88,10 @@ class AddTreatment extends React.Component {
         axios.put(link, status,{headers:{}});
         
 
-        this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/treatments")
+        
+        const timer = setTimeout(() => {
+            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/treatments");
+         }, 500);
         
 
 

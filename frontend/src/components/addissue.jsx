@@ -73,8 +73,10 @@ class AddIssue extends React.Component {
         link = "http://localhost:8080/api/v1/animals/" + id;
         axios.put(link, status,{headers:{}});
 
-        this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/issues")
         
+        const timer = setTimeout(() => {
+            this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/issues");
+         }, 500);
 
 
 

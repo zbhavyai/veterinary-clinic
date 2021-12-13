@@ -1,16 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
-import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
-import { withRouter } from "react-router";
-import NavBar from './navbar';
-import { Redirect } from 'react-router';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+
 import NavBarStart from './navbarstart';
 class RegistrationPage extends React.Component {
     state = {
@@ -35,19 +25,19 @@ class RegistrationPage extends React.Component {
             role: pos, 
         });
 
-        if(e.target.value==0){
+        if(e.target.value===0){
             pos = "ADMIN";
 
-        }else if(e.target.value==1){
+        }else if(e.target.value===1){
             pos = "ATTENDANT";
 
-        }else if(e.target.value==2){
+        }else if(e.target.value===2){
             pos = "TECHNICIAN";
             
-        }else if(e.target.value==3){
+        }else if(e.target.value===3){
             pos = "TEACHER";
             
-        }else if(e.target.value==4){
+        }else if(e.target.value===4){
             pos = "STUDENT";
             
         }

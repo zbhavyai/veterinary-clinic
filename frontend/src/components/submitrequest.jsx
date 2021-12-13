@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import axios from 'axios';
 import NavBar from './navbar';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+
 class RequestSubmission extends React.Component {
     state = {
         animals: [],
@@ -42,9 +37,9 @@ class RequestSubmission extends React.Component {
 
 
     handleRequest =(e, animal)=>{
-      if(animal["requestStatus"]=="REQUESTED"|| animal["requestStatus"]=="ACCEPT_BY_ADMIN" || animal["requestStatus"]=="READY"){
+      if(animal["requestStatus"]==="REQUESTED"|| animal["requestStatus"]==="ACCEPT_BY_ADMIN" || animal["requestStatus"]==="READY"){
         this.setState({alertmsg:"  Request already in progress for: " + animal["name"]});
-      }else if(animal["requestStatus"]=="REJECT" ){
+      }else if(animal["requestStatus"]==="REJECT" ){
         this.setState({alertmsg:"  Request has been rejected for: " + animal["name"]});
       }
       else{
@@ -65,7 +60,7 @@ class RequestSubmission extends React.Component {
     };
 
     handleCancel =(e, animal)=>{
-      if(animal["requestStatus"]=="REQUESTED"|| animal["requestStatus"]=="ACCEPT_BY_ADMIN"){
+      if(animal["requestStatus"]==="REQUESTED"|| animal["requestStatus"]==="ACCEPT_BY_ADMIN"){
 
 
         const status = {"requestStatus": "CANCEL"};
@@ -82,7 +77,7 @@ class RequestSubmission extends React.Component {
 
       }
 
-      else if(animal["requestStatus"]=="READY" ){
+      else if(animal["requestStatus"]==="READY" ){
 
         this.setState({alertmsg:"  Request past approval stages and is now ready for: " + animal["name"]});
 
@@ -123,15 +118,15 @@ class RequestSubmission extends React.Component {
       const uid = this.props.match.params.uid;
 
         let filtered = this.state.animals;
-        if (this.state.filterOption == 1) {
+        if (this.state.filterOption === 1) {
           filtered = 1?this.state.animals.filter(m=>m["animalId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.animals;
-        } else if (this.state.filterOption == 2) {
+        } else if (this.state.filterOption === 2) {
           filtered = 1?this.state.animals.filter(m=>m["name"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.animals;
-        } else if (this.state.filterOption == 3) {
+        } else if (this.state.filterOption === 3) {
           filtered = 1?this.state.animals.filter(m=>m["breed"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.animals;
-        } else if (this.state.filterOption == 4) {
+        } else if (this.state.filterOption === 4) {
           filtered = 1?this.state.animals.filter(m=>m["ownerName"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())):this.state.animals;
-        } else if (this.state.filterOption == 5) {
+        } else if (this.state.filterOption === 5) {
           filtered = 1?this.state.animals.filter(m=>m["requestStatus"].toString().toLowerCase().includes(this.state.filterText.toLowerCase()) ):this.state.animals;
         } else{
           filtered = this.state.animals;

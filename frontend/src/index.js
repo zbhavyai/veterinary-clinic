@@ -6,22 +6,21 @@ import { BrowserRouter } from "react-router-dom";
 
 import 'font-awesome/css/font-awesome.css';
 import './index.css';
-import App from "./App";
+
 import AnimalManagement from "./components/animalmanagement";
 
 import Login from "./components/login";
 
 import {Route, Switch} from 'react-router-dom';
-import { Routes } from 'react-router';
-import NavBar from "./components/navbar";
+
 import AnimalProfile from "./components/animalprofile";
-import NavBarStart from './components/navbarstart';
+
 import RegistrationPage from "./components/registerpage";
 import UserManagement from './components/usermanagement';
 import YourAccount from "./components/youraccount";
 import UserDetails from "./components/userdetails";
 import MainMenu from "./components/mainmenu";
-import axios from "axios";
+
 import ErrorPage from './components/errorpage';
 import HomePage from './components/homepage';
 import CommentList from './components/commentlist';

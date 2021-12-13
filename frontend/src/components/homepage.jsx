@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import NavBar from './navbar';
+import React from 'react';
+
 import NavBarStart from './navbarstart';
 
 class HomePage extends React.Component {
@@ -24,7 +24,7 @@ class HomePage extends React.Component {
         return <React.Fragment>
             <NavBarStart/>
             <div className="card" style={this.styles}>
-                <img className="card-img-top" src={this.state.imageUrl} alt="Card image cap"/>
+                <img className="card-img-top" src={this.state.imageUrl} alt="Card  cap"/>
                 <div className="card-body">
                     <h5 className="card-title">Welcome to VetApp</h5>
                     <p className="card-text">Please Sign in or Register from the top menu.</p>

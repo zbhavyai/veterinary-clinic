@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
 import NavBar from "./navbar";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
+    
     Link
 } from "react-router-dom";
 
@@ -81,7 +79,7 @@ class UserDetails extends React.Component {
         //     label = "Admin";
         // }
 
-        if(userx == "i"){
+        if(userx === "i"){
             return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
 

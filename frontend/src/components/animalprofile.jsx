@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
 import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
+
 import { withRouter } from "react-router";
 import NavBar from './navbar';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
+
     Link
 } from "react-router-dom";
 
@@ -45,12 +43,12 @@ class AnimalProfile extends React.Component {
         const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ apiphotos });
         
-        var image = null;
+        
         var photourl = null;
         var paray = [];
         for (var i = 0; i< this.state.apiphotos.length;i++){
             photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
-            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            
             paray.push(photourl);
 
         }
@@ -134,7 +132,7 @@ class AnimalProfile extends React.Component {
             xaxis: { categories: dates }
         }
 
-        if(user == "t" || user == "at" || user == "a"){
+        if(user === "t" || user === "at" || user === "a"){
             return <React.Fragment>
 
             <NavBar user = {user} uid = {uid}/>

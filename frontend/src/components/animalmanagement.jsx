@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import NavBar from './navbar';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
+    
+    
     Link
 } from "react-router-dom";
 
@@ -58,9 +57,7 @@ class AnimalManagement extends React.Component {
     }
 
     handleRemove =(e, animal)=>{
-        const user = this.props.match.params.user;
         
-        const uid = this.props.match.params.uid;
         
         const link = "http://localhost:8080/api/v1/animals/" + animal["animalId"];
         axios.delete(link).then(res => {
@@ -68,7 +65,7 @@ class AnimalManagement extends React.Component {
             console.log(res.data);
           });;
 
-          const timer = setTimeout(() => {
+          setTimeout(() => {
             window.location.reload(false);
          }, 500);
         //window.location.reload(false);
@@ -81,15 +78,15 @@ class AnimalManagement extends React.Component {
     render() {
         
         let filtered = this.state.animals;
-        if (this.state.filterOption == 1) {
+        if (this.state.filterOption === 1) {
             filtered = 1 ? this.state.animals.filter(m => m["animalId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
-        } else if (this.state.filterOption == 2) {
+        } else if (this.state.filterOption === 2) {
             filtered = 1 ? this.state.animals.filter(m => m["name"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
-        } else if (this.state.filterOption == 3) {
+        } else if (this.state.filterOption === 3) {
             filtered = 1 ? this.state.animals.filter(m => m["breed"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
-        } else if (this.state.filterOption == 4) {
+        } else if (this.state.filterOption === 4) {
             filtered = 1 ? this.state.animals.filter(m => m["ownerEmail"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
-        } else if (this.state.filterOption == 5) {
+        } else if (this.state.filterOption === 5) {
             filtered = 1 ? this.state.animals.filter(m => m["status"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
         } else {
             filtered = this.state.animals;
@@ -99,7 +96,7 @@ class AnimalManagement extends React.Component {
          const user = this.props.match.params.user;
          const uid = this.props.match.params.uid;
 
-         if(user == "s" || user == "i"){
+         if(user === "s" || user === "i"){
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             

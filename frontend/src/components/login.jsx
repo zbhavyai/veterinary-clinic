@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import NavBarStart from './navbarstart';
 
@@ -35,34 +35,34 @@ class Login extends React.Component {
     render() {
         let hyperlink = ""
         let errorMessage = ""
-        if (this.state.username != "" && this.state.password != "") {
+        if (this.state.username !== "" && this.state.password !== "") {
             for (var i = 0; i < this.state.users.length; i++) {
                 console.log("User: "+ this.state.users[i]["emailId"] + "  password: " +this.state.users[i]["passwordHash"]);
 
 
                 //role 0 is for instructor
-                if ((this.state.username == this.state.users[i]["emailId"]) && (this.state.password == this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] == "TEACHER")) {
+                if ((this.state.username === this.state.users[i]["emailId"]) && (this.state.password === this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] === "TEACHER")) {
                     console.log('Successful Login1');
                     hyperlink = "/i/" + this.state.users[i]["userId"] + "/menu";
 
                 }
 
                 //role 1 is for admin
-                else if ((this.state.username == this.state.users[i]["emailId"]) && (this.state.password == this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] == "ADMIN")) {
+                else if ((this.state.username === this.state.users[i]["emailId"]) && (this.state.password === this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] === "ADMIN")) {
                     console.log('Successful Login2');
                     hyperlink = "/a/" + this.state.users[i]["userId"] +"/menu";
                 }
 
                 //role 2 is for technician
-                else if ((this.state.username == this.state.users[i]["emailId"]) && (this.state.password == this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] == "TECHNICIAN")) {
+                else if ((this.state.username === this.state.users[i]["emailId"]) && (this.state.password === this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] === "TECHNICIAN")) {
                     console.log('Successful Login3');
                     hyperlink = "/t/" + this.state.users[i]["userId"] +"/menu";
                 }
-                else if ((this.state.username == this.state.users[i]["emailId"]) && (this.state.password == this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] == "STUDENT")) {
+                else if ((this.state.username === this.state.users[i]["emailId"]) && (this.state.password === this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] === "STUDENT")) {
                     console.log('Successful Login4');
                     hyperlink = "/s/" + this.state.users[i]["userId"] +"/menu";
                 }
-                else if ((this.state.username == this.state.users[i]["emailId"]) && (this.state.password == this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] == "ATTENDANT")) {
+                else if ((this.state.username === this.state.users[i]["emailId"]) && (this.state.password === this.state.users[i]["passwordHash"]) && (this.state.users[i]["role"] === "ATTENDANT")) {
                     console.log('Successful Login5');
                     hyperlink = "/at/" + this.state.users[i]["userId"] +"/menu";
                 }

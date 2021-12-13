@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
-import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
-import { withRouter } from "react-router";
+
 import NavBar from './navbar';
-import { Redirect } from 'react-router';
+
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
+    
+
     Link
 } from "react-router-dom";
 class EditUser extends React.Component {
@@ -36,15 +33,15 @@ class EditUser extends React.Component {
         this.setState({ user });
 
         let trigger = 0;
-        if(this.state.user["role"] == "ADMIN"){
+        if(this.state.user["role"] === "ADMIN"){
             trigger = 0;
-        } else if(this.state.user["role"] == "ATTENDANT"){
+        } else if(this.state.user["role"] === "ATTENDANT"){
             trigger = 1;
-        } else if(this.state.user["role"] == "TECHNICIAN"){
+        } else if(this.state.user["role"] === "TECHNICIAN"){
             trigger = 2;
-        } else if(this.state.user["role"] == "TEACHER"){
+        } else if(this.state.user["role"] === "TEACHER"){
             trigger = 3;
-        } else if(this.state.user["role"] == "STUDENT"){
+        } else if(this.state.user["role"] === "STUDENT"){
             trigger = 4;
         }
 
@@ -73,19 +70,19 @@ class EditUser extends React.Component {
             role: pos, 
         });
 
-        if(e.target.value==0){
+        if(e.target.value===0){
             pos = "ADMIN";
 
-        }else if(e.target.value==1){
+        }else if(e.target.value===1){
             pos = "ATTENDANT";
 
-        }else if(e.target.value==2){
+        }else if(e.target.value===2){
             pos = "TECHNICIAN";
             
-        }else if(e.target.value==3){
+        }else if(e.target.value===3){
             pos = "TEACHER";
             
-        }else if(e.target.value==4){
+        }else if(e.target.value===4){
             pos = "STUDENT";
             
         }

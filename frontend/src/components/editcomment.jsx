@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
-import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
-import { withRouter } from "react-router";
+
 import NavBar from './navbar';
-import { Redirect } from 'react-router';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+
 class EditComment extends React.Component {
     state = {
         animal: {},
@@ -38,12 +30,12 @@ class EditComment extends React.Component {
         const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ apiphotos });
         
-        var image = null;
+        
         var photourl = null;
         var paray = [];
         for (var i = 0; i< this.state.apiphotos.length;i++){
             photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
-            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            
             paray.push(photourl);
 
         }
@@ -66,9 +58,9 @@ class EditComment extends React.Component {
         
         
 
-        for(var i = 0; i<this.state.comments.length;i++){
+        for(i = 0; i<this.state.comments.length;i++){
             console.log("Comment ID: "+ this.state.comments[i]["commentId"]);
-            if(cid == this.state.comments[i]["commentId"]){
+            if(cid === this.state.comments[i]["commentId"]){
                 console.log("Found");
                 this.setState({
                     idx: i
@@ -89,16 +81,12 @@ class EditComment extends React.Component {
         const id = this.props.match.params.id;
         const user = this.props.match.params.user;
         const uid = this.props.match.params.uid;
-        const cid = this.props.match.params.cid;
-
+        
         
 
-        let newDate = new Date()
-        let date = newDate.getDate();
-        let month = newDate.getMonth() + 1;
-        let year = newDate.getFullYear();
-        let day = newDate.getDay();
-        let dateString = year.toString() + "-" + month.toString()+ "-"+day.toString();
+       
+        
+        
         let x = this.state.idx;
 
         const message = {
@@ -118,7 +106,7 @@ class EditComment extends React.Component {
           });
         //window.location.reload(false);
 
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/comments");
          }, 500);
         

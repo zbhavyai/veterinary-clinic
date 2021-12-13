@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
-import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
-import { withRouter } from "react-router";
+
 import NavBar from './navbar';
-import { Redirect } from 'react-router';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+
 class AddAnimalNew extends React.Component {
     state = {
         
@@ -54,7 +46,7 @@ class AddAnimalNew extends React.Component {
     handledOwnerContactChange(event) {
         let num = event.target.value.replace("-","").replace(" ","").replace("(","").replace(")","");
 
-        this.setState({ownerContact: event.target.value})
+        this.setState({ownerContact: num})
         
       }
 
@@ -134,10 +126,10 @@ class AddAnimalNew extends React.Component {
             gender: pos, 
         });
 
-        if(e.target.value==0){
+        if(e.target.value===0){
             pos = "MALE";
 
-        }else if(e.target.value==1){
+        }else if(e.target.value===1){
             pos = "FEMALE";
 
         }
@@ -200,7 +192,7 @@ class AddAnimalNew extends React.Component {
           });
         //window.location.reload(false);
 
-        const timer = setTimeout(() => {
+        setTimeout(() => {
           this.props.history.push("/"+ userx+"/" + uid +'/animals/');
        }, 500);
         
@@ -224,15 +216,15 @@ class AddAnimalNew extends React.Component {
                     <h5 className="card-title">Add and Animal</h5>
                     <div className="row">
                       <div className="col-sm">
-                      < input type="text" id="inputFilter"  className="form-control" placeholder="Name" value={this.state.name} onChange={(e) =>this.handleNameChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter1"  className="form-control" placeholder="Name" value={this.state.name} onChange={(e) =>this.handleNameChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       <div className="col-sm">
-                      < input type="text" id="inputFilter" className="form-control" placeholder="Species" value={this.state.species} onChange={(e) =>this.handleSpeciesChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter2" className="form-control" placeholder="Species" value={this.state.species} onChange={(e) =>this.handleSpeciesChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       <div className="col-sm">
-                      < input type="text" id="inputFilter" className="form-control" placeholder="Sub Species" value={this.state.subspecies} onChange={(e) =>this.handleSubSpeciesChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter3" className="form-control" placeholder="Sub Species" value={this.state.subspecies} onChange={(e) =>this.handleSubSpeciesChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       
@@ -240,15 +232,15 @@ class AddAnimalNew extends React.Component {
                     </div>
                     <div className="row">
                       <div className="col-sm">
-                      < input type="text" id="inputFilter"  className="form-control" placeholder="Breed" value={this.state.breed} onChange={(e) =>this.handleBreedChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter4"  className="form-control" placeholder="Breed" value={this.state.breed} onChange={(e) =>this.handleBreedChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       <div className="col-sm">
-                      < input type="text" id="inputFilter" className="form-control" placeholder="Type" value={this.state.type} onChange={(e) =>this.handleTypeChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter5" className="form-control" placeholder="Type" value={this.state.type} onChange={(e) =>this.handleTypeChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       <div className="col-sm">
-                      < input type="text" id="inputFilter" className="form-control" placeholder="Region" value={this.state.region} onChange={(e) =>this.handleRegionChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter6" className="form-control" placeholder="Region" value={this.state.region} onChange={(e) =>this.handleRegionChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       
@@ -257,20 +249,20 @@ class AddAnimalNew extends React.Component {
 
                     <div className="row">
                       <div className="col-sm">
-                      < input type="text" id="inputFilter"  className="form-control" placeholder="Tattoo Number" value={this.state.tattooNum} onChange={(e) =>this.handletattooNumChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter7"  className="form-control" placeholder="Tattoo Number" value={this.state.tattooNum} onChange={(e) =>this.handletattooNumChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       <div className="col-sm">
-                      < input type="text" id="inputFilter" className="form-control" placeholder="City Tattoo" value={this.state.cityTattoo} onChange={(e) =>this.handlecityTattooChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter8" className="form-control" placeholder="City Tattoo" value={this.state.cityTattoo} onChange={(e) =>this.handlecityTattooChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       <div className="col-sm">
-                      < input type="text" id="inputFilter" className="form-control" placeholder="RFID Number" value={this.state.rfidNumber} onChange={(e) =>this.handlerfidNumberChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter9" className="form-control" placeholder="RFID Number" value={this.state.rfidNumber} onChange={(e) =>this.handlerfidNumberChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
 
                       <div className="col-sm">
-                         < input type="text" id="inputFilter"  className="form-control" placeholder="Distinct Features" value={this.state.distinctFeature} onChange={(e) =>this.handledistinctFeatureChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
+                         < input type="text" id="inputFilter0"  className="form-control" placeholder="Distinct Features" value={this.state.distinctFeature} onChange={(e) =>this.handledistinctFeatureChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                         </div>
                       
@@ -279,15 +271,15 @@ class AddAnimalNew extends React.Component {
 
                     <div className="row">
                       <div className="col-sm">
-                      < input type="text" id="inputFilter"  className="form-control" placeholder="Micro Chip Number" value={this.state.microChipNumber} onChange={(e) =>this.handleMicroChipChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter11"  className="form-control" placeholder="Micro Chip Number" value={this.state.microChipNumber} onChange={(e) =>this.handleMicroChipChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       <div className="col-sm">
-                      < input type="text" id="inputFilter" className="form-control" placeholder="Coat Color" value={this.state.coatColor} onChange={(e) =>this.handleCoatColorChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter12" className="form-control" placeholder="Coat Color" value={this.state.coatColor} onChange={(e) =>this.handleCoatColorChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       <div className="col-sm">
-                      < input type="text" id="inputFilter" className="form-control" placeholder="Continuous Medication" value={this.state.continuousMedication} onChange={(e) =>this.handlecontMedChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
+                      < input type="text" id="inputFilter13" className="form-control" placeholder="Continuous Medication" value={this.state.continuousMedication} onChange={(e) =>this.handlecontMedChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
                     
                       </div>
                       
@@ -307,16 +299,16 @@ class AddAnimalNew extends React.Component {
                     <div className="row">
                         <h1>New Owner Information</h1>
                         <div className="col-sm">
-                         < input type="text" id="inputFilter"  className="form-control" placeholder="Owner's First Name" value={this.state.ownerFN} onChange={(e) =>this.handledOwnerFNChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
+                         < input type="text" id="inputFilter14"  className="form-control" placeholder="Owner's First Name" value={this.state.ownerFN} onChange={(e) =>this.handledOwnerFNChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                         </div>
                         <div className="col-sm">
-                         < input type="text" id="inputFilter"  className="form-control" placeholder="Owner's Last Name" value={this.state.ownerLN} onChange={(e) =>this.handledOwnerLNChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
+                         < input type="text" id="inputFilter15"  className="form-control" placeholder="Owner's Last Name" value={this.state.ownerLN} onChange={(e) =>this.handledOwnerLNChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                         </div>
                         
                         <div className="col-sm">
-                         < input type="text" id="inputFilter"  className="form-control" placeholder="Owner's Contact Number" value={this.state.ownerContact} onChange={(e) =>this.handledOwnerContactChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
+                         < input type="text" id="inputFilter16"  className="form-control" placeholder="Owner's Contact Number" value={this.state.ownerContact} onChange={(e) =>this.handledOwnerContactChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
                     
                         </div>
                     </div>

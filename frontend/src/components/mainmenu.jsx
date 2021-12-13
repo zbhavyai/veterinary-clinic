@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavBar from './navbar';
 
 class MainMenu extends React.Component {
@@ -28,13 +28,13 @@ class MainMenu extends React.Component {
         let usermanagementhyperlink = "/"+ user + "/" + uid + "/users";
         let requestmanagementhyperlink = "/"+ user + "/" + uid + "/requestmanagment";
         let requestsubmissionhyperlink = "/"+ user + "/" + uid + "/requestsubmission";
-        if(user == "at" ){
+        if(user === "at" ){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 
                 <div className="card" style={this.styles}>
                 <a href={animmanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Animal Management</h5>
                         
@@ -45,13 +45,13 @@ class MainMenu extends React.Component {
             </React.Fragment>;
 
         }
-        if(user == "s"){
+        if(user === "s"){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 
                 <div className="card" style={this.styles}>
                 <a href={animmanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Animal Management</h5>
                         
@@ -63,13 +63,13 @@ class MainMenu extends React.Component {
 
         }
 
-        if(user == "i"){
+        if(user === "i"){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 <div className="row">
                 <div className="card" style={this.styles}>
                 <a href={usermanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.userImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.userImageUrl} alt="Card cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Student Management</h5>
                         
@@ -79,7 +79,7 @@ class MainMenu extends React.Component {
 
                 <div className="card" style={this.styles}>
                 <a href={animmanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Animal Management</h5>
                         
@@ -88,7 +88,7 @@ class MainMenu extends React.Component {
                 </div>
                 <div className="card" style={this.styles}>
                 <a href={requestsubmissionhyperlink}>
-                    <img className="card-img-top" src={this.state.submitImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.submitImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Request Submission</h5>
                         
@@ -102,14 +102,14 @@ class MainMenu extends React.Component {
         }
 
 
-        if(user == "a"){
+        if(user === "a"){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 <div className="row">
                     
                 <div className="card" style={this.styles}>
                     <a href={usermanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.userImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.userImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">User Management</h5>
                         
@@ -119,7 +119,7 @@ class MainMenu extends React.Component {
 
                 <div className="card" style={this.styles}>
                 <a href={animmanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Animal Management</h5>
                         
@@ -129,7 +129,7 @@ class MainMenu extends React.Component {
                 
                 <div className="card" style={this.styles}>
                 <a href={requestmanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.requestImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.requestImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Request Management</h5>
                         
@@ -141,7 +141,7 @@ class MainMenu extends React.Component {
 
         }
 
-        if(user == "t"){
+        if(user === "t"){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 <div className="row">
@@ -149,7 +149,7 @@ class MainMenu extends React.Component {
 
                 <div className="card" style={this.styles}>
                 <a href={animmanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.animalImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Animal Management</h5>
                         
@@ -159,7 +159,7 @@ class MainMenu extends React.Component {
                 
                 <div className="card" style={this.styles}>
                 <a href={requestmanagementhyperlink}>
-                    <img className="card-img-top" src={this.state.requestImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.requestImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Request Management</h5>
                         

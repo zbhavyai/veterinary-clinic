@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
-import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
-import { withRouter } from "react-router";
+
 import NavBar from './navbar';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+
 class UploadPhoto extends React.Component {
     state = {
         animal: {},
@@ -32,12 +25,12 @@ class UploadPhoto extends React.Component {
         const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ apiphotos });
         
-        var image = null;
+        
         var photourl = null;
         var paray = [];
         for (var i = 0; i< this.state.apiphotos.length;i++){
             photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
-            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            
             paray.push(photourl);
 
         }
@@ -80,14 +73,7 @@ class UploadPhoto extends React.Component {
         formData.append("alttext", "photoupload");
 
       
-        const message = {
-            "image": this.state.selectedFile,
-            "userId": uid,
-            "photodesc": "photoupload",
-            "alttext": "photoupload",
-
-            
-        }
+        
 
         const link = "http://localhost:8080/api/v1/animals/" + id + "/photos";
         axios.post(link, formData,{headers:{}}).then(res => {
@@ -96,7 +82,7 @@ class UploadPhoto extends React.Component {
           });
         //window.location.reload(false);
 
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             this.props.history.push("/"+ user+"/" + uid +'/animals/'+id);
          }, 500);
       };

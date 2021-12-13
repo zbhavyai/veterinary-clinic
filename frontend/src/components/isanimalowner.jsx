@@ -1,12 +1,7 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
+
 import NavBar from './navbar';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+
 class IsAnimalOwner extends React.Component {
     state = {
         
@@ -33,7 +28,7 @@ class IsAnimalOwner extends React.Component {
                 <div className="row">
                 <div className="card" style={this.styles}>
                 <a href={"/"+user+"/" + uid +"/animals/addoanimal"}>
-                    <img className="card-img-top" src={this.state.ownerImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.ownerImageUrl} alt="Card  cap"/>
                     <div className="card-body">
                         <h5 className="card-title">Existing Owner</h5>
                         
@@ -43,7 +38,7 @@ class IsAnimalOwner extends React.Component {
 
                 <div className="card" style={this.styles}>
                 <a href={"/"+user+"/" + uid +"/animals/addnanimal"}>
-                    <img className="card-img-top" src={this.state.noOwnerImageUrl} alt="Card image cap"/>
+                    <img className="card-img-top" src={this.state.noOwnerImageUrl} alt="Card a cap"/>
                     <div className="card-body">
                         <h5 className="card-title">New Owner</h5>
                         

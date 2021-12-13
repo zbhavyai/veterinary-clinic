@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
 import NavBar from './navbar';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
+    
     Link
 } from "react-router-dom";
 
@@ -33,12 +31,12 @@ class TreatmentList extends React.Component {
         const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ apiphotos });
         
-        var image = null;
+        
         var photourl = null;
         var paray = [];
         for (var i = 0; i< this.state.apiphotos.length;i++){
             photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
-            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            
             paray.push(photourl);
 
         }
@@ -66,9 +64,9 @@ class TreatmentList extends React.Component {
     // }
 
     handleRemoveTreatments =(e, treatment)=>{
-        const user = this.props.match.params.user;
+        
         const id = this.props.match.params.id;
-        const uid = this.props.match.params.uid;
+        
         
         const link = "http://localhost:8080/api/v1/animals/" + id + "/treatments/" + treatment["treatmentId"];
         axios.delete(link).then(res => {
@@ -76,7 +74,7 @@ class TreatmentList extends React.Component {
             console.log(res.data);
           });;
 
-          const timer = setTimeout(() => {
+          setTimeout(() => {
             window.location.reload(false);
          }, 500);
         //window.location.reload(false);
@@ -88,13 +86,14 @@ class TreatmentList extends React.Component {
 
     render() {
         const user = this.props.match.params.user;
-        const cid = this.props.match.params.cid;
+        
         const uid = this.props.match.params.uid;
+        console.log("UID: " + uid);
 
-        if(user == "i" || user=="s"){
+        if(user === "i" || user==="s"){
             return <React.Fragment>
 
-<NavBar user = {user} uid = {uid}/>
+                <NavBar user = {user} uid = {uid}/>
             
             <h2 className="display-4">Treatment Logs</h2>
             <div className="row">

@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from 'axios';
 import NavBar from './navbar';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
+    
     Link
 } from "react-router-dom";
 
@@ -33,9 +31,9 @@ class UserManagement extends React.Component {
     };
 
     handleRemove =(e, user)=>{
-        const userx = this.props.match.params.user;
         
-        const uid = this.props.match.params.uid;
+        
+        
         
         const link = "http://localhost:8080/api/v1/users/" + user["userId"];
         axios.delete(link).then(res => {
@@ -43,7 +41,7 @@ class UserManagement extends React.Component {
             console.log(res.data);
           });;
 
-          const timer = setTimeout(() => {
+          setTimeout(() => {
             window.location.reload(false);
          }, 500);
         //window.location.reload(false);
@@ -67,33 +65,33 @@ class UserManagement extends React.Component {
         const userx = this.props.match.params.user;
         const uid = this.props.match.params.uid;
         let filtered = this.state.users;
-        if(userx == "i"){
+        if(userx === "i"){
             filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
         }
         
 
-        if (this.state.filterOption == 1) {
+        if (this.state.filterOption === 1) {
             filtered = 1 ? this.state.users.filter(m => m["userId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption == 2) {
+        } else if (this.state.filterOption === 2) {
             filtered = 1 ? this.state.users.filter(m => m["firstName"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption == 3) {
+        } else if (this.state.filterOption === 3) {
             filtered = 1 ? this.state.users.filter(m => m["lastName"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption == 4) {
+        } else if (this.state.filterOption === 4) {
             filtered = 1 ? this.state.users.filter(m => m["role"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption == 5) {
+        } else if (this.state.filterOption === 5) {
             filtered = 1 ? this.state.users.filter(m => m["emailId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption == 6) {
+        } else if (this.state.filterOption === 6) {
             filtered = 1 ? this.state.users.filter(m => m["status"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
         } else {
             filtered = this.state.users;
-            if(userx == "i"){
+            if(userx === "i"){
                 filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
             }
 
         }
 
         
-        if(userx == "i"){
+        if(userx === "i"){
             return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
 

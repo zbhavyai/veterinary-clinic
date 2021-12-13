@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
-import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
-import { withRouter } from "react-router";
+
 import NavBar from './navbar';
-import { Redirect } from 'react-router';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+
 class EditTreatment extends React.Component {
     state = {
         animal: {},
@@ -42,12 +34,12 @@ class EditTreatment extends React.Component {
         const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ apiphotos });
         
-        var image = null;
+        
         var photourl = null;
         var paray = [];
         for (var i = 0; i< this.state.apiphotos.length;i++){
             photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
-            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            
             paray.push(photourl);
 
         }
@@ -71,9 +63,9 @@ class EditTreatment extends React.Component {
         
         
 
-        for(var i = 0; i<this.state.treatments.length;i++){
+        for(i = 0; i<this.state.treatments.length;i++){
             console.log("Treatment ID: "+ this.state.treatments[i]["treatmentId"]);
-            if(cid == this.state.treatments[i]["treatmentId"]){
+            if(cid === this.state.treatments[i]["treatmentId"]){
                 
                 console.log("Found");
                 this.setState({
@@ -119,7 +111,7 @@ class EditTreatment extends React.Component {
         
         let dateString = year.toString() + "-" + month.toString()+ "-"+day.toString();
         console.log(dateString);
-        let x = this.state.idx;
+        
 
         const message = {
             "treatmentId": cid,
@@ -145,7 +137,7 @@ class EditTreatment extends React.Component {
         
 
         
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             this.props.history.push("/"+ user+"/" + uid +'/animals/'+id+"/treatments");
          }, 500);
         
@@ -170,7 +162,7 @@ class EditTreatment extends React.Component {
     render() {
         const user = this.props.match.params.user;
         const uid = this.props.match.params.uid;
-        let x  = this.state.idx;
+        
         
 
 

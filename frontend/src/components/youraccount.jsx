@@ -1,12 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
 import NavBar from "./navbar";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+
 class YourAccount extends React.Component {
     state = {
         user: {}

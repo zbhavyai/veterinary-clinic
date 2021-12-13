@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import axios from "axios";
-import ReactApexChart from 'react-apexcharts';
-import { useParams } from "react-router-dom";
-import { withRouter } from "react-router";
+
 
 import NavBar from './navbar';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+
 class AnimalStatus extends React.Component {
     state = {
         animal: {},
@@ -32,7 +25,7 @@ class AnimalStatus extends React.Component {
         const link = "http://localhost:8080/api/v1/animals/" + id;
         axios.put(link, status,{headers:{}});
 
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             window.location.reload(false);
          }, 500);
         
@@ -64,12 +57,12 @@ class AnimalStatus extends React.Component {
         const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ apiphotos });
         
-        var image = null;
+        
         var photourl = null;
         var paray = [];
         for (var i = 0; i< this.state.apiphotos.length;i++){
             photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
-            image = await axios.get(photourl, { headers: { 'Access-Control-Allow-Origin': true, }, });
+            
             paray.push(photourl);
 
         }
@@ -93,7 +86,7 @@ class AnimalStatus extends React.Component {
 
     render() { 
         const user = this.props.match.params.user;
-        const id = this.props.match.params.id;
+        
         const uid = this.props.match.params.uid;
 
         return <React.Fragment>
@@ -125,9 +118,9 @@ class AnimalStatus extends React.Component {
                 <div className="jumbotron jumbotron-fluid">
                     <div className="container">
                         <h1 className="display-4">Change Status to:</h1>
-                        <row>
+                        <div>
                         <button onClick={(e) => this.handleStatus(e, "GREEN")} className="btn btn-primary">Green</button><button onClick={(e) => this.handleStatus(e, "YELLOW")} className="btn btn-primary ">Yellow</button><button onClick={(e) => this.handleStatus(e, "RED")} className="btn btn-primary ">Red</button><button onClick={(e) => this.handleStatus(e, "INACTIVE")} className="btn btn-primary">Inactive</button>
-                        </row>
+                        </div>
                         
                     </div>
                 </div>

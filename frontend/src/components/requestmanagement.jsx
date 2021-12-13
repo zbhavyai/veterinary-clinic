@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import axios from 'axios';
 import NavBar from './navbar';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+
 class RequestManagement extends React.Component {
     state = {
         animals: [],
@@ -44,14 +39,14 @@ class RequestManagement extends React.Component {
     handleAccept =(e, animal)=>{
 
         const user = this.props.match.params.user;
-        if(user == "t"){
+        if(user === "t"){
             //animal["status"]="TECHNICIAN_APPROVAL";
             const status = {"requestStatus": "READY"};
             const link = "http://localhost:8080/api/v1/animals/" + animal["animalId"];
             axios.put(link, status,{headers:{}});
             window.location.reload(false);
 
-        } else if(user =='a'){
+        } else if(user ==='a'){
             //animal["status"]="ACCEPTED_BY_ADMIN";
             const status = {"requestStatus": "ACCEPT_BY_ADMIN"};
             const link = "http://localhost:8080/api/v1/animals/" + animal["animalId"];
@@ -106,16 +101,16 @@ class RequestManagement extends React.Component {
         const user = this.props.match.params.user;
         const uid = this.props.match.params.uid;
         let filtered = this.state.animals;
-        if(user == 't'){
+        if(user === 't'){
             filtered = 1?this.state.animals.filter(m=>m["requestStatus"].toString().includes("ACCEPT_BY_ADMIN") ):this.state.animals;
 
-        }else if(user =='a'){
+        }else if(user ==='a'){
             filtered = 1?this.state.animals.filter(m=>m["requestStatus"].toString().includes("REQUESTED") ):this.state.animals;
         }
 
         let alert = this.state.alertmsg;
 
-        if(filtered.length==0){
+        if(filtered.length===0){
             alert = "You have no more requests...";
         }
 

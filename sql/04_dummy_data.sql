@@ -109,8 +109,8 @@ INSERT INTO weights (w_weightid,w_massinkg,w_recorddate,w_recordedby,w_animalid)
 ("26","4.4","2021-02-28","4","5"),
 ("27","30.4","2021-02-28","1","6"),
 ("28","40.4","2021-02-28","2","7"),
-("29","40","2021-02-28",NULL,NULL),
-("30","40","2021-02-28",NULL,NULL);
+("29","40","2021-02-28",NULL,"8"),
+("30","40","2021-02-28",NULL,"9");
 
 UPDATE sequence_treatments SET next_val=31;
 -- ----------------------------------------------
@@ -136,8 +136,8 @@ INSERT INTO photos (p_photoid,p_photodesc,p_animalid,p_photolink,p_alttext,p_upl
 ("16",NULL,"9","image16.png",NULL,"17","2021-10-03"),
 ("17","post neuter ","10","image17.png",NULL,"13","2021-09-04"),
 ("18",NULL,"9","image18.png",NULL,"2","2021-03-28"),
-("19",NULL,NULL,NULL,NULL,NULL,"2021-03-28"),
-("20","",NULL,"","",NULL,"2021-03-28");
+("19",NULL,"8",NULL,NULL,NULL,"2021-03-28"),
+("20","","7","","",NULL,"2021-03-28");
 
 UPDATE sequence_photos SET next_val=21;
 -- ----------------------------------------------
@@ -163,8 +163,8 @@ INSERT INTO comments (c_commentid,c_commentdesc,c_animalid,c_commentdate,c_comme
 ("16",NULL,"1","2021-09-01","11"),
 ("17",NULL,"3","2021-03-19","14"),
 ("18",NULL,"5","2021-10-03","5"),
-("19",NULL,NULL,"2021-10-04",NULL),
-("20","",NULL,"2021-10-04",NULL);
+("19",NULL,"9","2021-10-04",NULL),
+("20","","12","2021-10-04",NULL);
 
 UPDATE sequence_comments SET next_val=21;
 -- ----------------------------------------------
@@ -190,8 +190,8 @@ INSERT INTO issues (i_issueid,i_issuedesc,i_detecteddate,i_animalid,i_raisedby,i
 ("16",NULL,"2021-11-11","16","14",1),
 ("17",NULL,"2021-06-14","6","10",1),
 ("18",NULL,"2021-06-19","15","9",0),
-("19",NULL,"2021-06-19",NULL,NULL,NULL),
-("20","","2021-06-19",NULL,NULL,"");
+("19",NULL,"2021-06-19","16",NULL,NULL),
+("20","","2021-06-19","17",NULL,"");
 
 UPDATE sequence_issues SET next_val=21;
 -- ----------------------------------------------
@@ -218,7 +218,7 @@ INSERT INTO treatments (t_treatmentid,t_treatmentdesc,t_drugname,t_drugdose,t_de
 ("17","drontal deworm",NULL,NULL,NULL,"5","2021-04-29","5"),
 ("18",NULL,NULL,NULL,NULL,"1","2021-11-11","7"),
 ("19",NULL,NULL,NULL,NULL,"5","2021-11-12","7"),
-("20","","","","",NULL,"2021-11-12",NULL);
+("20","","","","","14","2021-11-12",NULL);
 
 UPDATE sequence_treatments SET next_val=21;
 -- ----------------------------------------------

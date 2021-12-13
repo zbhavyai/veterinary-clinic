@@ -42,13 +42,13 @@ class AddWeight extends React.Component {
         var animalphotoUrl = "http://localhost:8080/api/v1/animals/" + id + "/photos"
         const { data: apiphotos } = await axios.get(animalphotoUrl, { headers: { 'Access-Control-Allow-Origin': true, }, });
         this.setState({ apiphotos });
-        
-        
+
+
         var photourl = null;
         var paray = [];
         for (var i = 0; i< this.state.apiphotos.length;i++){
             photourl = "http://localhost:8080/api/v1/animals/" + id+ "/photos/" + this.state.apiphotos[i]["photoId"];
-            
+
             paray.push(photourl);
 
         }
@@ -60,21 +60,21 @@ class AddWeight extends React.Component {
                 imageUrl: this.state.photos[0]
             })
         }
-        
+
 
         console.log(this.state.photos.length)
 
-        
 
-        
+
+
 
         //const promise = axios.get('https://jsonplaceholder.typicode.com/posts')
     }
 
-    
+
     handleChange(event) {
         this.setState({weight: event.target.value})
-        
+
       }
 
     handleComment =(e)=>{
@@ -88,28 +88,28 @@ class AddWeight extends React.Component {
         } else{
             const message = {
                 "massInKg": Number(this.state.weight),
-                
-                "reordedBy": {
+
+                "recordedBy": {
                     "userId": uid
                 }
             }
-    
-            
-           
-            
+
+
+
+
             const link = "http://localhost:8080/api/v1/animals/" + id + "/weights";
             axios.post(link, message,{headers:{}}).then(res => {
                 console.log(res);
                 console.log(res.data);
               });
             //window.location.reload(false);
-    
+
             setTimeout(() => {
                 this.props.history.push("/"+ user+"/" + uid +'/animals/'+id);
              }, 500);
 
         }
-        
+
 
     };
 
@@ -121,7 +121,7 @@ class AddWeight extends React.Component {
         let dates = [];
         // console.log(this.state.animal["weight"]);
 
-        
+
 
         if (this.state.weights.length > 0) {
             for (var i = 0; i < this.state.weights.length; i++) {
@@ -190,14 +190,14 @@ class AddWeight extends React.Component {
                     </div>
 
                 </div>
-                
+
                 <div className="container">
                         <h1 className="display-4">Add Weight</h1>
                         <div className="row">
                         <div className="col-sm">
                             < input type="text" id="inputFilter" className="form-control" placeholder="Add Weight here" aria-label="First Name" aria-describedby="basic-addon2" value={this.state.comment} onChange={(e) =>this.handleChange(e)}/>
                             <button onClick={(e) => this.handleComment(e)} className="btn btn-primary">Add Weight</button>
-                        
+
                         </div>
                         </div>
                     </div>
@@ -205,7 +205,7 @@ class AddWeight extends React.Component {
                     <div className="row">
                     <div className="jumbotron jumbotron-fluid">
                         <div className="container">
-                            
+
                             <div id="chart">
                                 <ReactApexChart options={options} series={series} type="line" height={350} />
                             </div>
@@ -215,9 +215,9 @@ class AddWeight extends React.Component {
                     </div>
 
                 </div>
-                
 
-                
+
+
             </div>
 
 
@@ -307,10 +307,10 @@ class AddWeight extends React.Component {
                         <div className="container">
                             <h5 className="display-4">Photos</h5>
                             {this.state.photos.map(photo => (
-                                
-                                <img key={photo} src={photo} width="200" 
+
+                                <img key={photo} src={photo} width="200"
                                 height="200" alt="" />
-                                
+
                             ))}
 
 
@@ -322,7 +322,7 @@ class AddWeight extends React.Component {
                     <div className="btn-group" role="group" aria-label="Basic example">
                         <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/treatments"} className="btn btn-secondary">Treatment List</Link></div>
                         <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/issues"} className="btn btn-secondary">Issue List</Link></div>
-                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></div> 
+                        <div><Link to={"/" + user + "/" + uid +"/animals/" + id + "/comments"} className="btn btn-secondary">Comment List</Link></div>
                     </div>
 
                 </div>
@@ -335,8 +335,8 @@ class AddWeight extends React.Component {
         }
 
 
-        
+
     }
 }
- 
+
 export default AddWeight;

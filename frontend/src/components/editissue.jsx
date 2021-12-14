@@ -54,7 +54,7 @@ class EditIssue extends React.Component {
 
         for(i = 0; i<this.state.comments.length;i++){
             console.log("Issue ID: "+ this.state.comments[i]["issueId"]);
-            if(cid === this.state.comments[i]["issueId"]){
+            if(cid == this.state.comments[i]["issueId"]){
                 console.log("Found");
                 this.setState({
                     idx: i,

@@ -25,19 +25,19 @@ class RegistrationPage extends React.Component {
             role: pos, 
         });
 
-        if(e.target.value===0){
+        if(e.target.value==0){
             pos = "ADMIN";
 
-        }else if(e.target.value===1){
+        }else if(e.target.value==1){
             pos = "ATTENDANT";
 
-        }else if(e.target.value===2){
+        }else if(e.target.value==2){
             pos = "TECHNICIAN";
             
-        }else if(e.target.value===3){
+        }else if(e.target.value==3){
             pos = "TEACHER";
             
-        }else if(e.target.value===4){
+        }else if(e.target.value==4){
             pos = "STUDENT";
             
         }

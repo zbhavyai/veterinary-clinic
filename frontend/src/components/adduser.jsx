@@ -22,24 +22,21 @@ class AddUser
 
     handleFilter = (e) => {
         let pos = "";
-        this.setState({
-            filterOption: e.target.value,
-            role: pos,
-        });
+        console.log("Choice: " + e.target.value);
 
-        if(e.target.value===0){
+        if(e.target.value==0){
             pos = "ADMIN";
 
-        }else if(e.target.value===1){
+        }else if(e.target.value==1){
             pos = "ATTENDANT";
 
-        }else if(e.target.value===2){
+        }else if(e.target.value==2){
             pos = "TECHNICIAN";
 
-        }else if(e.target.value===3){
+        }else if(e.target.value==3){
             pos = "TEACHER";
 
-        }else if(e.target.value===4){
+        }else if(e.target.value==4){
             pos = "STUDENT";
 
         }

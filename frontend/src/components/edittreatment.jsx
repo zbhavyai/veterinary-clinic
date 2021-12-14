@@ -65,7 +65,7 @@ class EditTreatment extends React.Component {
 
         for(i = 0; i<this.state.treatments.length;i++){
             console.log("Treatment ID: "+ this.state.treatments[i]["treatmentId"]);
-            if(cid === this.state.treatments[i]["treatmentId"]){
+            if(cid == this.state.treatments[i]["treatmentId"]){
                 
                 console.log("Found");
                 this.setState({

@@ -60,7 +60,7 @@ class EditComment extends React.Component {
 
         for(i = 0; i<this.state.comments.length;i++){
             console.log("Comment ID: "+ this.state.comments[i]["commentId"]);
-            if(cid === this.state.comments[i]["commentId"]){
+            if(cid == this.state.comments[i]["commentId"]){
                 console.log("Found");
                 this.setState({
                     idx: i

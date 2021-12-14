@@ -126,10 +126,10 @@ class AddAnimalNew extends React.Component {
             gender: pos, 
         });
 
-        if(e.target.value===0){
+        if(e.target.value==0){
             pos = "MALE";
 
-        }else if(e.target.value===1){
+        }else if(e.target.value==1){
             pos = "FEMALE";
 
         }

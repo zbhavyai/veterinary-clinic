@@ -28,7 +28,7 @@ class MainMenu extends React.Component {
         let usermanagementhyperlink = "/"+ user + "/" + uid + "/users";
         let requestmanagementhyperlink = "/"+ user + "/" + uid + "/requestmanagment";
         let requestsubmissionhyperlink = "/"+ user + "/" + uid + "/requestsubmission";
-        if(user === "at" ){
+        if(user == "at" ){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 
@@ -45,7 +45,7 @@ class MainMenu extends React.Component {
             </React.Fragment>;
 
         }
-        if(user === "s"){
+        if(user == "s"){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 
@@ -63,7 +63,7 @@ class MainMenu extends React.Component {
 
         }
 
-        if(user === "i"){
+        if(user == "i"){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 <div className="row">
@@ -102,7 +102,7 @@ class MainMenu extends React.Component {
         }
 
 
-        if(user === "a"){
+        if(user == "a"){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 <div className="row">
@@ -141,7 +141,7 @@ class MainMenu extends React.Component {
 
         }
 
-        if(user === "t"){
+        if(user == "t"){
             return <React.Fragment>
                 <NavBar user = {user} uid = {uid}/>
                 <div className="row">

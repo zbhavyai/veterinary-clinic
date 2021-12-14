@@ -63,23 +63,23 @@ class UserDetails extends React.Component {
         const uid = this.props.match.params.uid;
         // let label = "";
 
-        // if (this.state.user["role"] === 0) {
+        // if (this.state.user["role"] == 0) {
         //     label = "Student";
         // }
 
-        // else if (this.state.user["role"] === 1) {
+        // else if (this.state.user["role"] == 1) {
         //     label = "Technician";
         // }
 
-        // else if (this.state.user["role"] === 2) {
+        // else if (this.state.user["role"] == 2) {
         //     label = "Teacher";
         // }
 
-        // else if (this.state.user["role"] === 3) {
+        // else if (this.state.user["role"] == 3) {
         //     label = "Admin";
         // }
 
-        if(userx === "i"){
+        if(userx == "i"){
             return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
 

@@ -80,7 +80,7 @@ class CommentList extends React.Component {
         const user = this.props.match.params.user;
         
         const uid = this.props.match.params.uid;
-        if(user === "i" || user==="s"){
+        if(user == "i" || user=="s"){
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             

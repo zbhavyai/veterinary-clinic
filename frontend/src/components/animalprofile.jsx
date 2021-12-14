@@ -132,7 +132,7 @@ class AnimalProfile extends React.Component {
             xaxis: { categories: dates }
         }
 
-        if(user === "t" || user === "at" || user === "a"){
+        if(user == "t" || user == "at" || user == "a"){
             return <React.Fragment>
 
             <NavBar user = {user} uid = {uid}/>

@@ -78,15 +78,15 @@ class AnimalManagement extends React.Component {
     render() {
         
         let filtered = this.state.animals;
-        if (this.state.filterOption === 1) {
+        if (this.state.filterOption == 1) {
             filtered = 1 ? this.state.animals.filter(m => m["animalId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
-        } else if (this.state.filterOption === 2) {
+        } else if (this.state.filterOption == 2) {
             filtered = 1 ? this.state.animals.filter(m => m["name"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
-        } else if (this.state.filterOption === 3) {
+        } else if (this.state.filterOption == 3) {
             filtered = 1 ? this.state.animals.filter(m => m["breed"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
-        } else if (this.state.filterOption === 4) {
+        } else if (this.state.filterOption == 4) {
             filtered = 1 ? this.state.animals.filter(m => m["ownerEmail"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
-        } else if (this.state.filterOption === 5) {
+        } else if (this.state.filterOption == 5) {
             filtered = 1 ? this.state.animals.filter(m => m["status"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.animals;
         } else {
             filtered = this.state.animals;
@@ -96,7 +96,7 @@ class AnimalManagement extends React.Component {
          const user = this.props.match.params.user;
          const uid = this.props.match.params.uid;
 
-         if(user === "s" || user === "i"){
+         if(user == "s" || user == "i"){
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             

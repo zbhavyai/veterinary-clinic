@@ -65,33 +65,33 @@ class UserManagement extends React.Component {
         const userx = this.props.match.params.user;
         const uid = this.props.match.params.uid;
         let filtered = this.state.users;
-        if(userx === "i"){
+        if(userx == "i"){
             filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
         }
         
 
-        if (this.state.filterOption === 1) {
+        if (this.state.filterOption == 1) {
             filtered = 1 ? this.state.users.filter(m => m["userId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption === 2) {
+        } else if (this.state.filterOption == 2) {
             filtered = 1 ? this.state.users.filter(m => m["firstName"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption === 3) {
+        } else if (this.state.filterOption == 3) {
             filtered = 1 ? this.state.users.filter(m => m["lastName"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption === 4) {
+        } else if (this.state.filterOption == 4) {
             filtered = 1 ? this.state.users.filter(m => m["role"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption === 5) {
+        } else if (this.state.filterOption == 5) {
             filtered = 1 ? this.state.users.filter(m => m["emailId"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
-        } else if (this.state.filterOption === 6) {
+        } else if (this.state.filterOption == 6) {
             filtered = 1 ? this.state.users.filter(m => m["status"].toString().toLowerCase().includes(this.state.filterText.toLowerCase())) : this.state.users;
         } else {
             filtered = this.state.users;
-            if(userx === "i"){
+            if(userx == "i"){
                 filtered = 1?this.state.users.filter(m=>m["role"].toString().includes("STUDENT") ):this.state.users;
             }
 
         }
 
         
-        if(userx === "i"){
+        if(userx == "i"){
             return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
 

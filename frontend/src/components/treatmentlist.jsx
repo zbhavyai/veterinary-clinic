@@ -90,7 +90,7 @@ class TreatmentList extends React.Component {
         const uid = this.props.match.params.uid;
         console.log("UID: " + uid);
 
-        if(user === "i" || user==="s"){
+        if(user == "i" || user=="s"){
             return <React.Fragment>
 
                 <NavBar user = {user} uid = {uid}/>

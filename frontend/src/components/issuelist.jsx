@@ -89,7 +89,7 @@ class IssueList extends React.Component {
         
         const uid = this.props.match.params.uid;
         console.log(this.state.issues);
-        if(user === "i" || user==="s"){
+        if(user == "i" || user=="s"){
             return <React.Fragment>
             <NavBar user = {user} uid = {uid}/>
             
@@ -143,7 +143,8 @@ class IssueList extends React.Component {
             <h2 className="display-4">Issue Logs</h2>
             <div className="row">
                 <div className="col-sm">
-                    <img src={this.state.imageUrl} alt="" />
+                    <img src={this.state.imageUrl}  width="300" 
+                                height="300" alt="" />
 
                 </div>
                 <div className="col-sm">

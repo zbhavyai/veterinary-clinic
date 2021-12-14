@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import NavBar from "./navbar";
 import {
-    
+
     Link
 } from "react-router-dom";
 
@@ -42,15 +42,15 @@ class UserDetails extends React.Component {
             "lastName": this.state.user["lastName"],
             "role": this.state.user["role"],
             "emailId": this.state.user["emailId"],
-            "password": this.state.user["password"],
+            "passwordHash": this.state.user["passwordHash"],
             "status": statusx
         };
-       
-        
+
+
         const link = "http://localhost:8080/api/v1/users/" + id;
         axios.put(link, message,{headers:{}});
         window.location.reload(false);
-        
+
 
 
 
@@ -180,7 +180,7 @@ class UserDetails extends React.Component {
 
         }
 
-        
+
     }
 }
 

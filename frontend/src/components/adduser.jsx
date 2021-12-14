@@ -6,9 +6,9 @@ import NavBar from './navbar';
 class AddUser
  extends React.Component {
     state = {
-        
+
         filterOption: 0,
-        
+
         firstName: "",
         middleName: "",
         lastName: "",
@@ -16,15 +16,15 @@ class AddUser
         emailId: "",
         password: "",
         status: "INACTIVE"
-        
-        
+
+
     };
 
     handleFilter = (e) => {
         let pos = "";
-        this.setState({ 
+        this.setState({
             filterOption: e.target.value,
-            role: pos, 
+            role: pos,
         });
 
         if(e.target.value===0){
@@ -35,18 +35,18 @@ class AddUser
 
         }else if(e.target.value===2){
             pos = "TECHNICIAN";
-            
+
         }else if(e.target.value===3){
             pos = "TEACHER";
-            
+
         }else if(e.target.value===4){
             pos = "STUDENT";
-            
+
         }
 
-        this.setState({ 
+        this.setState({
             filterOption: e.target.value,
-            role: pos, 
+            role: pos,
         });
         //this.setState({filterOption: 1});
         console.log("Role Selected", this.state.role);
@@ -55,37 +55,37 @@ class AddUser
 
     handleFnChange(event) {
         this.setState({firstName: event.target.value})
-        
+
       }
 
       handleMnChange(event) {
         this.setState({middleName: event.target.value})
-        
+
       }
-    
+
       handleLnChange(event) {
         this.setState({lastName: event.target.value})
-        
+
       }
 
       handlePsChange(event) {
         this.setState({password: event.target.value})
-        
+
       }
 
       handleEmChange(event) {
         this.setState({emailId: event.target.value})
-        
+
       }
 
 
       handleRegister =(e)=>{
-        
+
         const userx = this.props.match.params.user;
         const uid = this.props.match.params.uid;
-        
-        
-        
+
+
+
 
         let message = {
             "userId": 3,
@@ -101,10 +101,10 @@ class AddUser
             "passwordSalt": null,
             "status": this.state.status
         }
-        
-        
-       
-        
+
+        console.log(message)
+
+
         const link = "http://localhost:8080/api/v1/users/register";
         axios.post(link, message,{headers:{}}).then(res => {
             console.log(res);
@@ -112,7 +112,7 @@ class AddUser
           });
         //window.location.reload(false);
 
-        
+
         setTimeout(() => {
             this.props.history.push("/"+ userx+"/" + uid +'/users/');
          }, 500);
@@ -124,31 +124,31 @@ class AddUser
     };
 
 
-    render() { 
+    render() {
         const userx = this.props.match.params.user;
         const uid = this.props.match.params.uid;
         return <React.Fragment>
             <NavBar user = {userx} uid = {uid}/>
             <div className="container">
             <div className="card" style={this.styles}>
-                
+
                 <div className="card-body">
                     <h5 className="card-title">Register for an Account Now</h5>
                     <div className="row">
                       <div className="col-sm">
                       < input type="text" id="inputFilter"  className="form-control" placeholder="First Name" value={this.state.firstName} onChange={(e) =>this.handleFnChange(e)} aria-label="First Name" aria-describedby="basic-addon2" />
-                    
+
                       </div>
                       <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Middle Name" value={this.state.middleName} onChange={(e) =>this.handleMnChange(e)} aria-label="Middle Name" aria-describedby="basic-addon2" />
-                    
+
                       </div>
                       <div className="col-sm">
                       < input type="text" id="inputFilter" className="form-control" placeholder="Last Name" value={this.state.lastName} onChange={(e) =>this.handleLnChange(e)} aria-label="Last Name" aria-describedby="basic-addon2" />
-                    
+
                       </div>
-                      
-                      
+
+
                     </div>
 
                     <div className="row">
@@ -158,7 +158,7 @@ class AddUser
                         <option value="2">TECHNICIAN</option>
                         <option value="3">TEACHER</option>
                         <option value="4">STUDENT</option>
-                        
+
                     </select>
 
                     </div>
@@ -170,13 +170,13 @@ class AddUser
                     </div>
 
                     <button onClick={(e) => this.handleRegister(e)} className="btn btn-primary">Register</button>
-                    <p>Note: Upon sign up, you will need to wait for the Admint to activate your account before you can login</p>
+                    <p>Note: Upon sign up, you will need to wait for the Admin to activate your account before you can login</p>
                 </div>
             </div>
             </div>
         </React.Fragment>;
     }
 }
- 
+
 export default AddUser
 ;

@@ -262,6 +262,7 @@ u.u_firstname 'FIRST_NAME',
 u.u_middlename 'MID_NAME',
 u.u_lastname 'LAST_NAME',
 u.u_emailid 'EMAIL',
+u.u_passwordhash 'PASSWORD',
 CASE u.u_role
     WHEN 0 THEN 'ADMIN'
     WHEN 1 THEN 'ATTENDANT'

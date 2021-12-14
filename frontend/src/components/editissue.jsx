@@ -136,7 +136,8 @@ class EditIssue extends React.Component {
             <h2 className="display-4">Issue Logs</h2>
             <div className="row">
                 <div className="col-sm">
-                    <img src={this.state.imageUrl} alt="" />
+                    <img src={this.state.imageUrl} width="300" 
+                                height="300" alt="" />
 
                 </div>
                 <div className="col-sm">

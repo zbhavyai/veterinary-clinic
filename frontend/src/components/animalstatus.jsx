@@ -95,7 +95,8 @@ class AnimalStatus extends React.Component {
 
             <div className="row">
                 <div className="col-sm">
-                    <img src={this.state.imageUrl} alt="" />
+                    <img src={this.state.imageUrl} width="300" 
+                                height="300" alt="" />
 
                 </div>
                 <div className="col-sm">

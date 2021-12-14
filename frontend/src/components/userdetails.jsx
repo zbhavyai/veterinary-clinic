@@ -49,7 +49,10 @@ class UserDetails extends React.Component {
 
         const link = "http://localhost:8080/api/v1/users/" + id;
         axios.put(link, message,{headers:{}});
-        window.location.reload(false);
+        setTimeout(() => {
+            window.location.reload(false);
+         }, 500);
+        
 
 
 

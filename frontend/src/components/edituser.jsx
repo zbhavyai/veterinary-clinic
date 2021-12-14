@@ -152,7 +152,11 @@ class EditUser extends React.Component {
           });
         //window.location.reload(false);
 
-        this.props.history.push("/"+ userx+"/" + uid +'/users/');
+        setTimeout(() => {
+            this.props.history.push("/"+ userx+"/" + uid +'/users/');
+         }, 500);
+
+        
         
 
 

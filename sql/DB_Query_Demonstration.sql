@@ -96,33 +96,6 @@ WHERE
 a.a_animalid=13;
 
 UPDATE issues SET i_issuedesc='Fracture' WHERE i_issueid=2;
-
-SELECT * FROM issues;
-SELECT
-a.a_animalid 'ID',
-a.a_name 'NAME',
-a.a_species 'SPECIES',
-a.a_subspecies 'SUBSPECIES',
-a.a_breed 'BREED',
-a.a_distinctfeature 'DISTINCT_FEATURE',
-CASE a.a_status
-    WHEN 0 THEN 'GREEN'
-    WHEN 1 THEN 'YELLOW'
-    WHEN 2 THEN 'RED'
-    WHEN 3 THEN 'INACTIVE'
-END 'STATUS',
-i.i_issuedesc 'ISSUE',
-i.i_detecteddate 'DETECTION_DATE',
-CONCAT( (CASE WHEN u.u_firstname IS NULL THEN "" ELSE u.u_firstname END),
-        (CASE WHEN u.u_middlename IS NULL THEN "" ELSE CONCAT(" ", u.u_middlename ) END),
-        (CASE WHEN u.u_lastname IS NULL THEN "" ELSE CONCAT(" ", u.u_lastname ) END)) 'RAISEDBY_NAME',
-u.u_emailid 'RAISEDBY_EMAIL'
-FROM
-animals a
-RIGHT JOIN issues i ON i.i_animalid = a.a_animalid
-LEFT JOIN users u ON u.u_userid = i.i_raisedby
-WHERE
-a.a_animalid=13;
 -- ----------------------------------------------
 
 

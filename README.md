@@ -75,6 +75,11 @@ Below are steps to run the application.
 
 
 
+## Video demonstration
+
+The sharepoint link to the video demonstration of this project is [here](https://uofc-my.sharepoint.com/:v:/g/personal/bhavyai_gupta_ucalgary_ca/EeJQu2IgUZNJvgrtBbjqCh0BwqAvQU3vdrGexBDjRfy_aA?e=bHb7rK).
+
+
 ## Contributors
 
 + [Bhavyai Gupta](https://github.com/zbhavyai)

@@ -1,3 +1,10 @@
+-- authors --------------------------------------
+-- Bhavyai Gupta
+-- Michael Man Yin Lee
+-- Sarang Kumar
+-- ----------------------------------------------
+
+
 USE vetdb;
 
 -- (2) basic retrieval query --------------------

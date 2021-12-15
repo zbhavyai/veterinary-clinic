@@ -1,3 +1,10 @@
+-- authors --------------------------------------
+-- Bhavyai Gupta
+-- Michael Man Yin Lee
+-- Sarang Kumar
+-- ----------------------------------------------
+
+
 -- creation of database -------------------------
 DROP DATABASE IF EXISTS vetdb;
 CREATE DATABASE vetdb;

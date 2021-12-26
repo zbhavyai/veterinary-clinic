@@ -1,7 +1,17 @@
 # Vet Application
 
-A project for fulfilment of requirements for courses ENSF-607 and ENSF-608.
+A web application for managing Veterinary Clinic
 
+
+## Features
+
++ Manage animals profiles, along with their owners
+
++ Manage user profiles like administrators, health technicians, attendants, teachers, and students
+
++ Each user having different access rights
+
++ Animal request workflow based on granted permissions
 
 
 ## Project Structure
@@ -9,36 +19,23 @@ A project for fulfilment of requirements for courses ENSF-607 and ENSF-608.
 ![dir tree](images/structure.png)
 
 + [`backend`](backend) - contains back end source code
-
 + [`docs`](docs) - various documentation on the project
-
 + [`frontend`](frontend) - contains front end source code
-
 + [`images`](images) - contains images for README file
-
 + [`sql`](sql) - contains MySQL database scripts
 
 
+## Dependencies
 
-## Sprints
-
-The table below summarizes all the sprint information
-
-Sprint No  | Description                          | Due Date     | Information
------          | -----                                | -----        | -----
-1              | Developing epics and user stories    | 15-Oct-2021  | [Jira board](https://uofeng607-888.atlassian.net/jira/software/projects/U888/boards/1/roadmap)
-2              | Designing the wire-frames            | 22-Oct-2021  | [Wireframes PPT](docs/wireframes/Wireframes_Consolidated.pptx)
-3              | Designing the required API           | 19-Nov-2021  | [Postman file](docs/api_endpoints/VetApp.postman_collection.json) and [instructions](#how-to-run-backend)
-4              | Developing front-end and back-end    | 03-Dec-2021  | [backend](backend) and [frontend](frontend)
-5              | Integrating front-end and back-end   | 14-Dec-2021  | [backend](backend) and [frontend](frontend)
++ JDK version 11.0.11 or above
++ Maven version 3.6.3 or above
++ MySQL server version 8.0.26 or above
++ Node version 8.1 or above
 
 
+## How to run
 
-## How to run backend and frontend
-
-Below are steps to run the application.
-
-1. Clone the repository to your local machine.
+1. Clone the repository on your machine
 
 2. Start the MySQL server on your local machine. If you are accessing the MySQL server over a network, edit the property `spring.datasource.url` in the file [application.properties](backend/src/main/resources/application.properties) and replace `localhost` with the server IP address.
 
@@ -50,34 +47,18 @@ Below are steps to run the application.
    3. [03_views.sql](sql/03_views.sql)
    4. [04_dummy_data.sql](sql/04_dummy_data.sql)
 
-5. **To run the backend**
+5. To run the backend, navigate to the directory [backend](backend). Running the below command will get the backend server running.
+   ```bash
+   $ mvn clean spring-boot:run
+   ```
 
-   1. On your machine, navigate to the directory [backend](backend). Running the below command will get the backend server running.
-      ```bash
-      $ mvn clean spring-boot:run
-      ```
+6. To run the frontend, navigate to the directory [frontend](frontend). Running the below command will get the react server running and launch your default browser.
+   ```bash
+   $ npm install
+   $ npm start
+   ```
 
-   2. To test all the implemented API endpoints, launch Postman on your local machine.
-
-   3. Import [this](docs/api_endpoints/VetApp.postman_collection.json) file into the Postman. You can then run all the API endpoints in the imported folder **VetApp** one by one.
-
-   4. At any given time, you can also verify the db tables using the credentials mentioned in step #4.
-
-6. **To run the frontend**
-
-   1. On your machine, navigate to the directory [frontend](frontend). Running the below command will get the react server running and launch your default browser.
-      ```bash
-      $ npm install
-      $ npm start
-      ```
-
-7. Once the testing and verification is done, you may remove all the data from your MySQL server using [10_purge.sql](sql/10_purge.sql).
-
-
-
-## Video demonstration
-
-The sharepoint link to the video demonstration of this project is [here](https://uofc-my.sharepoint.com/:v:/g/personal/bhavyai_gupta_ucalgary_ca/EeJQu2IgUZNJvgrtBbjqCh0BwqAvQU3vdrGexBDjRfy_aA?e=bHb7rK).
+7. Once you are done with the application, you may remove all the data from your MySQL server using [10_purge.sql](sql/10_purge.sql).
 
 
 ## Contributors

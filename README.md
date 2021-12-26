@@ -16,7 +16,7 @@ A web application for managing Veterinary Clinic
 
 ## Project Structure
 
-![dir tree](images/structure.png)
+![dir tree](images/tree.png)
 
 + [`backend`](backend) - contains back end source code
 + [`docs`](docs) - various documentation on the project

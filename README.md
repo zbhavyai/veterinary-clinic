@@ -30,7 +30,7 @@ A web application for managing Veterinary Clinic
 + JDK version 11.0.11 or above
 + Maven version 3.6.3 or above
 + MySQL server version 8.0.26 or above
-+ Node version 8.1 or above
++ Node version 16.13.1 or above
 
 
 ## How to run
